@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\Common\include\proto\Shakehand.pb.cc">
+      <Filter>proto</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="proto">
+      <UniqueIdentifier>{8dae2238-0e3a-472e-abfa-a302c5ac7ded}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Common\include\proto\Shakehand.pb.h">
+      <Filter>proto</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

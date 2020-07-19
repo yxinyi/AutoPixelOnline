@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TcpNet">
+      <UniqueIdentifier>{4de6eb83-1696-4583-9092-38666f843c07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tool">
+      <UniqueIdentifier>{cbb7454a-7202-4102-9ea5-7be904fa65ce}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\TcpServer.h">
+      <Filter>TcpNet</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TcpConnonetManager.h">
+      <Filter>TcpNet</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TcpClient.h">
+      <Filter>TcpNet</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TcpBase.h">
+      <Filter>TcpNet</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BaseEngine.h" />
+    <ClInclude Include="..\Common\include\tool\ProtobufDispatcher.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\tool\SingletonTemplate.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\tool\Time.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\tool\Timer.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\tool\UniqueNumberFactory.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\tool\LogInfo.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\tool\ProtobufCodec.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Tcp\TcpServer.cpp">
+      <Filter>TcpNet</Filter>
+    </ClCompile>
+    <ClCompile Include="Tcp\TcpClient.cpp">
+      <Filter>TcpNet</Filter>
+    </ClCompile>
+    <ClCompile Include="Tcp\TcpConnonetManager.cpp">
+      <Filter>TcpNet</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseEngine.cpp" />
+    <ClCompile Include="..\Common\include\tool\Time.cpp">
+      <Filter>tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\tool\UniqueNumberFactory.cpp">
+      <Filter>tool</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
