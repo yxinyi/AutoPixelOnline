@@ -5,7 +5,7 @@
 
 CBaseEngine::CBaseEngine() {
     EventRegister(ShakeHandEvent, [](std::shared_ptr<SChannel> socket_, const std::shared_ptr<ShakeHandEvent>& message_, const int64_t& tm_) {
-        LogInfo << "ShakeHandEvent" << FlushLog;
+        LogInfo << "ShakeHandEvent src_name : [" << message_->src_name() <<"]"<< FlushLog;
         return true;
     });
 }

@@ -20,6 +20,7 @@ bool CTcpClient::init(const std::string& address_, const uint16_t port_) {
     m_channel->m_tcp_info = shared_from_this();
     return true;
 }
+extern std::string getNodeName();
 bool CTcpClient::shankhand() {
     const uint64_t _now_time = TimeTool->Now();
     if ((_now_time - m_channel->m_last_shakehand_time) < g_shakehand_time) {
@@ -30,6 +31,7 @@ bool CTcpClient::shankhand() {
 
     std::shared_ptr<ShakeHandEvent> _shakehand(new ShakeHandEvent());
     _shakehand->set_state(m_shakehand_state);
+    _shakehand->set_src_name(getNodeName());
     m_shakehand_state++;
     SendNetMsg(m_channel, _shakehand);
     return true;

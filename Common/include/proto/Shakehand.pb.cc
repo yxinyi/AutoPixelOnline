@@ -44,6 +44,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_Shakehand_2eproto::offsets[] P
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::ShakeHandEvent, state_),
+  PROTOBUF_FIELD_OFFSET(::ShakeHandEvent, src_name_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::ShakeHandEvent)},
@@ -54,8 +55,8 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 };
 
 const char descriptor_table_protodef_Shakehand_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\017Shakehand.proto\"\037\n\016ShakeHandEvent\022\r\n\005s"
-  "tate\030\001 \001(\rb\006proto3"
+  "\n\017Shakehand.proto\"1\n\016ShakeHandEvent\022\r\n\005s"
+  "tate\030\001 \001(\r\022\020\n\010src_name\030\002 \001(\tb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_Shakehand_2eproto_deps[1] = {
 };
@@ -65,7 +66,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_Sha
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_Shakehand_2eproto_once;
 static bool descriptor_table_Shakehand_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Shakehand_2eproto = {
-  &descriptor_table_Shakehand_2eproto_initialized, descriptor_table_protodef_Shakehand_2eproto, "Shakehand.proto", 58,
+  &descriptor_table_Shakehand_2eproto_initialized, descriptor_table_protodef_Shakehand_2eproto, "Shakehand.proto", 76,
   &descriptor_table_Shakehand_2eproto_once, descriptor_table_Shakehand_2eproto_sccs, descriptor_table_Shakehand_2eproto_deps, 1, 0,
   schemas, file_default_instances, TableStruct_Shakehand_2eproto::offsets,
   file_level_metadata_Shakehand_2eproto, 1, file_level_enum_descriptors_Shakehand_2eproto, file_level_service_descriptors_Shakehand_2eproto,
@@ -91,11 +92,17 @@ ShakeHandEvent::ShakeHandEvent(const ShakeHandEvent& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  src_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from.src_name().empty()) {
+    src_name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.src_name_);
+  }
   state_ = from.state_;
   // @@protoc_insertion_point(copy_constructor:ShakeHandEvent)
 }
 
 void ShakeHandEvent::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ShakeHandEvent_Shakehand_2eproto.base);
+  src_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   state_ = 0u;
 }
 
@@ -105,6 +112,7 @@ ShakeHandEvent::~ShakeHandEvent() {
 }
 
 void ShakeHandEvent::SharedDtor() {
+  src_name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void ShakeHandEvent::SetCachedSize(int size) const {
@@ -122,6 +130,7 @@ void ShakeHandEvent::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  src_name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   state_ = 0u;
   _internal_metadata_.Clear();
 }
@@ -138,6 +147,13 @@ const char* ShakeHandEvent::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
           state_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string src_name = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_src_name(), ptr, ctx, "ShakeHandEvent.src_name");
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -184,6 +200,21 @@ bool ShakeHandEvent::MergePartialFromCodedStream(
         break;
       }
 
+      // string src_name = 2;
+      case 2: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+                input, this->mutable_src_name()));
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+            this->src_name().data(), static_cast<int>(this->src_name().length()),
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
+            "ShakeHandEvent.src_name"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -216,6 +247,16 @@ void ShakeHandEvent::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32(1, this->state(), output);
   }
 
+  // string src_name = 2;
+  if (this->src_name().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->src_name().data(), static_cast<int>(this->src_name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "ShakeHandEvent.src_name");
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->src_name(), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -232,6 +273,17 @@ void ShakeHandEvent::SerializeWithCachedSizes(
   // uint32 state = 1;
   if (this->state() != 0) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->state(), target);
+  }
+
+  // string src_name = 2;
+  if (this->src_name().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->src_name().data(), static_cast<int>(this->src_name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "ShakeHandEvent.src_name");
+    target =
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+        2, this->src_name(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -254,6 +306,13 @@ size_t ShakeHandEvent::ByteSizeLong() const {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
+
+  // string src_name = 2;
+  if (this->src_name().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->src_name());
+  }
 
   // uint32 state = 1;
   if (this->state() != 0) {
@@ -289,6 +348,10 @@ void ShakeHandEvent::MergeFrom(const ShakeHandEvent& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from.src_name().size() > 0) {
+
+    src_name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.src_name_);
+  }
   if (from.state() != 0) {
     set_state(from.state());
   }
@@ -315,6 +378,8 @@ bool ShakeHandEvent::IsInitialized() const {
 void ShakeHandEvent::InternalSwap(ShakeHandEvent* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  src_name_.Swap(&other->src_name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(state_, other->state_);
 }
 

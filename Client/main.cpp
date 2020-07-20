@@ -7,7 +7,10 @@
 #include <Windows.h>
 
 const uint32_t g_frame = 30;
-
+const std::string g_name = "Client";
+std::string getNodeName() {
+    return g_name;
+}
 void MainLoop() {
 
     try {

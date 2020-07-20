@@ -2,4 +2,5 @@ syntax = "proto3";
 
 message ShakeHandEvent {
     uint32 state = 1;
+	string src_name = 2;
 }

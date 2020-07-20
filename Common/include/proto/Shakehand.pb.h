@@ -176,8 +176,20 @@ class ShakeHandEvent :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kSrcNameFieldNumber = 2,
     kStateFieldNumber = 1,
   };
+  // string src_name = 2;
+  void clear_src_name();
+  const std::string& src_name() const;
+  void set_src_name(const std::string& value);
+  void set_src_name(std::string&& value);
+  void set_src_name(const char* value);
+  void set_src_name(const char* value, size_t size);
+  std::string* mutable_src_name();
+  std::string* release_src_name();
+  void set_allocated_src_name(std::string* src_name);
+
   // uint32 state = 1;
   void clear_state();
   ::PROTOBUF_NAMESPACE_ID::uint32 state() const;
@@ -188,6 +200,7 @@ class ShakeHandEvent :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr src_name_;
   ::PROTOBUF_NAMESPACE_ID::uint32 state_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Shakehand_2eproto;
@@ -215,6 +228,57 @@ inline void ShakeHandEvent::set_state(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   
   state_ = value;
   // @@protoc_insertion_point(field_set:ShakeHandEvent.state)
+}
+
+// string src_name = 2;
+inline void ShakeHandEvent::clear_src_name() {
+  src_name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& ShakeHandEvent::src_name() const {
+  // @@protoc_insertion_point(field_get:ShakeHandEvent.src_name)
+  return src_name_.GetNoArena();
+}
+inline void ShakeHandEvent::set_src_name(const std::string& value) {
+  
+  src_name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:ShakeHandEvent.src_name)
+}
+inline void ShakeHandEvent::set_src_name(std::string&& value) {
+  
+  src_name_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:ShakeHandEvent.src_name)
+}
+inline void ShakeHandEvent::set_src_name(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  src_name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:ShakeHandEvent.src_name)
+}
+inline void ShakeHandEvent::set_src_name(const char* value, size_t size) {
+  
+  src_name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:ShakeHandEvent.src_name)
+}
+inline std::string* ShakeHandEvent::mutable_src_name() {
+  
+  // @@protoc_insertion_point(field_mutable:ShakeHandEvent.src_name)
+  return src_name_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* ShakeHandEvent::release_src_name() {
+  // @@protoc_insertion_point(field_release:ShakeHandEvent.src_name)
+  
+  return src_name_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void ShakeHandEvent::set_allocated_src_name(std::string* src_name) {
+  if (src_name != nullptr) {
+    
+  } else {
+    
+  }
+  src_name_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), src_name);
+  // @@protoc_insertion_point(field_set_allocated:ShakeHandEvent.src_name)
 }
 
 #ifdef __GNUC__
