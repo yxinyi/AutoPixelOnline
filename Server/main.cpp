@@ -22,6 +22,9 @@ void MainLoop() {
         std::shared_ptr<CTcpServer> _server(new CTcpServer);
         _server->init("127.0.0.1", 2222);
         RegTcp(_server);
+        std::shared_ptr<CTcpClient> _DB_client(new CTcpClient);
+        _DB_client->init("127.0.0.1", 2224);
+        RegTcp(_DB_client);
 
         while (true) {
             const int64_t _this_frame_time = _frame_timer.elapsed();

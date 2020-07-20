@@ -28,7 +28,7 @@ bool CTcpServer::CheckAndClear() {
     const uint64_t _now_time = TimeTool->Now();
     std::vector<std::shared_ptr<SChannel>> _clear_channel_vec;
     for (auto&& _it : m_channel_pool) {
-        int _shake_hand_time = _now_time - _it.second->m_last_shakehand_time;
+        uint64_t _shake_hand_time = _now_time - _it.second->m_last_shakehand_time;
         if (_shake_hand_time > g_shakehand_time*2) {
             LogInfo << "[ShakeHand] _shake_hand_time [" << _shake_hand_time << "]" << FlushLog;
             _clear_channel_vec.push_back(_it.second);

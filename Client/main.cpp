@@ -18,9 +18,15 @@ void MainLoop() {
         Timer _second_fps_timer;
         uint32_t _fps_cnt = 1;
         SetConsoleTitleA("client");
+        std::shared_ptr<CTcpClient> _DB_client(new CTcpClient);
+        _DB_client->init("127.0.0.1", 2224);
+        RegTcp(_DB_client);
+
+
         std::shared_ptr<CTcpClient> _client(new CTcpClient);
         _client->init("127.0.0.1", 2222);
         RegTcp(_client);
+
         while (true) {
             const int64_t _this_frame_time = _frame_timer.elapsed();
             if (_this_frame_time >= _one_frame_time) {

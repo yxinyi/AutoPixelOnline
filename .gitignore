@@ -1,1 +1,6 @@
 /.vs/*
+/x64
+/DBServer/x64
+/Client/x64
+/BaseEngine/x64
+/Server/x64
