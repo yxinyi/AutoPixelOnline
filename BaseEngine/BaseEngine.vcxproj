@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -23,9 +23,14 @@
     <ClInclude Include="..\Common\include\tool\ProtobufCodec.h" />
     <ClInclude Include="..\Common\include\tool\ProtobufDispatcher.h" />
     <ClInclude Include="..\Common\include\tool\SingletonTemplate.h" />
+    <ClInclude Include="..\Common\include\tool\StringHelper.h" />
     <ClInclude Include="..\Common\include\tool\Time.h" />
     <ClInclude Include="..\Common\include\tool\Timer.h" />
     <ClInclude Include="..\Common\include\tool\UniqueNumberFactory.h" />
+    <ClInclude Include="Attribute\ApiAttribute.h" />
+    <ClInclude Include="Attribute\Attribute.h" />
+    <ClInclude Include="Attribute\AttributeDefine.h" />
+    <ClInclude Include="Attribute\AttributeManager.h" />
     <ClInclude Include="include\BaseEngine.h" />
     <ClInclude Include="include\TcpBase.h" />
     <ClInclude Include="include\TcpClient.h" />
@@ -35,6 +40,9 @@
   <ItemGroup>
     <ClCompile Include="..\Common\include\tool\Time.cpp" />
     <ClCompile Include="..\Common\include\tool\UniqueNumberFactory.cpp" />
+    <ClCompile Include="Attribute\Attribute.cpp" />
+    <ClCompile Include="Attribute\AttributeDefine.cpp" />
+    <ClCompile Include="Attribute\AttributeManager.cpp" />
     <ClCompile Include="BaseEngine.cpp" />
     <ClCompile Include="Tcp\TcpClient.cpp" />
     <ClCompile Include="Tcp\TcpConnonetManager.cpp" />

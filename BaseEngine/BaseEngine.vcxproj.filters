@@ -7,6 +7,9 @@
     <Filter Include="tool">
       <UniqueIdentifier>{cbb7454a-7202-4102-9ea5-7be904fa65ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Attribute">
+      <UniqueIdentifier>{cbb08f52-4f4b-4ce2-ad64-268bd2ce5210}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\TcpServer.h">
@@ -43,6 +46,21 @@
     <ClInclude Include="..\Common\include\tool\ProtobufCodec.h">
       <Filter>tool</Filter>
     </ClInclude>
+    <ClInclude Include="Attribute\AttributeDefine.h">
+      <Filter>Attribute</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\tool\StringHelper.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Attribute\AttributeManager.h">
+      <Filter>Attribute</Filter>
+    </ClInclude>
+    <ClInclude Include="Attribute\ApiAttribute.h">
+      <Filter>Attribute</Filter>
+    </ClInclude>
+    <ClInclude Include="Attribute\Attribute.h">
+      <Filter>Attribute</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tcp\TcpServer.cpp">
@@ -60,6 +78,15 @@
     </ClCompile>
     <ClCompile Include="..\Common\include\tool\UniqueNumberFactory.cpp">
       <Filter>tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Attribute\AttributeDefine.cpp">
+      <Filter>Attribute</Filter>
+    </ClCompile>
+    <ClCompile Include="Attribute\AttributeManager.cpp">
+      <Filter>Attribute</Filter>
+    </ClCompile>
+    <ClCompile Include="Attribute\Attribute.cpp">
+      <Filter>Attribute</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

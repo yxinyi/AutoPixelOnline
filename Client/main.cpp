@@ -24,8 +24,6 @@ void MainLoop() {
         std::shared_ptr<CTcpClient> _DB_client(new CTcpClient);
         _DB_client->init("127.0.0.1", 2224);
         RegTcp(_DB_client);
-
-
         std::shared_ptr<CTcpClient> _client(new CTcpClient);
         _client->init("127.0.0.1", 2222);
         RegTcp(_client);
