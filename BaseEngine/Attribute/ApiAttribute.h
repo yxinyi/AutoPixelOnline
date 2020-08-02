@@ -91,7 +91,38 @@ struct ItemInfo{
     }
 }
 
-
+//test
+    for (auto&& _it : ComplexStrDecoder(
+        "{"\
+        "ItemBag:arr,"                                                                                                                                              \
+        "item_id:uint32_t:0,"\
+        "item_id:uint64_t:0,"\
+            "{"\
+                "item_attr:arr,"\
+                "item_de_val:uint64_t:0"\
+            "}, "\
+            "{"\
+                "item_pro_attr,"\
+                "{"\
+                    "item_de_val,"\
+                    "item_0_val:uint64_0:0,"\
+                    "item_0_val:uint64_0:1"\
+                "},"\
+                "item_de_val:uint64_t:0"\
+            "},"\
+            "{"\
+                "new_attr,"\
+                "{"\
+                    "new_sub_attr,"\
+                    "new_sub_attr:uint64_t:2"\
+                "},"\
+                "new_sub_attr_64:uint64_t:2"\
+            "}"\
+        "}"
+    )
+    ) {
+        std::cout << get<0>(_it) << "  :  " << get<1>(_it) << std::endl;
+    }
 
 
 
