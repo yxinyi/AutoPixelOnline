@@ -50,13 +50,15 @@ public:
 using CObjAttr_t = std::shared_ptr<CObjAttr>;
 using ObjAttrMap = std::unordered_map<std::string, CObjAttr_t>;
 using PrototypeAttrMap = std::unordered_map<std::string, CAttributePrototype_t>;
-class CAttrDefineManager {
+class CAttrDefineManager: public Singleton<CAttrDefineManager> {
+    friend class Singleton<CAttrDefineManager>;
 public:
     void RegAttrDefine(const std::string& obj_name, const std::string& module_name_, const std::string& attr_info_, const AttrCfg cfg_);
     void InitPrototype(const std::string& obj_name);
     CAttribute_t CreateAttr(const std::string& obj_name);
 
 private:
+    CAttrDefineManager() = default;
     ObjAttrMap m_obj_attr_pool;
     PrototypeAttrMap m_obj_prototype_pool;
 };

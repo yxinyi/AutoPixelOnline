@@ -10,6 +10,9 @@
     <Filter Include="Attribute">
       <UniqueIdentifier>{cbb08f52-4f4b-4ce2-ad64-268bd2ce5210}</UniqueIdentifier>
     </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{20cfa52e-5fc0-45fa-bfde-416e90e1a0da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\TcpServer.h">
@@ -61,6 +64,9 @@
     <ClInclude Include="Attribute\Attribute.h">
       <Filter>Attribute</Filter>
     </ClInclude>
+    <ClInclude Include="System\BaseSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tcp\TcpServer.cpp">
@@ -87,6 +93,9 @@
     </ClCompile>
     <ClCompile Include="Attribute\Attribute.cpp">
       <Filter>Attribute</Filter>
+    </ClCompile>
+    <ClCompile Include="System\BaseSystem.cpp">
+      <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

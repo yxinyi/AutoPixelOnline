@@ -36,6 +36,7 @@
     <ClInclude Include="include\TcpClient.h" />
     <ClInclude Include="include\TcpConnonetManager.h" />
     <ClInclude Include="include\TcpServer.h" />
+    <ClInclude Include="System\BaseSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\include\tool\Time.cpp" />
@@ -44,6 +45,7 @@
     <ClCompile Include="Attribute\AttributeDefine.cpp" />
     <ClCompile Include="Attribute\AttributeManager.cpp" />
     <ClCompile Include="BaseEngine.cpp" />
+    <ClCompile Include="System\BaseSystem.cpp" />
     <ClCompile Include="Tcp\TcpClient.cpp" />
     <ClCompile Include="Tcp\TcpConnonetManager.cpp" />
     <ClCompile Include="Tcp\TcpServer.cpp" />

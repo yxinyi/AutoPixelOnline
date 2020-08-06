@@ -88,11 +88,9 @@ CAttribute_t CAttrDefineManager::CreateAttr(const std::string& obj_name_) {
     if (m_obj_prototype_pool.find(obj_name_) == m_obj_prototype_pool.end()) {
         //没找到进行初始化
         InitPrototype(obj_name_);
-        
-
-        CAttribute_t _tmp_attr(new CAttribute);
         //_tmp_attr
     }
+    
 
     return m_obj_prototype_pool[obj_name_]->Clone();
 }
@@ -131,6 +129,11 @@ uint64_t AttrValConver(const std::string& type_, const std::string& val_) {
         _un.m_point = nullptr;
         return _un.m_u64_t;
     }
+    else if (type_ == "point") {
+        ParamExchange _un;
+        _un.m_point = nullptr;
+        return _un.m_u64_t;
+    }
     else {
         printf("type [%s] not define conver rule \n", type_.c_str());
     }
@@ -151,4 +154,12 @@ void CAttrDefineManager::InitPrototype(const std::string& obj_name_) {
             _prototype->m_attr->m_eight_byte.push_back(AttrValConver(_module_it.m_type, _module_it.m_val));
         }
     }
+}
+
+CAttribute_t CAttributePrototype::Clone() {
+    CAttribute_t _rst_attr(new CAttribute);
+    _rst_attr->m_eight_byte.clear();
+    AttrValVec _tmp(this->m_attr->m_eight_byte.begin(), this->m_attr->m_eight_byte.end());
+    _rst_attr->m_eight_byte.swap(_tmp);
+    return _rst_attr;
 }

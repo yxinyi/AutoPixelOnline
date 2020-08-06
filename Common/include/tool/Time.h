@@ -3,6 +3,7 @@
 #include <chrono>
 #include <string>
 
+
 class Time : public Singleton<Time> {
 public:
     int64_t Now();
