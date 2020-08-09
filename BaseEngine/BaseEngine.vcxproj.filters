@@ -67,6 +67,16 @@
     <ClInclude Include="System\BaseSystem.h">
       <Filter>System</Filter>
     </ClInclude>
+    <ClInclude Include="DataBase\DBMgr.h" />
+    <ClInclude Include="Buff\Buffer.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Tcp\Connection.h">
+      <Filter>TcpNet</Filter>
+    </ClInclude>
+    <ClInclude Include="Tcp\NetManager.h">
+      <Filter>TcpNet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tcp\TcpServer.cpp">
@@ -96,6 +106,13 @@
     </ClCompile>
     <ClCompile Include="System\BaseSystem.cpp">
       <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="DataBase\DBMgr.cpp" />
+    <ClCompile Include="Tcp\Connection.cpp">
+      <Filter>TcpNet</Filter>
+    </ClCompile>
+    <ClCompile Include="Tcp\NetManager.cpp">
+      <Filter>TcpNet</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
