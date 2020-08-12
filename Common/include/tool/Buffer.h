@@ -15,7 +15,7 @@ public:
     //‘§∑÷≈‰ª∫¥Ê¥Û–°
     static const size_t g_initial_size = 1024;
 
-    explicit Buffer(size_t initialSize = g_initial_size)
+    explicit CBuffer(size_t initialSize = g_initial_size)
         : m_buffer(g_cheap_prepend + initialSize),
         m_reader_index(g_cheap_prepend),
         m_writer_index(g_cheap_prepend)
@@ -28,7 +28,7 @@ public:
     // implicit copy-ctor, move-ctor, dtor and assignment are fine
     // NOTE: implicit move-ctor is added in g++ 4.6
 
-    void swap(Buffer& rhs)
+    void swap(CBuffer& rhs)
     {
         m_buffer.swap(rhs.m_buffer);
         std::swap(m_reader_index, rhs.m_reader_index);
@@ -322,7 +322,7 @@ public:
     void shrink(size_t reserve)
     {
         // FIXME: use vector::shrink_to_fit() in C++ 11 if possible.
-        Buffer other;
+        CBuffer other;
         other.ensureWritableBytes(readableBytes() + reserve);
         other.append(toStringPiece());
         swap(other);

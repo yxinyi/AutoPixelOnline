@@ -40,7 +40,6 @@
     <ClInclude Include="include\TcpServer.h" />
     <ClInclude Include="System\BaseSystem.h" />
     <ClInclude Include="Tcp\Connection.h" />
-    <ClInclude Include="Tcp\NetManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\include\tool\Time.cpp" />
@@ -51,8 +50,6 @@
     <ClCompile Include="BaseEngine.cpp" />
     <ClCompile Include="DataBase\DBMgr.cpp" />
     <ClCompile Include="System\BaseSystem.cpp" />
-    <ClCompile Include="Tcp\Connection.cpp" />
-    <ClCompile Include="Tcp\NetManager.cpp" />
     <ClCompile Include="Tcp\TcpClient.cpp" />
     <ClCompile Include="Tcp\TcpConnonetManager.cpp" />
     <ClCompile Include="Tcp\TcpServer.cpp" />
