@@ -41,3 +41,5 @@ private:
 #define TcpMgr Singleton<CTcpConnonetManager>::getInstance()
 
 #define RegTcp Singleton<CTcpConnonetManager>::getInstance()->registerTcp
+
+

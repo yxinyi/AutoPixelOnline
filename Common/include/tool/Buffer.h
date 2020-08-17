@@ -4,6 +4,8 @@
 #include <string>
 #include <assert.h>
 #include <string.h>
+#include <memory>
+#include <stack>
 
 using namespace std;
 //muduo
@@ -371,4 +373,65 @@ private:
     size_t m_reader_index;
     size_t m_writer_index;
 
+};
+
+#include "include/tool/SingletonTemplate.h"
+const uint32_t g_default_size = 10;
+
+template<class T>
+class CMemoryPool :public Singleton<CMemoryPool<T>> {
+public:
+
+
+    shared_ptr<T> alloc() {
+        shared_ptr<T> _tmp_ptr;
+        if (m_memory_list.empty()) {
+            _tmp_ptr.reset(shared_ptr<T>(new T))
+        }
+        else {
+            _tmp_ptr = m_memory_list.front();
+            m_memory_list.pop_front();
+        }
+        return _tmp_ptr;
+    }
+    bool recover(shared_ptr<T> ptr_) {
+        m_memory_list.push_back(ptr_);
+    }
+
+private:
+    CMemoryPool() {
+        for (uint32_t _idx = 0; _idx < g_default_size; _idx++) {
+            m_memory_list.push_back(shared_ptr<T>(new T));
+        }
+    }
+
+    ~CMemoryPool() {
+        m_memory_list.clear();
+    }
+    list<shared_ptr<T>> m_memory_list;
+};
+
+enum MsgType
+{
+    MsgConn,
+    MsgClose,
+    MsgNet,
+};
+
+struct MsgPacket {
+    MsgType    m_type;
+    uint64_t    m_msg_id;
+    shared_ptr<CBuffer>   m_buffer;
+};
+
+
+class MessagePackPool :public Singleton<MessagePackPool> {
+public:
+    void push_msg(shared_ptr<MsgPacket > msg_pack_) {
+        m_stack.push_back(msg_pack_);
+    }
+
+    vector<shared_ptr<MsgPacket >> m_stack;
+private:
+    MessagePackPool() {}
 };
