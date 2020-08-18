@@ -7,7 +7,7 @@ const uint64_t g_recv_once_size = 1024;
 
 
 /*
-接受方案: Connection 本身带有一个临时buff结构,当新包传入的时候,约定头部带上当前包的固定大小,然后进行接收,将即将接受的包大小进行记录,并
+接收方案: Connection 本身带有一个临时buff结构,当新包传入的时候,约定头部带上当前包的固定大小,然后进行接收,将即将接受的包大小进行记录,并
 创建一个专门用来接受整包的结构,可以使用内存池?或定长buff结构,当每次接收到数据时,都进行判断,是否接受完了当前包,如已接受,则进行包的提取,直接
 转移本地buff或者进行 memcpy 都可, 生成一个事件包单位,进行事件分发.
 
@@ -60,7 +60,7 @@ public:
             Header* _head = (Header*)m_recv_buff.peek();
             const uint32_t _packet_length = _head->m_buf_length;
 
-            //有问题
+            //有问题??
             if (_packet_length >= m_recv_buff.readableBytes()) {
                 string _buff_str = m_recv_buff.retrieveAsString(_packet_length);
                 shared_ptr<CBuffer> _pack_buff = CMemoryPool<CBuffer>::getInstance()->alloc();
