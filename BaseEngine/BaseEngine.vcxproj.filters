@@ -74,6 +74,9 @@
     <ClInclude Include="Tcp\Connection.h">
       <Filter>TcpNet</Filter>
     </ClInclude>
+    <ClInclude Include="Tcp\NetManager.h">
+      <Filter>TcpNet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tcp\TcpServer.cpp">

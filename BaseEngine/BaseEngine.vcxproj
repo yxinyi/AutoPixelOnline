@@ -40,6 +40,7 @@
     <ClInclude Include="include\TcpServer.h" />
     <ClInclude Include="System\BaseSystem.h" />
     <ClInclude Include="Tcp\Connection.h" />
+    <ClInclude Include="Tcp\NetManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\include\tool\Time.cpp" />

@@ -78,10 +78,31 @@ public:
     void close() {
         m_socket.shutdown(asio::ip::tcp::socket::shutdown_both);
     }
+    asio::ip::tcp::socket GetSocket() { returbn m_socket; }
+    CConnection(asio::io_service& service_):m_socket(service_)
+    {
+    
+    }
+    ~CConnection() {}
 private:
     asio::ip::tcp::socket m_socket;
     char m_tmp_buff[g_recv_once_size];
 
     CBuffer  m_recv_buff;
     CBuffer  m_snd_buff;
+};
+
+class CConnectionMgr : public Singleton<CConnectionMgr> {
+public:
+
+    CConnection* CreateConnection(asio::io_service& service_) {
+        CConnection* _tmp_conn = new CConnection(service_);
+        m_conn_vec.push_back(_tmp_conn);
+        return _tmp_conn;
+    };
+
+private:
+    std::list<CConnection*> m_idle_conn_list;
+
+    std::vector<CConnection*> m_conn_vec;
 };
