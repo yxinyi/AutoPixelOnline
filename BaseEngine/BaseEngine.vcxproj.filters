@@ -108,5 +108,8 @@
       <Filter>System</Filter>
     </ClCompile>
     <ClCompile Include="DataBase\DBMgr.cpp" />
+    <ClCompile Include="Tcp\NetManager.cpp">
+      <Filter>TcpNet</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

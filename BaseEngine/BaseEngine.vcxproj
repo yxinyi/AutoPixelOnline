@@ -51,6 +51,7 @@
     <ClCompile Include="BaseEngine.cpp" />
     <ClCompile Include="DataBase\DBMgr.cpp" />
     <ClCompile Include="System\BaseSystem.cpp" />
+    <ClCompile Include="Tcp\NetManager.cpp" />
     <ClCompile Include="Tcp\TcpClient.cpp" />
     <ClCompile Include="Tcp\TcpConnonetManager.cpp" />
     <ClCompile Include="Tcp\TcpServer.cpp" />
