@@ -24,6 +24,10 @@ struct Header{
 
 class CConnection {
 public:
+    bool appendSendBuf(const char* data_, const uint32_t length_) {
+        m_snd_buff.append(data_,length_);
+        return true;
+    }
     bool Send() {
         if (m_snd_buff.readableBytes()) {
             //·¢ËÍÍê±Ï
@@ -77,17 +81,23 @@ public:
     }
     void close() {
         m_socket.shutdown(asio::ip::tcp::socket::shutdown_both);
+        m_is_conn = false;
     }
-    asio::ip::tcp::socket GetSocket() { returbn m_socket; }
+
+    asio::ip::tcp::socket& GetSocket() { return m_socket; }
     CConnection(asio::io_service& service_):m_socket(service_)
     {
-    
+        m_is_conn = true;
+    }
+    bool isConnection() {
+        return m_is_conn;
     }
     ~CConnection() {}
 private:
     asio::ip::tcp::socket m_socket;
     char m_tmp_buff[g_recv_once_size];
 
+    bool m_is_conn = false;
     CBuffer  m_recv_buff;
     CBuffer  m_snd_buff;
 };
@@ -100,6 +110,13 @@ public:
         m_conn_vec.push_back(_tmp_conn);
         return _tmp_conn;
     };
+
+    CConnection* GetConnection(const uint32_t conn_id_) {
+        if (conn_id_ >= m_conn_vec.size()) {
+            return nullptr;
+        }
+        return m_conn_vec[conn_id_];
+    }
 
 private:
     std::list<CConnection*> m_idle_conn_list;
