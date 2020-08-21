@@ -32,6 +32,7 @@ bool NetManager::WaitConnect() {
             _new_connection->close();
         }
     });
+    return true;
 }
 
 CConnection* NetManager::Connect(const string& ip_, const uint16_t port_) {
@@ -40,7 +41,7 @@ CConnection* NetManager::Connect(const string& ip_, const uint16_t port_) {
     asio::ip::tcp::resolver _resolver(m_service);
     asio::ip::tcp::resolver::iterator _endpoints = _resolver.resolve(asio::ip::tcp::resolver::query(ip_, to_string(port_)));
     asio::async_connect(_conn->GetSocket(), _endpoints,
-        [=](error_code err_, asio::ip::tcp::resolver)
+        [=](error_code err_, asio::ip::tcp::resolver::iterator)
     {
         if (!err_)
         {
@@ -50,7 +51,7 @@ CConnection* NetManager::Connect(const string& ip_, const uint16_t port_) {
             _conn->close();
         }
     });
-
+    return _conn;
 }
 bool NetManager::SendMessageData(const uint32_t conn_id_, const char* data_, const uint32_t length_) {
     CConnection* _conn = CConnectionMgr::getInstance()->GetConnection(conn_id_);
@@ -60,9 +61,7 @@ bool NetManager::SendMessageData(const uint32_t conn_id_, const char* data_, con
     if (!_conn->isConnection()) {
         return false;
     }
-    _conn->appendSendBuf(data_,length_);
-    _conn->Send();
-
+    _conn->DoSend(data_,length_);
     return true;
 }
 bool NetManager::SendMessageBuff(const uint32_t conn_id_, const CBuffer* buff_) {

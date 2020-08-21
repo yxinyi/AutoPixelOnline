@@ -24,8 +24,9 @@ struct Header{
 
 class CConnection {
 public:
-    bool appendSendBuf(const char* data_, const uint32_t length_) {
-        m_snd_buff.append(data_,length_);
+    bool DoSend(const char* data_, const uint32_t length_) {
+        m_snd_buff.append(data_, length_);
+        Send();
         return true;
     }
     bool Send() {

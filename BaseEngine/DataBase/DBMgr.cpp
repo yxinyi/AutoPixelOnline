@@ -2,9 +2,7 @@
 
 using namespace std;
 
-DBMgr::DBMgr() {
 
-}
 bool DBMgr::init(const std::string& ip_, const std::string& port_) {
 
     std::shared_ptr<CTcpClient> _DB_client(new CTcpClient);
@@ -23,5 +21,9 @@ bool DBMgr::Upsert(const string& tbl_name_, const string& key, std::shared_ptr<g
     m_db_client->send(_msg_packet);
     return true;
 }
-bool DBMgr::Query(const string& tbl_name_, const string& key, DBCmd = _null_func);
-bool DBMgr::Delete(const string& tbl_name_, const string& key, DBCmd = _null_func);
+bool DBMgr::Query(const string& tbl_name_, const string& key, DBCmd cmd_) {
+    return true;
+}
+bool DBMgr::Delete(const string& tbl_name_, const string& key, DBCmd cmd_) {
+    return true;
+}

@@ -381,12 +381,13 @@ const uint32_t g_default_size = 10;
 template<class T>
 class CMemoryPool :public Singleton<CMemoryPool<T>> {
 public:
-
+    friend class Singleton<CMemoryPool<T>> ;
 
     shared_ptr<T> alloc() {
         shared_ptr<T> _tmp_ptr;
         if (m_memory_list.empty()) {
-            _tmp_ptr.reset(shared_ptr<T>(new T))
+            _tmp_ptr.reset();
+            _tmp_ptr = _tmp_ptr;
         }
         else {
             _tmp_ptr = m_memory_list.front();
@@ -395,6 +396,7 @@ public:
         return _tmp_ptr;
     }
     bool recover(shared_ptr<T> ptr_) {
+        ptr_.~T();
         m_memory_list.push_back(ptr_);
     }
 
@@ -426,6 +428,7 @@ struct MsgPacket {
 
 
 class MessagePackPool :public Singleton<MessagePackPool> {
+    friend class Singleton<MessagePackPool>;
 public:
     void push_msg(shared_ptr<MsgPacket > msg_pack_) {
         m_stack.push_back(msg_pack_);
