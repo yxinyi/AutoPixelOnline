@@ -146,7 +146,7 @@ void CAttrDefineManager::InitPrototype(const std::string& obj_name_) {
         printf("CAttrDefineManager InitPrototype error  [%s] \n", obj_name_.c_str());
     }
 
-    size_t _idx = 0;
+    uint32_t _idx = 0;
     for (auto&& _it : m_obj_attr_pool[obj_name_]->m_module_pool) {
         std::string _module_name = _it.first;
         for (auto&& _module_it : _it.second->m_attr_pool) {

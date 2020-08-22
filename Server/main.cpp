@@ -3,17 +3,20 @@
 #include "include/tool/LogInfo.h"
 #include "include/zmq/cppzmq/zmq_addon.hpp"
 #include "BaseEngine.h"
+#include "../BaseEngine/Tcp/NetManager.h"
 
 #include <Windows.h>
 
 const uint32_t g_frame = 30;
 const std::string g_name = "LogicServer";
+void testMain();
 std::string getNodeName() {
     return g_name;
 }
 void MainLoop() {
 
     try {
+        testMain();
         const float _one_frame_time = 1000.f / static_cast<float>(g_frame);
         //const float _one_frame_time = 1000.f / static_cast<float>(30);
         Timer _frame_timer;
@@ -22,12 +25,16 @@ void MainLoop() {
         uint32_t _fps_cnt = 1;
         SetConsoleTitleA("server");
 
-        std::shared_ptr<CTcpServer> _server(new CTcpServer);
-        _server->init("127.0.0.1", 2222);
-        RegTcp(_server);
-        std::shared_ptr<CTcpClient> _DB_client(new CTcpClient);
-        _DB_client->init("127.0.0.1", 2224);
-        RegTcp(_DB_client);
+
+
+        NetManager::getInstance()->Start();
+
+        //std::shared_ptr<CTcpServer> _server(new CTcpServer);
+        //_server->init("127.0.0.1", 2222);
+        //RegTcp(_server);
+        //std::shared_ptr<CTcpClient> _DB_client(new CTcpClient);
+        //_DB_client->init("127.0.0.1", 2224);
+        //RegTcp(_DB_client);
 
         while (true) {
             const int64_t _this_frame_time = _frame_timer.elapsed();

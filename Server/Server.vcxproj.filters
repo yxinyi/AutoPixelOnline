@@ -5,6 +5,7 @@
     <ClCompile Include="..\Common\include\proto\Shakehand.pb.cc">
       <Filter>proto</Filter>
     </ClCompile>
+    <ClCompile Include="testMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="proto">
