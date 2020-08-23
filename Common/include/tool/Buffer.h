@@ -12,6 +12,10 @@ using namespace std;
 class CBuffer
 {
 public:
+    void init() {}
+    void reset() {
+        retrieveAll();
+    }
     //预设前置8个字节来插入消息大小
     static const size_t g_cheap_prepend = 8;
     //预分配缓存大小

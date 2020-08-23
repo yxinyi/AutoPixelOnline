@@ -20,7 +20,7 @@ struct  SMsgPacket{
 using fd_t = size_t;
 class CTcpBase{
 public:
-    virtual bool init(const std::string& address_, const uint16_t port_) = 0;
+    virtual bool init(const std::string& address_, const uint32_t port_) = 0;
     virtual bool shankhand() = 0;
     virtual bool recv(std::shared_ptr<std::vector<std::shared_ptr<SMsgPacket>>> msg_vec_) = 0;
     virtual bool send(std::shared_ptr<SMsgPacket> msg_vec_) = 0;

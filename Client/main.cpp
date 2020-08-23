@@ -1,6 +1,7 @@
 #include "include/tool/Time.h"
 #include "include/tool/Timer.h"
 #include "include/tool/LogInfo.h"
+#include "include/tool/ObjectPool.h"
 #include "include/zmq/cppzmq/zmq_addon.hpp"
 #include "../BaseEngine/Tcp/NetManager.h"
 #include "BaseEngine.h"
@@ -22,7 +23,15 @@ void MainLoop() {
         Timer _second_fps_timer;
         uint32_t _fps_cnt = 1;
         SetConsoleTitleA("client");
-        NetManager::getInstance()->Connect("127.0.0.1",8888);
+        NetManager::getInstance()->Start("127.0.0.1", 8889);
+        auto _conn = NetManager::getInstance()->Connect("127.0.0.1",8888);
+        for (;;) {
+
+            shared_ptr<CBuffer> _buffer = CObjectPool<CBuffer>::getInstance()->Get();
+            _buffer->append("111");
+            CObjectPool<CBuffer>::getInstance()->print();
+            NetManager::getInstance()->SendMessageBuff(_conn->getConnId(),_buffer);
+        }
         //std::shared_ptr<CTcpClient> _DB_client(new CTcpClient);
         //_DB_client->init("127.0.0.1", 2224);
         //RegTcp(_DB_client);

@@ -8,7 +8,7 @@
 #include "include/proto/Shakehand.pb.h"
 
 
-bool CTcpClient::init(const std::string& address_, const uint16_t port_) {
+bool CTcpClient::init(const std::string& address_, const uint32_t port_) {
     m_socket = std::shared_ptr<zmq::socket_t>(new zmq::socket_t(*TcpMgr->getContext(), zmq::socket_type::dealer));
     std::string _tmp_address = "tcp://";
     _tmp_address += address_;

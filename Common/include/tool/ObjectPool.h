@@ -1,7 +1,8 @@
+#pragma once
 #include <string>
 #include <functional>
 #include <memory>
-#include <map>
+#include <mutex>
 #include <list>
 #include <iostream>
 #include <unordered_set>
@@ -82,8 +83,7 @@ void CObjectPoolTest() {
 
 */
 
-
-const size_t g_BaseCnt = 100;
+static const size_t g_BaseCnt = 100;
 template<class T>
 class CObjectPool : public Singleton<CObjectPool<T>> {
     friend class Singleton<CObjectPool<T>>;
@@ -96,13 +96,18 @@ public:
                 buildObjToPool();
             }
         }
-        shared_ptr<T> _tst_ptr = m_object_list.front();
-        m_object_list.pop_front();
+        shared_ptr<T> _tst_ptr;
+        {
+            std::unique_lock<std::mutex> _lock(m_mutex);
+            _tst_ptr = m_object_list.front();
+            m_object_list.pop_front();
+        }
         (*_tst_ptr).init(std::forward<Args>(args_)...);
         return _tst_ptr;
     }
 
     void DestoryIdle() {
+        std::unique_lock<std::mutex> _lock(m_mutex);
         for (auto&& _ptr_it : m_object_list) {
             m_delete_set.insert(_ptr_it.get());
         }
@@ -120,10 +125,14 @@ private:
         }
         else {
             obj_ptr_->reset();
-            m_object_list.emplace_back(shared_ptr<T>(obj_ptr_, std::bind(&CObjectPool<T>::ObjDestoryCallBack, this, std::placeholders::_1)));
+            {
+                std::unique_lock<std::mutex> _lock(m_mutex);
+                m_object_list.emplace_back(shared_ptr<T>(obj_ptr_, std::bind(&CObjectPool<T>::ObjDestoryCallBack, this, std::placeholders::_1)));
+            }
         }
     }
     void buildObjToPool() {
+        std::unique_lock<std::mutex> _lock(m_mutex);
         m_obj_total_count++;
         m_object_list.emplace_back(shared_ptr<T>(new T, std::bind(&CObjectPool<T>::ObjDestoryCallBack, this, std::placeholders::_1)));
     }
@@ -133,7 +142,9 @@ private:
             buildObjToPool();
         }
     }
-    std::unordered_set<T*> m_delete_set;
     uint32_t m_obj_total_count;
+
+    std::mutex m_mutex;
     std::list<shared_ptr<T>> m_object_list;
+    std::unordered_set<T*> m_delete_set;
 };

@@ -1,7 +1,9 @@
 #pragma once
 #include "asio.hpp"
 #include "../../Common/include/tool/Buffer.h"
+#include <mutex>
 #include "include/tool/UniqueNumberFactory.h"
+#include "include/tool/ObjectPool.h"
 
 const uint64_t g_recv_once_size = 1024;
 
@@ -17,32 +19,49 @@ const uint64_t g_recv_once_size = 1024;
 
 struct Header{
     size_t m_buf_length;
-    char   m_msg_id;
 };
 
 
 
 class CConnection {
 public:
-    bool DoSend(const char* data_, const uint32_t length_) {
-        m_snd_buff.append(data_, length_);
-        Send();
-        return true;
-    }
-    bool Send() {
-        if (m_snd_buff.readableBytes()) {
-            //发送完毕
-            return true;
+    bool DoSend() {
+        std::vector<shared_ptr<CBuffer>> _local_vec;
+        {
+            std::unique_lock<std::mutex> _lock(m_snd_buff_mutex);
+            if (!m_snd_buff_list.size()) {
+                m_in_sended = false;
+                return false;
+            }
+            else {
+                m_in_sended = true;
+            }
+            _local_vec.swap(m_snd_buff_list);
         }
-        m_socket.async_write_some(asio::buffer(m_snd_buff.peek(), m_snd_buff.readableBytes()), [this](asio::error_code err_,
+
+        shared_ptr<CBuffer> _snd_buff = CObjectPool<CBuffer>::getInstance()->Get();
+        for (auto&& _buff_it : _local_vec) {
+            const uint32_t length = _buff_it->readableBytes();
+            _buff_it->prependInt64(length);
+            _snd_buff->append(_buff_it->peek(), _buff_it->readableBytes());
+        }
+
+        _local_vec.clear();
+        m_socket.async_write_some(asio::buffer(_snd_buff->peek(), _snd_buff->readableBytes()), [this](asio::error_code err_,
             std::size_t size_) {
             if (err_) {
                 close();
                 return;
             }
 
-            Send();
+            DoSend();
         });
+        
+        return true;
+    }
+    bool Send(shared_ptr<CBuffer> buff_) {
+        std::unique_lock<std::mutex> _lock(m_snd_buff_mutex);
+        m_snd_buff_list.push_back(buff_);
         return true;
     }
 
@@ -62,19 +81,18 @@ public:
             //清空临时buff，准备下次数据接收
             memset(m_tmp_buff, 0, g_recv_once_size);
 
-            Header* _head = (Header*)m_recv_buff.peek();
-            const uint32_t _packet_length = _head->m_buf_length;
-
+            const uint32_t _packet_length = m_recv_buff.readInt64();
             //有问题??
-            if (_packet_length >= m_recv_buff.readableBytes()) {
+            if (_packet_length <= m_recv_buff.readableBytes()) {
                 string _buff_str = m_recv_buff.retrieveAsString(_packet_length);
-                shared_ptr<CBuffer> _pack_buff = CMemoryPool<CBuffer>::getInstance()->alloc();
-                _pack_buff->append(_buff_str.data(),_buff_str.size());
-                shared_ptr<MsgPacket> _msg_packet(new MsgPacket);
-                _msg_packet->m_buffer = _pack_buff;
-                _msg_packet->m_type = MsgNet;
-                _msg_packet->m_msg_id = UniqueNumberFactory::getInstance()->build();
-                MessagePackPool::getInstance()->push_msg(_msg_packet);
+                std::cout << "recv: " << _buff_str << std::endl;
+                //shared_ptr<CBuffer> _pack_buff = CMemoryPool<CBuffer>::getInstance()->alloc();
+                //_pack_buff->append(_buff_str.data(),_buff_str.size());
+                //shared_ptr<MsgPacket> _msg_packet(new MsgPacket);
+                //_msg_packet->m_buffer = _pack_buff;
+                //_msg_packet->m_type = MsgNet;
+                //_msg_packet->m_msg_id = UniqueNumberFactory::getInstance()->build();
+                //MessagePackPool::getInstance()->push_msg(_msg_packet);
             }
             Recv();
         });
@@ -85,22 +103,34 @@ public:
         m_is_conn = false;
     }
 
+    void setConnId(const uint32_t conn_id_) {
+        m_conn_id = conn_id_;
+    }
+    uint32_t getConnId() {
+        return m_conn_id;
+    }
+    bool inSended() {
+        return m_in_sended;
+    }
     asio::ip::tcp::socket& GetSocket() { return m_socket; }
     CConnection(asio::io_service& service_):m_socket(service_)
     {
         m_is_conn = true;
     }
     bool isConnection() {
-        return m_is_conn;
+        return m_is_conn && m_socket.is_open();
     }
     ~CConnection() {}
 private:
     asio::ip::tcp::socket m_socket;
     char m_tmp_buff[g_recv_once_size];
-
+    uint32_t m_conn_id = -1;
     bool m_is_conn = false;
+    bool m_in_sended = false;
     CBuffer  m_recv_buff;
-    CBuffer  m_snd_buff;
+
+    std::mutex m_snd_buff_mutex;
+    std::vector<shared_ptr<CBuffer>> m_snd_buff_list;
 };
 
 class CConnectionMgr : public Singleton<CConnectionMgr> {
@@ -108,7 +138,9 @@ public:
 
     CConnection* CreateConnection(asio::io_service& service_) {
         CConnection* _tmp_conn = new CConnection(service_);
+        _tmp_conn->setConnId(m_conn_vec.size());
         m_conn_vec.push_back(_tmp_conn);
+        
         return _tmp_conn;
     };
 

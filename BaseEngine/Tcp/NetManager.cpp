@@ -1,10 +1,10 @@
 #include "NetManager.h"
 
 
-bool NetManager::Start() {
+bool NetManager::Start(const string& ip_, const uint32_t port_) {
 
 
-    asio::ip::tcp::endpoint _end_point(asio::ip::address_v4::from_string("0.0.0.0"), 8888);
+    asio::ip::tcp::endpoint _end_point(asio::ip::address_v4::from_string(ip_), port_);
 
     m_acceptor = new asio::ip::tcp::acceptor(m_service, _end_point, true);
     WaitConnect();
@@ -12,9 +12,9 @@ bool NetManager::Start() {
     m_run_thread = std::thread([this]() {
         m_service.run();
     });
-
     return true;
 }
+
 bool NetManager::Stop() {
     m_service.stop();
     m_acceptor->close();
@@ -53,7 +53,9 @@ CConnection* NetManager::Connect(const string& ip_, const uint16_t port_) {
     });
     return _conn;
 }
-bool NetManager::SendMessageData(const uint32_t conn_id_, const char* data_, const uint32_t length_) {
+
+bool NetManager::SendMessageBuff(const uint32_t conn_id_, shared_ptr<CBuffer> buff_) {
+
     CConnection* _conn = CConnectionMgr::getInstance()->GetConnection(conn_id_);
     if (!_conn) {
         return false;
@@ -61,9 +63,11 @@ bool NetManager::SendMessageData(const uint32_t conn_id_, const char* data_, con
     if (!_conn->isConnection()) {
         return false;
     }
-    _conn->DoSend(data_,length_);
+    _conn->Send(buff_);
+    if (!_conn->inSended()) {
+        m_service.post([=]() {
+            _conn->DoSend();
+        });
+    }
     return true;
-}
-bool NetManager::SendMessageBuff(const uint32_t conn_id_, const CBuffer* buff_) {
-    return SendMessageData(conn_id_, buff_->peek(),buff_->readableBytes());
 }

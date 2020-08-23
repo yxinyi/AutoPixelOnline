@@ -14,9 +14,9 @@ std::string getNodeName() {
     return g_name;
 }
 void MainLoop() {
+    //testMain();
 
     try {
-        testMain();
         const float _one_frame_time = 1000.f / static_cast<float>(g_frame);
         //const float _one_frame_time = 1000.f / static_cast<float>(30);
         Timer _frame_timer;
@@ -27,7 +27,8 @@ void MainLoop() {
 
 
 
-        NetManager::getInstance()->Start();
+        NetManager::getInstance()->Start("127.0.0.1", 8888);
+
 
         //std::shared_ptr<CTcpServer> _server(new CTcpServer);
         //_server->init("127.0.0.1", 2222);
