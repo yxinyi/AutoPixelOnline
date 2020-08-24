@@ -6,6 +6,7 @@
 #include "include/tool/ObjectPool.h"
 
 const uint64_t g_recv_once_size = 1024;
+static uint32_t s_length_statc = sizeof int64_t;
 
 
 /*
@@ -81,9 +82,11 @@ public:
             //清空临时buff，准备下次数据接收
             memset(m_tmp_buff, 0, g_recv_once_size);
 
-            const uint32_t _packet_length = m_recv_buff.readInt64();
+            const uint64_t _packet_length = m_recv_buff.peekInt64();
             //有问题??
-            if (_packet_length <= m_recv_buff.readableBytes()) {
+            const uint64_t _now_cur_length = m_recv_buff.readableBytes();
+            if (_packet_length + s_length_statc <= _now_cur_length) {
+                m_recv_buff.retrieveInt64();
                 string _buff_str = m_recv_buff.retrieveAsString(_packet_length);
                 std::cout << "recv: " << _buff_str << std::endl;
                 //shared_ptr<CBuffer> _pack_buff = CMemoryPool<CBuffer>::getInstance()->alloc();

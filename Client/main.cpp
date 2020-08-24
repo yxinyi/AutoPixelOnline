@@ -22,15 +22,17 @@ void MainLoop() {
         Timer _tick_timer;
         Timer _second_fps_timer;
         uint32_t _fps_cnt = 1;
+        Sleep(1000);
         SetConsoleTitleA("client");
         NetManager::getInstance()->Start("127.0.0.1", 8889);
         auto _conn = NetManager::getInstance()->Connect("127.0.0.1",8888);
         for (;;) {
 
             shared_ptr<CBuffer> _buffer = CObjectPool<CBuffer>::getInstance()->Get();
-            _buffer->append("111");
+            _buffer->append("123456789101112131415");
             CObjectPool<CBuffer>::getInstance()->print();
             NetManager::getInstance()->SendMessageBuff(_conn->getConnId(),_buffer);
+            //system("pause");
         }
         //std::shared_ptr<CTcpClient> _DB_client(new CTcpClient);
         //_DB_client->init("127.0.0.1", 2224);
