@@ -18,10 +18,6 @@ static uint32_t s_length_statc = sizeof int64_t;
 
 */
 
-struct Header{
-    size_t m_buf_length;
-};
-
 
 
 class CConnection {
@@ -83,8 +79,9 @@ public:
             memset(m_tmp_buff, 0, g_recv_once_size);
 
             const uint64_t _packet_length = m_recv_buff.peekInt64();
-            //有问题??
             const uint64_t _now_cur_length = m_recv_buff.readableBytes();
+
+            //长度8个字节的长度标记,与包的长度
             if (_packet_length + s_length_statc <= _now_cur_length) {
                 m_recv_buff.retrieveInt64();
                 string _buff_str = m_recv_buff.retrieveAsString(_packet_length);
