@@ -16,17 +16,28 @@
 */
 
 struct Package {
-    string m_topic;
-    
+    uint32_t m_conn_id;
+    shared_ptr<CBuffer> m_buffer;
+    void init(uint32_t conn_id_, shared_ptr<CBuffer> buf_) {
+        m_conn_id = conn_id_;
+        m_buffer = buf_;
+    };
+    void reset() { m_conn_id = 0; m_buffer.reset(); };
 };
 
 // thread safe
-class CPackageMgr {
+class CPackageMgr : public Singleton<CPackageMgr> {
 public:
-    void push(shared_ptr<Package> pack_);
-    void swap(std::vector<shared_ptr<Package>>& out_vec_);
-
+    void push(shared_ptr<Package> pack_) {
+        std::unique_lock<std::mutex> _lock(m_vec_mutex);
+        m_package_vec.push_back(pack_);
+    }
+    void swap(std::vector<shared_ptr<Package>>& out_vec_) {
+        std::unique_lock<std::mutex> _lock(m_vec_mutex);
+        out_vec_.swap(m_package_vec);
+    }
 private:
+    std::mutex m_vec_mutex;
     std::vector<shared_ptr<Package>> m_package_vec;
 
 };

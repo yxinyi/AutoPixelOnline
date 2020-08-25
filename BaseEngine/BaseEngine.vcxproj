@@ -34,10 +34,6 @@
     <ClInclude Include="Buff\Buffer.h" />
     <ClInclude Include="DataBase\DBMgr.h" />
     <ClInclude Include="include\BaseEngine.h" />
-    <ClInclude Include="include\TcpBase.h" />
-    <ClInclude Include="include\TcpClient.h" />
-    <ClInclude Include="include\TcpConnonetManager.h" />
-    <ClInclude Include="include\TcpServer.h" />
     <ClInclude Include="System\BaseSystem.h" />
     <ClInclude Include="Tcp\Connection.h" />
     <ClInclude Include="Tcp\NetManager.h" />
@@ -48,13 +44,9 @@
     <ClCompile Include="Attribute\Attribute.cpp" />
     <ClCompile Include="Attribute\AttributeDefine.cpp" />
     <ClCompile Include="Attribute\AttributeManager.cpp" />
-    <ClCompile Include="BaseEngine.cpp" />
     <ClCompile Include="DataBase\DBMgr.cpp" />
     <ClCompile Include="System\BaseSystem.cpp" />
     <ClCompile Include="Tcp\NetManager.cpp" />
-    <ClCompile Include="Tcp\TcpClient.cpp" />
-    <ClCompile Include="Tcp\TcpConnonetManager.cpp" />
-    <ClCompile Include="Tcp\TcpServer.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -165,6 +157,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Common\;$(SolutionDir)Common\include\;$(SolutionDir)BaseEngine\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>-D_WIN32_WINNT=0x0601 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

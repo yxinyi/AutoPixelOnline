@@ -2,7 +2,6 @@
 #include "include/tool/Timer.h"
 #include "include/tool/LogInfo.h"
 #include "include/tool/ObjectPool.h"
-#include "include/zmq/cppzmq/zmq_addon.hpp"
 #include "../BaseEngine/Tcp/NetManager.h"
 #include "BaseEngine.h"
 
@@ -26,12 +25,15 @@ void MainLoop() {
         SetConsoleTitleA("client");
         NetManager::getInstance()->Start("127.0.0.1", 8889);
         auto _conn = NetManager::getInstance()->Connect("127.0.0.1",8888);
+        int _cnt = 0;
         for (;;) {
 
             shared_ptr<CBuffer> _buffer = CObjectPool<CBuffer>::getInstance()->Get();
-            _buffer->append("123456789101112131415");
+            _buffer->append(to_string(_cnt++));
             CObjectPool<CBuffer>::getInstance()->print();
             NetManager::getInstance()->SendMessageBuff(_conn->getConnId(),_buffer);
+            Sleep(1);
+
             //system("pause");
         }
         //std::shared_ptr<CTcpClient> _DB_client(new CTcpClient);

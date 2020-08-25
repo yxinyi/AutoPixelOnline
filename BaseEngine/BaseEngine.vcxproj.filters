@@ -15,18 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\TcpServer.h">
-      <Filter>TcpNet</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TcpConnonetManager.h">
-      <Filter>TcpNet</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TcpClient.h">
-      <Filter>TcpNet</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TcpBase.h">
-      <Filter>TcpNet</Filter>
-    </ClInclude>
     <ClInclude Include="include\BaseEngine.h" />
     <ClInclude Include="..\Common\include\tool\ProtobufDispatcher.h">
       <Filter>tool</Filter>
@@ -79,16 +67,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Tcp\TcpServer.cpp">
-      <Filter>TcpNet</Filter>
-    </ClCompile>
-    <ClCompile Include="Tcp\TcpClient.cpp">
-      <Filter>TcpNet</Filter>
-    </ClCompile>
-    <ClCompile Include="Tcp\TcpConnonetManager.cpp">
-      <Filter>TcpNet</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseEngine.cpp" />
     <ClCompile Include="..\Common\include\tool\Time.cpp">
       <Filter>tool</Filter>
     </ClCompile>

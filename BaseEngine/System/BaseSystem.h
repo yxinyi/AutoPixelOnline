@@ -16,15 +16,16 @@ public:
     virtual bool Quit() = 0;
     virtual bool Destroy() = 0;
 
-private:
+protected:
     string m_system_name;
 };
+
 using System_t = shared_ptr<BaseSystem>;
 using System_wt = weak_ptr<BaseSystem>;
 class SystemManager : public  Singleton<SystemManager>{
 public:
     bool Register(const string& str_,System_t sys_);
-    System_wt GetSystem(const string& str_);
+    bool GetSystem(System_wt& out_, const string& str_);
     bool EnvDefine();
     bool PreInit();
     bool Init();

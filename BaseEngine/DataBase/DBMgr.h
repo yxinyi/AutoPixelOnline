@@ -28,6 +28,5 @@ public:
 
 private:
     std::map<uint64_t, DBCmd> m_call_back;
-    std::shared_ptr<CTcpClient> m_db_client;
 };
 //bool UpSert

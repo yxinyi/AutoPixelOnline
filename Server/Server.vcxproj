@@ -149,10 +149,12 @@
   <ItemGroup>
     <ClCompile Include="..\Common\include\proto\Shakehand.pb.cc" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="System\ShakeHand\ShakeHandSystem.cpp" />
     <ClCompile Include="testMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Common\include\proto\Shakehand.pb.h" />
+    <ClInclude Include="System\ShakeHand\ShakeHandSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

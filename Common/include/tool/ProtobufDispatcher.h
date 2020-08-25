@@ -9,7 +9,6 @@
 #include "include/tool/LogInfo.h"
 
 using namespace google::protobuf;
-struct SChannel;
 
 using MessagePtr = std::shared_ptr<google::protobuf::Message>;
 // muduo  module
@@ -18,7 +17,7 @@ class Callback
 {
 public:
     virtual ~Callback() = default;
-    virtual void onMessage(std::shared_ptr<SChannel>,
+    virtual void onMessage(const uint32_t,
         const MessagePtr&,
         const int64_t&) const = 0;
 };
@@ -29,13 +28,13 @@ class CallbackT : public Callback
     static_assert(std::is_base_of<google::protobuf::Message, T>::value,
         "T must be derived from gpb::Message.");
 public:
-    using ProtobufMessageTCallback = std::function<void(std::shared_ptr<SChannel>, const std::shared_ptr<T>& message, const int64_t&)>;
+    using ProtobufMessageTCallback = std::function<void(const uint32_t, const std::shared_ptr<T>& message, const int64_t&)>;
 
     CallbackT(const ProtobufMessageTCallback& callback_)
         : m_callback(callback_) {
     }
 
-    void onMessage(std::shared_ptr<SChannel> socket_,
+    void onMessage(const uint32_t socket_,
         const MessagePtr& msg_,
         const int64_t& receive_time_) const override {
         std::shared_ptr<T> _concrete = std::static_pointer_cast<T>(msg_);
@@ -49,13 +48,13 @@ private:
 
 class ProtobufDispatch : public Singleton<ProtobufDispatch> {
 public:
-    using ProtobufMessageCallback = std::function<void(std::shared_ptr<SChannel>, const MessagePtr&, const int64_t&)>;
+    using ProtobufMessageCallback = std::function<void(const uint32_t, const MessagePtr&, const int64_t&)>;
 
-    ProtobufDispatch() :m_defaultCallback([](std::shared_ptr<SChannel>, const MessagePtr& msg_, const int64_t&) {
+    ProtobufDispatch() :m_defaultCallback([](const uint32_t, const MessagePtr& msg_, const int64_t&) {
         LogInfo << "onUnknowMessageType: " << msg_->GetTypeName() << FlushLog;
     }) {}
 
-    void onProtobufMessage(std::shared_ptr<SChannel> conn_,
+    void onProtobufMessage(const uint32_t conn_,
         const MessagePtr& message_,
         const int64_t& receive_time_) const {
         CallbackListMap::const_iterator it = m_callbacks.find(message_->GetDescriptor());

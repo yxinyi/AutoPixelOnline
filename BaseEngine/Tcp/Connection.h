@@ -4,6 +4,7 @@
 #include <mutex>
 #include "include/tool/UniqueNumberFactory.h"
 #include "include/tool/ObjectPool.h"
+#include "PakcageList.h"
 
 const uint64_t g_recv_once_size = 1024;
 static uint32_t s_length_statc = sizeof int64_t;
@@ -38,7 +39,7 @@ public:
 
         shared_ptr<CBuffer> _snd_buff = CObjectPool<CBuffer>::getInstance()->Get();
         for (auto&& _buff_it : _local_vec) {
-            const uint32_t length = _buff_it->readableBytes();
+            const uint32_t length = (uint32_t)_buff_it->readableBytes();
             _buff_it->prependInt64(length);
             _snd_buff->append(_buff_it->peek(), _buff_it->readableBytes());
         }
@@ -85,14 +86,13 @@ public:
             if (_packet_length + s_length_statc <= _now_cur_length) {
                 m_recv_buff.retrieveInt64();
                 string _buff_str = m_recv_buff.retrieveAsString(_packet_length);
-                std::cout << "recv: " << _buff_str << std::endl;
-                //shared_ptr<CBuffer> _pack_buff = CMemoryPool<CBuffer>::getInstance()->alloc();
-                //_pack_buff->append(_buff_str.data(),_buff_str.size());
-                //shared_ptr<MsgPacket> _msg_packet(new MsgPacket);
-                //_msg_packet->m_buffer = _pack_buff;
-                //_msg_packet->m_type = MsgNet;
-                //_msg_packet->m_msg_id = UniqueNumberFactory::getInstance()->build();
-                //MessagePackPool::getInstance()->push_msg(_msg_packet);
+                //std::cout << "recv: " << _buff_str << std::endl;
+
+                shared_ptr<CBuffer> _pack_buff = CObjectPool<CBuffer>::getInstance()->Get();
+                _pack_buff->append(_buff_str.data(), _buff_str.size());
+                shared_ptr<Package> _pack = CObjectPool<Package>::getInstance()->Get(m_conn_id, _pack_buff);
+                //推入消息池
+                CPackageMgr::getInstance()->push(_pack);
             }
             Recv();
         });
@@ -138,7 +138,7 @@ public:
 
     CConnection* CreateConnection(asio::io_service& service_) {
         CConnection* _tmp_conn = new CConnection(service_);
-        _tmp_conn->setConnId(m_conn_vec.size());
+        _tmp_conn->setConnId((uint32_t)m_conn_vec.size());
         m_conn_vec.push_back(_tmp_conn);
         
         return _tmp_conn;

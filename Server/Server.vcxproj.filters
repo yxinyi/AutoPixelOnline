@@ -6,15 +6,27 @@
       <Filter>proto</Filter>
     </ClCompile>
     <ClCompile Include="testMain.cpp" />
+    <ClCompile Include="System\ShakeHand\ShakeHandSystem.cpp">
+      <Filter>System\ShakeHand</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="proto">
       <UniqueIdentifier>{75043fc9-9e04-47f7-8cf4-7295d5ccb2b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{ffe5e087-e31c-42a9-9986-48e6087beb15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\ShakeHand">
+      <UniqueIdentifier>{cb5e2b7c-f5c2-40b9-afec-c4f3ad3a1a55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Common\include\proto\Shakehand.pb.h">
       <Filter>proto</Filter>
+    </ClInclude>
+    <ClInclude Include="System\ShakeHand\ShakeHandSystem.h">
+      <Filter>System\ShakeHand</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,7 +2,6 @@
 #include <cstdint>
 #include <iostream>
 #include "include/tool/SingletonTemplate.h"
-#include "include/zmq/cppzmq/zmq_addon.hpp"
 
 class UniqueNumberFactory : public Singleton<UniqueNumberFactory> {
     friend Singleton<UniqueNumberFactory>;

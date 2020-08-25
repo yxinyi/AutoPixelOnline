@@ -16,3 +16,4 @@ private:
 
 template<class T>
 T* Singleton<T>::m_instance = nullptr;
+

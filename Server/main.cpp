@@ -1,10 +1,9 @@
 #include "include/tool/Time.h"
 #include "include/tool/Timer.h"
 #include "include/tool/LogInfo.h"
-#include "include/zmq/cppzmq/zmq_addon.hpp"
 #include "BaseEngine.h"
 #include "../BaseEngine/Tcp/NetManager.h"
-
+#include "../Server/System/ShakeHand/ShakeHandSystem.h"
 #include <Windows.h>
 
 const uint32_t g_frame = 30;
@@ -24,18 +23,9 @@ void MainLoop() {
         Timer _second_fps_timer;
         uint32_t _fps_cnt = 1;
         SetConsoleTitleA("server");
-
-
-
         NetManager::getInstance()->Start("127.0.0.1", 8888);
 
-
-        //std::shared_ptr<CTcpServer> _server(new CTcpServer);
-        //_server->init("127.0.0.1", 2222);
-        //RegTcp(_server);
-        //std::shared_ptr<CTcpClient> _DB_client(new CTcpClient);
-        //_DB_client->init("127.0.0.1", 2224);
-        //RegTcp(_DB_client);
+        SystemManager::getInstance()->Register("ShakeHandEvent",shared_ptr<ShakeHandSystem>(new ShakeHandSystem()));
 
         while (true) {
             const int64_t _this_frame_time = _frame_timer.elapsed();

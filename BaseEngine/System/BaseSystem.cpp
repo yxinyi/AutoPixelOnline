@@ -5,22 +5,22 @@ using System_t = shared_ptr<BaseSystem>;
 using System_wt = weak_ptr<BaseSystem>;
 bool SystemManager::Register(const string& str_, System_t sys_) {
     if (m_system_pool.find(str_) == m_system_pool.end()) {
-        LogInfo << "[SYS] [" << str_ << "] is registed" << FlushLog
-            return false;
+        LogInfo << "[SYS] [" << str_ << "] is registed" << FlushLog;
+        return false;
     }
     m_system_pool[str_] = sys_;
     return true;
 }
 
 
-System_wt SystemManager::GetSystem(const string& str_) {
+bool SystemManager::GetSystem(System_wt& out_, const string& str_) {
     map<string, System_t>::iterator _find = m_system_pool.find(str_);
     if (_find == m_system_pool.end()) {
-        LogInfo << "[SYS] [" << str_ << "] is registed" << FlushLog
-            return System_wt();
+        LogInfo << "[SYS] [" << str_ << "] not registed" << FlushLog;
+        return false;
     }
-
-    return System_wt(_find->second);
+    out_ = _find->second;
+    return true;
 }
 
 

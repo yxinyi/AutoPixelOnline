@@ -20,10 +20,10 @@ public:
         }
         return _msg;
     }
-    Message* decode(const std::string& proto_name_, const std::string& zmq_msg_) {
+    Message* decode(const std::string& proto_name_, const std::string& msg_) {
         Message* _msg = nullptr;
         if (_msg = createMessage(proto_name_)) {
-            _msg->ParseFromString(zmq_msg_);
+            _msg->ParseFromString(msg_);
         }
         return _msg;
     }
