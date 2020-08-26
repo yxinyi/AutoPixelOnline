@@ -4,6 +4,7 @@
 #include "include/tool/ObjectPool.h"
 #include "../BaseEngine/Tcp/NetManager.h"
 #include "BaseEngine.h"
+#include "../Common/include/proto/Shakehand.pb.h"
 
 #include <Windows.h>
 
@@ -26,16 +27,13 @@ void MainLoop() {
         NetManager::getInstance()->Start("127.0.0.1", 8889);
         auto _conn = NetManager::getInstance()->Connect("127.0.0.1",8888);
         int _cnt = 0;
-        for (;;) {
+        //for (;;) {
+        //    shared_ptr<ShakeHandEvent> _event(new ShakeHandEvent);
+        //    NetManager::getInstance()->SendMessageBuff(_conn->getConnId(), _event);
+        //    Sleep(1);
+        //    //system("pause");
+        //}
 
-            shared_ptr<CBuffer> _buffer = CObjectPool<CBuffer>::getInstance()->Get();
-            _buffer->append(to_string(_cnt++));
-            CObjectPool<CBuffer>::getInstance()->print();
-            NetManager::getInstance()->SendMessageBuff(_conn->getConnId(),_buffer);
-            Sleep(1);
-
-            //system("pause");
-        }
         //std::shared_ptr<CTcpClient> _DB_client(new CTcpClient);
         //_DB_client->init("127.0.0.1", 2224);
         //RegTcp(_DB_client);

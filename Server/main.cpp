@@ -23,9 +23,13 @@ void MainLoop() {
         Timer _second_fps_timer;
         uint32_t _fps_cnt = 1;
         SetConsoleTitleA("server");
-        NetManager::getInstance()->Start("127.0.0.1", 8888);
+        if (!NetManager::getInstance()->Start("127.0.0.1", 8888)) {
+            std::cout << "server start error " << std::endl;
+        }
 
-        SystemManager::getInstance()->Register("ShakeHandEvent",shared_ptr<ShakeHandSystem>(new ShakeHandSystem()));
+
+
+
 
         while (true) {
             const int64_t _this_frame_time = _frame_timer.elapsed();

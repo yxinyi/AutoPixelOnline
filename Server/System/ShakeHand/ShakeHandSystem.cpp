@@ -3,12 +3,14 @@
 #include "../../../Common/include/proto/Shakehand.pb.h"
 
 
+RegSystem(ShakeHandSystem);
+
 using ShakeHandEvent_t = shared_ptr<ShakeHandEvent>;
 bool ShakeHandSystem::EnvDefine() {
-    EventRegister(ShakeHandEvent, [](const uint32_t conn_,
+    EventRegister(ShakeHandEvent, [this](const uint32_t conn_,
         const ShakeHandEvent_t& message_,
         const int64_t& receive_time_) {
-        std::cout << "ShakeHandEvent_t" << std::endl;
+        this->ShakeHandPrint();
     });
     return true;
 }
@@ -26,4 +28,8 @@ bool ShakeHandSystem::Quit() {
 }
 bool ShakeHandSystem::Destroy() {
     return true;
+}
+
+void  ShakeHandSystem::ShakeHandPrint(){
+    std::cout << "ShakeHandPrint" << std::endl;
 }

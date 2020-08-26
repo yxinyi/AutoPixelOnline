@@ -4,7 +4,7 @@ using namespace std;
 using System_t = shared_ptr<BaseSystem>;
 using System_wt = weak_ptr<BaseSystem>;
 bool SystemManager::Register(const string& str_, System_t sys_) {
-    if (m_system_pool.find(str_) == m_system_pool.end()) {
+    if (m_system_pool.find(str_) != m_system_pool.end()) {
         LogInfo << "[SYS] [" << str_ << "] is registed" << FlushLog;
         return false;
     }

@@ -3,11 +3,17 @@
 
 class ShakeHandSystem :public BaseSystem {
 public:
-    ShakeHandSystem(){}
+    ShakeHandSystem():BaseSystem("ShakeHandSystem"){}
     bool EnvDefine(); 
     bool PreInit(); 
     bool Init(); 
     bool Loop(const uint64_t interval_); 
     bool Quit();
     bool Destroy();
+
+private:
+    void ShakeHandPrint();
+
 };
+
+

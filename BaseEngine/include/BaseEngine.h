@@ -7,6 +7,15 @@
 
 class CBaseEngine :public Singleton<CBaseEngine> {
 public:
+    CBaseEngine() {
+        Singleton<SystemManager>::getInstance()->EnvDefine();
+        Singleton<SystemManager>::getInstance()->PreInit();
+        Singleton<SystemManager>::getInstance()->Init();
+    }
+    ~CBaseEngine() {
+        Singleton<SystemManager>::getInstance()->Quit();
+        Singleton<SystemManager>::getInstance()->Destroy();
+    }
     void run(const uint32_t receive_time_) {
         std::vector<shared_ptr<Package>> _vec;
         CPackageMgr::getInstance()->swap(_vec);
