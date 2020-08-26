@@ -1,5 +1,6 @@
 #include "./ShakeHandSystem.h"
 #include "../../../Common/include/tool/ProtobufDispatcher.h"
+#include "../../../BaseEngine/MessageBus/MessageBus.h"
 #include "../../../Common/include/proto/Shakehand.pb.h"
 
 
@@ -12,6 +13,10 @@ bool ShakeHandSystem::EnvDefine() {
         const int64_t& receive_time_) {
         this->ShakeHandPrint();
     });
+
+    MessageBus::getInstance()->Attach([]() {
+        std::cout << "MessageBus ShakeHand" << std::endl;
+    }, "ShakeHand");
     return true;
 }
 bool ShakeHandSystem::PreInit() {
@@ -32,4 +37,7 @@ bool ShakeHandSystem::Destroy() {
 
 void  ShakeHandSystem::ShakeHandPrint(){
     std::cout << "ShakeHandPrint" << std::endl;
+
+    MessageBus::getInstance()->SendReq<void>("ShakeHand");
+
 }

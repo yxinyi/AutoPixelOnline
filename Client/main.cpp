@@ -27,12 +27,12 @@ void MainLoop() {
         NetManager::getInstance()->Start("127.0.0.1", 8889);
         auto _conn = NetManager::getInstance()->Connect("127.0.0.1",8888);
         int _cnt = 0;
-        //for (;;) {
-        //    shared_ptr<ShakeHandEvent> _event(new ShakeHandEvent);
-        //    NetManager::getInstance()->SendMessageBuff(_conn->getConnId(), _event);
-        //    Sleep(1);
-        //    //system("pause");
-        //}
+        for (;;) {
+            shared_ptr<ShakeHandEvent> _event(new ShakeHandEvent);
+            NetManager::getInstance()->SendMessageBuff(_conn->getConnId(), _event);
+            Sleep(1);
+            //system("pause");
+        }
 
         //std::shared_ptr<CTcpClient> _DB_client(new CTcpClient);
         //_DB_client->init("127.0.0.1", 2224);

@@ -34,6 +34,7 @@
     <ClInclude Include="Buff\Buffer.h" />
     <ClInclude Include="DataBase\DBMgr.h" />
     <ClInclude Include="include\BaseEngine.h" />
+    <ClInclude Include="MessageBus\MessageBus.h" />
     <ClInclude Include="System\BaseSystem.h" />
     <ClInclude Include="Tcp\Connection.h" />
     <ClInclude Include="Tcp\NetManager.h" />
@@ -158,6 +159,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Common\;$(SolutionDir)Common\include\;$(SolutionDir)BaseEngine\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalOptions>-D_WIN32_WINNT=0x0601 %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

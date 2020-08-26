@@ -13,6 +13,9 @@
     <Filter Include="System">
       <UniqueIdentifier>{20cfa52e-5fc0-45fa-bfde-416e90e1a0da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MessageBus">
+      <UniqueIdentifier>{c78503ec-9793-4d2a-9be8-74cf1b9a50e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\BaseEngine.h" />
@@ -64,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="Tcp\NetManager.h">
       <Filter>TcpNet</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageBus\MessageBus.h">
+      <Filter>MessageBus</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
