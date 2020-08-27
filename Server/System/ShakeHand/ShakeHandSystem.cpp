@@ -2,6 +2,8 @@
 #include "../../../Common/include/tool/ProtobufDispatcher.h"
 #include "../../../BaseEngine/MessageBus/MessageBus.h"
 #include "../../../Common/include/proto/Shakehand.pb.h"
+#include "../../../Common/include/tool/TimerTask.h"
+#include "../../../Common/include/tool/Time.h"
 
 
 RegSystem(ShakeHandSystem);
@@ -17,6 +19,9 @@ bool ShakeHandSystem::EnvDefine() {
     MessageBus::getInstance()->Attach([]() {
         std::cout << "MessageBus ShakeHand" << std::endl;
     }, "ShakeHand");
+    TimerTaskMgr->RegisterTask("ShakeHandEvent", 0, 1000, -1, []() {
+        std::cout << "ShakeHandEvent timer" << std::endl;
+    });
     return true;
 }
 bool ShakeHandSystem::PreInit() {

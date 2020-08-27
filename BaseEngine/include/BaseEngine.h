@@ -3,6 +3,7 @@
 #include "tool/SingletonTemplate.h"
 #include "../Common/include/tool/ProtobufDispatcher.h"
 #include "../Common/include/tool/ProtobufCodec.h"
+#include "../Common/include/tool/TimerTask.h"
 #include "../BaseEngine/System/BaseSystem.h"
 
 class CBaseEngine :public Singleton<CBaseEngine> {
@@ -28,7 +29,7 @@ public:
             DispatcherEvent(_conn_id, _msg, receive_time_);
         }
         _vec.clear();
-
+        TimerTaskMgr->Run();
     }
 };
 

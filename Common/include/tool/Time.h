@@ -11,4 +11,4 @@ public:
     std::string NowStr();
 };
 
-#define TimeTool Singleton<Time>::getInstance()
+#define NowTime Singleton<Time>::getInstance()

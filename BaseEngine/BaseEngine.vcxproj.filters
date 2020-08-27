@@ -71,6 +71,9 @@
     <ClInclude Include="MessageBus\MessageBus.h">
       <Filter>MessageBus</Filter>
     </ClInclude>
+    <ClInclude Include="..\Common\include\tool\TimerTask.h">
+      <Filter>tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\include\tool\Time.cpp">
@@ -94,6 +97,9 @@
     <ClCompile Include="DataBase\DBMgr.cpp" />
     <ClCompile Include="Tcp\NetManager.cpp">
       <Filter>TcpNet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\tool\TimerTask.cpp">
+      <Filter>tool</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

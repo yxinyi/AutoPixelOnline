@@ -28,9 +28,6 @@ void MainLoop() {
         }
 
 
-
-
-
         while (true) {
             const int64_t _this_frame_time = _frame_timer.elapsed();
             if (_this_frame_time >= _one_frame_time) {

@@ -26,6 +26,7 @@
     <ClInclude Include="..\Common\include\tool\StringHelper.h" />
     <ClInclude Include="..\Common\include\tool\Time.h" />
     <ClInclude Include="..\Common\include\tool\Timer.h" />
+    <ClInclude Include="..\Common\include\tool\TimerTask.h" />
     <ClInclude Include="..\Common\include\tool\UniqueNumberFactory.h" />
     <ClInclude Include="Attribute\ApiAttribute.h" />
     <ClInclude Include="Attribute\Attribute.h" />
@@ -41,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\include\tool\Time.cpp" />
+    <ClCompile Include="..\Common\include\tool\TimerTask.cpp" />
     <ClCompile Include="..\Common\include\tool\UniqueNumberFactory.cpp" />
     <ClCompile Include="Attribute\Attribute.cpp" />
     <ClCompile Include="Attribute\AttributeDefine.cpp" />
