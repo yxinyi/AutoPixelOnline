@@ -3,15 +3,28 @@
 #include "include/tool/LogInfo.h"
 #include "BaseEngine.h"
 #include "../BaseEngine/Tcp/NetManager.h"
-#include "../Server/System/ShakeHand/ShakeHandSystem.h"
 #include <Windows.h>
 
 const uint32_t g_frame = 30;
 const std::string g_name = "LogicServer";
+
+const std::vector<std::string> m_connec_target = {};
+
+const std::string g_listen = "127.0.0.1";
+const uint32_t g_listen_port = 8888;
 void testMain();
 std::string getNodeName() {
     return g_name;
 }
+
+std::vector<ConnectTargetConfig> getConnectConfig() {
+    static std::vector<ConnectTargetConfig> _target_cfg;
+    if (!_target_cfg.size()) {
+        //_target_cfg.emplace_back("127.0.0.1", 8888);
+    }
+    return _target_cfg;
+}
+
 void MainLoop() {
     //testMain();
 
@@ -23,7 +36,7 @@ void MainLoop() {
         Timer _second_fps_timer;
         uint32_t _fps_cnt = 1;
         SetConsoleTitleA("server");
-        if (!NetManager::getInstance()->Start("127.0.0.1", 8888)) {
+        if (!NetManager::getInstance()->Start(g_listen, g_listen_port)) {
             std::cout << "server start error " << std::endl;
         }
 

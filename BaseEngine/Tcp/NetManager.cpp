@@ -22,7 +22,7 @@ bool NetManager::Stop() {
     return true;
 }
 bool NetManager::WaitConnect() {
-    CConnection* _new_connection = CConnectionMgr::getInstance()->CreateConnection(m_service);
+    CConnection_t _new_connection = CConnectionMgr::getInstance()->CreateConnection(m_service);
     m_acceptor->async_accept(_new_connection->GetSocket(), [this,_new_connection](const error_code& err_){
         if (!err_) {
             _new_connection->Recv();
@@ -35,8 +35,8 @@ bool NetManager::WaitConnect() {
     return true;
 }
 
-CConnection* NetManager::Connect(const string& ip_, const uint16_t port_) {
-    CConnection* _conn = CConnectionMgr::getInstance()->CreateConnection(m_service);
+CConnection_t NetManager::Connect(const string& ip_, const uint16_t port_) {
+    CConnection_t _conn = CConnectionMgr::getInstance()->CreateConnection(m_service);
 
     asio::ip::tcp::resolver _resolver(m_service);
     asio::ip::tcp::resolver::iterator _endpoints = _resolver.resolve(asio::ip::tcp::resolver::query(ip_, to_string(port_)));
@@ -56,7 +56,7 @@ CConnection* NetManager::Connect(const string& ip_, const uint16_t port_) {
 
 bool NetManager::SendMessageBuff(const uint32_t conn_id_, shared_ptr<CBuffer> buff_) {
 
-    CConnection* _conn = CConnectionMgr::getInstance()->GetConnection(conn_id_);
+    CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(conn_id_);
     if (!_conn) {
         return false;
     }

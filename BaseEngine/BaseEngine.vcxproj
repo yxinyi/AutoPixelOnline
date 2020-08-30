@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Common\include\tool\AStar.h" />
     <ClInclude Include="..\Common\include\tool\LogInfo.h" />
     <ClInclude Include="..\Common\include\tool\ProtobufCodec.h" />
     <ClInclude Include="..\Common\include\tool\ProtobufDispatcher.h" />
@@ -37,6 +38,7 @@
     <ClInclude Include="include\BaseEngine.h" />
     <ClInclude Include="MessageBus\MessageBus.h" />
     <ClInclude Include="System\BaseSystem.h" />
+    <ClInclude Include="System\ShakeHand\ShakeHandSystem.h" />
     <ClInclude Include="Tcp\Connection.h" />
     <ClInclude Include="Tcp\NetManager.h" />
   </ItemGroup>
@@ -49,6 +51,7 @@
     <ClCompile Include="Attribute\AttributeManager.cpp" />
     <ClCompile Include="DataBase\DBMgr.cpp" />
     <ClCompile Include="System\BaseSystem.cpp" />
+    <ClCompile Include="System\ShakeHand\ShakeHandSystem.cpp" />
     <ClCompile Include="Tcp\NetManager.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

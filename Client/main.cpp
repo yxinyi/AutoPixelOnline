@@ -13,6 +13,16 @@ const std::string g_name = "Client";
 std::string getNodeName() {
     return g_name;
 }
+
+
+std::vector<ConnectTargetConfig> getConnectConfig() {
+    static std::vector<ConnectTargetConfig> _target_cfg;
+    if (!_target_cfg.size()) {
+        _target_cfg.emplace_back("127.0.0.1",8888);
+    }
+    return _target_cfg;
+}
+
 void MainLoop() {
 
     try {
@@ -24,22 +34,16 @@ void MainLoop() {
         uint32_t _fps_cnt = 1;
         Sleep(1000);
         SetConsoleTitleA("client");
-        NetManager::getInstance()->Start("127.0.0.1", 8889);
-        auto _conn = NetManager::getInstance()->Connect("127.0.0.1",8888);
-        int _cnt = 0;
-        for (;;) {
-            shared_ptr<ShakeHandEvent> _event(new ShakeHandEvent);
-            NetManager::getInstance()->SendMessageBuff(_conn->getConnId(), _event);
-            Sleep(1);
-            //system("pause");
-        }
+        NetManager::getInstance()->Start();
+        //auto _conn = NetManager::getInstance()->Connect("127.0.0.1", 8889);
+        //int _cnt = 0;
+        //for (;;) {
+        //    shared_ptr<ShakeHandEvent> _event(new ShakeHandEvent);
+        //    NetManager::getInstance()->SendMessageBuff(_conn->getConnId(), _event);
+        //    Sleep(1);
+        //    //system("pause");
+        //}
 
-        //std::shared_ptr<CTcpClient> _DB_client(new CTcpClient);
-        //_DB_client->init("127.0.0.1", 2224);
-        //RegTcp(_DB_client);
-        //std::shared_ptr<CTcpClient> _client(new CTcpClient);
-        //_client->init("127.0.0.1", 2222);
-        //RegTcp(_client);
         while (true) {
             const int64_t _this_frame_time = _frame_timer.elapsed();
             if (_this_frame_time >= _one_frame_time) {

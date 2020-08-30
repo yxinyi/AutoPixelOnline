@@ -74,6 +74,10 @@
     <ClInclude Include="..\Common\include\tool\TimerTask.h">
       <Filter>tool</Filter>
     </ClInclude>
+    <ClInclude Include="..\Common\include\tool\AStar.h" />
+    <ClInclude Include="System\ShakeHand\ShakeHandSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\include\tool\Time.cpp">
@@ -100,6 +104,9 @@
     </ClCompile>
     <ClCompile Include="..\Common\include\tool\TimerTask.cpp">
       <Filter>tool</Filter>
+    </ClCompile>
+    <ClCompile Include="System\ShakeHand\ShakeHandSystem.cpp">
+      <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

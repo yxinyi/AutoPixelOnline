@@ -20,7 +20,6 @@ static uint32_t s_length_statc = sizeof int64_t;
 */
 
 
-
 class CConnection {
 public:
     bool DoSend() {
@@ -48,6 +47,7 @@ public:
         m_socket.async_write_some(asio::buffer(_snd_buff->peek(), _snd_buff->readableBytes()), [this](asio::error_code err_,
             std::size_t size_) {
             if (err_) {
+                printf("async_write_some %d \n", err_.value());
                 close();
                 return;
             }
@@ -123,7 +123,7 @@ public:
     ~CConnection() {}
 private:
     asio::ip::tcp::socket m_socket;
-    char m_tmp_buff[g_recv_once_size];
+    char m_tmp_buff[g_recv_once_size] = {0};
     uint32_t m_conn_id = -1;
     bool m_is_conn = false;
     bool m_in_sended = false;
@@ -132,19 +132,20 @@ private:
     std::mutex m_snd_buff_mutex;
     std::vector<shared_ptr<CBuffer>> m_snd_buff_list;
 };
+using CConnection_t = shared_ptr<CConnection>;
 
 class CConnectionMgr : public Singleton<CConnectionMgr> {
 public:
 
-    CConnection* CreateConnection(asio::io_service& service_) {
-        CConnection* _tmp_conn = new CConnection(service_);
+    CConnection_t CreateConnection(asio::io_service& service_) {
+        CConnection_t _tmp_conn = std::make_shared<CConnection>(service_);
         _tmp_conn->setConnId((uint32_t)m_conn_vec.size());
         m_conn_vec.push_back(_tmp_conn);
         
         return _tmp_conn;
     };
 
-    CConnection* GetConnection(const uint32_t conn_id_) {
+    CConnection_t GetConnection(const uint32_t conn_id_) {
         if (conn_id_ >= m_conn_vec.size()) {
             return nullptr;
         }
@@ -152,7 +153,7 @@ public:
     }
 
 private:
-    std::list<CConnection*> m_idle_conn_list;
+    std::list<CConnection_t> m_idle_conn_list;
 
-    std::vector<CConnection*> m_conn_vec;
+    std::vector<CConnection_t> m_conn_vec;
 };
