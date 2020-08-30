@@ -2,10 +2,6 @@
 #include "Time.h"
 #include <iostream>
 
-bool operator<(TimerTask_t lhs_, TimerTask_t rhs_) {
-    return lhs_->m_start_time < rhs_->m_start_time;
-}
-
 
 bool TimerTaskManager::RegisterTask(const std::string& name_, const int64_t start_time_, const int64_t intervals_, int32_t loop_times_, TaskFunc func_) {
     TimerTask_t _task(new TimerTask);

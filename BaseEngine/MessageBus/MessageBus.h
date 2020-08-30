@@ -89,7 +89,7 @@ public:
         std::string _msg_type = topic_ + typeid(function_type).name();
         std::pair<Iterater, Iterater> _range = m_map.equal_range(_msg_type);
         for (Iterater _start = _range.first; _start != _range.second; _start++) {
-            std::any_cast<function_type>(_start->second)(std::forward<Args>(args_));
+            std::any_cast<function_type>(_start->second)(std::forward<Args...>(args_...));
         }
     }
 

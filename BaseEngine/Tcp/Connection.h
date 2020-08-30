@@ -1,6 +1,7 @@
 #pragma once
 #include "asio.hpp"
 #include "../../Common/include/tool/Buffer.h"
+#include <map>
 #include <mutex>
 #include "include/tool/UniqueNumberFactory.h"
 #include "include/tool/ObjectPool.h"
@@ -118,9 +119,12 @@ public:
         m_is_conn = true;
     }
     bool isConnection() {
-        return m_is_conn && m_socket.is_open();
+        return m_is_conn;//&& m_socket.is_open();
     }
     ~CConnection() {}
+    std::string getIPStr() {
+        return (m_socket.remote_endpoint().address().to_string() + " : "+ to_string(m_socket.remote_endpoint().port()));
+    }
 private:
     asio::ip::tcp::socket m_socket;
     char m_tmp_buff[g_recv_once_size] = {0};
@@ -139,21 +143,29 @@ public:
 
     CConnection_t CreateConnection(asio::io_service& service_) {
         CConnection_t _tmp_conn = std::make_shared<CConnection>(service_);
-        _tmp_conn->setConnId((uint32_t)m_conn_vec.size());
-        m_conn_vec.push_back(_tmp_conn);
+        const uint32_t _conn_id = m_conn_inc_id++;
+        _tmp_conn->setConnId(_conn_id);
+        
+        m_conn_pool[_conn_id] = _tmp_conn;
         
         return _tmp_conn;
     };
 
     CConnection_t GetConnection(const uint32_t conn_id_) {
-        if (conn_id_ >= m_conn_vec.size()) {
+        if (m_conn_pool.find(conn_id_)== m_conn_pool.end()) {
             return nullptr;
         }
-        return m_conn_vec[conn_id_];
+        return m_conn_pool[conn_id_];
     }
 
+    bool DelelteConnection(const uint32_t conn_id_) {
+        if (m_conn_pool.find(conn_id_) == m_conn_pool.end()) {
+            return false;
+        }
+        m_conn_pool.erase(conn_id_);
+        return true;
+    }
 private:
-    std::list<CConnection_t> m_idle_conn_list;
-
-    std::vector<CConnection_t> m_conn_vec;
+    std::map<uint32_t,CConnection_t> m_conn_pool;
+    uint32_t m_conn_inc_id = 0;
 };
