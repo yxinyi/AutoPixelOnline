@@ -8,6 +8,7 @@
 
 
 enum class AttrCfg {
+    NONE = 0,
     SAVE = 1,
 };
 

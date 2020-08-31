@@ -131,7 +131,6 @@ struct ItemInfo{
 
 
 
-//ApiAttrDefine("Player", "BaseAttr", "attack:float:50", Save)
 bool ApiAttrDefine(const std::string& obj_, const std::string& model_, const std::string& attr_info_, const AttrCfg ex_cfg_);
 
 std::string ApiGetAttr(CAttribute_t, const std::string& name_);

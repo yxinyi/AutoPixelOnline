@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+message PlayerLoginEvent {
+    //uint32 state = 1;
+	//string src_name = 2;
+}

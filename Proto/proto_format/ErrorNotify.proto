@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+message ErrorMsg {
+    uint32 error_id = 1;
+	repeated string param = 2;
+}

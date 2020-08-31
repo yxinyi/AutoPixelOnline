@@ -6,6 +6,21 @@
     <ClCompile Include="..\Common\include\proto\Shakehand.pb.cc">
       <Filter>proto</Filter>
     </ClCompile>
+    <ClCompile Include="System\Map\Map.cpp">
+      <Filter>System\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="System\Creature\Creature.cpp">
+      <Filter>System\Creature</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\proto\PlayerLogin.pb.cc">
+      <Filter>proto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\proto\ErrorNotify.pb.cc">
+      <Filter>System\Error</Filter>
+    </ClCompile>
+    <ClCompile Include="System\Error\Error.cpp">
+      <Filter>System\Error</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="proto">
@@ -14,13 +29,43 @@
     <Filter Include="System">
       <UniqueIdentifier>{ffe5e087-e31c-42a9-9986-48e6087beb15}</UniqueIdentifier>
     </Filter>
-    <Filter Include="System\ShakeHand">
-      <UniqueIdentifier>{cb5e2b7c-f5c2-40b9-afec-c4f3ad3a1a55}</UniqueIdentifier>
+    <Filter Include="System\Map">
+      <UniqueIdentifier>{a4db9742-7a51-49a3-9ed8-3caf5739e13d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Creature">
+      <UniqueIdentifier>{3ab8185b-80ed-44b4-8f0c-771af260a157}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Error">
+      <UniqueIdentifier>{f8a0e8e9-d763-4077-a7c3-73db56324031}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Common\include\proto\Shakehand.pb.h">
       <Filter>proto</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Map\Map.h">
+      <Filter>System\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Map\MapStruct.h">
+      <Filter>System\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Creature\CreatureStruct.h">
+      <Filter>System\Creature</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Creature\Creature.h">
+      <Filter>System\Creature</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\proto\PlayerLogin.pb.h">
+      <Filter>proto</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Error\ErrorStruct.h">
+      <Filter>System\Error</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\proto\ErrorNotify.pb.h">
+      <Filter>System\Error</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Error\Error.h">
+      <Filter>System\Error</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
