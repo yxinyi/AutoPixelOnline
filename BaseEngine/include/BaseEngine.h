@@ -38,6 +38,8 @@ public:
         }
         _vec.clear();
         TimerTaskMgr->Run();
+
+        SystemManager::getInstance()->Loop(receive_time_);
     }
 };
 

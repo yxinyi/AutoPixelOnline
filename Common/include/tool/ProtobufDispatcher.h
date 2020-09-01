@@ -82,8 +82,10 @@ private:
 
 };
 
+
 #define EventRegister(event_,func_)  \
-    Singleton<ProtobufDispatch>::getInstance()->registerMessageCallback<event_>(func_);
+    Singleton<ProtobufDispatch>::getInstance()->registerMessageCallback<event_ >(func_);
+
 
 
 #define DispatcherEvent(socket_,msg_,tm_)  \

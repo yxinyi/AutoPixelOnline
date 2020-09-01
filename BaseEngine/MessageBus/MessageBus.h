@@ -73,9 +73,8 @@ public:
         add(topic_, _func);
     }
 
-    template<typename R>
     void SendReq(const std::string& topic_ = "") {
-        using function_type = std::function<R()>;
+        using function_type = std::function<void ()>;
         std::string _msg_type = topic_ + typeid(function_type).name();
         
         std::pair<Iterater, Iterater> _range = m_map.equal_range(_msg_type);
@@ -83,9 +82,9 @@ public:
             std::any_cast<function_type>(_start->second)();
         }
     }
-    template<typename R,typename... Args>
+    template<typename... Args>
     void SendReq(Args... args_,const std::string& topic_ = "") {
-        using function_type = std::function<R(Args...)>;
+        using function_type = std::function<void(Args...)>;
         std::string _msg_type = topic_ + typeid(function_type).name();
         std::pair<Iterater, Iterater> _range = m_map.equal_range(_msg_type);
         for (Iterater _start = _range.first; _start != _range.second; _start++) {
@@ -93,15 +92,14 @@ public:
         }
     }
 
-    template<typename R, typename... Args>
+    template<typename... Args>
     void Remove(const std::string& topic_ ) {
-        using function_type = std::function<R(Args...)>;
+        using function_type = std::function<void(Args...)>;
         std::string _msg_type = topic_ + typeid(function_type).name();
         
         std::pair<Iterater, Iterater> _range = m_map.equal_range(_msg_type);
         m_map.erase(_range.first, _range.second);
     }
-
 
 
 
@@ -116,3 +114,4 @@ private:
 
     using Iterater = std::multimap<std::string, std::any>::iterator;
 };
+

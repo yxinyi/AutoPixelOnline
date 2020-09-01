@@ -3,9 +3,19 @@
 #include "./MapStruct.h"
 
 
-class MapManager {
+class MapManager :public BaseSystem, public Singleton<MapManager> {
 public:
+    MapManager() :BaseSystem("MapManager") {}
+    bool EnvDefine();
+    bool PreInit();
+    bool Init();
+    bool Loop(const uint64_t interval_);
+    bool Quit();
+    bool Destroy();
+
+public:
+    Map_t CreateMap(const uint32_t map_tbl_id_);
 
 private:
-    std::map<uint64_t, shared_ptr<Map>> m_map_pool;
+    std::map<uint64_t, Map_t> m_map_pool;
 };

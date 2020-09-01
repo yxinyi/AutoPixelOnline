@@ -76,7 +76,7 @@ bool ShakeHandSystem::ShakeHandCheck() {
         if (_now_time - _cnn_it.second > g_interval * 2 ) {
             if (CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(_cnn_it.first)) {
                 _out_time_conn.push_back(_cnn_it.first);
-                MessageBus::getInstance()->SendReq<void, uint32_t>(_cnn_it.first, "ShakeHandOutTimeBefore");
+                MessageBus::getInstance()->SendReq< uint32_t>(_cnn_it.first, "ShakeHandOutTimeBefore");
                 std::cout << _conn->getIPStr() << " close " << std::endl;
                 CConnectionMgr::getInstance()->DelelteConnection(_cnn_it.first);
             }
@@ -88,7 +88,7 @@ bool ShakeHandSystem::ShakeHandCheck() {
 
     for (auto&& _out_time_it : _out_time_conn) {
         m_remote.erase(_out_time_it);
-        MessageBus::getInstance()->SendReq<void, uint32_t>(_out_time_it, "ShakeHandOutTimeAfter");
+        MessageBus::getInstance()->SendReq< uint32_t>(_out_time_it, "ShakeHandOutTimeAfter");
     }
 
 

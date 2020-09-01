@@ -4,7 +4,7 @@
 #include "include/proto/PlayerLogin.pb.h"
 
 using PlayerLoginEvent_t = shared_ptr<PlayerLoginEvent>;
-class CreatureManager :public BaseSystem {
+class CreatureManager :public BaseSystem,public Singleton<CreatureManager> {
 public:
     CreatureManager() :BaseSystem("CreatureManager") {}
     bool EnvDefine();
@@ -14,12 +14,12 @@ public:
     bool Quit();
     bool Destroy();
 public:
-    bool CreateCreature(const uint32_t conn_,const PlayerLoginEvent_t& message_);
+    Creature_t CreateCreature(const uint32_t conn_,const PlayerLoginEvent_t& message_);
 
 
 private:
-    std::map<uint32_t, uint64_t> m_conid_to_player;
+    std::map<uint32_t, Creature_t> m_conid_to_player;
     
-    std::map<uint64_t,shared_ptr<Creature>> m_oid_to_player;
+    std::map<uint64_t, Creature_t> m_oid_to_player;
 
 };
