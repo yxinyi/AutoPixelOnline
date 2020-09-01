@@ -23,6 +23,7 @@ public:
 
 public:
     uint64_t GetOid() { return m_oid; }
+    CAttribute_t GetAttr() { return m_attr; }
 
 private:
     CAttribute_t m_attr;

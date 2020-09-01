@@ -95,6 +95,21 @@ CAttribute_t CAttrDefineManager::CreateAttr(const std::string& obj_name_) {
     return m_obj_prototype_pool[obj_name_]->Clone();
 }
 
+
+uint32_t CAttrDefineManager::GetAttrIndex(const std::string& obj_name_, const std::string& module_name_, const std::string& attr_info_) {
+    auto _obj_find = m_obj_attr_pool.find(obj_name_);
+    if (_obj_find == m_obj_attr_pool.end()) {
+        return -1;
+    }
+    auto _module_index_find = _obj_find->second->m_index.find(module_name_+ attr_info_);
+    if (_module_index_find == _obj_find->second->m_index.end()) {
+        return -1;
+    }
+
+    return _module_index_find->second;
+}
+
+
 uint64_t AttrValConver(const std::string& type_, const std::string& val_) {
     union ParamExchange
     {

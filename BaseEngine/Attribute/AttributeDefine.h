@@ -57,7 +57,7 @@ public:
     void RegAttrDefine(const std::string& obj_name, const std::string& module_name_, const std::string& attr_info_, const AttrCfg cfg_);
     void InitPrototype(const std::string& obj_name);
     CAttribute_t CreateAttr(const std::string& obj_name);
-
+    uint32_t GetAttrIndex(const std::string& obj_name_,const std::string& module_name_, const std::string& attr_info_);
 private:
     CAttrDefineManager() = default;
     ObjAttrMap m_obj_attr_pool;

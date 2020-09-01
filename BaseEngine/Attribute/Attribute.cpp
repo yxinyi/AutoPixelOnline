@@ -7,7 +7,10 @@ bool ApiAttrDefine(const std::string& obj_, const std::string& model_, const std
     return true;
 }
 
-std::string ApiGetAttr(CAttribute_t, const std::string& name_);
+std::string ApiGetAttr(CAttribute_t, const std::string& model_, const std::string& name_) {
+
+    
+}
 
 bool ApiSetAttr(CAttribute_t, const std::string& name_, const std::string& val_);
 
