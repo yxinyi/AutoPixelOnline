@@ -62,7 +62,7 @@ public:
     CAttrCreature():CAttr("CAttrCreature") {}
 
     shared_ptr<Message> ToSaveProto() {
-    
+        return nullptr;
     }
     bool decodeSaveData(shared_ptr<Message> msg_) {
         shared_ptr<Message> _msg = std::dynamic_pointer_cast<Message>(msg_);
@@ -77,17 +77,7 @@ private:
     float m_postion_y = 0.f;
 };
 
-template<class T>
-bool ApiGetAttr(shared_ptr<T>& attr_,const string& obj_name_, const string& attr_name_) {
-    ???
-    attr_ = std::dynamic_pointer_cast<T>(_attr);
-    if (!attr_) {
-        return false;
-    }
 
-
-    return true;
-}
 
 class CAttrs {
 public:
@@ -98,9 +88,27 @@ public:
         m_attr_pool[attr_->GetName()] = attr_;
         return true;
     }
+
+    template<class T>
+    shared_ptr<T> ApiGetAttr(const string& module_name_) {
+        auto _attr_find = m_attr_pool.find(module_name_);
+        if (_attr_find == m_attr_pool.end()) {
+            return nullptr;
+        }
+        shared_ptr<T> _attr = std::dynamic_pointer_cast<T>(_attr_find->second);
+        if (!_attr) {
+            return false;
+        }
+
+        return _attr;
+    }
+
 private:
     std::map<string, shared_ptr<CAttr>> m_attr_pool;
 };
+
+
+
 using CAttrPrototype = CAttrs;
 using CAttrPrototype_t = shared_ptr<CAttrPrototype>;
 class CAttrManager :public Singleton<CAttrManager>{
@@ -113,12 +121,14 @@ private:
     std::unordered_map<string, CAttrPrototype_t> m_prototype_pool;
 };
 
+
+
+
+
 bool CreatureManager::PreInit() {
 
     CAttrManager::getInstance()->Register("Player",make_shared<CAttrCreature>());
 
-    //ApiAttrDefine("Player", "BaseAttr", "postion_x:float:0", AttrCfg::NONE);
-    //ApiAttrDefine("Player", "BaseAttr", "postion_y:float:0", AttrCfg::NONE);
     return true;
 }
 bool CreatureManager::Init() {
