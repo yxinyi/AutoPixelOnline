@@ -29,10 +29,7 @@
     <ClInclude Include="..\Common\include\tool\Timer.h" />
     <ClInclude Include="..\Common\include\tool\TimerTask.h" />
     <ClInclude Include="..\Common\include\tool\UniqueNumberFactory.h" />
-    <ClInclude Include="Attribute\ApiAttribute.h" />
     <ClInclude Include="Attribute\Attribute.h" />
-    <ClInclude Include="Attribute\AttributeDefine.h" />
-    <ClInclude Include="Attribute\AttributeManager.h" />
     <ClInclude Include="Buff\Buffer.h" />
     <ClInclude Include="DataBase\DBMgr.h" />
     <ClInclude Include="include\BaseEngine.h" />
@@ -46,9 +43,6 @@
     <ClCompile Include="..\Common\include\tool\Time.cpp" />
     <ClCompile Include="..\Common\include\tool\TimerTask.cpp" />
     <ClCompile Include="..\Common\include\tool\UniqueNumberFactory.cpp" />
-    <ClCompile Include="Attribute\Attribute.cpp" />
-    <ClCompile Include="Attribute\AttributeDefine.cpp" />
-    <ClCompile Include="Attribute\AttributeManager.cpp" />
     <ClCompile Include="DataBase\DBMgr.cpp" />
     <ClCompile Include="System\BaseSystem.cpp" />
     <ClCompile Include="System\ShakeHand\ShakeHandSystem.cpp" />

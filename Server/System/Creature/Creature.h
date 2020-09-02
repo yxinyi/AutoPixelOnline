@@ -2,6 +2,7 @@
 #include "System/BaseSystem.h"
 #include "./CreatureStruct.h"
 #include "include/proto/PlayerLogin.pb.h"
+#include "Attribute/Attribute.h"
 
 using PlayerLoginEvent_t = shared_ptr<PlayerLoginEvent>;
 class CreatureManager :public BaseSystem,public Singleton<CreatureManager> {
