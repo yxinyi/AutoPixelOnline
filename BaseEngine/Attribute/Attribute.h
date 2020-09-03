@@ -4,6 +4,7 @@
 #include "tool/SingletonTemplate.h"
 #include "google/protobuf/message.h"
 
+using namespace google::protobuf;
 
 class CAttr {
 public:
@@ -15,8 +16,9 @@ public:
         return decodeSaveData(msg_);
     }
     virtual shared_ptr<CAttr> Clone() = 0;
-
-    virtual shared_ptr<Message> ToSaveProto() = 0;
+    virtual shared_ptr<Message> ToDataBaseProto() = 0;
+    virtual shared_ptr<Message> ToClientProto() = 0;
+    virtual shared_ptr<Message> ToOtherClientProto() { return nullptr; };
     string GetName() { return m_attr_name; }
 protected:
     virtual bool decodeSaveData(shared_ptr<Message> msg_) = 0;

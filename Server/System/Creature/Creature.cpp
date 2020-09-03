@@ -28,32 +28,6 @@ bool CreatureManager::EnvDefine() {
 }
 
 
-class CAttrCreature : public CAttr {
-public:
-    CAttrCreature() :CAttr("CAttrCreature") {}
-
-    shared_ptr<Message> ToSaveProto() {
-        return nullptr;
-    }
-    bool decodeSaveData(shared_ptr<Message> msg_) {
-        shared_ptr<Message> _msg = std::dynamic_pointer_cast<Message>(msg_);
-        
-        if (!_msg) {
-            return false;
-        }
-        return true;
-    }
-
-    shared_ptr<CAttr> Clone() {
-        shared_ptr<CAttrCreature> _attr = make_shared<CAttrCreature>();
-        _attr->m_postion_x = m_postion_x;
-        _attr->m_postion_y = m_postion_y;
-        return _attr;
-    }
-private:
-    float m_postion_x = 0.f;
-    float m_postion_y = 0.f;
-};
 
 
 

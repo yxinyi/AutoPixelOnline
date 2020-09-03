@@ -1,6 +1,8 @@
 #pragma once
-#include "System/BaseSystem.h"
 #include "./MapStruct.h"
+#include "System/BaseSystem.h"
+
+
 
 
 class MapManager :public BaseSystem, public Singleton<MapManager> {

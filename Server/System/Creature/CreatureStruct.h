@@ -3,9 +3,40 @@
 #include "Attribute/Attribute.h"
 #include "tool/UniqueNumberFactory.h"
 
+
+class CAttrCreature : public CAttr {
+public:
+    CAttrCreature() :CAttr("CAttrCreature") {}
+
+    shared_ptr<Message> ToDataBaseProto() {
+        return nullptr;
+    }
+    shared_ptr<Message> ToClientProto() {
+        return nullptr;
+    }
+    bool decodeSaveData(shared_ptr<Message> msg_) {
+        shared_ptr<Message> _msg = std::dynamic_pointer_cast<Message>(msg_);
+
+        if (!_msg) {
+            return false;
+        }
+        return true;
+    }
+
+    shared_ptr<CAttr> Clone() {
+        shared_ptr<CAttrCreature> _attr = make_shared<CAttrCreature>();
+        _attr->m_postion_x = m_postion_x;
+        _attr->m_postion_y = m_postion_y;
+        return _attr;
+    }
+private:
+    float m_postion_x = 0.f;
+    float m_postion_y = 0.f;
+};
+
 class Creature {
 public:
-    Creature():m_attr(nullptr), m_type_name(""), m_oid(0){}
+    Creature():m_attr(nullptr), m_type_name(""), m_oid(0), m_conn_id(0){}
 public:
     void init(const string& type_name_, const uint32_t conn_) {
         m_type_name = type_name_;

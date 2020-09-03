@@ -163,6 +163,7 @@
     <ClInclude Include="..\Common\include\proto\Shakehand.pb.h" />
     <ClInclude Include="System\Creature\Creature.h" />
     <ClInclude Include="System\Creature\CreatureStruct.h" />
+    <ClInclude Include="System\Creature\Player\PlayerStruct.h" />
     <ClInclude Include="System\Error\Error.h" />
     <ClInclude Include="System\Error\ErrorStruct.h" />
     <ClInclude Include="System\Map\Map.h" />
