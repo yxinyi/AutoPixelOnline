@@ -62,12 +62,14 @@
     <ClInclude Include="..\Common\include\tool\TimerTask.h">
       <Filter>tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\include\tool\AStar.h" />
     <ClInclude Include="System\ShakeHand\ShakeHandSystem.h">
       <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="Attribute\Attribute.h">
       <Filter>Attribute</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\tool\AStar.h">
+      <Filter>tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

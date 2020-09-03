@@ -20,7 +20,6 @@ public:
 
 private:
     std::map<uint32_t, Creature_t> m_conid_to_player;
-    
     std::map<uint64_t, Creature_t> m_oid_to_player;
 
 };

@@ -7,8 +7,9 @@ struct Point {
     int64_t m_id = 0;
     int32_t m_x = 0;
     int32_t m_y = 0;
-    uint32_t m_h = 0; //到出发点的估算距离
-    uint32_t m_g = 0; //到目的地的估算距离
+    float m_h = 0; //到出发点的估算距离
+    float m_g = 0; //到目的地的估算距离
+    float m_rate = 1.f; //如果是对角,路径要长一点
     std::shared_ptr<Point> m_parent = nullptr;
 };
 
@@ -18,8 +19,8 @@ public:
 
     }
 
-    uint32_t CalcDistance(std::shared_ptr<Point> start, std::shared_ptr<Point> end) {
-        return abs(start->m_x - end->m_x) + abs(start->m_y - end->m_y);
+    float CalcDistance(std::shared_ptr<Point> start, std::shared_ptr<Point> end) {
+        return (abs(start->m_x - end->m_x) + abs(start->m_y - end->m_y)) * end->m_rate;
     }
 
     std::shared_ptr<Point> getNode(std::shared_ptr<Point> point_,const uint32_t x_, const uint32_t y_) {
@@ -52,30 +53,34 @@ public:
         uint32_t _point_x = point_->m_x;
         uint32_t _point_y = point_->m_y;
 
-        //if (std::shared_ptr<Point> _point = getNode(point_, _point_x - 1, _point_y - 1)) {
-        //    _rst_ptr.push_back(_point);
-        //}
+        if (std::shared_ptr<Point> _point = getNode(point_, _point_x - 1, _point_y - 1)) {
+            _point->m_rate = 1.4f;
+            _rst_ptr.push_back(_point);
+        }
         if (std::shared_ptr<Point> _point = getNode(point_, _point_x - 1, _point_y)) {
             _rst_ptr.push_back(_point);
         }
-        //if (std::shared_ptr<Point> _point = getNode(point_, _point_x - 1, _point_y+1)) {
-        //    _rst_ptr.push_back(_point);
-        //}
+        if (std::shared_ptr<Point> _point = getNode(point_, _point_x - 1, _point_y+1)) {
+            _point->m_rate = 1.4f;
+            _rst_ptr.push_back(_point);
+        }
         if (std::shared_ptr<Point> _point = getNode(point_, _point_x, _point_y - 1)) {
             _rst_ptr.push_back(_point);
         }
         if (std::shared_ptr<Point> _point = getNode(point_, _point_x, _point_y + 1)) {
             _rst_ptr.push_back(_point);
         }
-        //if (std::shared_ptr<Point> _point = getNode(point_, _point_x + 1, _point_y - 1)) {
-        //    _rst_ptr.push_back(_point);
-        //}
+        if (std::shared_ptr<Point> _point = getNode(point_, _point_x + 1, _point_y - 1)) {
+            _point->m_rate = 1.4f;
+            _rst_ptr.push_back(_point);
+        }
         if (std::shared_ptr<Point> _point = getNode(point_, _point_x + 1, _point_y)) {
             _rst_ptr.push_back(_point);
         }
-        //if (std::shared_ptr<Point> _point = getNode(point_, _point_x + 1, _point_y + 1)) {
-        //    _rst_ptr.push_back(_point);
-        //}
+        if (std::shared_ptr<Point> _point = getNode(point_, _point_x + 1, _point_y + 1)) {
+            _point->m_rate = 1.4f;
+            _rst_ptr.push_back(_point);
+        }
         return _rst_ptr;
     }
 
@@ -89,9 +94,9 @@ public:
 
     std::shared_ptr<Point> getMinOpenNode() {
         std::shared_ptr<Point> _rst_node;
-        uint64_t _rst_min = -1;
+        float _rst_min = -1;
         for (auto& _it : m_open_list) {
-            const uint32_t _f = _it.second->m_g + _it.second->m_h;
+            const float _f = _it.second->m_g + _it.second->m_h;
             if (_f < _rst_min) {
                 _rst_min = _f;
                 _rst_node = _it.second;
@@ -101,6 +106,8 @@ public:
     }
     
     std::shared_ptr<Point> getPath(Point start_, Point end_) {
+        m_open_list.clear();
+        m_close_list.clear();
         std::shared_ptr<Point> _start_point = getNode(nullptr, start_.m_x, start_.m_y);
         std::shared_ptr<Point> _end_point = getNode(nullptr, end_.m_x, end_.m_y);
         if (!_start_point||!_end_point) {

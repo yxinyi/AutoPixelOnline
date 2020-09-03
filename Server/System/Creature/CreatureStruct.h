@@ -25,13 +25,9 @@ public:
 
     shared_ptr<CAttr> Clone() {
         shared_ptr<CAttrCreature> _attr = make_shared<CAttrCreature>();
-        _attr->m_postion_x = m_postion_x;
-        _attr->m_postion_y = m_postion_y;
         return _attr;
     }
 private:
-    float m_postion_x = 0.f;
-    float m_postion_y = 0.f;
 };
 
 class Creature {

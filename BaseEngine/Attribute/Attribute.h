@@ -15,14 +15,15 @@ public:
         }
         return decodeSaveData(msg_);
     }
-    virtual shared_ptr<CAttr> Clone() = 0;
-    virtual shared_ptr<Message> ToDataBaseProto() = 0;
-    virtual shared_ptr<Message> ToClientProto() = 0;
+    virtual shared_ptr<CAttr> Clone() { return nullptr; };
+    virtual shared_ptr<Message> ToDataBaseProto() { return nullptr; };
+    virtual shared_ptr<Message> ToClientProto() { return nullptr; };
     virtual shared_ptr<Message> ToOtherClientProto() { return nullptr; };
     string GetName() { return m_attr_name; }
 protected:
-    virtual bool decodeSaveData(shared_ptr<Message> msg_) = 0;
+    virtual bool decodeSaveData(shared_ptr<Message> msg_) { return false; };
     string m_attr_name;
+    virtual  ~CAttr() = 0;
 };
 
 
@@ -46,7 +47,7 @@ public:
         }
         shared_ptr<T> _attr = std::dynamic_pointer_cast<T>(_attr_find->second);
         if (!_attr) {
-            return false;
+            return nullptr;
         }
 
         return _attr;
