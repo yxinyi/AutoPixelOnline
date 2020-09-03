@@ -50,7 +50,8 @@ public:
 
 public:
     uint64_t GetOid() { return m_oid; }
-    CAttrs_t GetAttr() { return m_attr; }
+    CAttrs_t GetAttrs() { return m_attr; }
+    uint64_t GetConnID() { return m_conn_id; }
 
 private:
     CAttrs_t m_attr;

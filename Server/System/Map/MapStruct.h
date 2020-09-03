@@ -2,7 +2,9 @@
 #include "System/BaseSystem.h"
 #include "Attribute/Attribute.h"
 #include "Creature/CreatureStruct.h"
+#include "tool/AStar.h"
 #include <vector>
+#include <list>
 #include <set>
 
 struct CPosition {
@@ -36,25 +38,33 @@ public:
     float m_vector_x = 0.f;
     float m_vector_y = 0.f;
     uint64_t m_map_oid = 0;
-    std::vector<CPosition> m_path_pos;
+    uint64_t m_last_map_tid = 0; //最后一次地图
+    std::list<CPosition> m_path_pos;
     
 };
 using CAttrMap_t = shared_ptr<CAttrMap>;
 
 struct CMapConfig {
+    CMapConfig() {
+        m_max_x = m_maze_shape[0].size() * m_cell_size;
+        m_max_y = m_maze_shape.size() * m_cell_size;
+    }
     std::vector<std::vector<uint32_t>> m_maze_shape = { 
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0}, 
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0}
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,1,0,1,0,1,0,1,0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0,1,0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0,1,0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0,1,0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0,1,0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0,1,0,1,0,1,0,1,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
     };
     CPosition m_default_postion = { 0.0f ,0.f};
     uint32_t m_cell_size = 30;
-    uint32_t m_tbl_id = 1;
+    uint32_t m_tid = 1;
+    uint32_t m_auto_create = 1; //是否自动创建
+    uint32_t m_max_x = 0;
+    uint32_t m_max_y = 0;
 };
 using CMapConfig_t = shared_ptr<CMapConfig>;
 
@@ -65,21 +75,29 @@ public:
     bool init(const uint64_t oid_, const CMapConfig_t cfg_) {
         m_config = cfg_;
         m_map_oid = oid_;
+        m_astar = make_shared<Astar>(cfg_->m_maze_shape);
         return true;
     }
     bool reset() { return true; }
 
 public:
     bool EnterScene(Creature_t creature_) {
-        CAttrMap_t _attr_map = creature_->GetAttr()->ApiGetAttr<CAttrMap>("CAttrMap");
+        CAttrMap_t _attr_map = creature_->GetAttrs()->ApiGetAttr<CAttrMap>("CAttrMap");
         if (!_attr_map) {
             return false;
         }
         _attr_map->m_map_oid = m_map_oid;
+        _attr_map->m_last_map_tid = m_config->m_tid;
         _attr_map->m_map_postion = m_config->m_default_postion;
         return true;
     }
     uint32_t GetPlayerSize() { return (uint32_t)m_players.size(); }
+    const std::set<uint32_t>& GetPlayer() { return m_players; }
+
+    bool PosMoveCheck(const CPosition& pos_);
+
+    bool MoveTo(Creature_t creature_, CPosition pos_);
+
 private:
     std::set<uint32_t>              m_players;
     std::vector<std::vector<uint32_t>> m_maze_shape;
@@ -87,6 +105,8 @@ private:
 private: //map confg
     CMapConfig_t m_config;
     uint64_t m_map_oid;
+    Astar_t m_astar = nullptr;
 };
+
 using Map_t = shared_ptr<CMap>;
 

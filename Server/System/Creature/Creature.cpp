@@ -68,3 +68,12 @@ shared_ptr<Creature> CreatureManager::CreateCreature(const uint32_t conn_, const
     return _login_create;
 }
 
+Creature_t CreatureManager::FindCreatureByOid(const uint64_t& oid_) {
+    auto _ply_find = m_oid_to_player.find(oid_);
+    if (_ply_find == m_oid_to_player.end()) {
+        return nullptr;
+    }
+    return _ply_find->second;
+}
+
+

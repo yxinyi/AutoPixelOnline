@@ -8,7 +8,7 @@ class CMapConfigMgr :public Singleton<CMapConfigMgr> {
 public:
     bool init() {
         CMapConfig_t _tmp_cfg = make_shared<CMapConfig>();
-        m_configs[_tmp_cfg->m_tbl_id] = _tmp_cfg;
+        m_configs[_tmp_cfg->m_tid] = _tmp_cfg;
     };
 
     const CMapConfig_t FindMapConfig(const uint32_t map_tbl_id_)const {
@@ -42,5 +42,6 @@ public:
 private:
     std::map<uint64_t, Map_t> m_map_pool;
     std::map<uint32_t, std::vector<Map_t>> m_type_to_map;
+    uint32_t m_default_map_tid = 1;
 
 };

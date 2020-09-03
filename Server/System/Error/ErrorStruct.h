@@ -10,6 +10,7 @@ using namespace google::protobuf;
 enum ErrorID
 {
     LOG_ERR = 1,
+    LOG_POS_NOT_EXISTS = 2,
     ErrorMAX,
 }; 
 

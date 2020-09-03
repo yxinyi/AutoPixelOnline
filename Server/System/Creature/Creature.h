@@ -15,7 +15,8 @@ public:
     bool Quit();
     bool Destroy();
 public:
-    Creature_t CreateCreature(const uint32_t conn_,const PlayerLoginEvent_t& message_);
+    Creature_t CreateCreature(const uint32_t conn_, const PlayerLoginEvent_t& message_);
+    Creature_t FindCreatureByOid(const uint64_t& oid_);
 
 
 private:
