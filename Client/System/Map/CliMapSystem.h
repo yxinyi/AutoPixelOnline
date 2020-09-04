@@ -7,9 +7,9 @@
 #include "proto/Map.pb.h"
 #include <set>
 
-class MapRenderSystem:public BaseSystem, public Singleton<MapRenderSystem> {
+class CliMapSystem:public BaseSystem, public Singleton<CliMapSystem> {
 public:
-    MapRenderSystem() :BaseSystem("MapRenderSystem") {}
+    CliMapSystem() :BaseSystem("CliMapSystem") {}
     bool EnvDefine();
     bool PreInit();
     bool Init();

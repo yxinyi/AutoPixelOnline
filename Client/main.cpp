@@ -5,7 +5,7 @@
 #include "../BaseEngine/Tcp/NetManager.h"
 #include "BaseEngine.h"
 #include "../Common/include/proto/Shakehand.pb.h"
-
+#include "RenderSystem.h"
 #include <Windows.h>
 
 const uint32_t g_frame = 30;
@@ -42,6 +42,7 @@ void MainLoop() {
             if (_this_frame_time >= _one_frame_time) {
                 _tick_timer.reset();
                 Singleton<CBaseEngine>::getInstance()->run(_this_frame_time);
+                RenderSystem::getInstance()->Loop(_this_frame_time);
                 _frame_timer.reset();
 
                 int64_t _tick_time = _tick_timer.elapsed();

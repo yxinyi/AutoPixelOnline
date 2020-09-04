@@ -1,4 +1,4 @@
-#include "./MapRender.h"
+#include "./CliMapSystem.h"
 #include "MessageBus/MessageBus.h"
 #include "Creature/Creature.h"
 #include "tool/ObjectPool.h"
@@ -7,23 +7,23 @@
 #include "Tcp/NetManager.h"
 #include <math.h>
 
-RegSystem(MapRenderSystem)
+RegSystem(CliMapSystem)
 
-bool MapRenderSystem::EnvDefine() {
+bool CliMapSystem::EnvDefine() {
     return true;
 }
-bool MapRenderSystem::PreInit() {
+bool CliMapSystem::PreInit() {
     return true;
 }
-bool MapRenderSystem::Init() {
+bool CliMapSystem::Init() {
     return true;
 }
-bool MapRenderSystem::Loop(const uint64_t interval_) {
+bool CliMapSystem::Loop(const uint64_t interval_) {
     return true;
 }
-bool MapRenderSystem::Quit() {
+bool CliMapSystem::Quit() {
     return true;
 }
-bool MapRenderSystem::Destroy() {
+bool CliMapSystem::Destroy() {
     return true;
 }
