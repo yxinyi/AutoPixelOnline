@@ -5,27 +5,61 @@
 #include "tool/AStar.h"
 #include <vector>
 #include <list>
+#include "proto/Map.pb.h"
 #include <set>
 
 struct CPosition {
     float m_postion_x = 0.f;
     float m_postion_y = 0.f;
 };
+using MapData_t = shared_ptr<MapData>;
+using MapTickUpdate_t = shared_ptr<MapTickUpdate>;
 class CAttrMap : public CAttr {
 public:
     CAttrMap() :CAttr("CAttrMap") {}
-
-    shared_ptr<Message> ToSaveProto() {
+    ~CAttrMap() {}
+    Message_t ToSaveProto() {
         return nullptr;
     }
-    bool decodeSaveData(shared_ptr<Message> msg_) {
-        shared_ptr<Message> _msg = std::dynamic_pointer_cast<Message>(msg_);
+    bool decodeSaveData(Message_t msg_) {
+        MapData_t _msg = std::dynamic_pointer_cast<MapData>(msg_);
 
         if (!_msg) {
             return false;
         }
+        m_speed = _msg->speed();
+        m_map_postion.m_postion_x = _msg->map_postion().postion_x();
+        m_map_postion.m_postion_y = _msg->map_postion().postion_y();
+
+        m_vector_x = _msg->vector().postion_x();
+        m_vector_y = _msg->vector().postion_y();
+
+        uint64_t m_map_oid = _msg->map_oid();
         return true;
     }
+
+    bool decodeSaveData(const std::string& msg_) {
+        MapData_t _msg = make_shared<MapData>();
+        if (!_msg) {
+            return false;
+        }
+        _msg->ParseFromString(msg_);
+
+        return decodeSaveData(_msg);
+    }
+
+    Message_t ToClientProto() {
+        MapData_t _msg = make_shared<MapData>();
+
+        auto _pos = _msg->mutable_map_postion();
+        _pos->set_postion_x(m_map_postion.m_postion_x);
+        _pos->set_postion_y(m_map_postion.m_postion_y);
+
+        _msg->set_map_oid(m_map_oid);
+        _msg->set_speed(m_speed);
+        _msg->set_last_map_tid(m_last_map_tid);
+        return _msg;
+    };
 
     shared_ptr<CAttr> Clone() {
         shared_ptr<CAttrMap> _attr = make_shared<CAttrMap>();
@@ -38,7 +72,7 @@ public:
     float m_vector_x = 0.f;
     float m_vector_y = 0.f;
     uint64_t m_map_oid = 0;
-    uint64_t m_last_map_tid = 0; //最后一次地图
+    uint32_t m_last_map_tid = 0; //最后一次地图
     std::list<CPosition> m_path_pos;
     
 };

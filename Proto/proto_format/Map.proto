@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+message Position {
+    float postion_x = 1;
+    float postion_y = 2;
+};
+
+message MapData {
+    float speed = 1;
+    Position map_postion = 2;
+    Position vector = 3;
+    uint64 map_oid = 4;
+    uint64 last_map_tid = 5; 
+	uint64 creature_oid = 6;
+}
+
+message MapTickUpdate{
+	repeated string map_infos = 1;
+}
+

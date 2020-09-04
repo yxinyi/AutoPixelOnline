@@ -7,7 +7,6 @@
 #include "../BaseEngine/System/BaseSystem.h"
 #include "../BaseEngine/System/ShakeHand/ShakeHandSystem.h"
 
-
 void BaseSystemRegister() {
     RegSystem(ShakeHandSystem);
 

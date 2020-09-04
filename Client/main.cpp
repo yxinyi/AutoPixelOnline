@@ -35,14 +35,7 @@ void MainLoop() {
         Sleep(1000);
         SetConsoleTitleA("client");
         NetManager::getInstance()->Start();
-        //auto _conn = NetManager::getInstance()->Connect("127.0.0.1", 8889);
-        //int _cnt = 0;
-        //for (;;) {
-        //    shared_ptr<ShakeHandEvent> _event(new ShakeHandEvent);
-        //    NetManager::getInstance()->SendMessageBuff(_conn->getConnId(), _event);
-        //    Sleep(1);
-        //    //system("pause");
-        //}
+        auto _conn = NetManager::getInstance()->Connect("127.0.0.1", 8889);
 
         while (true) {
             const int64_t _this_frame_time = _frame_timer.elapsed();

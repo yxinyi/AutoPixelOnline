@@ -148,7 +148,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Common\include\proto\CreatureNotify.pb.cc" />
     <ClCompile Include="..\Common\include\proto\ErrorNotify.pb.cc" />
+    <ClCompile Include="..\Common\include\proto\Map.pb.cc" />
     <ClCompile Include="..\Common\include\proto\PlayerLogin.pb.cc" />
     <ClCompile Include="..\Common\include\proto\Shakehand.pb.cc" />
     <ClCompile Include="main.cpp" />
@@ -158,7 +160,9 @@
     <ClCompile Include="testMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Common\include\proto\CreatureNotify.pb.h" />
     <ClInclude Include="..\Common\include\proto\ErrorNotify.pb.h" />
+    <ClInclude Include="..\Common\include\proto\Map.pb.h" />
     <ClInclude Include="..\Common\include\proto\PlayerLogin.pb.h" />
     <ClInclude Include="..\Common\include\proto\Shakehand.pb.h" />
     <ClInclude Include="System\Creature\Creature.h" />

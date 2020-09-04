@@ -5,6 +5,7 @@
 #include "tool/UniqueNumberFactory.h"
 #include "Error/Error.h"
 #include "Tcp/NetManager.h"
+#include <math.h>
 
 RegSystem(MapManager)
 
@@ -43,6 +44,8 @@ bool MapManager::EnvDefine() {
     return true;
 }
 bool MapManager::PreInit() {
+    CAttrManager::getInstance()->Register("Player", make_shared<CAttrMap>());
+    CAttrManager::getInstance()->Register("Monster", make_shared<CAttrMap>());
     return true;
 }
 bool MapManager::Init() {
@@ -51,6 +54,7 @@ bool MapManager::Init() {
 bool MapManager::Loop(const uint64_t interval_) {
     for (auto&& _map_it :m_map_pool) {
         const std::set<uint32_t>& _players = _map_it.second->GetPlayer();
+        MapTickUpdate_t _update_msg = make_shared<MapTickUpdate>();
         for (auto&& _ply_it : _players) {
             Creature_t _player = CreatureManager::getInstance()->FindCreatureByOid(_ply_it);
             if (!_player) {
@@ -59,9 +63,42 @@ bool MapManager::Loop(const uint64_t interval_) {
             }
 
             //move postion
-            231313
+            CAttrMap_t _attr_map = _player->GetAttrs()->ApiGetAttr<CAttrMap>("CAttrMap");
+            if (!_attr_map) {
+                return false;
+            }
+            if (_attr_map->m_path_pos.size()) {
+                CPosition _target_pos = _attr_map->m_path_pos.front();
+                
+                CPosition _speed_vec;
+
+                CPosition _now_pos = _attr_map->m_map_postion;
 
 
+                float _distance = sqrt(pow((_target_pos.m_postion_y - _now_pos.m_postion_y), 2) * pow((_target_pos.m_postion_x - _now_pos.m_postion_x), 2));
+                
+                float _move_rate = (_attr_map->m_speed * (interval_ / 1000) / _distance);
+                
+                _now_pos.m_postion_y += (_target_pos.m_postion_y - _now_pos.m_postion_y) * _move_rate;
+                _now_pos.m_postion_x += (_target_pos.m_postion_x - _now_pos.m_postion_x) * _move_rate;
+
+                if (sqrt(pow((_target_pos.m_postion_y - _now_pos.m_postion_y), 2) * pow((_target_pos.m_postion_x - _now_pos.m_postion_x), 2)) < 0.1f) {
+                    _attr_map->m_path_pos.pop_front();
+                }
+            }
+
+            _update_msg->add_map_infos(_attr_map->ToClientStr());
+        }
+
+
+        //向当前场景所有玩家进行同步
+        for (auto&& _ply_it : _players) {
+            Creature_t _player = CreatureManager::getInstance()->FindCreatureByOid(_ply_it);
+            if (!_player) {
+                LogError << "[MapManager::Loop]" << _ply_it << FlushLog;
+                continue;
+            }
+            _player->SendProtoMsg(_update_msg);
         }
     }
 
@@ -129,8 +166,8 @@ bool CMap::PosMoveCheck(const CPosition& pos_) {
     if (pos_.m_postion_x > m_config->m_max_x || pos_.m_postion_y > m_config->m_max_y) {
         return false;
     }
-    uint32_t _x_block = pos_.m_postion_x / m_config->m_cell_size;
-    uint32_t _y_block = pos_.m_postion_y / m_config->m_cell_size;
+    uint32_t _x_block = uint32_t(pos_.m_postion_x / m_config->m_cell_size);
+    uint32_t _y_block = uint32_t(pos_.m_postion_y / m_config->m_cell_size);
     if (m_maze_shape[_y_block][_x_block] == 1) {
         return false;
     }
@@ -152,14 +189,14 @@ bool CMap::MoveTo(Creature_t creature_, CPosition tar_pos_) {
     uint32_t _start_x_block = _attr_map->m_map_postion.m_postion_x / m_config->m_cell_size;
     uint32_t _start_y_block = _attr_map->m_map_postion.m_postion_y / m_config->m_cell_size;
 
-    uint32_t _end_x_block = tar_pos_.m_postion_x / m_config->m_cell_size;
-    uint32_t _end_y_block = tar_pos_.m_postion_y / m_config->m_cell_size;
+    uint32_t _end_x_block = uint32_t(tar_pos_.m_postion_x / m_config->m_cell_size);
+    uint32_t _end_y_block = uint32_t(tar_pos_.m_postion_y / m_config->m_cell_size);
     SAstarPoint_t _path = m_astar->getPath(_start_x_block, _start_y_block, _end_x_block, _end_y_block);
     
     while (_path) {
         CPosition _tmp_pos;
-        _tmp_pos.m_postion_x = _path->m_x * m_config->m_cell_size + m_config->m_cell_size / 2;
-        _tmp_pos.m_postion_y = _path->m_y * m_config->m_cell_size + m_config->m_cell_size / 2;
+        _tmp_pos.m_postion_x = _path->m_x * m_config->m_cell_size + float((float)m_config->m_cell_size / 2.f);
+        _tmp_pos.m_postion_y = _path->m_y * m_config->m_cell_size + float((float)m_config->m_cell_size / 2.f);
         _attr_map->m_path_pos.push_front(_tmp_pos);
         _path = _path->m_parent;
     }

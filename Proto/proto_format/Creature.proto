@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+message ModuleData {    
+	string msg_type_str = 1;
+	string binary = 2;
+}
+
+message AllAttributeDataNotify{
+	uint64 oid = 1;
+	repeated ModuleData data =2;
+}

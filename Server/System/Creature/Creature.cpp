@@ -35,8 +35,6 @@ bool CreatureManager::EnvDefine() {
 
 bool CreatureManager::PreInit() {
 
-    CAttrManager::getInstance()->Register("Player", make_shared<CAttrCreature>());
-    CAttrManager::getInstance()->Register("Monster", make_shared<CAttrCreature>());
 
     return true;
 }
