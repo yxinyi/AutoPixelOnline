@@ -25,15 +25,28 @@ bool NetManager::WaitConnect() {
     CConnection_t _new_connection = CConnectionMgr::getInstance()->CreateConnection(m_service);
     m_acceptor->async_accept(_new_connection->GetSocket(), [this,_new_connection](const error_code& err_){
         if (!err_) {
-            _new_connection->ConnectedOK();
+            ConnectedOpen(_new_connection);
             _new_connection->Recv();
             WaitConnect();
         }
         else {
-            _new_connection->close();
+            ConnectedClose(_new_connection);
         }
     });
     return true;
+}
+
+
+void NetManager::ConnectedOpen(CConnection_t conn_) {
+    conn_->ConnectedOK();
+    shared_ptr<Package> _pack = CObjectPool<Package>::getInstance()->Get(PackageType::OpenConnect, conn_->getConnId());
+    //推入消息池
+    CPackageMgr::getInstance()->push(_pack);
+}
+void NetManager::ConnectedClose(CConnection_t conn_) {
+    shared_ptr<Package> _pack = CObjectPool<Package>::getInstance()->Get(PackageType::CloseConnect, conn_->getConnId());
+    //推入消息池
+    CPackageMgr::getInstance()->push(_pack);
 }
 
 CConnection_t NetManager::Connect(const string& ip_, const uint16_t port_, const string& nick_name_) {
@@ -50,11 +63,11 @@ CConnection_t NetManager::Connect(const string& ip_, const uint16_t port_, const
         else 
         if (!err_)
         {
-            _conn->ConnectedOK();
+            ConnectedOpen(_conn);
             _conn->Recv();
         }
         else {
-            _conn->close();
+            ConnectedClose(_conn);
         }
     });
     return _conn;

@@ -2,6 +2,8 @@
 #include "tool/UniqueNumberFactory.h"
 #include "MessageBus/MessageBus.h"
 #include "tool/ProtobufDispatcher.h"
+#include "tool/ProtobufDispatcher.h"
+#include "tool/ProtobufCodec.h"
 #include "tool/LogInfo.h"
 #include "Tcp/NetManager.h"
 #include "tool/TimerTask.h"

@@ -15,12 +15,20 @@
     需要线程安全
 */
 
+enum class PackageType {
+    OpenConnect,
+    CloseConnect,
+    Msg,
+};
+
 struct Package {
+    PackageType m_msg_type;
     uint32_t m_conn_id;
     shared_ptr<CBuffer> m_buffer;
-    void init(uint32_t conn_id_, shared_ptr<CBuffer> buf_) {
+    void init(const PackageType type_,const uint32_t conn_id_, shared_ptr<CBuffer> buf_ = nullptr) {
         m_conn_id = conn_id_;
         m_buffer = buf_;
+        m_msg_type = type_;
     };
     void reset() { m_conn_id = 0; m_buffer.reset(); };
 };

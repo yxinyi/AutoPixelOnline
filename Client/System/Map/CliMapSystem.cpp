@@ -36,7 +36,7 @@ bool CliMapSystem::PreInit() {
     return true;
 }
 bool CliMapSystem::Init() {
-    TimerTaskMgr->RegisterTask("CliMapSystem::Init", 6000, 5000, -1, [this]() {
+    TimerTaskMgr->RegisterTask("CliMapSystem::Init", 6000, 0, 1, [this]() {
         LogError << "CliMapSystem::Init" << FlushLog;
         CConnection_t _server_conn = CConnectionMgr::getInstance()->GetConnection("LogicServer");
         shared_ptr<PlayerLoginEvent> _event = make_shared<PlayerLoginEvent>();

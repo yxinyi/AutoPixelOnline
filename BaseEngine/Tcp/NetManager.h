@@ -22,6 +22,8 @@ public:
     bool WaitConnect();
 
     CConnection_t Connect(const string& ip_, const uint16_t port_,const string& nick_name_ = "");
+    void ConnectedOpen(CConnection_t conn_);
+    void ConnectedClose(CConnection_t conn_);
 private:
     asio::ip::tcp::acceptor* m_acceptor;
     asio::io_service m_service;

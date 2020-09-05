@@ -91,7 +91,7 @@ public:
 
                 shared_ptr<CBuffer> _pack_buff = CObjectPool<CBuffer>::getInstance()->Get();
                 _pack_buff->append(_buff_str.data(), _buff_str.size());
-                shared_ptr<Package> _pack = CObjectPool<Package>::getInstance()->Get(m_conn_id, _pack_buff);
+                shared_ptr<Package> _pack = CObjectPool<Package>::getInstance()->Get(PackageType::Msg,m_conn_id, _pack_buff);
                 //推入消息池
                 CPackageMgr::getInstance()->push(_pack);
             }
