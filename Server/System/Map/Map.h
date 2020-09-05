@@ -9,6 +9,7 @@ public:
     bool init() {
         CMapConfig_t _tmp_cfg = make_shared<CMapConfig>();
         m_configs[_tmp_cfg->m_tid] = _tmp_cfg;
+        return true;
     };
 
     const CMapConfig_t FindMapConfig(const uint32_t map_tbl_id_)const {

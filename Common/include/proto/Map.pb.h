@@ -47,26 +47,38 @@ struct TableStruct_Map_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[3]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[6]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
   static const ::PROTOBUF_NAMESPACE_ID::uint32 offsets[];
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Map_2eproto;
+class MapBlock;
+class MapBlockDefaultTypeInternal;
+extern MapBlockDefaultTypeInternal _MapBlock_default_instance_;
 class MapData;
 class MapDataDefaultTypeInternal;
 extern MapDataDefaultTypeInternal _MapData_default_instance_;
+class MapRows;
+class MapRowsDefaultTypeInternal;
+extern MapRowsDefaultTypeInternal _MapRows_default_instance_;
 class MapTickUpdate;
 class MapTickUpdateDefaultTypeInternal;
 extern MapTickUpdateDefaultTypeInternal _MapTickUpdate_default_instance_;
 class Position;
 class PositionDefaultTypeInternal;
 extern PositionDefaultTypeInternal _Position_default_instance_;
+class SceneMapInfo;
+class SceneMapInfoDefaultTypeInternal;
+extern SceneMapInfoDefaultTypeInternal _SceneMapInfo_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
+template<> ::MapBlock* Arena::CreateMaybeMessage<::MapBlock>(Arena*);
 template<> ::MapData* Arena::CreateMaybeMessage<::MapData>(Arena*);
+template<> ::MapRows* Arena::CreateMaybeMessage<::MapRows>(Arena*);
 template<> ::MapTickUpdate* Arena::CreateMaybeMessage<::MapTickUpdate>(Arena*);
 template<> ::Position* Arena::CreateMaybeMessage<::Position>(Arena*);
+template<> ::SceneMapInfo* Arena::CreateMaybeMessage<::SceneMapInfo>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 
 // ===================================================================
@@ -522,6 +534,418 @@ class MapTickUpdate :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Map_2eproto;
 };
+// -------------------------------------------------------------------
+
+class MapBlock :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:MapBlock) */ {
+ public:
+  MapBlock();
+  virtual ~MapBlock();
+
+  MapBlock(const MapBlock& from);
+  MapBlock(MapBlock&& from) noexcept
+    : MapBlock() {
+    *this = ::std::move(from);
+  }
+
+  inline MapBlock& operator=(const MapBlock& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline MapBlock& operator=(MapBlock&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const MapBlock& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const MapBlock* internal_default_instance() {
+    return reinterpret_cast<const MapBlock*>(
+               &_MapBlock_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    3;
+
+  friend void swap(MapBlock& a, MapBlock& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(MapBlock* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline MapBlock* New() const final {
+    return CreateMaybeMessage<MapBlock>(nullptr);
+  }
+
+  MapBlock* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<MapBlock>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const MapBlock& from);
+  void MergeFrom(const MapBlock& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(MapBlock* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "MapBlock";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_Map_2eproto);
+    return ::descriptor_table_Map_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kStateFieldNumber = 1,
+  };
+  // uint32 state = 1;
+  void clear_state();
+  ::PROTOBUF_NAMESPACE_ID::uint32 state() const;
+  void set_state(::PROTOBUF_NAMESPACE_ID::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:MapBlock)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 state_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_Map_2eproto;
+};
+// -------------------------------------------------------------------
+
+class MapRows :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:MapRows) */ {
+ public:
+  MapRows();
+  virtual ~MapRows();
+
+  MapRows(const MapRows& from);
+  MapRows(MapRows&& from) noexcept
+    : MapRows() {
+    *this = ::std::move(from);
+  }
+
+  inline MapRows& operator=(const MapRows& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline MapRows& operator=(MapRows&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const MapRows& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const MapRows* internal_default_instance() {
+    return reinterpret_cast<const MapRows*>(
+               &_MapRows_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    4;
+
+  friend void swap(MapRows& a, MapRows& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(MapRows* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline MapRows* New() const final {
+    return CreateMaybeMessage<MapRows>(nullptr);
+  }
+
+  MapRows* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<MapRows>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const MapRows& from);
+  void MergeFrom(const MapRows& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(MapRows* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "MapRows";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_Map_2eproto);
+    return ::descriptor_table_Map_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kRowsFieldNumber = 1,
+  };
+  // repeated .MapBlock rows = 1;
+  int rows_size() const;
+  void clear_rows();
+  ::MapBlock* mutable_rows(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::MapBlock >*
+      mutable_rows();
+  const ::MapBlock& rows(int index) const;
+  ::MapBlock* add_rows();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::MapBlock >&
+      rows() const;
+
+  // @@protoc_insertion_point(class_scope:MapRows)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::MapBlock > rows_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_Map_2eproto;
+};
+// -------------------------------------------------------------------
+
+class SceneMapInfo :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:SceneMapInfo) */ {
+ public:
+  SceneMapInfo();
+  virtual ~SceneMapInfo();
+
+  SceneMapInfo(const SceneMapInfo& from);
+  SceneMapInfo(SceneMapInfo&& from) noexcept
+    : SceneMapInfo() {
+    *this = ::std::move(from);
+  }
+
+  inline SceneMapInfo& operator=(const SceneMapInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline SceneMapInfo& operator=(SceneMapInfo&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const SceneMapInfo& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const SceneMapInfo* internal_default_instance() {
+    return reinterpret_cast<const SceneMapInfo*>(
+               &_SceneMapInfo_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  friend void swap(SceneMapInfo& a, SceneMapInfo& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(SceneMapInfo* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline SceneMapInfo* New() const final {
+    return CreateMaybeMessage<SceneMapInfo>(nullptr);
+  }
+
+  SceneMapInfo* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<SceneMapInfo>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const SceneMapInfo& from);
+  void MergeFrom(const SceneMapInfo& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(SceneMapInfo* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "SceneMapInfo";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_Map_2eproto);
+    return ::descriptor_table_Map_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kMapInfoFieldNumber = 1,
+    kMapBlockSizeFieldNumber = 2,
+  };
+  // repeated .MapRows map_info = 1;
+  int map_info_size() const;
+  void clear_map_info();
+  ::MapRows* mutable_map_info(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::MapRows >*
+      mutable_map_info();
+  const ::MapRows& map_info(int index) const;
+  ::MapRows* add_map_info();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::MapRows >&
+      map_info() const;
+
+  // uint32 map_block_size = 2;
+  void clear_map_block_size();
+  ::PROTOBUF_NAMESPACE_ID::uint32 map_block_size() const;
+  void set_map_block_size(::PROTOBUF_NAMESPACE_ID::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:SceneMapInfo)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::MapRows > map_info_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 map_block_size_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_Map_2eproto;
+};
 // ===================================================================
 
 
@@ -792,9 +1216,115 @@ MapTickUpdate::mutable_map_infos() {
   return &map_infos_;
 }
 
+// -------------------------------------------------------------------
+
+// MapBlock
+
+// uint32 state = 1;
+inline void MapBlock::clear_state() {
+  state_ = 0u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 MapBlock::state() const {
+  // @@protoc_insertion_point(field_get:MapBlock.state)
+  return state_;
+}
+inline void MapBlock::set_state(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  
+  state_ = value;
+  // @@protoc_insertion_point(field_set:MapBlock.state)
+}
+
+// -------------------------------------------------------------------
+
+// MapRows
+
+// repeated .MapBlock rows = 1;
+inline int MapRows::rows_size() const {
+  return rows_.size();
+}
+inline void MapRows::clear_rows() {
+  rows_.Clear();
+}
+inline ::MapBlock* MapRows::mutable_rows(int index) {
+  // @@protoc_insertion_point(field_mutable:MapRows.rows)
+  return rows_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::MapBlock >*
+MapRows::mutable_rows() {
+  // @@protoc_insertion_point(field_mutable_list:MapRows.rows)
+  return &rows_;
+}
+inline const ::MapBlock& MapRows::rows(int index) const {
+  // @@protoc_insertion_point(field_get:MapRows.rows)
+  return rows_.Get(index);
+}
+inline ::MapBlock* MapRows::add_rows() {
+  // @@protoc_insertion_point(field_add:MapRows.rows)
+  return rows_.Add();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::MapBlock >&
+MapRows::rows() const {
+  // @@protoc_insertion_point(field_list:MapRows.rows)
+  return rows_;
+}
+
+// -------------------------------------------------------------------
+
+// SceneMapInfo
+
+// repeated .MapRows map_info = 1;
+inline int SceneMapInfo::map_info_size() const {
+  return map_info_.size();
+}
+inline void SceneMapInfo::clear_map_info() {
+  map_info_.Clear();
+}
+inline ::MapRows* SceneMapInfo::mutable_map_info(int index) {
+  // @@protoc_insertion_point(field_mutable:SceneMapInfo.map_info)
+  return map_info_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::MapRows >*
+SceneMapInfo::mutable_map_info() {
+  // @@protoc_insertion_point(field_mutable_list:SceneMapInfo.map_info)
+  return &map_info_;
+}
+inline const ::MapRows& SceneMapInfo::map_info(int index) const {
+  // @@protoc_insertion_point(field_get:SceneMapInfo.map_info)
+  return map_info_.Get(index);
+}
+inline ::MapRows* SceneMapInfo::add_map_info() {
+  // @@protoc_insertion_point(field_add:SceneMapInfo.map_info)
+  return map_info_.Add();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::MapRows >&
+SceneMapInfo::map_info() const {
+  // @@protoc_insertion_point(field_list:SceneMapInfo.map_info)
+  return map_info_;
+}
+
+// uint32 map_block_size = 2;
+inline void SceneMapInfo::clear_map_block_size() {
+  map_block_size_ = 0u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 SceneMapInfo::map_block_size() const {
+  // @@protoc_insertion_point(field_get:SceneMapInfo.map_block_size)
+  return map_block_size_;
+}
+inline void SceneMapInfo::set_map_block_size(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  
+  map_block_size_ = value;
+  // @@protoc_insertion_point(field_set:SceneMapInfo.map_block_size)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

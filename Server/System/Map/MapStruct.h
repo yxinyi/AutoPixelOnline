@@ -14,6 +14,7 @@ struct CPosition {
 };
 using MapData_t = shared_ptr<MapData>;
 using MapTickUpdate_t = shared_ptr<MapTickUpdate>;
+using SceneMapInfo_t = shared_ptr<SceneMapInfo>;
 class CAttrMap : public CAttr {
 public:
     CAttrMap() :CAttr("CAttrMap") {}
@@ -95,7 +96,7 @@ struct CMapConfig {
     };
     CPosition m_default_postion = { 0.0f ,0.f};
     uint32_t m_cell_size = 30;
-    uint32_t m_tid = 1;
+    uint32_t m_tid = 0;
     uint32_t m_auto_create = 1; //是否自动创建
     uint32_t m_max_x = 0;
     uint32_t m_max_y = 0;
@@ -129,7 +130,7 @@ public:
     const std::set<uint32_t>& GetPlayer() { return m_players; }
 
     bool PosMoveCheck(const CPosition& pos_);
-
+    SceneMapInfo_t ToProto();
     bool MoveTo(Creature_t creature_, CPosition pos_);
 
 private:

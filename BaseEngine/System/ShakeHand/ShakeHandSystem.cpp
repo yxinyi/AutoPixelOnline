@@ -40,7 +40,7 @@ extern std::vector<ConnectTargetConfig> getConnectConfig();
 bool ShakeHandSystem::Init() {
     std::vector<ConnectTargetConfig> _conn_cfg = getConnectConfig();
     for (auto&& _cfg_it : _conn_cfg) {
-        CConnection_t _conn = NetManager::getInstance()->Connect(_cfg_it.m_ip, _cfg_it.m_port);
+        CConnection_t _conn = NetManager::getInstance()->Connect(_cfg_it.m_ip, _cfg_it.m_port, _cfg_it.m_nick_name);
         m_conne_vec.insert(_conn->getConnId());
     }
     return true;
@@ -97,10 +97,12 @@ bool ShakeHandSystem::ShakeHandCheck() {
 
 void  ShakeHandSystem::ShakeHandPrint(const uint32_t conn_){
 
-    CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(conn_);
-    m_remote[conn_] = NowTime->NowMillisecond();
-    std::cout << "ShakeHandPrint: " << _conn->getIPStr() << std::endl;
-    std::cout << "ShakeHandSize: " << m_remote.size() << std::endl;
-    //MessageBus::getInstance()->SendReq<void>("ShakeHand");
+    if (CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(conn_)) {
+        m_remote[conn_] = NowTime->NowMillisecond();
+        std::cout << "ShakeHandPrint: " << _conn->getIPStr() << std::endl;
+        std::cout << "ShakeHandSize: " << m_remote.size() << std::endl;
+        //MessageBus::getInstance()->SendReq<void>("ShakeHand");
+    
+    }
 
 }

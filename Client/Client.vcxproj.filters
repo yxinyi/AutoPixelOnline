@@ -5,15 +5,51 @@
     <ClCompile Include="..\Common\include\proto\Shakehand.pb.cc">
       <Filter>proto</Filter>
     </ClCompile>
+    <ClCompile Include="RenderSystem.h">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="System\Map\CliMapSystem.cpp">
+      <Filter>System\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\proto\Map.pb.cc">
+      <Filter>System\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\proto\PlayerLogin.pb.cc">
+      <Filter>System\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="proto">
       <UniqueIdentifier>{8dae2238-0e3a-472e-abfa-a302c5ac7ded}</UniqueIdentifier>
     </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{49856e03-d5ca-424e-8b97-ab5996ce9d20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Creature">
+      <UniqueIdentifier>{98fd0913-cd48-4399-ae1d-6a60dc7f56f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Map">
+      <UniqueIdentifier>{2cd2ecfd-9613-4dc1-b916-19236311784d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Common\include\proto\Shakehand.pb.h">
       <Filter>proto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Server\System\Map\MapStruct.h">
+      <Filter>System\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Server\System\Creature\CreatureStruct.h">
+      <Filter>System\Creature</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Map\CliMapSystem.h">
+      <Filter>System\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\proto\Map.pb.h">
+      <Filter>System\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\proto\PlayerLogin.pb.h">
+      <Filter>System\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

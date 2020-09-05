@@ -53,7 +53,7 @@ using AllAttributeDataNotify_t = shared_ptr<AllAttributeDataNotify>;
 class CAttrs {
 public:
     bool Register(shared_ptr<CAttr> attr_) {
-        if (m_attr_pool.find(attr_->GetName()) == m_attr_pool.end()) {
+        if (m_attr_pool.find(attr_->GetName()) != m_attr_pool.end()) {
             return false;
         }
         m_attr_pool[attr_->GetName()] = attr_;
@@ -118,6 +118,10 @@ using CAttrPrototype_t = shared_ptr<CAttrPrototype>;
 class CAttrManager :public Singleton<CAttrManager> {
 public:
     void Register(const string& obj_name_, shared_ptr<CAttr> attr_) {
+        if (!m_prototype_pool[obj_name_]) {
+            CAttrPrototype_t _prototype = make_shared<CAttrPrototype>();
+            m_prototype_pool[obj_name_] = _prototype;
+        }
         m_prototype_pool[obj_name_]->Register(attr_);
     }
     CAttrs_t CreateAttr(const string& obj_name_) {

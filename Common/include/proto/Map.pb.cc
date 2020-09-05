@@ -15,6 +15,8 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
+extern PROTOBUF_INTERNAL_EXPORT_Map_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MapBlock_Map_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_Map_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MapRows_Map_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_Map_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Position_Map_2eproto;
 class PositionDefaultTypeInternal {
  public:
@@ -28,6 +30,32 @@ class MapTickUpdateDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MapTickUpdate> _instance;
 } _MapTickUpdate_default_instance_;
+class MapBlockDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MapBlock> _instance;
+} _MapBlock_default_instance_;
+class MapRowsDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MapRows> _instance;
+} _MapRows_default_instance_;
+class SceneMapInfoDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SceneMapInfo> _instance;
+} _SceneMapInfo_default_instance_;
+static void InitDefaultsscc_info_MapBlock_Map_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::_MapBlock_default_instance_;
+    new (ptr) ::MapBlock();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::MapBlock::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MapBlock_Map_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_MapBlock_Map_2eproto}, {}};
+
 static void InitDefaultsscc_info_MapData_Map_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -42,6 +70,21 @@ static void InitDefaultsscc_info_MapData_Map_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MapData_Map_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_MapData_Map_2eproto}, {
       &scc_info_Position_Map_2eproto.base,}};
+
+static void InitDefaultsscc_info_MapRows_Map_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::_MapRows_default_instance_;
+    new (ptr) ::MapRows();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::MapRows::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MapRows_Map_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_MapRows_Map_2eproto}, {
+      &scc_info_MapBlock_Map_2eproto.base,}};
 
 static void InitDefaultsscc_info_MapTickUpdate_Map_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -71,7 +114,22 @@ static void InitDefaultsscc_info_Position_Map_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Position_Map_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_Position_Map_2eproto}, {}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_Map_2eproto[3];
+static void InitDefaultsscc_info_SceneMapInfo_Map_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::_SceneMapInfo_default_instance_;
+    new (ptr) ::SceneMapInfo();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::SceneMapInfo::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SceneMapInfo_Map_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_SceneMapInfo_Map_2eproto}, {
+      &scc_info_MapRows_Map_2eproto.base,}};
+
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_Map_2eproto[6];
 static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_Map_2eproto = nullptr;
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_Map_2eproto = nullptr;
 
@@ -100,17 +158,42 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_Map_2eproto::offsets[] PROTOBU
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::MapTickUpdate, map_infos_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::MapBlock, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::MapBlock, state_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::MapRows, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::MapRows, rows_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::SceneMapInfo, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::SceneMapInfo, map_info_),
+  PROTOBUF_FIELD_OFFSET(::SceneMapInfo, map_block_size_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::Position)},
   { 7, -1, sizeof(::MapData)},
   { 18, -1, sizeof(::MapTickUpdate)},
+  { 24, -1, sizeof(::MapBlock)},
+  { 30, -1, sizeof(::MapRows)},
+  { 36, -1, sizeof(::SceneMapInfo)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_Position_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_MapData_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_MapTickUpdate_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_MapBlock_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_MapRows_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_SceneMapInfo_default_instance_),
 };
 
 const char descriptor_table_protodef_Map_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
@@ -120,22 +203,28 @@ const char descriptor_table_protodef_Map_2eproto[] PROTOBUF_SECTION_VARIABLE(pro
   "\022\031\n\006vector\030\003 \001(\0132\t.Position\022\017\n\007map_oid\030\004"
   " \001(\004\022\024\n\014last_map_tid\030\005 \001(\004\022\024\n\014creature_o"
   "id\030\006 \001(\004\"\"\n\rMapTickUpdate\022\021\n\tmap_infos\030\001"
-  " \003(\tb\006proto3"
+  " \003(\t\"\031\n\010MapBlock\022\r\n\005state\030\001 \001(\r\"\"\n\007MapRo"
+  "ws\022\027\n\004rows\030\001 \003(\0132\t.MapBlock\"B\n\014SceneMapI"
+  "nfo\022\032\n\010map_info\030\001 \003(\0132\010.MapRows\022\026\n\016map_b"
+  "lock_size\030\002 \001(\rb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_Map_2eproto_deps[1] = {
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_Map_2eproto_sccs[3] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_Map_2eproto_sccs[6] = {
+  &scc_info_MapBlock_Map_2eproto.base,
   &scc_info_MapData_Map_2eproto.base,
+  &scc_info_MapRows_Map_2eproto.base,
   &scc_info_MapTickUpdate_Map_2eproto.base,
   &scc_info_Position_Map_2eproto.base,
+  &scc_info_SceneMapInfo_Map_2eproto.base,
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_Map_2eproto_once;
 static bool descriptor_table_Map_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Map_2eproto = {
-  &descriptor_table_Map_2eproto_initialized, descriptor_table_protodef_Map_2eproto, "Map.proto", 252,
-  &descriptor_table_Map_2eproto_once, descriptor_table_Map_2eproto_sccs, descriptor_table_Map_2eproto_deps, 3, 0,
+  &descriptor_table_Map_2eproto_initialized, descriptor_table_protodef_Map_2eproto, "Map.proto", 383,
+  &descriptor_table_Map_2eproto_once, descriptor_table_Map_2eproto_sccs, descriptor_table_Map_2eproto_deps, 6, 0,
   schemas, file_default_instances, TableStruct_Map_2eproto::offsets,
-  file_level_metadata_Map_2eproto, 3, file_level_enum_descriptors_Map_2eproto, file_level_service_descriptors_Map_2eproto,
+  file_level_metadata_Map_2eproto, 6, file_level_enum_descriptors_Map_2eproto, file_level_service_descriptors_Map_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -1194,6 +1283,821 @@ void MapTickUpdate::InternalSwap(MapTickUpdate* other) {
 }
 
 
+// ===================================================================
+
+void MapBlock::InitAsDefaultInstance() {
+}
+class MapBlock::_Internal {
+ public:
+};
+
+MapBlock::MapBlock()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:MapBlock)
+}
+MapBlock::MapBlock(const MapBlock& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  state_ = from.state_;
+  // @@protoc_insertion_point(copy_constructor:MapBlock)
+}
+
+void MapBlock::SharedCtor() {
+  state_ = 0u;
+}
+
+MapBlock::~MapBlock() {
+  // @@protoc_insertion_point(destructor:MapBlock)
+  SharedDtor();
+}
+
+void MapBlock::SharedDtor() {
+}
+
+void MapBlock::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const MapBlock& MapBlock::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_MapBlock_Map_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void MapBlock::Clear() {
+// @@protoc_insertion_point(message_clear_start:MapBlock)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  state_ = 0u;
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* MapBlock::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // uint32 state = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          state_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool MapBlock::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:MapBlock)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // uint32 state = 1;
+      case 1: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::uint32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &state_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:MapBlock)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:MapBlock)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void MapBlock::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:MapBlock)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint32 state = 1;
+  if (this->state() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32(1, this->state(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:MapBlock)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* MapBlock::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:MapBlock)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint32 state = 1;
+  if (this->state() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->state(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:MapBlock)
+  return target;
+}
+
+size_t MapBlock::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:MapBlock)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // uint32 state = 1;
+  if (this->state() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
+        this->state());
+  }
+
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void MapBlock::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:MapBlock)
+  GOOGLE_DCHECK_NE(&from, this);
+  const MapBlock* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<MapBlock>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:MapBlock)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:MapBlock)
+    MergeFrom(*source);
+  }
+}
+
+void MapBlock::MergeFrom(const MapBlock& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:MapBlock)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.state() != 0) {
+    set_state(from.state());
+  }
+}
+
+void MapBlock::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:MapBlock)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void MapBlock::CopyFrom(const MapBlock& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:MapBlock)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool MapBlock::IsInitialized() const {
+  return true;
+}
+
+void MapBlock::InternalSwap(MapBlock* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(state_, other->state_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata MapBlock::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void MapRows::InitAsDefaultInstance() {
+}
+class MapRows::_Internal {
+ public:
+};
+
+MapRows::MapRows()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:MapRows)
+}
+MapRows::MapRows(const MapRows& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr),
+      rows_(from.rows_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:MapRows)
+}
+
+void MapRows::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_MapRows_Map_2eproto.base);
+}
+
+MapRows::~MapRows() {
+  // @@protoc_insertion_point(destructor:MapRows)
+  SharedDtor();
+}
+
+void MapRows::SharedDtor() {
+}
+
+void MapRows::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const MapRows& MapRows::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_MapRows_Map_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void MapRows::Clear() {
+// @@protoc_insertion_point(message_clear_start:MapRows)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  rows_.Clear();
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* MapRows::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // repeated .MapBlock rows = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(add_rows(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 10);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool MapRows::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:MapRows)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // repeated .MapBlock rows = 1;
+      case 1: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
+                input, add_rows()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:MapRows)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:MapRows)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void MapRows::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:MapRows)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .MapBlock rows = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->rows_size()); i < n; i++) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1,
+      this->rows(static_cast<int>(i)),
+      output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:MapRows)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* MapRows::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:MapRows)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .MapBlock rows = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->rows_size()); i < n; i++) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        1, this->rows(static_cast<int>(i)), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:MapRows)
+  return target;
+}
+
+size_t MapRows::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:MapRows)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .MapBlock rows = 1;
+  {
+    unsigned int count = static_cast<unsigned int>(this->rows_size());
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          this->rows(static_cast<int>(i)));
+    }
+  }
+
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void MapRows::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:MapRows)
+  GOOGLE_DCHECK_NE(&from, this);
+  const MapRows* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<MapRows>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:MapRows)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:MapRows)
+    MergeFrom(*source);
+  }
+}
+
+void MapRows::MergeFrom(const MapRows& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:MapRows)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  rows_.MergeFrom(from.rows_);
+}
+
+void MapRows::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:MapRows)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void MapRows::CopyFrom(const MapRows& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:MapRows)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool MapRows::IsInitialized() const {
+  return true;
+}
+
+void MapRows::InternalSwap(MapRows* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  CastToBase(&rows_)->InternalSwap(CastToBase(&other->rows_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata MapRows::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void SceneMapInfo::InitAsDefaultInstance() {
+}
+class SceneMapInfo::_Internal {
+ public:
+};
+
+SceneMapInfo::SceneMapInfo()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:SceneMapInfo)
+}
+SceneMapInfo::SceneMapInfo(const SceneMapInfo& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr),
+      map_info_(from.map_info_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  map_block_size_ = from.map_block_size_;
+  // @@protoc_insertion_point(copy_constructor:SceneMapInfo)
+}
+
+void SceneMapInfo::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_SceneMapInfo_Map_2eproto.base);
+  map_block_size_ = 0u;
+}
+
+SceneMapInfo::~SceneMapInfo() {
+  // @@protoc_insertion_point(destructor:SceneMapInfo)
+  SharedDtor();
+}
+
+void SceneMapInfo::SharedDtor() {
+}
+
+void SceneMapInfo::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const SceneMapInfo& SceneMapInfo::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_SceneMapInfo_Map_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void SceneMapInfo::Clear() {
+// @@protoc_insertion_point(message_clear_start:SceneMapInfo)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  map_info_.Clear();
+  map_block_size_ = 0u;
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* SceneMapInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // repeated .MapRows map_info = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(add_map_info(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 10);
+        } else goto handle_unusual;
+        continue;
+      // uint32 map_block_size = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          map_block_size_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool SceneMapInfo::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:SceneMapInfo)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // repeated .MapRows map_info = 1;
+      case 1: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
+                input, add_map_info()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // uint32 map_block_size = 2;
+      case 2: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (16 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::uint32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &map_block_size_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:SceneMapInfo)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:SceneMapInfo)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void SceneMapInfo::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:SceneMapInfo)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .MapRows map_info = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->map_info_size()); i < n; i++) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1,
+      this->map_info(static_cast<int>(i)),
+      output);
+  }
+
+  // uint32 map_block_size = 2;
+  if (this->map_block_size() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32(2, this->map_block_size(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:SceneMapInfo)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* SceneMapInfo::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:SceneMapInfo)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .MapRows map_info = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->map_info_size()); i < n; i++) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        1, this->map_info(static_cast<int>(i)), target);
+  }
+
+  // uint32 map_block_size = 2;
+  if (this->map_block_size() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->map_block_size(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:SceneMapInfo)
+  return target;
+}
+
+size_t SceneMapInfo::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:SceneMapInfo)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .MapRows map_info = 1;
+  {
+    unsigned int count = static_cast<unsigned int>(this->map_info_size());
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          this->map_info(static_cast<int>(i)));
+    }
+  }
+
+  // uint32 map_block_size = 2;
+  if (this->map_block_size() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
+        this->map_block_size());
+  }
+
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void SceneMapInfo::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:SceneMapInfo)
+  GOOGLE_DCHECK_NE(&from, this);
+  const SceneMapInfo* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<SceneMapInfo>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SceneMapInfo)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:SceneMapInfo)
+    MergeFrom(*source);
+  }
+}
+
+void SceneMapInfo::MergeFrom(const SceneMapInfo& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:SceneMapInfo)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  map_info_.MergeFrom(from.map_info_);
+  if (from.map_block_size() != 0) {
+    set_map_block_size(from.map_block_size());
+  }
+}
+
+void SceneMapInfo::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:SceneMapInfo)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void SceneMapInfo::CopyFrom(const SceneMapInfo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:SceneMapInfo)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool SceneMapInfo::IsInitialized() const {
+  return true;
+}
+
+void SceneMapInfo::InternalSwap(SceneMapInfo* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  CastToBase(&map_info_)->InternalSwap(CastToBase(&other->map_info_));
+  swap(map_block_size_, other->map_block_size_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata SceneMapInfo::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
 // @@protoc_insertion_point(namespace_scope)
 PROTOBUF_NAMESPACE_OPEN
 template<> PROTOBUF_NOINLINE ::Position* Arena::CreateMaybeMessage< ::Position >(Arena* arena) {
@@ -1204,6 +2108,15 @@ template<> PROTOBUF_NOINLINE ::MapData* Arena::CreateMaybeMessage< ::MapData >(A
 }
 template<> PROTOBUF_NOINLINE ::MapTickUpdate* Arena::CreateMaybeMessage< ::MapTickUpdate >(Arena* arena) {
   return Arena::CreateInternal< ::MapTickUpdate >(arena);
+}
+template<> PROTOBUF_NOINLINE ::MapBlock* Arena::CreateMaybeMessage< ::MapBlock >(Arena* arena) {
+  return Arena::CreateInternal< ::MapBlock >(arena);
+}
+template<> PROTOBUF_NOINLINE ::MapRows* Arena::CreateMaybeMessage< ::MapRows >(Arena* arena) {
+  return Arena::CreateInternal< ::MapRows >(arena);
+}
+template<> PROTOBUF_NOINLINE ::SceneMapInfo* Arena::CreateMaybeMessage< ::SceneMapInfo >(Arena* arena) {
+  return Arena::CreateInternal< ::SceneMapInfo >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

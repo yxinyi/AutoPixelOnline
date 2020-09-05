@@ -116,14 +116,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Common\;$(SolutionDir)Common\include\;$(SolutionDir)BaseEngine\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Common\;$(SolutionDir)Common\include\;$(SolutionDir)BaseEngine\include\;$(MsBuildProjectDirectory)\System\;$(SolutionDir)BaseEngine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>BaseEngined.lib;libprotobufd.lib;libprotoc.lib;libzmq-v141-mt-4_3_2.lib;libzmq-v141-mt-s-4_3_2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2main.lib;SDL2.lib;BaseEngined.lib;libprotobufd.lib;libprotoc.lib;libzmq-v141-mt-4_3_2.lib;libzmq-v141-mt-s-4_3_2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Common\lib\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -135,7 +135,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Common\;$(SolutionDir)Common\include\;$(SolutionDir)BaseEngine\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Common\;$(SolutionDir)Common\include\;$(SolutionDir)BaseEngine\include\;$(SolutionDir)BaseEngine\;$(MsBuildProjectDirectory)\System\;$(MsBuildProjectDirectory)\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -143,16 +143,25 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>BaseEngine.lib;libprotobuf.lib;libprotoc.lib;libzmq-v141-mt-4_3_2.lib;libzmq-v141-mt-s-4_3_2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2test.lib;SDL2main.lib;SDL2.lib;BaseEngine.lib;libprotobuf.lib;libprotoc.lib;libzmq-v141-mt-4_3_2.lib;libzmq-v141-mt-s-4_3_2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Common\lib\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Common\include\proto\Map.pb.cc" />
+    <ClCompile Include="..\Common\include\proto\PlayerLogin.pb.cc" />
     <ClCompile Include="..\Common\include\proto\Shakehand.pb.cc" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RenderSystem.h" />
+    <ClCompile Include="System\Map\CliMapSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Common\include\proto\Map.pb.h" />
+    <ClInclude Include="..\Common\include\proto\PlayerLogin.pb.h" />
     <ClInclude Include="..\Common\include\proto\Shakehand.pb.h" />
+    <ClInclude Include="..\Server\System\Creature\CreatureStruct.h" />
+    <ClInclude Include="..\Server\System\Map\MapStruct.h" />
+    <ClInclude Include="System\Map\CliMapSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

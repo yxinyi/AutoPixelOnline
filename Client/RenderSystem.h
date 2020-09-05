@@ -1,13 +1,13 @@
 #pragma once
 #include "tool/SingletonTemplate.h"
-#include "SDL2/SDL_render.h"
-#include "SDL2/SDL.h"
-#include "SDL2/SDL_events.h"
 #include "System/BaseSystem.h"
 #include <functional>
 #include <vector>
 #include <string>
 #include "tool/LogInfo.h"
+#include "SDL2/SDL_render.h"
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_events.h"
 
 class RenderSystem :public Singleton<RenderSystem> {
 public:
@@ -52,13 +52,37 @@ public:
         SDL_Window* _windiow = m_window;
         if (!_render || !_windiow) {
             LogError << "error " << FlushLog;
-            return;
+            return false;
         }
         for (auto& _func_it : m_render_funcs) {
             _func_it(_windiow, _render);
         }
         SDL_RenderPresent(m_render);
         m_render_funcs.clear();
+
+        while (SDL_PollEvent(&m_event) != 0)
+        {
+            switch (m_event.type)
+            {
+            case SDL_QUIT:
+                //m_window.m_isOpen = false;
+                break;
+
+            case SDL_KEYDOWN:
+                //switch (m_window.m_event.key.keysym.sym)
+                //{
+                //case SDLK_ESCAPE:
+                //    m_window.m_isOpen = false;
+                //    break;
+                //}
+                break;
+            }
+
+            // Process system events.
+            //m_moveSystem.event(m_window.m_event, m_registry);
+        }
+
+        return true;
     }
     void Register(std::function<void(SDL_Window*, SDL_Renderer*)> func_) {
         m_render_funcs.push_back(func_);

@@ -71,6 +71,7 @@
     <ClInclude Include="..\Common\include\tool\AStar.h">
       <Filter>tool</Filter>
     </ClInclude>
+    <ClInclude Include="EngineInclude.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\include\tool\Time.cpp">

@@ -1,10 +1,7 @@
 #include "./Map.h"
-#include "MessageBus/MessageBus.h"
+#include "EngineInclude.h"
 #include "Creature/Creature.h"
-#include "tool/ObjectPool.h"
-#include "tool/UniqueNumberFactory.h"
 #include "Error/Error.h"
-#include "Tcp/NetManager.h"
 #include <math.h>
 
 RegSystem(MapManager)
@@ -22,7 +19,8 @@ bool MapManager::EnvDefine() {
         if (!_map) {
             LogError << "[EnterMap] " << creature_->GetOid() << "enter map err" << _attr_map->m_last_map_tid << FlushLog;
         }
-
+        SceneMapInfo_t _proto = _map->ToProto();
+        creature_->SendProtoMsg(_proto);
     }, "PlayerLogin");
 
     MessageBus::getInstance()->Attach([this](Creature_t creature_, CPosition pos_) {
@@ -37,8 +35,6 @@ bool MapManager::EnvDefine() {
         }
 
 
-
-
     }, "PlayerMoveTo");
 
     return true;
@@ -46,6 +42,8 @@ bool MapManager::EnvDefine() {
 bool MapManager::PreInit() {
     CAttrManager::getInstance()->Register("Player", make_shared<CAttrMap>());
     CAttrManager::getInstance()->Register("Monster", make_shared<CAttrMap>());
+
+    CMapConfigMgr::getInstance()->init();
     return true;
 }
 bool MapManager::Init() {
@@ -133,8 +131,9 @@ Map_t MapManager::EnterMap(Creature_t creature_, const uint32_t map_tbl_id_) {
             _map = CreateMap(map_tbl_id_);
         }
     }
-
-    _map->EnterScene(creature_);
+    if (_map) {
+        _map->EnterScene(creature_);
+    }
     return _map;
 }
 
@@ -174,6 +173,21 @@ bool CMap::PosMoveCheck(const CPosition& pos_) {
 
     return true;
 }
+
+SceneMapInfo_t CMap::ToProto() {
+    SceneMapInfo_t _proto = make_shared<SceneMapInfo>();
+    _proto->set_map_block_size(m_config->m_cell_size);
+    for (auto&& _colmn_it : m_config->m_maze_shape) {
+        auto _colmn = _proto->add_map_info();
+        for (auto&& _row_it: _colmn_it) {
+            auto _block = _colmn->add_rows();
+            _block->set_state(_row_it);
+        }
+    }
+    return _proto;
+}
+
+
 
 bool CMap::MoveTo(Creature_t creature_, CPosition tar_pos_) {
     if (!PosMoveCheck(tar_pos_)) {

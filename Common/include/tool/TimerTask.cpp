@@ -6,7 +6,7 @@
 bool TimerTaskManager::RegisterTask(const std::string& name_, const int64_t start_time_, const int64_t intervals_, int32_t loop_times_, TaskFunc func_) {
     TimerTask_t _task(new TimerTask);
     _task->m_name = name_;
-    _task->m_start_time = start_time_ ? start_time_: NowTime->NowMillisecond();
+    _task->m_start_time = start_time_ ? NowTime->NowMillisecond()+start_time_: NowTime->NowMillisecond();
     _task->m_intervals = intervals_;
     _task->m_loop_times = loop_times_;
     _task->m_func = func_;

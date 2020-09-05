@@ -18,3 +18,15 @@ message MapTickUpdate{
 	repeated string map_infos = 1;
 }
 
+message MapBlock{
+	uint32 state = 1;
+}
+
+message MapRows{
+	repeated MapBlock rows = 1;
+}
+
+message SceneMapInfo{
+	repeated MapRows map_info = 1;
+	uint32 map_block_size = 2;
+}

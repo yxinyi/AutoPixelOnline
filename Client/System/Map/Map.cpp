@@ -23,23 +23,27 @@ bool MapManager::EnvDefine() {
             LogError << "[EnterMap] " << creature_->GetOid() << "enter map err" << _attr_map->m_last_map_tid << FlushLog;
         }
 
+
+
     }, "PlayerLogin");
 
-    MessageBus::getInstance()->Attach([this](Creature_t creature_, CPosition pos_) {
-        CAttrMap_t _attr_map = creature_->GetAttrs()->ApiGetAttr<CAttrMap>("CAttrMap");
-        if (_attr_map->m_last_map_tid != 0) {
-            _attr_map->m_last_map_tid = m_default_map_tid;
-        }
-        Map_t _map = MapManager::getInstance()->GetMapByMapOid(_attr_map->m_map_oid);
-        if (!_map) {
-            NetManager::getInstance()->SendMessageBuff(creature_->GetConnID(), ApiBuildErrorMsg(LOG_POS_NOT_EXISTS));
-            return;
-        }
 
 
 
 
-    }, "PlayerMoveTo");
+
+    //MessageBus::getInstance()->Attach([this](Creature_t creature_, CPosition pos_) {
+    //    CAttrMap_t _attr_map = creature_->GetAttrs()->ApiGetAttr<CAttrMap>("CAttrMap");
+    //    if (_attr_map->m_last_map_tid != 0) {
+    //        _attr_map->m_last_map_tid = m_default_map_tid;
+    //    }
+    //    Map_t _map = MapManager::getInstance()->GetMapByMapOid(_attr_map->m_map_oid);
+    //    if (!_map) {
+    //        NetManager::getInstance()->SendMessageBuff(creature_->GetConnID(), ApiBuildErrorMsg(LOG_POS_NOT_EXISTS));
+    //        return;
+    //    }
+    //
+    //}, "PlayerMoveTo");
 
     return true;
 }
@@ -159,6 +163,13 @@ Map_t MapManager::GetMapByMapOid(const uint64_t map_oid_) {
         return nullptr;
     }
     return _map_find->second;
+}
+SceneMapInfo_t CMap::ToProto() {
+    SceneMapInfo_t _proto = make_shared<SceneMapInfo>();
+    
+    
+    _proto->set_map_block_size(m_config->m_cell_size);
+    return _proto;
 }
 
 

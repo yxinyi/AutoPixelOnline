@@ -7,6 +7,7 @@
 #include "../Common/include/proto/Shakehand.pb.h"
 #include "RenderSystem.h"
 #include <Windows.h>
+#include "../Client/RenderSystem.h"
 
 const uint32_t g_frame = 30;
 const std::string g_name = "Client";
@@ -18,7 +19,7 @@ std::string getNodeName() {
 std::vector<ConnectTargetConfig> getConnectConfig() {
     static std::vector<ConnectTargetConfig> _target_cfg;
     if (!_target_cfg.size()) {
-        _target_cfg.emplace_back("127.0.0.1",8888);
+        _target_cfg.emplace_back("127.0.0.1",8888,"LogicServer");
     }
     return _target_cfg;
 }
@@ -35,7 +36,10 @@ void MainLoop() {
         Sleep(1000);
         SetConsoleTitleA("client");
         NetManager::getInstance()->Start();
-        auto _conn = NetManager::getInstance()->Connect("127.0.0.1", 8889);
+        if (!RenderSystem::getInstance()->WindowInit()) {
+            system("pause");
+            return;
+        }
 
         while (true) {
             const int64_t _this_frame_time = _frame_timer.elapsed();
@@ -78,7 +82,7 @@ void MainLoop() {
 }
 
 
-int main() {
+int main(int argc, char* argv[]) {
 
     MainLoop();
     return 0;

@@ -116,16 +116,27 @@ public:
     asio::ip::tcp::socket& GetSocket() { return m_socket; }
     CConnection(asio::io_service& service_):m_socket(service_)
     {
-        m_is_conn = true;
+    }
+
+    void SetNickName(const string& nick_name_) {
+        m_nick_name = nick_name_;
+    }
+    string GetNickName() {
+        return m_nick_name;
     }
     bool isConnection() {
         return m_is_conn;//&& m_socket.is_open();
+    }
+
+    void ConnectedOK() {
+        m_is_conn = true;
     }
     ~CConnection() {}
     std::string getIPStr() {
         return (m_socket.remote_endpoint().address().to_string() + " : "+ to_string(m_socket.remote_endpoint().port()));
     }
 private:
+    std::string m_nick_name;
     asio::ip::tcp::socket m_socket;
     char m_tmp_buff[g_recv_once_size] = {0};
     uint32_t m_conn_id = -1;
@@ -137,16 +148,21 @@ private:
     std::vector<shared_ptr<CBuffer>> m_snd_buff_list;
 };
 using CConnection_t = shared_ptr<CConnection>;
+using CConnection_wt = weak_ptr<CConnection>;
 
 class CConnectionMgr : public Singleton<CConnectionMgr> {
 public:
 
-    CConnection_t CreateConnection(asio::io_service& service_) {
+    CConnection_t CreateConnection(asio::io_service& service_,const std::string& nick_name_ = "") {
         CConnection_t _tmp_conn = std::make_shared<CConnection>(service_);
         const uint32_t _conn_id = m_conn_inc_id++;
         _tmp_conn->setConnId(_conn_id);
         
         m_conn_pool[_conn_id] = _tmp_conn;
+        if (!nick_name_.empty()) {
+            _tmp_conn->SetNickName(nick_name_);
+            m_nickname_to_conn[nick_name_] = _tmp_conn;
+        }
         
         return _tmp_conn;
     };
@@ -157,15 +173,24 @@ public:
         }
         return m_conn_pool[conn_id_];
     }
-
+    CConnection_t GetConnection(const std::string& nick_name_) {
+        auto _conn_find = m_nickname_to_conn.find(nick_name_);
+        if (_conn_find == m_nickname_to_conn.end()) {
+            return nullptr;
+        }
+        return _conn_find->second;
+    }
     bool DelelteConnection(const uint32_t conn_id_) {
-        if (m_conn_pool.find(conn_id_) == m_conn_pool.end()) {
+        auto _conn_find = m_conn_pool.find(conn_id_);
+        if (_conn_find == m_conn_pool.end()) {
             return false;
         }
+        m_nickname_to_conn.erase(_conn_find->second->GetNickName());
         m_conn_pool.erase(conn_id_);
         return true;
     }
 private:
-    std::map<uint32_t,CConnection_t> m_conn_pool;
+    std::map<uint32_t, CConnection_t> m_conn_pool;
+    std::map<string, CConnection_t> m_nickname_to_conn;
     uint32_t m_conn_inc_id = 0;
 };

@@ -1,9 +1,5 @@
 #include "./Creature.h"
-#include "tool/ProtobufDispatcher.h"
-#include "MessageBus/MessageBus.h"
-#include "tool/ObjectPool.h"
-#include "tool/LogInfo.h"
-#include "Tcp/NetManager.h"
+#include "EngineInclude.h"
 #include "Error/Error.h"
 #include <memory>
 
@@ -53,12 +49,13 @@ bool CreatureManager::Destroy() {
 
 
 shared_ptr<Creature> CreatureManager::CreateCreature(const uint32_t conn_, const PlayerLoginEvent_t& message_) {
+    auto _conn_find = m_conid_to_player.find(conn_);
+    if (_conn_find != m_conid_to_player.end()) {
+        return _conn_find->second;
+    }
     Creature_t _login_create = CObjectPool<Creature>::getInstance()->Get("Player", conn_);
     const uint64_t _oid = _login_create->GetOid();
     if (m_oid_to_player.find(_oid) != m_oid_to_player.end()) {
-        return nullptr;
-    }
-    if (m_conid_to_player.find(conn_) != m_conid_to_player.end()) {
         return nullptr;
     }
     m_oid_to_player[_oid] = _login_create;

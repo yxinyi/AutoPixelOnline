@@ -44,9 +44,6 @@
     <Filter Include="System\Error">
       <UniqueIdentifier>{f8a0e8e9-d763-4077-a7c3-73db56324031}</UniqueIdentifier>
     </Filter>
-    <Filter Include="System\Creature\Player">
-      <UniqueIdentifier>{fe5abf29-4538-44e6-94f4-d4f9b8797010}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Common\include\proto\Shakehand.pb.h">
@@ -75,9 +72,6 @@
     </ClInclude>
     <ClInclude Include="System\Error\Error.h">
       <Filter>System\Error</Filter>
-    </ClInclude>
-    <ClInclude Include="System\Creature\Player\PlayerStruct.h">
-      <Filter>System\Creature\Player</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\include\proto\CreatureNotify.pb.h">
       <Filter>System\Creature</Filter>
