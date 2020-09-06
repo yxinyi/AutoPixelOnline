@@ -34,7 +34,7 @@ public:
 
     void RestoreForProto(AllAttributeDataNotify_t ntf_) {
         const int _size = ntf_->data_size();
-        for (size_t _idx = 0; _idx < _size; _idx++) {
+        for (int _idx = 0; _idx < _size; _idx++) {
             ModuleData _module_data = ntf_->data(_idx);
             m_attr->RestoreForProto(_module_data.msg_type_str(), _module_data.binary());
         }

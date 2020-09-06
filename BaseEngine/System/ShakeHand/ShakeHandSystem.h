@@ -1,14 +1,9 @@
 #pragma once
-#include "../../../BaseEngine/System/BaseSystem.h"
-#include "../../../BaseEngine/Tcp/NetManager.h"
+#include "System/BaseSystem.h"
+#include "Tcp/NetManager.h"
 #include <set>
 
-
-
-
 std::vector<ConnectTargetConfig> getConnectConfig();
-
-
 class ShakeHandSystem :public BaseSystem {
 public:
     ShakeHandSystem():BaseSystem("ShakeHandSystem"){}

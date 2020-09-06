@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+message DataBaseReq {
+    uint64 msg_id = 1;
+	uint32 cmd_op = 2;
+	string key = 3;
+	string val = 4;
+}
+
+message DataBaseAck {
+    uint64 msg_id = 1;
+	uint32 query_state = 2;
+	string result_str = 3;
+}

@@ -200,8 +200,8 @@ bool CMap::MoveTo(Creature_t creature_, CPosition tar_pos_) {
 
     _attr_map->m_path_pos.clear();
 
-    uint32_t _start_x_block = _attr_map->m_map_postion.m_postion_x / m_config->m_cell_size;
-    uint32_t _start_y_block = _attr_map->m_map_postion.m_postion_y / m_config->m_cell_size;
+    uint32_t _start_x_block = uint32_t(_attr_map->m_map_postion.m_postion_x / m_config->m_cell_size);
+    uint32_t _start_y_block = uint32_t(_attr_map->m_map_postion.m_postion_y / m_config->m_cell_size);
 
     uint32_t _end_x_block = uint32_t(tar_pos_.m_postion_x / m_config->m_cell_size);
     uint32_t _end_y_block = uint32_t(tar_pos_.m_postion_y / m_config->m_cell_size);

@@ -9,7 +9,6 @@
 
 
 
-RegSystem(ShakeHandSystem)
 
 
 const uint32_t g_interval = 6000;

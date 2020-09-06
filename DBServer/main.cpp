@@ -1,9 +1,9 @@
 #include "include/tool/Time.h"
 #include "include/tool/Timer.h"
 #include "include/tool/LogInfo.h"
-#include "include/zmq/cppzmq/zmq_addon.hpp"
 #include "BaseEngine.h"
-
+#include "EngineInclude.h"
+#include "include/leveldb/db.h"
 #include <Windows.h>
 
 const uint32_t g_frame = 30;
@@ -11,21 +11,24 @@ const std::string g_name = "DBserver";
 std::string getNodeName() {
     return g_name;
 }
+
+
+std::vector<ConnectTargetConfig> getConnectConfig() {
+    static std::vector<ConnectTargetConfig> _target_cfg;
+    if (!_target_cfg.size()) {
+        //_target_cfg.emplace_back("127.0.0.1", 8888);
+    }
+    return _target_cfg;
+}
 void MainLoop() {
 
     try {
         const float _one_frame_time = 1000.f / static_cast<float>(g_frame);
-        //const float _one_frame_time = 1000.f / static_cast<float>(30);
         Timer _frame_timer;
         Timer _tick_timer;
         Timer _second_fps_timer;
         uint32_t _fps_cnt = 1;
         SetConsoleTitleA("DBserver");
-
-        std::shared_ptr<CTcpServer> _server(new CTcpServer);
-        _server->init("127.0.0.1", 2224);
-        RegTcp(_server);
-
         while (true) {
             const int64_t _this_frame_time = _frame_timer.elapsed();
             if (_this_frame_time >= _one_frame_time) {

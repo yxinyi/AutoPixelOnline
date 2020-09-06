@@ -36,7 +36,7 @@ bool CliMapSystem::PreInit() {
     return true;
 }
 bool CliMapSystem::Init() {
-    TimerTaskMgr->RegisterTask("CliMapSystem::Init", 6000, 0, 1, [this]() {
+    TimerTaskMgr->RegisterTask("CliMapSystem::Init", 6000, 3000, -1, [this]() {
         LogError << "CliMapSystem::Init" << FlushLog;
         CConnection_t _server_conn = CConnectionMgr::getInstance()->GetConnection("LogicServer");
         shared_ptr<PlayerLoginEvent> _event = make_shared<PlayerLoginEvent>();
@@ -52,18 +52,16 @@ void CliMapSystem::MapRender(SDL_Window* windows_, SDL_Renderer* render_) {
             //_rect.w = m_cell_size;
             //_rect.x = m_cell_size * _row_it;
             //_rect.y = m_cell_size * _column_it;
-            auto _x = m_cell_size * _row_it;
-            auto _y = m_cell_size * _column_it;
+            auto _x = float(m_cell_size * _row_it);
+            auto _y = float(m_cell_size * _column_it);
             if (m_maze_shape[_column_it][_row_it] == 1) {
                 SDL_SetRenderDrawColor(render_, 0, 0, 0, 255);
-                SDL_FRect rectToDraw{ _x, _y, m_cell_size, m_cell_size };
-                SDL_RenderFillRectF(render_, &rectToDraw);
             }
             else {
                 SDL_SetRenderDrawColor(render_, 255, 255, 255, 255);
-                SDL_FRect rectToDraw{ _x, _y, m_cell_size, m_cell_size };
-                SDL_RenderFillRectF(render_, &rectToDraw);
             }
+            SDL_FRect rectToDraw{ _x, _y, (float)m_cell_size, (float)m_cell_size };
+            SDL_RenderFillRectF(render_, &rectToDraw);
         }
     }
 }

@@ -142,8 +142,8 @@ private:
     std::set<uint64_t> m_close_list;
 
     std::vector<std::vector<uint32_t>> m_maze;
-    uint32_t m_maze_clounmn;
-    uint32_t m_maze_row;
+    uint64_t m_maze_clounmn;
+    uint64_t m_maze_row;
 
 };
 
