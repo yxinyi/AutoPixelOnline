@@ -33,19 +33,19 @@ bool CreatureManager::PreInit() {
     return true;
 }
 bool CreatureManager::Init() {
-    TimerTaskManager::getInstance()->RegisterTask("CreatureManager::Loop", 0, 50, -1, []() {
-        if (shared_ptr<CDataBaseSystem> _sys = SystemManager::getInstance()->GetSystem<CDataBaseSystem>()) {
-            static uint64_t _key = 1;
-            uint64_t _test_kv = _key++;
-            _sys->Upsert(to_string(_test_kv), to_string(_test_kv), [_sys, _test_kv](DBOperatorErr err_, string rst_) {
-                if (err_ == DBOperatorErr::SUCCESS) {
-                    _sys->Query(to_string(_test_kv), [_test_kv](DBOperatorErr err_, string rst_) {
-                        LogInfo << "[DBTest query]: err_: " << (uint32_t)err_ << " key: [" << _test_kv << "] vale: " << rst_ << FlushLog;
-                    });
-                }
-            });
-        }
-    });
+    //TimerTaskManager::getInstance()->RegisterTask("CreatureManager::Loop", 0, 50, -1, []() {
+    //    if (shared_ptr<CDataBaseSystem> _sys = SystemManager::getInstance()->GetSystem<CDataBaseSystem>()) {
+    //        static uint64_t _key = 1;
+    //        uint64_t _test_kv = _key++;
+    //        _sys->Upsert(to_string(_test_kv), to_string(_test_kv), [_sys, _test_kv](DBOperatorErr err_, string rst_) {
+    //            if (err_ == DBOperatorErr::SUCCESS) {
+    //                _sys->Query(to_string(_test_kv), [_test_kv](DBOperatorErr err_, string rst_) {
+    //                    LogInfo << "[DBTest query]: err_: " << (uint32_t)err_ << " key: [" << _test_kv << "] vale: " << rst_ << FlushLog;
+    //                });
+    //            }
+    //        });
+    //    }
+    //});
     return true;
 }
 bool CreatureManager::Loop(const uint64_t interval_) {

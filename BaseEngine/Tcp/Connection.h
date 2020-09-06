@@ -110,6 +110,9 @@ public:
     void close() {
         m_socket.shutdown(asio::ip::tcp::socket::shutdown_both);
         m_is_conn = false;
+        shared_ptr<Package> _pack = CObjectPool<Package>::getInstance()->Get(PackageType::CloseConnect, m_conn_id);
+        //推入消息池
+        CPackageMgr::getInstance()->push(_pack);
     }
 
     void setConnId(const uint32_t conn_id_) {
@@ -138,6 +141,9 @@ public:
 
     void ConnectedOK() {
         m_is_conn = true;
+        shared_ptr<Package> _pack = CObjectPool<Package>::getInstance()->Get(PackageType::OpenConnect, m_conn_id);
+        //推入消息池
+        CPackageMgr::getInstance()->push(_pack);
     }
     ~CConnection() {}
     std::string getIPStr() {

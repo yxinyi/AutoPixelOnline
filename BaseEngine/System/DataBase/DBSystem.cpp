@@ -9,6 +9,9 @@ bool CDataBaseSystem::EnvDefine() {
         }
         m_dbserver_connected_ok = DBConnecState::open;
         m_dbserver_connected_id = _conn->getConnId();
+
+        LogError << "[CDataBaseSystem] DBServer open" << FlushLog;
+
     }, "OpenConnect");
     MessageBus::getInstance()->Attach([this](uint32_t conn_id_) {
         CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(conn_id_);
@@ -17,6 +20,7 @@ bool CDataBaseSystem::EnvDefine() {
         }
         m_dbserver_connected_ok = DBConnecState::close;
         m_dbserver_connected_id = 0;
+        LogError << "[CDataBaseSystem] DBServer close" << FlushLog;
     }, "CloseConnect");
 
 
@@ -35,8 +39,19 @@ bool CDataBaseSystem::EnvDefine() {
     
     return true;
 }
-bool CDataBaseSystem::PreInit() {
+
+bool CDataBaseSystem::ConnecDBServer() {
+    if (m_dbserver_connected_ok != DBConnecState::close) {
+        return false;
+    }
+
     NetManager::getInstance()->Connect(m_dbserver_ip, m_dbserver_port, "DBServer");
+    m_dbserver_connected_ok = DBConnecState::connecting;
+    return true;
+}
+
+bool CDataBaseSystem::PreInit() {
+    ConnecDBServer();
     return true;
 }
 bool CDataBaseSystem::Init() {
@@ -68,9 +83,9 @@ bool CDataBaseSystem::Init() {
 }
 bool CDataBaseSystem::Loop(const uint64_t interval_) {
     //ÖØÁ¬ DBServer 
-    if (DBConnecState::close == m_dbserver_connected_ok) {
-        NetManager::getInstance()->Connect(m_dbserver_ip, m_dbserver_port, "DBServer");
-        m_dbserver_connected_ok = DBConnecState::connecting;
+    if (ConnecDBServer()) {
+        LogError << "[CDataBaseSystem] DBServer reconnected" << FlushLog;
+
     }
 
 

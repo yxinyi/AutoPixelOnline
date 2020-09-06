@@ -26,6 +26,9 @@ public:
     bool Update(const string& key_, const string& val_, DBQueryCB cb_);
     bool Insert(const string& key_, const string& val_, DBQueryCB cb_);
     bool Upsert(const string& key_, const string& val_, DBQueryCB cb_);
+
+    bool ConnecDBServer();
+
 private:
     bool op(DBOperatorType opt_, const string& key_, DBQueryCB cb_, const string& val_ = "");
 
