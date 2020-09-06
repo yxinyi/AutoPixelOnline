@@ -149,11 +149,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Common\include\proto\DataBase.pb.cc" />
     <ClCompile Include="..\Common\include\proto\Shakehand.pb.cc" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="System\DataBase\DataBase.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Common\include\proto\DataBase.pb.h" />
     <ClInclude Include="..\Common\include\proto\Shakehand.pb.h" />
     <ClInclude Include="System\DataBase\DataBase.h" />
   </ItemGroup>

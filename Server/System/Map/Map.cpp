@@ -28,12 +28,11 @@ bool MapManager::EnvDefine() {
         if (_attr_map->m_last_map_tid != 0) {
             _attr_map->m_last_map_tid = m_default_map_tid;
         }
-        Map_t _map = MapManager::getInstance()->GetMapByMapOid(_attr_map->m_map_oid);
+        Map_t _map = GetMapByMapOid(_attr_map->m_map_oid);
         if (!_map) {
             NetManager::getInstance()->SendMessageBuff(creature_->GetConnID(), ApiBuildErrorMsg(LOG_POS_NOT_EXISTS));
             return;
         }
-
 
     }, "PlayerMoveTo");
 
@@ -50,11 +49,17 @@ bool MapManager::Init() {
     return true;
 }
 bool MapManager::Loop(const uint64_t interval_) {
+    shared_ptr<CreatureManager> _sys = SystemManager::getInstance()->GetSystem<CreatureManager>();
+    if (!_sys) {
+        return false;
+    }
+
     for (auto&& _map_it :m_map_pool) {
         const std::set<uint32_t>& _players = _map_it.second->GetPlayer();
         MapTickUpdate_t _update_msg = make_shared<MapTickUpdate>();
         for (auto&& _ply_it : _players) {
-            Creature_t _player = CreatureManager::getInstance()->FindCreatureByOid(_ply_it);
+
+            Creature_t _player = _sys->FindCreatureByOid(_ply_it);
             if (!_player) {
                 LogError << "[MapManager::Loop]" << _ply_it << FlushLog;
                 continue;
@@ -91,7 +96,7 @@ bool MapManager::Loop(const uint64_t interval_) {
 
         //向当前场景所有玩家进行同步
         for (auto&& _ply_it : _players) {
-            Creature_t _player = CreatureManager::getInstance()->FindCreatureByOid(_ply_it);
+            Creature_t _player = _sys->FindCreatureByOid(_ply_it);
             if (!_player) {
                 LogError << "[MapManager::Loop]" << _ply_it << FlushLog;
                 continue;

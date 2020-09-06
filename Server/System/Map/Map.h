@@ -24,9 +24,9 @@ private:
     std::map<uint32_t, CMapConfig_t> m_configs;
 };
 
-class MapManager :public BaseSystem, public Singleton<MapManager> {
+class MapManager :public BaseSystem {
 public:
-    MapManager() :BaseSystem("MapManager") {}
+    MapManager() :BaseSystem(typeid(MapManager).name()) {}
     bool EnvDefine();
     bool PreInit();
     bool Init();

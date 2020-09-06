@@ -30,7 +30,21 @@ using System_wt = weak_ptr<BaseSystem>;
 class SystemManager : public  Singleton<SystemManager>{
 public:
     bool Register(const string& str_,System_t sys_);
-    bool GetSystem(System_wt& out_, const string& str_);
+
+    template <class T>
+    shared_ptr<T> GetSystem() {
+        map<string, System_t>::iterator _find = m_system_pool.find(typeid(T).name());
+        if (_find == m_system_pool.end()) {
+            LogInfo << "[SYS] [" << typeid(T).name() << "] not registed" << FlushLog;
+            return nullptr;
+        }
+        shared_ptr<T> _system = std::dynamic_pointer_cast<T>(_find->second);
+        if (!_system) {
+            return nullptr;
+        }
+        return _system;
+    }
+
     bool EnvDefine();
     bool PreInit();
     bool Init();

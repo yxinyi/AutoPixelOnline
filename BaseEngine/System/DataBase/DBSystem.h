@@ -11,7 +11,7 @@ using namespace std;
 
 class CDataBaseSystem :public BaseSystem {
 public:
-    CDataBaseSystem() :BaseSystem("CDataBaseSystem") {}
+    CDataBaseSystem() :BaseSystem(typeid(CDataBaseSystem).name()) {}
     ~CDataBaseSystem() {}
     bool EnvDefine();
     bool PreInit();

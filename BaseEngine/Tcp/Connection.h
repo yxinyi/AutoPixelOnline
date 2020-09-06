@@ -80,20 +80,28 @@ public:
             //清空临时buff，准备下次数据接收
             memset(m_tmp_buff, 0, g_recv_once_size);
 
-            const uint64_t _packet_length = m_recv_buff.peekInt64();
-            const uint64_t _now_cur_length = m_recv_buff.readableBytes();
+            uint64_t _packet_length = m_recv_buff.peekInt64();
+            uint64_t _now_cur_length = m_recv_buff.readableBytes();
+
 
             //长度8个字节的长度标记,与包的长度
-            if (_packet_length + s_length_statc <= _now_cur_length) {
+            while(_packet_length + s_length_statc <= _now_cur_length) {
                 m_recv_buff.retrieveInt64();
                 string _buff_str = m_recv_buff.retrieveAsString(_packet_length);
-                //std::cout << "recv: " << _buff_str << std::endl;
-
                 shared_ptr<CBuffer> _pack_buff = CObjectPool<CBuffer>::getInstance()->Get();
                 _pack_buff->append(_buff_str.data(), _buff_str.size());
-                shared_ptr<Package> _pack = CObjectPool<Package>::getInstance()->Get(PackageType::Msg,m_conn_id, _pack_buff);
+                shared_ptr<Package> _pack = CObjectPool<Package>::getInstance()->Get(PackageType::Msg, m_conn_id, _pack_buff);
+                _pack->init(PackageType::Msg, m_conn_id, _pack_buff);
                 //推入消息池
                 CPackageMgr::getInstance()->push(_pack);
+
+                if (m_recv_buff.readableBytes() >= s_length_statc) {
+                    _packet_length = m_recv_buff.peekInt64();
+                }
+                else {
+                    break;
+                }
+                _now_cur_length = m_recv_buff.readableBytes();
             }
             Recv();
         });

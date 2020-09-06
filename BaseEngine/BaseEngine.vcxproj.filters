@@ -16,6 +16,12 @@
     <Filter Include="MessageBus">
       <UniqueIdentifier>{c78503ec-9793-4d2a-9be8-74cf1b9a50e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="System\DB">
+      <UniqueIdentifier>{bd50177a-6d69-4f94-ba65-b8da9c12a50a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\ShakeHand">
+      <UniqueIdentifier>{daedceff-29d6-4b85-a790-e5e8d5392dd3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\BaseEngine.h" />
@@ -62,9 +68,6 @@
     <ClInclude Include="..\Common\include\tool\TimerTask.h">
       <Filter>tool</Filter>
     </ClInclude>
-    <ClInclude Include="System\ShakeHand\ShakeHandSystem.h">
-      <Filter>System</Filter>
-    </ClInclude>
     <ClInclude Include="Attribute\Attribute.h">
       <Filter>Attribute</Filter>
     </ClInclude>
@@ -72,6 +75,18 @@
       <Filter>tool</Filter>
     </ClInclude>
     <ClInclude Include="EngineInclude.h" />
+    <ClInclude Include="System\DataBase\DBSystem.h">
+      <Filter>System\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="System\ShakeHand\ShakeHandSystem.h">
+      <Filter>System\ShakeHand</Filter>
+    </ClInclude>
+    <ClInclude Include="System\DataBase\DBSystemStruct.h">
+      <Filter>System\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\proto\DataBase.pb.h">
+      <Filter>System\DB</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\include\tool\Time.cpp">
@@ -90,8 +105,14 @@
     <ClCompile Include="..\Common\include\tool\TimerTask.cpp">
       <Filter>tool</Filter>
     </ClCompile>
+    <ClCompile Include="System\DataBase\DBSystem.cpp">
+      <Filter>System\DB</Filter>
+    </ClCompile>
     <ClCompile Include="System\ShakeHand\ShakeHandSystem.cpp">
-      <Filter>System</Filter>
+      <Filter>System\ShakeHand</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\proto\DataBase.pb.cc">
+      <Filter>System\DB</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

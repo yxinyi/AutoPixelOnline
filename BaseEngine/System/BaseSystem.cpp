@@ -13,16 +13,6 @@ bool SystemManager::Register(const string& str_, System_t sys_) {
 }
 
 
-bool SystemManager::GetSystem(System_wt& out_, const string& str_) {
-    map<string, System_t>::iterator _find = m_system_pool.find(str_);
-    if (_find == m_system_pool.end()) {
-        LogInfo << "[SYS] [" << str_ << "] not registed" << FlushLog;
-        return false;
-    }
-    out_ = _find->second;
-    return true;
-}
-
 
 
 bool SystemManager::EnvDefine() {

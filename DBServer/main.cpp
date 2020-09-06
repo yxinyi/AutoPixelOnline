@@ -13,6 +13,9 @@ std::string getNodeName() {
 }
 
 
+const std::string g_listen = "127.0.0.1";
+const uint32_t g_listen_port = 9000;
+
 std::vector<ConnectTargetConfig> getConnectConfig() {
     static std::vector<ConnectTargetConfig> _target_cfg;
     if (!_target_cfg.size()) {
@@ -29,6 +32,9 @@ void MainLoop() {
         Timer _second_fps_timer;
         uint32_t _fps_cnt = 1;
         SetConsoleTitleA("DBserver");
+        if (!NetManager::getInstance()->Start(g_listen, g_listen_port)) {
+            std::cout << "server start error " << std::endl;
+        }
         while (true) {
             const int64_t _this_frame_time = _frame_timer.elapsed();
             if (_this_frame_time >= _one_frame_time) {

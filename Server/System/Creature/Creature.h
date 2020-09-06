@@ -5,9 +5,9 @@
 #include "Attribute/Attribute.h"
 
 using PlayerLoginEvent_t = shared_ptr<PlayerLoginEvent>;
-class CreatureManager :public BaseSystem,public Singleton<CreatureManager> {
+class CreatureManager :public BaseSystem{
 public:
-    CreatureManager() :BaseSystem("CreatureManager") {}
+    CreatureManager() :BaseSystem(typeid(CreatureManager).name()) {}
     bool EnvDefine();
     bool PreInit();
     bool Init();

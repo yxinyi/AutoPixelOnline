@@ -4,10 +4,10 @@
 #include "System/DataBase/DBSystemStruct.h"
 #include "proto/DataBase.pb.h"
 #include "leveldb/db.h"
-class CDataBaseSystem :public BaseSystem, public Singleton<CDataBaseSystem> {
+class CDBServerSystem :public BaseSystem{
 public:
-    CDataBaseSystem() :BaseSystem("CDataBaseSystem") {}
-    ~CDataBaseSystem() {}
+    CDBServerSystem() :BaseSystem(typeid(CDBServerSystem).name()) {}
+    ~CDBServerSystem() {}
     bool EnvDefine();
     bool PreInit();
     bool Init();

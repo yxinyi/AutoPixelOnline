@@ -93,7 +93,7 @@ bool NetManager::SendMessageBuff(const uint32_t conn_id_, shared_ptr<CBuffer> bu
 
 bool NetManager::SendMessageBuff(const uint32_t conn_id_, shared_ptr<google::protobuf::Message> buff_) {
     shared_ptr<CBuffer> _buffer = CObjectPool<CBuffer>::getInstance()->Get();
-    _buffer->appendInt32(buff_->GetTypeName().size());
+    _buffer->appendInt32((int32_t)buff_->GetTypeName().size());
     _buffer->append(buff_->GetTypeName());
     _buffer->append(buff_->SerializePartialAsString());
 

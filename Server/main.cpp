@@ -26,7 +26,6 @@ std::vector<ConnectTargetConfig> getConnectConfig() {
 }
 
 void MainLoop() {
-    //testMain();
 
     try {
         const float _one_frame_time = 1000.f / static_cast<float>(g_frame);

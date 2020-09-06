@@ -2,10 +2,12 @@
 #include "../Tcp/PakcageList.h"
 #include "../BaseEngine/System/BaseSystem.h"
 #include "../BaseEngine/System/ShakeHand/ShakeHandSystem.h"
+#include "../BaseEngine/System/DataBase/DBSystem.h"
 #include "../BaseEngine/EngineInclude.h"
 
 void BaseSystemRegister() {
     RegSystem(ShakeHandSystem);
+    RegSystem(CDataBaseSystem);
 
 }
 

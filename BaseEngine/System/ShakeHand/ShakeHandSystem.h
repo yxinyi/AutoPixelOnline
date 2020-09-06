@@ -6,7 +6,7 @@
 std::vector<ConnectTargetConfig> getConnectConfig();
 class ShakeHandSystem :public BaseSystem {
 public:
-    ShakeHandSystem():BaseSystem("ShakeHandSystem"){}
+    ShakeHandSystem():BaseSystem(typeid(ShakeHandSystem).name()){}
     bool EnvDefine(); 
     bool PreInit();
     bool Init(); 

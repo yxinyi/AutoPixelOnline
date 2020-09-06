@@ -8,9 +8,9 @@
 #include "../Client/RenderSystem.h"
 #include <set>
 
-class CliMapSystem:public BaseSystem, public Singleton<CliMapSystem> {
+class CliMapSystem:public BaseSystem {
 public:
-    CliMapSystem() :BaseSystem("CliMapSystem") {}
+    CliMapSystem() :BaseSystem(typeid(CliMapSystem).name()) {}
     ~CliMapSystem() {}
     bool EnvDefine();
     bool PreInit();

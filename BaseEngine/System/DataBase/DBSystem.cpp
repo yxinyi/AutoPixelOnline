@@ -20,16 +20,17 @@ bool CDataBaseSystem::EnvDefine() {
     }, "CloseConnect");
 
 
-    EventRegister(DataBaseAck, [this](const uint32_t conn_,
+    ProtobufDispatch::getInstance()->registerMessageCallback<DataBaseAck>( [this](const uint32_t conn_,
         const shared_ptr<DataBaseAck>& message_,
         const int64_t& receive_time_) {
         const uint64_t _msg_id = message_->msg_id();
+        LogInfo << "[DataBaseAck]" << FlushLog;
         auto _op_find = m_op_pool.find(_msg_id);
         if (_op_find == m_op_pool.end()) {
             return;
         }
         _op_find->second->m_cb((DBOperatorErr)message_->query_state(), message_->result_str());
-
+        m_op_pool.erase(_op_find->first);
     });
     
     return true;
@@ -40,7 +41,7 @@ bool CDataBaseSystem::PreInit() {
 }
 bool CDataBaseSystem::Init() {
     TimerTaskManager::getInstance()->RegisterTask("DBSystemCacheClear", m_query_time_out, m_query_time_out, -1, [this]() {
-        for (auto _cache_it = m_proto_send_cache.cbegin(); _cache_it != m_proto_send_cache.cend();) {
+        for (auto _cache_it = m_proto_send_cache.cbegin(); _cache_it != m_proto_send_cache.cend(); _cache_it++) {
             const uint64_t _msg_id = (*_cache_it)->msg_id();
             if (m_op_pool.find(_msg_id) != m_op_pool.end()) {
                 NetManager::getInstance()->SendMessageBuff(m_dbserver_connected_id, *_cache_it);
@@ -69,7 +70,7 @@ bool CDataBaseSystem::Loop(const uint64_t interval_) {
     //ÖØÁ¬ DBServer 
     if (DBConnecState::close == m_dbserver_connected_ok) {
         NetManager::getInstance()->Connect(m_dbserver_ip, m_dbserver_port, "DBServer");
-        m_dbserver_connected_ok == DBConnecState::connecting;
+        m_dbserver_connected_ok = DBConnecState::connecting;
     }
 
 
@@ -82,12 +83,14 @@ bool CDataBaseSystem::Destroy() {
     return true;
 }
 
-bool CDataBaseSystem::op(DBOperatorType opt_, const string& key_, DBQueryCB cb_, const string& val_ = "") {
+bool CDataBaseSystem::op(DBOperatorType opt_, const string& key_, DBQueryCB cb_, const string& val_) {
 
     const uint64_t _st_time = Time::getInstance()->NowMillisecond();
     const uint64_t _oid = UniqueNumberFactory::getInstance()->build();
     DataBaseReq_t _msg = make_shared<DataBaseReq>();
+    _msg->set_cmd_op((uint32_t)opt_);
     _msg->set_key(key_);
+    _msg->set_val(val_);
     _msg->set_msg_id(_oid);
     if (m_dbserver_connected_ok == DBConnecState::open) {
         NetManager::getInstance()->SendMessageBuff(m_dbserver_connected_id, _msg);

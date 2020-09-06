@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Common\include\proto\DataBase.pb.h" />
     <ClInclude Include="..\Common\include\tool\AStar.h" />
     <ClInclude Include="..\Common\include\tool\LogInfo.h" />
     <ClInclude Include="..\Common\include\tool\ProtobufCodec.h" />
@@ -36,16 +37,20 @@
     <ClInclude Include="include\BaseEngine.h" />
     <ClInclude Include="MessageBus\MessageBus.h" />
     <ClInclude Include="System\BaseSystem.h" />
+    <ClInclude Include="System\DataBase\DBSystem.h" />
+    <ClInclude Include="System\DataBase\DBSystemStruct.h" />
     <ClInclude Include="System\ShakeHand\ShakeHandSystem.h" />
     <ClInclude Include="Tcp\Connection.h" />
     <ClInclude Include="Tcp\NetManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Common\include\proto\DataBase.pb.cc" />
     <ClCompile Include="..\Common\include\tool\Time.cpp" />
     <ClCompile Include="..\Common\include\tool\TimerTask.cpp" />
     <ClCompile Include="..\Common\include\tool\UniqueNumberFactory.cpp" />
     <ClCompile Include="DataBase\DBMgr.cpp" />
     <ClCompile Include="System\BaseSystem.cpp" />
+    <ClCompile Include="System\DataBase\DBSystem.cpp" />
     <ClCompile Include="System\ShakeHand\ShakeHandSystem.cpp" />
     <ClCompile Include="Tcp\NetManager.cpp" />
   </ItemGroup>
@@ -156,7 +161,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Common\;$(SolutionDir)Common\include\;$(SolutionDir)BaseEngine\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Common\;$(SolutionDir)Common\include\;$(SolutionDir)BaseEngine\include\;$(MsBuildProjectDirectory)\System\;$(SolutionDir)BaseEngine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalOptions>-D_WIN32_WINNT=0x0601 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>

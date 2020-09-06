@@ -90,17 +90,21 @@ class CObjectPool : public Singleton<CObjectPool<T>> {
 public:
     template<class... Args>
     shared_ptr<T> Get(Args&&... args_) {
-        if (!m_object_list.size()) {
-            const uint32_t _now_cnt = m_obj_total_count;
-            for (uint32_t _grow_idx = 0; _grow_idx < _now_cnt; _grow_idx++) {
-                buildObjToPool();
-            }
-        }
         shared_ptr<T> _tst_ptr;
+        bool _need_grow = false;
         {
             std::unique_lock<std::mutex> _lock(m_mutex);
             _tst_ptr = m_object_list.front();
             m_object_list.pop_front();
+            if (!m_object_list.size()) {
+                _need_grow = true;
+            }
+        }
+        if (_need_grow) {
+            const uint32_t _now_cnt = m_obj_total_count;
+            for (uint32_t _grow_idx = 0; _grow_idx < _now_cnt; _grow_idx++) {
+                buildObjToPool();
+            }
         }
         (*_tst_ptr).init(std::forward<Args>(args_)...);
         return _tst_ptr;
