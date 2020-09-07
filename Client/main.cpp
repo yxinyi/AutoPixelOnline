@@ -1,13 +1,10 @@
-#include "include/tool/Time.h"
-#include "include/tool/Timer.h"
-#include "include/tool/LogInfo.h"
-#include "include/tool/ObjectPool.h"
-#include "../BaseEngine/Tcp/NetManager.h"
+#include "EngineInclude.h"
 #include "BaseEngine.h"
 #include "../Common/include/proto/Shakehand.pb.h"
-#include "RenderSystem.h"
+#include "RenderManager.h"
+#include "UI/UIManager.h"
 #include <Windows.h>
-#include "../Client/RenderSystem.h"
+#include "../Client/RenderManager.h"
 
 const uint32_t g_frame = 30;
 const std::string g_name = "Client";
@@ -36,7 +33,7 @@ void MainLoop() {
         Sleep(1000);
         SetConsoleTitleA("client");
         NetManager::getInstance()->Start();
-        if (!RenderSystem::getInstance()->WindowInit()) {
+        if (!RenderManager::getInstance()->WindowInit()) {
             system("pause");
             return;
         }
@@ -45,8 +42,9 @@ void MainLoop() {
             const int64_t _this_frame_time = _frame_timer.elapsed();
             if (_this_frame_time >= _one_frame_time) {
                 _tick_timer.reset();
-                Singleton<CBaseEngine>::getInstance()->run(_this_frame_time);
-                RenderSystem::getInstance()->Loop(_this_frame_time);
+                CBaseEngine::getInstance()->run(_this_frame_time);
+                RenderManager::getInstance()->Loop(_this_frame_time);
+                //UIManager::getInstance()->loop();
                 _frame_timer.reset();
 
                 int64_t _tick_time = _tick_timer.elapsed();

@@ -5,7 +5,7 @@
 #include <vector>
 #include <list>
 #include "proto/Map.pb.h"
-#include "../Client/RenderSystem.h"
+#include "../Client/RenderManager.h"
 #include <set>
 
 class CliMapSystem:public BaseSystem {

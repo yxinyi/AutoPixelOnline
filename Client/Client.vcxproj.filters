@@ -5,9 +5,6 @@
     <ClCompile Include="..\Common\include\proto\Shakehand.pb.cc">
       <Filter>proto</Filter>
     </ClCompile>
-    <ClCompile Include="RenderSystem.h">
-      <Filter>System</Filter>
-    </ClCompile>
     <ClCompile Include="System\Map\CliMapSystem.cpp">
       <Filter>System\Map</Filter>
     </ClCompile>
@@ -16,6 +13,33 @@
     </ClCompile>
     <ClCompile Include="..\Common\include\proto\PlayerLogin.pb.cc">
       <Filter>System\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderManager.h">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UIManager.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\SDL2\include\SDL2\imgui_demo.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\SDL2\include\SDL2\imgui_draw.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\SDL2\include\SDL2\imgui_impl_dx9.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\SDL2\include\SDL2\imgui_impl_win32.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\SDL2\include\SDL2\imgui_sdl.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\SDL2\include\SDL2\imgui_widgets.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\SDL2\include\SDL2\imgui.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -30,6 +54,12 @@
     </Filter>
     <Filter Include="System\Map">
       <UniqueIdentifier>{2cd2ecfd-9613-4dc1-b916-19236311784d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{ffe204c8-cdd6-40fa-ba8e-b2c089d778bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Login">
+      <UniqueIdentifier>{dbbd6f45-4ccd-4599-8c64-0bd3c5c2edbb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +80,36 @@
     </ClInclude>
     <ClInclude Include="..\Common\include\proto\PlayerLogin.pb.h">
       <Filter>System\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UIManager.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UIStruct.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\SDL2\include\SDL2\imgui.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\SDL2\include\SDL2\imgui_impl_dx9.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\SDL2\include\SDL2\imgui_impl_win32.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\SDL2\include\SDL2\imgui_internal.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\SDL2\include\SDL2\imgui_sdl.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\SDL2\include\SDL2\imstb_rectpack.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\SDL2\include\SDL2\imstb_textedit.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\SDL2\include\SDL2\imstb_truetype.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -36,7 +36,7 @@ bool CliMapSystem::PreInit() {
     return true;
 }
 bool CliMapSystem::Init() {
-    TimerTaskMgr->RegisterTask("CliMapSystem::Init", 6000, 3000, -1, [this]() {
+    TimerTaskMgr->RegisterTask("CliMapSystem::Init", 6000, 3000, 1, [this]() {
         LogError << "CliMapSystem::Init" << FlushLog;
         CConnection_t _server_conn = CConnectionMgr::getInstance()->GetConnection("LogicServer");
         shared_ptr<PlayerLoginEvent> _event = make_shared<PlayerLoginEvent>();
@@ -67,7 +67,7 @@ void CliMapSystem::MapRender(SDL_Window* windows_, SDL_Renderer* render_) {
 }
 bool CliMapSystem::Loop(const uint64_t interval_) {
 
-    RenderSystem::getInstance()->Register([this](SDL_Window* windows_, SDL_Renderer* render_) {
+    RenderManager::getInstance()->Register([this](SDL_Window* windows_, SDL_Renderer* render_) {
         this->MapRender(windows_, render_);
     });
     return true;
