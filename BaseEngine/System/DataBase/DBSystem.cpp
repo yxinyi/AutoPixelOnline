@@ -1,4 +1,5 @@
 #include "./DBSystem.h"
+#include "proto/ServerLink.pb.h"
 using namespace std;
 
 bool CDataBaseSystem::EnvDefine() {
@@ -37,6 +38,14 @@ bool CDataBaseSystem::EnvDefine() {
         m_op_pool.erase(_op_find->first);
     });
     
+
+
+    ProtobufDispatch::getInstance()->registerMessageCallback<DataBaseNotify>([this](const uint32_t conn_,
+        const shared_ptr<DataBaseNotify>& message_,
+        const int64_t& receive_time_) {
+        123123
+    });
+
     return true;
 }
 
@@ -51,7 +60,6 @@ bool CDataBaseSystem::ConnecDBServer() {
 }
 
 bool CDataBaseSystem::PreInit() {
-    ConnecDBServer();
     return true;
 }
 bool CDataBaseSystem::Init() {

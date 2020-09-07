@@ -22,6 +22,9 @@
     <Filter Include="System\ShakeHand">
       <UniqueIdentifier>{daedceff-29d6-4b85-a790-e5e8d5392dd3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Error">
+      <UniqueIdentifier>{f8814867-2d08-4f78-8016-454aed5e35ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\BaseEngine.h" />
@@ -87,6 +90,18 @@
     <ClInclude Include="..\Common\include\proto\DataBase.pb.h">
       <Filter>System\DB</Filter>
     </ClInclude>
+    <ClInclude Include="..\Common\include\proto\Shakehand.pb.h">
+      <Filter>System\ShakeHand</Filter>
+    </ClInclude>
+    <ClInclude Include="Error\Error.h">
+      <Filter>Error</Filter>
+    </ClInclude>
+    <ClInclude Include="Error\ErrorStruct.h">
+      <Filter>Error</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\proto\ErrorNotify.pb.h">
+      <Filter>Error</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\include\tool\Time.cpp">
@@ -113,6 +128,15 @@
     </ClCompile>
     <ClCompile Include="..\Common\include\proto\DataBase.pb.cc">
       <Filter>System\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\proto\Shakehand.pb.cc">
+      <Filter>System\ShakeHand</Filter>
+    </ClCompile>
+    <ClCompile Include="Error\Error.cpp">
+      <Filter>Error</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\proto\ErrorNotify.pb.cc">
+      <Filter>Error</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

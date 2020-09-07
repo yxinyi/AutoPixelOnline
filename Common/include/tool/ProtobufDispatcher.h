@@ -68,6 +68,10 @@ public:
         }
     }
 
+    void SetDefaultCallback(ProtobufMessageCallback cb_) {
+        m_defaultCallback = cb_;
+    }
+
     template<typename T>
     void registerMessageCallback(const typename CallbackT<T>::ProtobufMessageTCallback& callback_) {
         std::shared_ptr<CallbackT<T> > pd(new CallbackT<T>(callback_));

@@ -15,12 +15,6 @@
     <ClCompile Include="..\Common\include\proto\PlayerLogin.pb.cc">
       <Filter>proto</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\include\proto\ErrorNotify.pb.cc">
-      <Filter>System\Error</Filter>
-    </ClCompile>
-    <ClCompile Include="System\Error\Error.cpp">
-      <Filter>System\Error</Filter>
-    </ClCompile>
     <ClCompile Include="..\Common\include\proto\CreatureNotify.pb.cc">
       <Filter>System\Creature</Filter>
     </ClCompile>
@@ -41,9 +35,6 @@
     <Filter Include="System\Creature">
       <UniqueIdentifier>{3ab8185b-80ed-44b4-8f0c-771af260a157}</UniqueIdentifier>
     </Filter>
-    <Filter Include="System\Error">
-      <UniqueIdentifier>{f8a0e8e9-d763-4077-a7c3-73db56324031}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Common\include\proto\Shakehand.pb.h">
@@ -63,15 +54,6 @@
     </ClInclude>
     <ClInclude Include="..\Common\include\proto\PlayerLogin.pb.h">
       <Filter>proto</Filter>
-    </ClInclude>
-    <ClInclude Include="System\Error\ErrorStruct.h">
-      <Filter>System\Error</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\include\proto\ErrorNotify.pb.h">
-      <Filter>System\Error</Filter>
-    </ClInclude>
-    <ClInclude Include="System\Error\Error.h">
-      <Filter>System\Error</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\include\proto\CreatureNotify.pb.h">
       <Filter>System\Creature</Filter>
