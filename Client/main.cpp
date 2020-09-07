@@ -2,11 +2,10 @@
 #include "BaseEngine.h"
 #include "../Common/include/proto/Shakehand.pb.h"
 #include "RenderManager.h"
-#include "UI/UIManager.h"
 #include <Windows.h>
 #include "../Client/RenderManager.h"
 
-const uint32_t g_frame = 30;
+const uint32_t g_frame = 100;
 const std::string g_name = "Client";
 std::string getNodeName() {
     return g_name;
@@ -30,7 +29,6 @@ void MainLoop() {
         Timer _tick_timer;
         Timer _second_fps_timer;
         uint32_t _fps_cnt = 1;
-        Sleep(1000);
         SetConsoleTitleA("client");
         NetManager::getInstance()->Start();
         if (!RenderManager::getInstance()->WindowInit()) {
@@ -44,7 +42,7 @@ void MainLoop() {
                 _tick_timer.reset();
                 CBaseEngine::getInstance()->run(_this_frame_time);
                 RenderManager::getInstance()->Loop(_this_frame_time);
-                //UIManager::getInstance()->loop();
+                
                 _frame_timer.reset();
 
                 int64_t _tick_time = _tick_timer.elapsed();

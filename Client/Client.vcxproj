@@ -137,6 +137,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Common\;$(SolutionDir)Common\include\;$(SolutionDir)BaseEngine\include\;$(MsBuildProjectDirectory)\System\;$(SolutionDir)BaseEngine\;$(MsBuildProjectDirectory)\Imgui\;F:\AutoPixelOnline\AutoPixelOnline\Common\SDL2\include\SDL2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

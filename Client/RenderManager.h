@@ -12,6 +12,7 @@
 #include "imgui_impl_dx9.h"
 #include "imgui_impl_win32.h"
 #include "imgui_sdl.h"
+#include "UI/UIManager.h"
 
 class RenderManager :public Singleton<RenderManager> {
 public:
@@ -26,7 +27,7 @@ public:
 
 
     bool WindowInit() {
-        if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+        if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0)
         {
             std::string message = "Failed to init SDL2! Error: " + std::string(SDL_GetError());
             return false;
@@ -51,17 +52,14 @@ public:
             return false;
         }
 
+        UIManager::getInstance()->Init(m_render);
         LogInfo << "WindowInit" << FlushLog;
-        ImGui::CreateContext();
-        ImGuiSDL::Initialize(m_render, 1280, 720);
-
         return true;
     }
     bool WindowUpdate(const int64_t& dt_) {
         return true;
     }
     bool Loop(const uint64_t interval_) {
-        
         ImGuiIO& io = ImGui::GetIO();
 
         int wheel = 0;
@@ -87,6 +85,8 @@ public:
 
 
 
+
+
         int mouseX, mouseY;
         const int buttons = SDL_GetMouseState(&mouseX, &mouseY);
         io.DeltaTime = 1.0f / 60.0f;
@@ -96,18 +96,12 @@ public:
         io.MouseWheel = static_cast<float>(wheel);
 
 
-        ImGui::NewFrame();
-
-        ImGui::ShowDemoWindow();
-
         SDL_SetRenderDrawColor(m_render, 0, 0, 0, 255);
         SDL_RenderClear(m_render);
-
         for (auto& _func_it : m_render_funcs) {
             _func_it(m_window, m_render);
         }
-        ImGui::Render();
-        ImGuiSDL::Render(ImGui::GetDrawData());
+        UIManager::getInstance()->loop(); 
 
         SDL_RenderPresent(m_render);
         m_render_funcs.clear();
