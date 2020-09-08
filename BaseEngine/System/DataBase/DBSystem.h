@@ -6,7 +6,6 @@
 #include "./DBSystemStruct.h"
 #include "System/BaseSystem.h"
 #include "EngineInclude.h"
-using namespace std;
 
 
 class CDataBaseSystem :public BaseSystem {

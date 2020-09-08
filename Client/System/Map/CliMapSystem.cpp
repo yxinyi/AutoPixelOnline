@@ -3,12 +3,13 @@
 #include "Error/Error.h"
 #include "proto/PlayerLogin.pb.h"
 #include <math.h>
+#include "SDL_rect.h"
 
 RegSystem(CliMapSystem)
 
 bool CliMapSystem::EnvDefine() {
     EventRegister(SceneMapInfo, [this](const uint32_t conn_,
-        const shared_ptr<SceneMapInfo>& message_,
+        const std::shared_ptr<SceneMapInfo>& message_,
         const int64_t& receive_time_) {
         this->InitMap(message_);
         
@@ -16,7 +17,7 @@ bool CliMapSystem::EnvDefine() {
     return true;
 }
 
-void CliMapSystem::InitMap(shared_ptr<SceneMapInfo> info_) {
+void CliMapSystem::InitMap(std::shared_ptr<SceneMapInfo> info_) {
     m_maze_shape.clear();
     m_cell_size = info_->map_block_size();
     auto _colmn_size = info_->map_info_size();

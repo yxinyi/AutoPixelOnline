@@ -8,7 +8,7 @@
 
 using namespace google::protobuf;
 
-using Message_t = shared_ptr<Message>;
+using Message_t = std::shared_ptr<Message>;
 class CAttr {
 public:
     CAttr(const string& name_) :m_attr_name(name_) {}
@@ -26,7 +26,7 @@ public:
         return decodeSaveData(msg_);
     }
 
-    virtual shared_ptr<CAttr> Clone() { return nullptr; };
+    virtual std::shared_ptr<CAttr> Clone() { return nullptr; };
     virtual Message_t ToDataBaseProto() { return nullptr; };
     virtual Message_t ToClientProto() { return nullptr; };
 
@@ -47,12 +47,12 @@ protected:
 
 
 
-using ModuleData_t = shared_ptr<ModuleData>;
-using AllAttributeDataNotify_t = shared_ptr<AllAttributeDataNotify>;
+using ModuleData_t = std::shared_ptr<ModuleData>;
+using AllAttributeDataNotify_t = std::shared_ptr<AllAttributeDataNotify>;
 
 class CAttrs {
 public:
-    bool Register(shared_ptr<CAttr> attr_) {
+    bool Register(std::shared_ptr<CAttr> attr_) {
         if (m_attr_pool.find(attr_->GetName()) != m_attr_pool.end()) {
             return false;
         }
@@ -61,20 +61,20 @@ public:
     }
 
     template<class T>
-    shared_ptr<T> ApiGetAttr(const string& module_name_) {
+    std::shared_ptr<T> ApiGetAttr(const string& module_name_) {
         auto _attr_find = m_attr_pool.find(module_name_);
         if (_attr_find == m_attr_pool.end()) {
             return nullptr;
         }
-        shared_ptr<T> _attr = std::dynamic_pointer_cast<T>(_attr_find->second);
+        std::shared_ptr<T> _attr = std::dynamic_pointer_cast<T>(_attr_find->second);
         if (!_attr) {
             return nullptr;
         }
 
         return _attr;
     }
-    shared_ptr<CAttrs> Clone() {
-        shared_ptr<CAttrs> _attrs = make_shared<CAttrs>();
+    std::shared_ptr<CAttrs> Clone() {
+        std::shared_ptr<CAttrs> _attrs = std::make_shared<CAttrs>();
         for (auto&& _attr_it : m_attr_pool) {
             _attrs->m_attr_pool[_attr_it.first] = _attr_it.second->Clone();
         }
@@ -107,19 +107,19 @@ public:
     }
 
 private:
-    std::map<string, shared_ptr<CAttr>> m_attr_pool;
+    std::map<string, std::shared_ptr<CAttr>> m_attr_pool;
 };
 
 
 
 using CAttrPrototype = CAttrs;
-using CAttrs_t = shared_ptr<CAttrs>;
-using CAttrPrototype_t = shared_ptr<CAttrPrototype>;
+using CAttrs_t = std::shared_ptr<CAttrs>;
+using CAttrPrototype_t = std::shared_ptr<CAttrPrototype>;
 class CAttrManager :public Singleton<CAttrManager> {
 public:
-    void Register(const string& obj_name_, shared_ptr<CAttr> attr_) {
+    void Register(const string& obj_name_, std::shared_ptr<CAttr> attr_) {
         if (!m_prototype_pool[obj_name_]) {
-            CAttrPrototype_t _prototype = make_shared<CAttrPrototype>();
+            CAttrPrototype_t _prototype = std::make_shared<CAttrPrototype>();
             m_prototype_pool[obj_name_] = _prototype;
         }
         m_prototype_pool[obj_name_]->Register(attr_);

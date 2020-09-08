@@ -8,7 +8,6 @@
 #include <unordered_set>
 #include "../tool/SingletonTemplate.h"
 
-using namespace std;
 /*
 知识点:
 1.自定义指针指针销毁
@@ -89,8 +88,8 @@ class CObjectPool : public Singleton<CObjectPool<T>> {
     friend class Singleton<CObjectPool<T>>;
 public:
     template<class... Args>
-    shared_ptr<T> Get(Args&&... args_) {
-        shared_ptr<T> _tst_ptr;
+    std::shared_ptr<T> Get(Args&&... args_) {
+        std::shared_ptr<T> _tst_ptr;
         bool _need_grow = false;
         {
             std::unique_lock<std::mutex> _lock(m_mutex);
@@ -131,14 +130,14 @@ private:
             obj_ptr_->reset();
             {
                 std::unique_lock<std::mutex> _lock(m_mutex);
-                m_object_list.emplace_back(shared_ptr<T>(obj_ptr_, std::bind(&CObjectPool<T>::ObjDestoryCallBack, this, std::placeholders::_1)));
+                m_object_list.emplace_back(std::shared_ptr<T>(obj_ptr_, std::bind(&CObjectPool<T>::ObjDestoryCallBack, this, std::placeholders::_1)));
             }
         }
     }
     void buildObjToPool() {
         std::unique_lock<std::mutex> _lock(m_mutex);
         m_obj_total_count++;
-        m_object_list.emplace_back(shared_ptr<T>(new T, std::bind(&CObjectPool<T>::ObjDestoryCallBack, this, std::placeholders::_1)));
+        m_object_list.emplace_back(std::shared_ptr<T>(new T, std::bind(&CObjectPool<T>::ObjDestoryCallBack, this, std::placeholders::_1)));
     }
     
     CObjectPool() {
@@ -149,6 +148,6 @@ private:
     uint32_t m_obj_total_count;
 
     std::mutex m_mutex;
-    std::list<shared_ptr<T>> m_object_list;
+    std::list<std::shared_ptr<T>> m_object_list;
     std::unordered_set<T*> m_delete_set;
 };

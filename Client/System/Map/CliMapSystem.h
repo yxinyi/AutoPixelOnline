@@ -19,7 +19,7 @@ public:
     bool Quit();
     bool Destroy();
 public:
-    void InitMap(shared_ptr<SceneMapInfo>);
+    void InitMap(std::shared_ptr<SceneMapInfo>);
     void MapRender(SDL_Window* windows_, SDL_Renderer* render_);
 private:
     std::vector<std::vector<uint32_t>> m_maze_shape;

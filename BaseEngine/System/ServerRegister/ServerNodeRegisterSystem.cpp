@@ -10,7 +10,7 @@ bool ServerNodeRegisterSystem::EnvDefine() {
 
         if (_conn->GetConnNodeType() == NodeType::GateServer) {
             LogInfo << "[ServerNodeRegisterSystem] OpenConnect" << (uint32_t)conn_id_ << FlushLog;
-            ServerLink_t _link = make_shared<ServerLink>();
+            ServerLink_t _link = std::make_shared<ServerLink>();
             _link->set_node_type((uint32_t)getNodeType());
             NetManager::getInstance()->SendMessageBuff(conn_id_, _link);
         }
@@ -35,13 +35,13 @@ bool ServerNodeRegisterSystem::EnvDefine() {
         if (!_conn || _conn->GetConnNodeType() != NodeType::DataBaseServer) {
             RETURN_VOID;
         }
-        ServerMessageRegister_t _msg_reg = make_shared<ServerMessageRegister>();
+        ServerMessageRegister_t _msg_reg = std::make_shared<ServerMessageRegister>();
 
         auto _all_name = ProtobufDispatch::getInstance()->GetAllMessageTypeStr();
         for (auto&& _name_it : _all_name) {
             _msg_reg->add_message_str(_name_it);
         }
-        set<uint32_t> _cnn_set = CConnectionMgr::getInstance()->GetConnection(NodeType::GateServer);
+        std::set<uint32_t> _cnn_set = CConnectionMgr::getInstance()->GetConnection(NodeType::GateServer);
         if (_cnn_set.size() != 1) {
             RETURN_VOID;
         }

@@ -3,7 +3,6 @@
 #include "Attribute/Attribute.h"
 #include "tool/UniqueNumberFactory.h"
 #include "Tcp/NetManager.h"
-using namespace std;
 
 class Creature {
 public:

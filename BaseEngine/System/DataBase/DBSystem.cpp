@@ -1,6 +1,5 @@
 #include "./DBSystem.h"
 #include "proto/ServerLink.pb.h"
-using namespace std;
 
 bool CDataBaseSystem::EnvDefine() {
     MessageBus::getInstance()->Attach([this](uint32_t conn_id_) {
@@ -27,7 +26,7 @@ bool CDataBaseSystem::EnvDefine() {
 
 
     ProtobufDispatch::getInstance()->registerMessageCallback<DataBaseAck>( [this](const uint32_t conn_,
-        const shared_ptr<DataBaseAck>& message_,
+        const std::shared_ptr<DataBaseAck>& message_,
         const int64_t& receive_time_) {
         const uint64_t _msg_id = message_->msg_id();
         LogInfo << "[DataBaseAck]" << FlushLog;
@@ -42,10 +41,10 @@ bool CDataBaseSystem::EnvDefine() {
 
 
     ProtobufDispatch::getInstance()->registerMessageCallback<DataBaseNotify>([this](const uint32_t conn_,
-        const shared_ptr<DataBaseNotify>& message_,
+        const std::shared_ptr<DataBaseNotify>& message_,
         const int64_t& receive_time_) {
 
-        set<uint32_t> _cnn_set = CConnectionMgr::getInstance()->GetConnection(NodeType::DataBaseServer);
+        std::set<uint32_t> _cnn_set = CConnectionMgr::getInstance()->GetConnection(NodeType::DataBaseServer);
         if (_cnn_set.size()) {
             for (auto&& _it : _cnn_set) {
                 CConnectionMgr::getInstance()->CloseConnection(_it);
@@ -120,7 +119,7 @@ bool CDataBaseSystem::op(DBOperatorType opt_, const string& key_, DBQueryCB cb_,
 
     const uint64_t _st_time = Time::getInstance()->NowMillisecond();
     const uint64_t _oid = UniqueNumberFactory::getInstance()->build();
-    DataBaseReq_t _msg = make_shared<DataBaseReq>();
+    DataBaseReq_t _msg = std::make_shared<DataBaseReq>();
     _msg->set_cmd_op((uint32_t)opt_);
     _msg->set_key(key_);
     _msg->set_val(val_);
@@ -131,7 +130,7 @@ bool CDataBaseSystem::op(DBOperatorType opt_, const string& key_, DBQueryCB cb_,
     else {
         m_proto_send_cache.push_back(_msg);
     }
-    DBOpUnity_t _unity = make_shared<DBOpUnity>();
+    DBOpUnity_t _unity = std::make_shared<DBOpUnity>();
     _unity->m_cb = cb_;
     _unity->m_op = opt_;
     _unity->m_oid = _oid;

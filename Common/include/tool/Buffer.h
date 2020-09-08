@@ -7,7 +7,6 @@
 #include <memory>
 #include <stack>
 
-using namespace std;
 //muduo
 class CBuffer
 {
@@ -110,25 +109,25 @@ public:
         m_writer_index = g_cheap_prepend;
     }
 
-    string retrieveAllAsString()
+    std::string retrieveAllAsString()
     {
         return retrieveAsString(readableBytes());
     }
 
-    string retrieveAsString(size_t len)
+    std::string retrieveAsString(size_t len)
     {
         assert(len <= readableBytes());
-        string result(peek(), len);
+        std::string result(peek(), len);
         retrieve(len);
         return result;
     }
 
-    string toStringPiece() const
+    std::string toStringPiece() const
     {
-        return string(peek(), static_cast<int>(readableBytes()));
+        return std::string(peek(), static_cast<int>(readableBytes()));
     }
 
-    void append(const string& str)
+    void append(const std::string& str)
     {
         append(str.data(), str.size());
     }
@@ -387,8 +386,8 @@ class CMemoryPool :public Singleton<CMemoryPool<T>> {
 public:
     friend class Singleton<CMemoryPool<T>> ;
 
-    shared_ptr<T> alloc() {
-        shared_ptr<T> _tmp_ptr;
+    std::shared_ptr<T> alloc() {
+        std::shared_ptr<T> _tmp_ptr;
         if (m_memory_list.empty()) {
             _tmp_ptr.reset();
             _tmp_ptr = _tmp_ptr;
@@ -399,7 +398,7 @@ public:
         }
         return _tmp_ptr;
     }
-    bool recover(shared_ptr<T> ptr_) {
+    bool recover(std::shared_ptr<T> ptr_) {
         ptr_.~T();
         m_memory_list.push_back(ptr_);
     }
@@ -407,14 +406,14 @@ public:
 private:
     CMemoryPool() {
         for (uint32_t _idx = 0; _idx < g_default_size; _idx++) {
-            m_memory_list.push_back(shared_ptr<T>(new T));
+            m_memory_list.push_back(std::shared_ptr<T>(new T));
         }
     }
 
     ~CMemoryPool() {
         m_memory_list.clear();
     }
-    list<shared_ptr<T>> m_memory_list;
+    std::list<std::shared_ptr<T>> m_memory_list;
 };
 
 enum MsgType
@@ -427,18 +426,18 @@ enum MsgType
 struct MsgPacket {
     MsgType    m_type;
     uint64_t    m_msg_id;
-    shared_ptr<CBuffer>   m_buffer;
+    std::shared_ptr<CBuffer>   m_buffer;
 };
 
 
 class MessagePackPool :public Singleton<MessagePackPool> {
     friend class Singleton<MessagePackPool>;
 public:
-    void push_msg(shared_ptr<MsgPacket > msg_pack_) {
+    void push_msg(std::shared_ptr<MsgPacket > msg_pack_) {
         m_stack.push_back(msg_pack_);
     }
 
-    vector<shared_ptr<MsgPacket >> m_stack;
+    std::vector<std::shared_ptr<MsgPacket >> m_stack;
 private:
     MessagePackPool() {}
 };

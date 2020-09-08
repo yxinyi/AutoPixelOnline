@@ -5,8 +5,8 @@
 #include <set>
 #include "proto/ServerLink.pb.h"
 
-using ServerLink_t = shared_ptr<ServerLink>;
-using ServerMessageRegister_t = shared_ptr<ServerMessageRegister>;
+using ServerLink_t = std::shared_ptr<ServerLink>;
+using ServerMessageRegister_t = std::shared_ptr<ServerMessageRegister>;
 
 class ServerNodeRegisterSystem :public BaseSystem {
 public:

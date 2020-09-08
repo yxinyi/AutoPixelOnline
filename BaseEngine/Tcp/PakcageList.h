@@ -25,8 +25,8 @@ enum class PackageType {
 struct Package {
     PackageType m_msg_type;
     uint32_t m_conn_id;
-    shared_ptr<CBuffer> m_buffer;
-    void init(const PackageType type_,const uint32_t conn_id_, shared_ptr<CBuffer> buf_ = nullptr) {
+    std::shared_ptr<CBuffer> m_buffer;
+    void init(const PackageType type_,const uint32_t conn_id_, std::shared_ptr<CBuffer> buf_ = nullptr) {
         m_conn_id = conn_id_;
         m_buffer = buf_;
         m_msg_type = type_;
@@ -37,16 +37,16 @@ struct Package {
 // thread safe
 class CPackageMgr : public Singleton<CPackageMgr> {
 public:
-    void push(shared_ptr<Package> pack_) {
+    void push(std::shared_ptr<Package> pack_) {
         std::unique_lock<std::mutex> _lock(m_vec_mutex);
         m_package_vec.push_back(pack_);
     }
-    void swap(std::vector<shared_ptr<Package>>& out_vec_) {
+    void swap(std::vector<std::shared_ptr<Package>>& out_vec_) {
         std::unique_lock<std::mutex> _lock(m_vec_mutex);
         out_vec_.swap(m_package_vec);
     }
 private:
     std::mutex m_vec_mutex;
-    std::vector<shared_ptr<Package>> m_package_vec;
+    std::vector<std::shared_ptr<Package>> m_package_vec;
 
 };

@@ -1,18 +1,17 @@
 #pragma once
 #include "tool/SingletonTemplate.h"
+#include "UI/UIManager.h"
 #include "System/BaseSystem.h"
 #include <functional>
 #include <vector>
 #include <string>
 #include "tool/LogInfo.h"
-#include "SDL2/SDL_render.h"
-#include "SDL2/SDL.h"
-#include "SDL2/SDL_events.h"
 #include "imgui.h"
-#include "imgui_impl_dx9.h"
-#include "imgui_impl_win32.h"
-#include "imgui_sdl.h"
-#include "UI/UIManager.h"
+#include "imgui_impl_sdl.h"
+#include "imgui_impl_dx11.h"
+#include <stdio.h>
+#include "SDL.h"
+#include "SDL_syswm.h"
 
 class RenderManager :public Singleton<RenderManager> {
 public:

@@ -4,7 +4,6 @@
 #include <vector>
 #include <memory>
 
-using namespace std;
 using namespace google::protobuf;
 
 enum ErrorID
@@ -16,5 +15,5 @@ enum ErrorID
 }; 
 
 
-using ErrorMsg_t = shared_ptr<ErrorMsg>;
+using ErrorMsg_t = std::shared_ptr<ErrorMsg>;
 

@@ -29,7 +29,7 @@ public:
         Singleton<SystemManager>::getInstance()->Destroy();
     }
     void run(const int64_t receive_time_) {
-        std::vector<shared_ptr<Package>> _vec;
+        std::vector<std::shared_ptr<Package>> _vec;
         CPackageMgr::getInstance()->swap(_vec);
         for (auto&& _packet_it : _vec) {
             switch (_packet_it->m_msg_type)

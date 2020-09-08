@@ -14,27 +14,6 @@
     <ClCompile Include="UI\UIManager.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\SDL2\include\SDL2\imgui_demo.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Common\SDL2\include\SDL2\imgui_draw.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Common\SDL2\include\SDL2\imgui_impl_dx9.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Common\SDL2\include\SDL2\imgui_impl_win32.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Common\SDL2\include\SDL2\imgui_sdl.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Common\SDL2\include\SDL2\imgui_widgets.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Common\SDL2\include\SDL2\imgui.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="System\Map\CliMapSystem.cpp">
       <Filter>System\Map</Filter>
     </ClCompile>
@@ -46,6 +25,24 @@
     </ClCompile>
     <ClCompile Include="RenderManager.cpp">
       <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\SDL2\imgui_draw.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\SDL2\imgui_impl_dx11.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\SDL2\imgui_impl_sdl.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\SDL2\imgui_widgets.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\SDL2\imgui.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\SDL2\imgui_demo.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -87,30 +84,6 @@
     <ClInclude Include="UI\UIStruct.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\SDL2\include\SDL2\imgui.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\SDL2\include\SDL2\imgui_impl_dx9.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\SDL2\include\SDL2\imgui_impl_win32.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\SDL2\include\SDL2\imgui_internal.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\SDL2\include\SDL2\imgui_sdl.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\SDL2\include\SDL2\imstb_rectpack.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\SDL2\include\SDL2\imstb_textedit.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\SDL2\include\SDL2\imstb_truetype.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="System\Map\CliMapSystem.h">
       <Filter>System\Map</Filter>
     </ClInclude>
@@ -119,6 +92,30 @@
     </ClInclude>
     <ClInclude Include="System\Login\CliLoginSystem.h">
       <Filter>System\Login</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\SDL2\imgui_impl_dx11.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\SDL2\imgui_impl_sdl.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\SDL2\imgui_internal.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\SDL2\imstb_rectpack.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\SDL2\imstb_textedit.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\SDL2\imstb_truetype.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\SDL2\imconfig.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\SDL2\imgui.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

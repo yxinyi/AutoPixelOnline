@@ -4,7 +4,7 @@ RegSystem(CDBServerSystem)
 
 bool CDBServerSystem::EnvDefine() {
     ProtobufDispatch::getInstance()->registerMessageCallback<DataBaseReq>([this](const uint32_t conn_,
-        const shared_ptr<DataBaseReq>& message_,
+        const std::shared_ptr<DataBaseReq>& message_,
         const int64_t& receive_time_) {
         LogInfo << "[DataBaseReq]" << FlushLog;
 
@@ -13,7 +13,7 @@ bool CDBServerSystem::EnvDefine() {
         const string& _key = message_->key();
         const string& _val = message_->val();
 
-        DataBaseAck_t _ack = make_shared<DataBaseAck>();
+        DataBaseAck_t _ack = std::make_shared<DataBaseAck>();
         _ack->set_msg_id(_msg_id);
         DBOperatorErr _err = DBOperatorErr::ERR;
         switch (_op)

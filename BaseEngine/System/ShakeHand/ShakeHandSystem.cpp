@@ -13,7 +13,7 @@
 
 const uint32_t g_interval = 6000;
 
-using ShakeHandEvent_t = shared_ptr<ShakeHandEvent>;
+using ShakeHandEvent_t = std::shared_ptr<ShakeHandEvent>;
 bool ShakeHandSystem::EnvDefine() {
     EventRegister(ShakeHandEvent, [this](const uint32_t conn_,
         const ShakeHandEvent_t& message_,
@@ -64,7 +64,7 @@ bool ShakeHandSystem::Destroy() {
 
 //主动连接,主动发起握手
 bool ShakeHandSystem::ShakeHandForEveryOne() {
-    shared_ptr<ShakeHandEvent> _event = make_shared<ShakeHandEvent>();
+    std::shared_ptr<ShakeHandEvent> _event = std::make_shared<ShakeHandEvent>();
     std::vector<uint32_t > _error_delete_conn;
     for (auto&& _conn_it : m_conne_vec) {
         NetManager::getInstance()->SendMessageBuff(_conn_it, _event);

@@ -26,7 +26,7 @@ static uint32_t s_length_statc = sizeof int64_t;
 class CConnection {
 public:
     bool DoSend() {
-        std::vector<shared_ptr<CBuffer>> _local_vec;
+        std::vector<std::shared_ptr<CBuffer>> _local_vec;
         {
             std::unique_lock<std::mutex> _lock(m_snd_buff_mutex);
             if (!m_snd_buff_list.size()) {
@@ -39,7 +39,7 @@ public:
             _local_vec.swap(m_snd_buff_list);
         }
 
-        shared_ptr<CBuffer> _snd_buff = CObjectPool<CBuffer>::getInstance()->Get();
+        std::shared_ptr<CBuffer> _snd_buff = CObjectPool<CBuffer>::getInstance()->Get();
         for (auto&& _buff_it : _local_vec) {
             const uint32_t length = (uint32_t)_buff_it->readableBytes();
             _buff_it->prependInt64(length);
@@ -57,10 +57,10 @@ public:
 
             DoSend();
         });
-        
+
         return true;
     }
-    bool Send(shared_ptr<CBuffer> buff_) {
+    bool Send(std::shared_ptr<CBuffer> buff_) {
         std::unique_lock<std::mutex> _lock(m_snd_buff_mutex);
         m_snd_buff_list.push_back(buff_);
         return true;
@@ -76,7 +76,7 @@ public:
             //接受到了信息,要先确定总长度,然后将临时包中的数据转移至总buff中,然后判断是否已经传输完毕,如已传输完毕,则清空CBuffer包,
             //生成事件包进行分发,注意,m_cur_buff中可能有沾包的情况发生,如果转移了所有的数据还是有剩余的情况,就是发生了沾包,则整理CBuffer数据继续进行接受
             //接收完毕后继续等待异步读取
-            
+
             //拷贝数据
             m_recv_buff.append(m_tmp_buff, size_t_);
             //清空临时buff，准备下次数据接收
@@ -87,12 +87,12 @@ public:
 
 
             //长度8个字节的长度标记,与包的长度
-            while(_packet_length + s_length_statc <= _now_cur_length) {
+            while (_packet_length + s_length_statc <= _now_cur_length) {
                 m_recv_buff.retrieveInt64();
-                string _buff_str = m_recv_buff.retrieveAsString(_packet_length);
-                shared_ptr<CBuffer> _pack_buff = CObjectPool<CBuffer>::getInstance()->Get();
+                std::string _buff_str = m_recv_buff.retrieveAsString(_packet_length);
+                std::shared_ptr<CBuffer> _pack_buff = CObjectPool<CBuffer>::getInstance()->Get();
                 _pack_buff->append(_buff_str.data(), _buff_str.size());
-                shared_ptr<Package> _pack = CObjectPool<Package>::getInstance()->Get(PackageType::Msg, m_conn_id, _pack_buff);
+                std::shared_ptr<Package> _pack = CObjectPool<Package>::getInstance()->Get(PackageType::Msg, m_conn_id, _pack_buff);
                 _pack->init(PackageType::Msg, m_conn_id, _pack_buff);
                 //推入消息池
                 CPackageMgr::getInstance()->push(_pack);
@@ -114,7 +114,7 @@ public:
             m_socket.shutdown(asio::ip::tcp::socket::shutdown_both);
         }
         m_is_conn = false;
-        shared_ptr<Package> _pack = CObjectPool<Package>::getInstance()->Get(PackageType::CloseConnect, m_conn_id);
+        std::shared_ptr<Package> _pack = CObjectPool<Package>::getInstance()->Get(PackageType::CloseConnect, m_conn_id);
         //推入消息池
         CPackageMgr::getInstance()->push(_pack);
     }
@@ -129,7 +129,7 @@ public:
         return m_in_sended;
     }
     asio::ip::tcp::socket& GetSocket() { return m_socket; }
-    CConnection(asio::io_service& service_):m_socket(service_)
+    CConnection(asio::io_service& service_) :m_socket(service_)
     {
     }
 
@@ -145,53 +145,53 @@ public:
 
     void ConnectedOK() {
         m_is_conn = true;
-        shared_ptr<Package> _pack = CObjectPool<Package>::getInstance()->Get(PackageType::OpenConnect, m_conn_id);
+        std::shared_ptr<Package> _pack = CObjectPool<Package>::getInstance()->Get(PackageType::OpenConnect, m_conn_id);
         //推入消息池
         CPackageMgr::getInstance()->push(_pack);
     }
 
     void AcceptOK() {
         m_is_conn = true;
-        shared_ptr<Package> _pack = CObjectPool<Package>::getInstance()->Get(PackageType::AcceptConnect, m_conn_id);
+        std::shared_ptr<Package> _pack = CObjectPool<Package>::getInstance()->Get(PackageType::AcceptConnect, m_conn_id);
         //推入消息池
         CPackageMgr::getInstance()->push(_pack);
     }
     ~CConnection() {}
     std::string getIPStr() {
-        return (m_socket.remote_endpoint().address().to_string() + " : "+ to_string(m_socket.remote_endpoint().port()));
+        return (m_socket.remote_endpoint().address().to_string() + " : " + std::to_string(m_socket.remote_endpoint().port()));
     }
 private:
     NodeType m_node_type;
     asio::ip::tcp::socket m_socket;
-    char m_tmp_buff[g_recv_once_size] = {0};
+    char m_tmp_buff[g_recv_once_size] = { 0 };
     uint32_t m_conn_id = -1;
     bool m_is_conn = false;
     bool m_in_sended = false;
     CBuffer  m_recv_buff;
 
     std::mutex m_snd_buff_mutex;
-    std::vector<shared_ptr<CBuffer>> m_snd_buff_list;
+    std::vector<std::shared_ptr<CBuffer>> m_snd_buff_list;
 };
-using CConnection_t = shared_ptr<CConnection>;
-using CConnection_wt = weak_ptr<CConnection>;
+using CConnection_t = std::shared_ptr<CConnection>;
+using CConnection_wt = std::weak_ptr<CConnection>;
 
 class CConnectionMgr : public Singleton<CConnectionMgr> {
 public:
 
-    CConnection_t CreateConnection(asio::io_service& service_,const NodeType& node_type_ = NodeType::Client) {
+    CConnection_t CreateConnection(asio::io_service& service_, const NodeType& node_type_ = NodeType::Client) {
         CConnection_t _tmp_conn = std::make_shared<CConnection>(service_);
         const uint32_t _conn_id = m_conn_inc_id++;
         _tmp_conn->setConnId(_conn_id);
-        
+
         m_conn_pool[_conn_id] = _tmp_conn;
         _tmp_conn->SetConnNodeType(node_type_);
         m_nodetype_to_conn[node_type_].insert(_conn_id);
-        
+
         return _tmp_conn;
     };
 
     CConnection_t GetConnection(const uint32_t conn_id_) {
-        if (m_conn_pool.find(conn_id_)== m_conn_pool.end()) {
+        if (m_conn_pool.find(conn_id_) == m_conn_pool.end()) {
             return nullptr;
         }
         return m_conn_pool[conn_id_];

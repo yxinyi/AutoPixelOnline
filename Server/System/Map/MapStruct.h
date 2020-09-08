@@ -12,9 +12,9 @@ struct CPosition {
     float m_postion_x = 0.f;
     float m_postion_y = 0.f;
 };
-using MapData_t = shared_ptr<MapData>;
-using MapTickUpdate_t = shared_ptr<MapTickUpdate>;
-using SceneMapInfo_t = shared_ptr<SceneMapInfo>;
+using MapData_t = std::shared_ptr<MapData>;
+using MapTickUpdate_t = std::shared_ptr<MapTickUpdate>;
+using SceneMapInfo_t = std::shared_ptr<SceneMapInfo>;
 class CAttrMap : public CAttr {
 public:
     CAttrMap() :CAttr("CAttrMap") {}
@@ -40,7 +40,7 @@ public:
     }
 
     bool decodeSaveData(const std::string& msg_) {
-        MapData_t _msg = make_shared<MapData>();
+        MapData_t _msg = std::make_shared<MapData>();
         if (!_msg) {
             return false;
         }
@@ -50,7 +50,7 @@ public:
     }
 
     Message_t ToClientProto() {
-        MapData_t _msg = make_shared<MapData>();
+        MapData_t _msg = std::make_shared<MapData>();
 
         auto _pos = _msg->mutable_map_postion();
         _pos->set_postion_x(m_map_postion.m_postion_x);
@@ -62,8 +62,8 @@ public:
         return _msg;
     };
 
-    shared_ptr<CAttr> Clone() {
-        shared_ptr<CAttrMap> _attr = make_shared<CAttrMap>();
+    std::shared_ptr<CAttr> Clone() {
+        std::shared_ptr<CAttrMap> _attr = std::make_shared<CAttrMap>();
         _attr->m_map_postion = m_map_postion;
         return _attr;
     }
@@ -77,7 +77,7 @@ public:
     std::list<CPosition> m_path_pos;
     
 };
-using CAttrMap_t = shared_ptr<CAttrMap>;
+using CAttrMap_t = std::shared_ptr<CAttrMap>;
 
 struct CMapConfig {
     CMapConfig() {
@@ -117,7 +117,7 @@ struct CMapConfig {
     uint64_t m_max_x = 0;
     uint64_t m_max_y = 0;
 };
-using CMapConfig_t = shared_ptr<CMapConfig>;
+using CMapConfig_t = std::shared_ptr<CMapConfig>;
 
 
 
@@ -126,7 +126,7 @@ public:
     bool init(const uint64_t oid_, const CMapConfig_t cfg_) {
         m_config = cfg_;
         m_map_oid = oid_;
-        m_astar = make_shared<Astar>(cfg_->m_maze_shape);
+        m_astar = std::make_shared<Astar>(cfg_->m_maze_shape);
         return true;
     }
     bool reset() { return true; }
@@ -159,5 +159,5 @@ private: //map confg
     Astar_t m_astar = nullptr;
 };
 
-using Map_t = shared_ptr<CMap>;
+using Map_t = std::shared_ptr<CMap>;
 
