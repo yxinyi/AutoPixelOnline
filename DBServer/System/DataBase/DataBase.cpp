@@ -12,7 +12,7 @@ bool CDBServerSystem::EnvDefine() {
         DBOperatorType _op = (DBOperatorType)message_->cmd_op();
         const string& _key = message_->key();
         const string& _val = message_->val();
-        
+
         DataBaseAck_t _ack = make_shared<DataBaseAck>();
         _ack->set_msg_id(_msg_id);
         DBOperatorErr _err = DBOperatorErr::ERR;
@@ -48,7 +48,7 @@ bool CDBServerSystem::EnvDefine() {
                 _err = DBOperatorErr::SUCCESS;
             }
             else {
-                LogError << "[DBOperatorType]"  << "op: " << (uint32_t)_op  <<" "<< _status.ToString() << FlushLog;
+                LogError << "[DBOperatorType]" << "op: " << (uint32_t)_op << " " << _status.ToString() << FlushLog;
             }
             break;
         }
@@ -58,7 +58,7 @@ bool CDBServerSystem::EnvDefine() {
         }
 
         _ack->set_query_state((uint32_t)_err);
-        NetManager::getInstance()->SendMessageBuff(conn_,_ack);
+        NetManager::getInstance()->SendMessageBuff(conn_, _ack);
     });
     return true;
 }

@@ -3,12 +3,17 @@
 #include "../BaseEngine/System/BaseSystem.h"
 #include "../BaseEngine/System/ShakeHand/ShakeHandSystem.h"
 #include "../BaseEngine/System/DataBase/DBSystem.h"
+#include "../BaseEngine/System/ServerRegister/ServerNodeRegisterSystem.h"
 #include "../BaseEngine/EngineInclude.h"
+
+
 
 void BaseSystemRegister() {
     RegSystem(ShakeHandSystem);
-    RegSystem(CDataBaseSystem);
-
+    if (getNodeType() != NodeType::GateServer && getNodeType() != NodeType::DataBaseServer) {
+        RegSystem(CDataBaseSystem);
+        RegSystem(ServerNodeRegisterSystem);
+    }
 }
 
 class CBaseEngine :public Singleton<CBaseEngine> {
@@ -35,6 +40,12 @@ public:
             }
             case PackageType::CloseConnect: {
                 MessageBus::getInstance()->SendReq<uint32_t>(_packet_it->m_conn_id, "CloseConnect");
+                CConnectionMgr::getInstance()->DelelteConnection(_packet_it->m_conn_id);
+                break;
+            }
+
+            case PackageType::AcceptConnect: {
+                MessageBus::getInstance()->SendReq<uint32_t>(_packet_it->m_conn_id, "AcceptConnect");
                 break;
             }
             case PackageType::Msg: {

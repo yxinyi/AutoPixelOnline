@@ -79,7 +79,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_ServerLink_2eproto::offsets[] 
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::ServerLink, server_str_),
+  PROTOBUF_FIELD_OFFSET(::ServerLink, node_type_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::DataBaseNotify, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -107,10 +107,10 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 };
 
 const char descriptor_table_protodef_ServerLink_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\020ServerLink.proto\" \n\nServerLink\022\022\n\nserv"
-  "er_str\030\001 \001(\t\"0\n\016DataBaseNotify\022\r\n\005db_ip\030"
-  "\001 \001(\t\022\017\n\007db_port\030\002 \001(\r\",\n\025ServerMessageR"
-  "egister\022\023\n\013message_str\030\001 \003(\tb\006proto3"
+  "\n\020ServerLink.proto\"\037\n\nServerLink\022\021\n\tnode"
+  "_type\030\001 \001(\r\"0\n\016DataBaseNotify\022\r\n\005db_ip\030\001"
+  " \001(\t\022\017\n\007db_port\030\002 \001(\r\",\n\025ServerMessageRe"
+  "gister\022\023\n\013message_str\030\001 \003(\tb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_ServerLink_2eproto_deps[1] = {
 };
@@ -122,7 +122,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_Ser
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_ServerLink_2eproto_once;
 static bool descriptor_table_ServerLink_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_ServerLink_2eproto = {
-  &descriptor_table_ServerLink_2eproto_initialized, descriptor_table_protodef_ServerLink_2eproto, "ServerLink.proto", 156,
+  &descriptor_table_ServerLink_2eproto_initialized, descriptor_table_protodef_ServerLink_2eproto, "ServerLink.proto", 155,
   &descriptor_table_ServerLink_2eproto_once, descriptor_table_ServerLink_2eproto_sccs, descriptor_table_ServerLink_2eproto_deps, 3, 0,
   schemas, file_default_instances, TableStruct_ServerLink_2eproto::offsets,
   file_level_metadata_ServerLink_2eproto, 3, file_level_enum_descriptors_ServerLink_2eproto, file_level_service_descriptors_ServerLink_2eproto,
@@ -148,16 +148,12 @@ ServerLink::ServerLink(const ServerLink& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  server_str_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from.server_str().empty()) {
-    server_str_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.server_str_);
-  }
+  node_type_ = from.node_type_;
   // @@protoc_insertion_point(copy_constructor:ServerLink)
 }
 
 void ServerLink::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ServerLink_ServerLink_2eproto.base);
-  server_str_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  node_type_ = 0u;
 }
 
 ServerLink::~ServerLink() {
@@ -166,7 +162,6 @@ ServerLink::~ServerLink() {
 }
 
 void ServerLink::SharedDtor() {
-  server_str_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void ServerLink::SetCachedSize(int size) const {
@@ -184,7 +179,7 @@ void ServerLink::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  server_str_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  node_type_ = 0u;
   _internal_metadata_.Clear();
 }
 
@@ -196,10 +191,10 @@ const char* ServerLink::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID:
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // string server_str = 1;
+      // uint32 node_type = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_server_str(), ptr, ctx, "ServerLink.server_str");
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          node_type_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -233,15 +228,13 @@ bool ServerLink::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string server_str = 1;
+      // uint32 node_type = 1;
       case 1: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
-                input, this->mutable_server_str()));
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-            this->server_str().data(), static_cast<int>(this->server_str().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
-            "ServerLink.server_str"));
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::uint32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &node_type_)));
         } else {
           goto handle_unusual;
         }
@@ -275,14 +268,9 @@ void ServerLink::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string server_str = 1;
-  if (this->server_str().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->server_str().data(), static_cast<int>(this->server_str().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "ServerLink.server_str");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->server_str(), output);
+  // uint32 node_type = 1;
+  if (this->node_type() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32(1, this->node_type(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -298,15 +286,9 @@ void ServerLink::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string server_str = 1;
-  if (this->server_str().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->server_str().data(), static_cast<int>(this->server_str().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "ServerLink.server_str");
-    target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
-        1, this->server_str(), target);
+  // uint32 node_type = 1;
+  if (this->node_type() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->node_type(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -330,11 +312,11 @@ size_t ServerLink::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string server_str = 1;
-  if (this->server_str().size() > 0) {
+  // uint32 node_type = 1;
+  if (this->node_type() != 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->server_str());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
+        this->node_type());
   }
 
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
@@ -364,9 +346,8 @@ void ServerLink::MergeFrom(const ServerLink& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.server_str().size() > 0) {
-
-    server_str_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.server_str_);
+  if (from.node_type() != 0) {
+    set_node_type(from.node_type());
   }
 }
 
@@ -391,8 +372,7 @@ bool ServerLink::IsInitialized() const {
 void ServerLink::InternalSwap(ServerLink* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  server_str_.Swap(&other->server_str_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
+  swap(node_type_, other->node_type_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ServerLink::GetMetadata() const {

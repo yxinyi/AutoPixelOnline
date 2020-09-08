@@ -6,19 +6,11 @@
 #include "../Client/RenderManager.h"
 
 const uint32_t g_frame = 100;
-const std::string g_name = "Client";
-std::string getNodeName() {
-    return g_name;
+const NodeType g_node_type = NodeType::Client;
+NodeType getNodeType() {
+    return g_node_type;
 }
 
-
-std::vector<ConnectTargetConfig> getConnectConfig() {
-    static std::vector<ConnectTargetConfig> _target_cfg;
-    if (!_target_cfg.size()) {
-        _target_cfg.emplace_back("127.0.0.1",8888,"LogicServer");
-    }
-    return _target_cfg;
-}
 
 void MainLoop() {
 

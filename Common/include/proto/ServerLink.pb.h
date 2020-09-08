@@ -184,25 +184,19 @@ class ServerLink :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kServerStrFieldNumber = 1,
+    kNodeTypeFieldNumber = 1,
   };
-  // string server_str = 1;
-  void clear_server_str();
-  const std::string& server_str() const;
-  void set_server_str(const std::string& value);
-  void set_server_str(std::string&& value);
-  void set_server_str(const char* value);
-  void set_server_str(const char* value, size_t size);
-  std::string* mutable_server_str();
-  std::string* release_server_str();
-  void set_allocated_server_str(std::string* server_str);
+  // uint32 node_type = 1;
+  void clear_node_type();
+  ::PROTOBUF_NAMESPACE_ID::uint32 node_type() const;
+  void set_node_type(::PROTOBUF_NAMESPACE_ID::uint32 value);
 
   // @@protoc_insertion_point(class_scope:ServerLink)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr server_str_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 node_type_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_ServerLink_2eproto;
 };
@@ -504,55 +498,18 @@ class ServerMessageRegister :
 #endif  // __GNUC__
 // ServerLink
 
-// string server_str = 1;
-inline void ServerLink::clear_server_str() {
-  server_str_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+// uint32 node_type = 1;
+inline void ServerLink::clear_node_type() {
+  node_type_ = 0u;
 }
-inline const std::string& ServerLink::server_str() const {
-  // @@protoc_insertion_point(field_get:ServerLink.server_str)
-  return server_str_.GetNoArena();
+inline ::PROTOBUF_NAMESPACE_ID::uint32 ServerLink::node_type() const {
+  // @@protoc_insertion_point(field_get:ServerLink.node_type)
+  return node_type_;
 }
-inline void ServerLink::set_server_str(const std::string& value) {
+inline void ServerLink::set_node_type(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   
-  server_str_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:ServerLink.server_str)
-}
-inline void ServerLink::set_server_str(std::string&& value) {
-  
-  server_str_.SetNoArena(
-    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:ServerLink.server_str)
-}
-inline void ServerLink::set_server_str(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  server_str_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:ServerLink.server_str)
-}
-inline void ServerLink::set_server_str(const char* value, size_t size) {
-  
-  server_str_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:ServerLink.server_str)
-}
-inline std::string* ServerLink::mutable_server_str() {
-  
-  // @@protoc_insertion_point(field_mutable:ServerLink.server_str)
-  return server_str_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline std::string* ServerLink::release_server_str() {
-  // @@protoc_insertion_point(field_release:ServerLink.server_str)
-  
-  return server_str_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline void ServerLink::set_allocated_server_str(std::string* server_str) {
-  if (server_str != nullptr) {
-    
-  } else {
-    
-  }
-  server_str_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), server_str);
-  // @@protoc_insertion_point(field_set_allocated:ServerLink.server_str)
+  node_type_ = value;
+  // @@protoc_insertion_point(field_set:ServerLink.node_type)
 }
 
 // -------------------------------------------------------------------

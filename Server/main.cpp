@@ -5,25 +5,20 @@
 #include "../BaseEngine/Tcp/NetManager.h"
 #include <Windows.h>
 
-const uint32_t g_frame = 30;
-const std::string g_name = "LogicServer";
+const uint32_t g_frame = 1000;
+const NodeType g_node_type = NodeType::LogicServer;
+NodeType getNodeType() {
+    return g_node_type;
+}
 
 const std::vector<std::string> m_connec_target = {};
 
+
+void testMain();
+
 const std::string g_listen = "127.0.0.1";
 const uint32_t g_listen_port = 8888;
-void testMain();
-std::string getNodeName() {
-    return g_name;
-}
 
-std::vector<ConnectTargetConfig> getConnectConfig() {
-    static std::vector<ConnectTargetConfig> _target_cfg;
-    if (!_target_cfg.size()) {
-        //_target_cfg.emplace_back("127.0.0.1", 8888);
-    }
-    return _target_cfg;
-}
 
 void MainLoop() {
 

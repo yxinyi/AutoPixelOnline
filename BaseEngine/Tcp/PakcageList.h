@@ -18,6 +18,7 @@
 enum class PackageType {
     OpenConnect,
     CloseConnect,
+    AcceptConnect,
     Msg,
 };
 

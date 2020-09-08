@@ -6,3 +6,7 @@
 #define LogError std::cout << "LogError: " 
 
 #define FlushLog std::endl;
+
+#define RETURN_VOID   \
+        std::cout << "RETURN_VOID: " << __FILE__  << " : " << __LINE__ << std::endl;\
+        return;

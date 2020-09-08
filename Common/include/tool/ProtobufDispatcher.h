@@ -51,7 +51,7 @@ public:
     using ProtobufMessageCallback = std::function<void(const uint32_t, const MessagePtr&, const int64_t&)>;
 
     ProtobufDispatch() :m_defaultCallback([](const uint32_t, const MessagePtr& msg_, const int64_t&) {
-        LogInfo << "onUnknowMessageType: " << msg_->GetTypeName() << FlushLog;
+        LogInfo << "[ProtobufDispatch] onUnknowMessageType: " << msg_->GetTypeName() << FlushLog;
     }) {}
 
     void onProtobufMessage(const uint32_t conn_,
@@ -74,13 +74,17 @@ public:
 
     template<typename T>
     void registerMessageCallback(const typename CallbackT<T>::ProtobufMessageTCallback& callback_) {
+        T _tmp;
+        m_message_type_str.push_back(_tmp.GetTypeName());
         std::shared_ptr<CallbackT<T> > pd(new CallbackT<T>(callback_));
         m_callbacks[T::descriptor()].push_back(pd);
     }
-
+    std::vector<string> GetAllMessageTypeStr() {
+        return m_message_type_str;
+    }
 private:
     using CallbackListMap = std::map<const google::protobuf::Descriptor*, std::vector<std::shared_ptr<Callback> > >;
-
+    std::vector<string> m_message_type_str;
     CallbackListMap m_callbacks;
     ProtobufMessageCallback m_defaultCallback;
 

@@ -4,6 +4,7 @@
 #include <string>
 #include <memory>
 #include "proto/ServerLink.pb.h"
+#include "ServerTypeStruct.h"
 
 
 enum class ServerState {
@@ -15,7 +16,7 @@ enum class ServerState {
 
 struct  ServerInfo{
     uint32_t m_conn_id;
-    std::string m_server_name;
+    NodeType m_node_type;
     ServerState m_state = ServerState::Error;
     std::vector<std::string> m_message_register;
 };

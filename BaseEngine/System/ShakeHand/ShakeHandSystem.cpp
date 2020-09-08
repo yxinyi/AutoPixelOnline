@@ -24,24 +24,32 @@ bool ShakeHandSystem::EnvDefine() {
     MessageBus::getInstance()->Attach([]() {
         std::cout << "MessageBus ShakeHand" << std::endl;
     }, "ShakeHand");
+    MessageBus::getInstance()->Attach([this](uint32_t conn_id_) {
+        m_conne_vec.insert(conn_id_);
+    }, "OpenConnect");
+
+    MessageBus::getInstance()->Attach([this](uint32_t conn_id_) {
+        m_conne_vec.erase(conn_id_);
+        m_remote.erase(conn_id_);
+    }, "CloseConnect");
+    
     TimerTaskMgr->RegisterTask("ShakeHandEvent", 0, g_interval, -1, [this]() {
         this->ShakeHandForEveryOne();
     });
     TimerTaskMgr->RegisterTask("ShakeHandCheck", 0, g_interval, -1, [this]() {
         this->ShakeHandCheck();
     });
+    //TimerTaskMgr->RegisterTask("ShakeHandInfo", 0, g_interval, -1, [this]() {
+    //    LogInfo << "[ShakeHandSystem] ShakeHandInfo remote size: " << m_remote.size() << FlushLog;
+    //    LogInfo << "[ShakeHandSystem] ShakeHandInfo connec size: " << m_conne_vec.size() << FlushLog;
+    //});
     return true;
 }
 bool ShakeHandSystem::PreInit() {
     return true;
 }
-extern std::vector<ConnectTargetConfig> getConnectConfig();
 bool ShakeHandSystem::Init() {
-    std::vector<ConnectTargetConfig> _conn_cfg = getConnectConfig();
-    for (auto&& _cfg_it : _conn_cfg) {
-        CConnection_t _conn = NetManager::getInstance()->Connect(_cfg_it.m_ip, _cfg_it.m_port, _cfg_it.m_nick_name);
-        m_conne_vec.insert(_conn->getConnId());
-    }
+
     return true;
 }
 bool ShakeHandSystem::Loop(const uint64_t interval_) {
@@ -54,20 +62,18 @@ bool ShakeHandSystem::Destroy() {
     return true;
 }
 
-
+//主动连接,主动发起握手
 bool ShakeHandSystem::ShakeHandForEveryOne() {
     shared_ptr<ShakeHandEvent> _event = make_shared<ShakeHandEvent>();
     std::vector<uint32_t > _error_delete_conn;
     for (auto&& _conn_it : m_conne_vec) {
-        if (!NetManager::getInstance()->SendMessageBuff(_conn_it, _event)) {
-            _error_delete_conn.push_back(_conn_it);
-        }
+        NetManager::getInstance()->SendMessageBuff(_conn_it, _event);
     }
-    
 
     return true;
 }
 
+//被动连接,被动检测远端是否掉线
 bool ShakeHandSystem::ShakeHandCheck() {
     uint64_t _now_time = NowTime->NowMillisecond();
     std::vector<uint32_t > _out_time_conn;
@@ -77,7 +83,7 @@ bool ShakeHandSystem::ShakeHandCheck() {
                 _out_time_conn.push_back(_cnn_it.first);
                 MessageBus::getInstance()->SendReq< uint32_t>(_cnn_it.first, "ShakeHandOutTimeBefore");
                 std::cout << _conn->getIPStr() << " close " << std::endl;
-                CConnectionMgr::getInstance()->DelelteConnection(_cnn_it.first);
+                CConnectionMgr::getInstance()->CloseConnection(_cnn_it.first);
             }
             else {
                 _out_time_conn.push_back(_cnn_it.first);
@@ -86,7 +92,6 @@ bool ShakeHandSystem::ShakeHandCheck() {
     }
 
     for (auto&& _out_time_it : _out_time_conn) {
-        m_remote.erase(_out_time_it);
         MessageBus::getInstance()->SendReq< uint32_t>(_out_time_it, "ShakeHandOutTimeAfter");
     }
 
@@ -95,13 +100,11 @@ bool ShakeHandSystem::ShakeHandCheck() {
 }
 
 void  ShakeHandSystem::ShakeHandPrint(const uint32_t conn_){
-
+    
     if (CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(conn_)) {
         m_remote[conn_] = NowTime->NowMillisecond();
         std::cout << "ShakeHandPrint: " << _conn->getIPStr() << std::endl;
         std::cout << "ShakeHandSize: " << m_remote.size() << std::endl;
-        //MessageBus::getInstance()->SendReq<void>("ShakeHand");
-    
     }
 
 }

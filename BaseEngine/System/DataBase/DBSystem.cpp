@@ -5,23 +5,24 @@ using namespace std;
 bool CDataBaseSystem::EnvDefine() {
     MessageBus::getInstance()->Attach([this](uint32_t conn_id_) {
         CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(conn_id_);
-        if (_conn->GetNickName() != "DBServer") {
+        if (!_conn || _conn->GetConnNodeType() != NodeType::DataBaseServer) {
             return;
         }
-        m_dbserver_connected_ok = DBConnecState::open;
+        m_dbserver_connected_ok = DBConnecState::Open;
         m_dbserver_connected_id = _conn->getConnId();
 
         LogError << "[CDataBaseSystem] DBServer open" << FlushLog;
-
+        MessageBus::getInstance()->SendReq<uint32_t>(conn_id_, "DBServerOpen");
     }, "OpenConnect");
     MessageBus::getInstance()->Attach([this](uint32_t conn_id_) {
         CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(conn_id_);
-        if (_conn->GetNickName() != "DBServer") {
+        if (!_conn ||_conn->GetConnNodeType() != NodeType::DataBaseServer) {
             return;
         }
-        m_dbserver_connected_ok = DBConnecState::close;
+        m_dbserver_connected_ok = DBConnecState::Close;
         m_dbserver_connected_id = 0;
         LogError << "[CDataBaseSystem] DBServer close" << FlushLog;
+        MessageBus::getInstance()->SendReq<uint32_t>(conn_id_, "DBServerClose");
     }, "CloseConnect");
 
 
@@ -43,19 +44,28 @@ bool CDataBaseSystem::EnvDefine() {
     ProtobufDispatch::getInstance()->registerMessageCallback<DataBaseNotify>([this](const uint32_t conn_,
         const shared_ptr<DataBaseNotify>& message_,
         const int64_t& receive_time_) {
-        123123
+
+        set<uint32_t> _cnn_set = CConnectionMgr::getInstance()->GetConnection(NodeType::DataBaseServer);
+        if (_cnn_set.size()) {
+            for (auto&& _it : _cnn_set) {
+                CConnectionMgr::getInstance()->CloseConnection(_it);
+            }
+        }
+        m_dbserver_ip = message_->db_ip();
+        m_dbserver_port = message_->db_port();
+        m_dbserver_connected_ok = DBConnecState::Close;
+        
     });
 
     return true;
 }
 
 bool CDataBaseSystem::ConnecDBServer() {
-    if (m_dbserver_connected_ok != DBConnecState::close) {
+    if (m_dbserver_connected_ok != DBConnecState::Close) {
         return false;
     }
-
-    NetManager::getInstance()->Connect(m_dbserver_ip, m_dbserver_port, "DBServer");
-    m_dbserver_connected_ok = DBConnecState::connecting;
+    NetManager::getInstance()->Connect(m_dbserver_ip, m_dbserver_port, NodeType::DataBaseServer);
+    m_dbserver_connected_ok = DBConnecState::Connecting;
     return true;
 }
 
@@ -92,7 +102,7 @@ bool CDataBaseSystem::Init() {
 bool CDataBaseSystem::Loop(const uint64_t interval_) {
     //ÖØÁ¬ DBServer 
     if (ConnecDBServer()) {
-        LogError << "[CDataBaseSystem] DBServer reconnected" << FlushLog;
+        LogError << "[CDataBaseSystem] DBServer connected" << FlushLog;
 
     }
 
@@ -115,7 +125,7 @@ bool CDataBaseSystem::op(DBOperatorType opt_, const string& key_, DBQueryCB cb_,
     _msg->set_key(key_);
     _msg->set_val(val_);
     _msg->set_msg_id(_oid);
-    if (m_dbserver_connected_ok == DBConnecState::open) {
+    if (m_dbserver_connected_ok == DBConnecState::Open) {
         NetManager::getInstance()->SendMessageBuff(m_dbserver_connected_id, _msg);
     }
     else {

@@ -25,7 +25,7 @@ bool NetManager::WaitConnect() {
     CConnection_t _new_connection = CConnectionMgr::getInstance()->CreateConnection(m_service);
     m_acceptor->async_accept(_new_connection->GetSocket(), [this,_new_connection](const error_code& err_){
         if (!err_) {
-            _new_connection->ConnectedOK();
+            _new_connection->AcceptOK();
             _new_connection->Recv();
             WaitConnect();
         }
@@ -39,18 +39,18 @@ bool NetManager::WaitConnect() {
 
 
 
-CConnection_t NetManager::Connect(const string& ip_, const uint16_t port_, const string& nick_name_) {
-    CConnection_t _conn = CConnectionMgr::getInstance()->CreateConnection(m_service, nick_name_);
+CConnection_t NetManager::Connect(const string& ip_, const uint16_t port_, const NodeType& node_type_) {
+    CConnection_t _conn = CConnectionMgr::getInstance()->CreateConnection(m_service, node_type_);
 
     asio::ip::tcp::resolver _resolver(m_service);
     asio::ip::tcp::resolver::iterator _endpoints = _resolver.resolve(asio::ip::tcp::resolver::query(ip_, to_string(port_)));
     asio::async_connect(_conn->GetSocket(), _endpoints,
         [=](error_code err_, asio::ip::tcp::resolver::iterator)
     {
-        if (err_.value() == 10061) {
-            Connect(ip_, port_, nick_name_);
-        }
-        else 
+        //if (err_.value() == 10061) {
+        //    Connect(ip_, port_, node_type_);
+        //}
+        //else 
         if (!err_)
         {
             _conn->ConnectedOK();

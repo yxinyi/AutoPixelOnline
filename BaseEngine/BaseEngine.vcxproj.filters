@@ -25,6 +25,9 @@
     <Filter Include="Error">
       <UniqueIdentifier>{f8814867-2d08-4f78-8016-454aed5e35ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="System\ServerRegister">
+      <UniqueIdentifier>{ae15959d-2975-4841-ab97-8ba949fcd285}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\BaseEngine.h" />
@@ -55,7 +58,6 @@
     <ClInclude Include="System\BaseSystem.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="DataBase\DBMgr.h" />
     <ClInclude Include="Buff\Buffer.h">
       <Filter>tool</Filter>
     </ClInclude>
@@ -102,6 +104,13 @@
     <ClInclude Include="..\Common\include\proto\ErrorNotify.pb.h">
       <Filter>Error</Filter>
     </ClInclude>
+    <ClInclude Include="..\Common\include\proto\ServerLink.pb.h">
+      <Filter>System\ServerRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="System\ServerRegister\ServerNodeRegisterSystem.h">
+      <Filter>System\ServerRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerTypeStruct.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\include\tool\Time.cpp">
@@ -113,7 +122,6 @@
     <ClCompile Include="System\BaseSystem.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="DataBase\DBMgr.cpp" />
     <ClCompile Include="Tcp\NetManager.cpp">
       <Filter>TcpNet</Filter>
     </ClCompile>
@@ -137,6 +145,12 @@
     </ClCompile>
     <ClCompile Include="..\Common\include\proto\ErrorNotify.pb.cc">
       <Filter>Error</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\proto\ServerLink.pb.cc">
+      <Filter>System\ServerRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="System\ServerRegister\ServerNodeRegisterSystem.cpp">
+      <Filter>System\ServerRegister</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

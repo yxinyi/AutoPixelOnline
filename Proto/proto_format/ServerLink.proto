@@ -1,8 +1,9 @@
 syntax = "proto3";
 
 message ServerLink {
-    string server_str = 1;
+    uint32 node_type = 1;
 }
+
 message DataBaseNotify{
     string db_ip = 1;
     uint32 db_port = 2;

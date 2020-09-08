@@ -1,6 +1,15 @@
 #include "./BaseSystem.h"
 using namespace std;
 
+
+const char* GetGateIP() {
+    return "127.0.0.1";
+}
+uint32_t GetGatePort() {
+    return 9001;
+}
+
+
 using System_t = shared_ptr<BaseSystem>;
 using System_wt = weak_ptr<BaseSystem>;
 bool SystemManager::Register(const string& str_, System_t sys_) {

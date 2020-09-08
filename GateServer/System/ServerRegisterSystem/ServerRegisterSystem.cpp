@@ -3,8 +3,7 @@ RegSystem(ServerRegisterSystem)
 
 
 
-const string g_dbserver_ip = "127.0.0.1";
-const uint32_t g_dbserver_port = 9000;
+
 
 bool ServerRegisterSystem::EnvDefine() {
     ProtobufDispatch::getInstance()->SetDefaultCallback([this](const uint32_t conn_,
@@ -37,14 +36,18 @@ bool ServerRegisterSystem::EnvDefine() {
 
         auto _conn_find = m_id_to_server.find(conn_);
         if (_conn_find == m_id_to_server.end()) {
-            LogError << "[ServerRegisterSystem] ServerLink ERR" << msg_->server_str() << FlushLog;
+            LogError << "[ServerRegisterSystem] ServerLink ERR" << msg_->node_type() << FlushLog;
             return;
         }
-        _conn_find->second->m_server_name = msg_->server_str();
+        _conn_find->second->m_node_type = (NodeType)msg_->node_type();
         _conn_find->second->m_state = ServerState::initializa;
         DataBaseNotify_t _notify = make_shared<DataBaseNotify>();
-        _notify->set_db_ip(g_dbserver_ip);
-        _notify->set_db_port(g_dbserver_port);
+
+        LogInfo << "[ServerRegisterSystem] ServerLink Touch" << conn_ << FlushLog;
+
+        auto _obj = Json::parse("{ \"db_ip\": \"127.0.0.1\", \"db_port\": 9000 }");
+        _notify->set_db_ip(_obj["db_ip"]);
+        _notify->set_db_port(_obj["db_port"]);
         NetManager::getInstance()->SendMessageBuff(conn_,_notify);
     });
 
@@ -57,7 +60,10 @@ bool ServerRegisterSystem::EnvDefine() {
             LogError << "[ServerRegisterSystem] ServerMessageRegister ERR" << conn_ << FlushLog;
             return;
         }
-
+        LogInfo << "[ServerRegisterSystem] ServerLink runing" << (uint32_t)conn_ << FlushLog;
+        for (auto&& _it :msg_->message_str()) {
+            LogInfo << "[ServerRegisterSystem] msg str " << _it  << FlushLog;
+        }
         _conn_find->second->m_state = ServerState::runing;
 
         int _msg_size = msg_->message_str_size();
@@ -78,11 +84,14 @@ bool ServerRegisterSystem::EnvDefine() {
         ServerInfo_t _info = make_shared<ServerInfo>();
         _info->m_state = ServerState::Touch;
         _info->m_conn_id = conn_;
+        LogInfo << "[ServerRegisterSystem] OpenConnect" << (uint32_t)conn_ << FlushLog;
+
         m_id_to_server[_info->m_conn_id] = _info;
-    }, "OpenConnect");
+    }, "AcceptConnect");
 
     MessageBus::getInstance()->Attach([this](uint32_t conn_) {
         if (m_id_to_server.find(conn_) != m_id_to_server.end()) {
+            LogInfo << "[ServerRegisterSystem] CloseConnect" << (uint32_t)conn_ << FlushLog;
             m_id_to_server.erase(conn_);
         }
 

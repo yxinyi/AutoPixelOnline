@@ -32,14 +32,15 @@ public:
 private:
     bool op(DBOperatorType opt_, const string& key_, DBQueryCB cb_, const string& val_ = "");
 
-    const string m_dbserver_ip = "127.0.0.1";
-    const uint32_t m_dbserver_port = 9000;
+    string m_dbserver_ip = "";
+    uint32_t m_dbserver_port = 0;
     enum class DBConnecState {
-        close,
-        connecting,
-        open,
+        WaitDBInfo,
+        Close,
+        Connecting,
+        Open,
     };
-    DBConnecState m_dbserver_connected_ok = DBConnecState::close;
+    DBConnecState m_dbserver_connected_ok = DBConnecState::WaitDBInfo;
     uint32_t m_dbserver_connected_id = 0;
     const uint32_t m_query_time_out = 6000; //∫¡√Î
     std::map<uint64_t, DBOpUnity_t> m_op_pool;

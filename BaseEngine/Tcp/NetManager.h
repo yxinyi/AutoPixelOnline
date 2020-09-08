@@ -6,9 +6,9 @@
 #include <mutex>
 
 struct ConnectTargetConfig {
-    ConnectTargetConfig(const string& str_, const uint32_t port_, const string& nick_name_=""):m_ip(str_),m_port(port_),m_nick_name(nick_name_){}
+    ConnectTargetConfig(const string& str_, const uint32_t port_, const NodeType& node_type_= NodeType::Client):m_ip(str_),m_port(port_), m_node_type(node_type_){}
     std::string m_ip;
-    std::string m_nick_name;
+    NodeType m_node_type;
     uint32_t m_port;
 };
 
@@ -21,7 +21,7 @@ public:
     bool SendMessageBuff(const uint32_t conn_id_, shared_ptr<google::protobuf::Message> buff_);
     bool WaitConnect();
 
-    CConnection_t Connect(const string& ip_, const uint16_t port_,const string& nick_name_ = "");
+    CConnection_t Connect(const string& ip_, const uint16_t port_, const NodeType& node_type_ = NodeType::Client);
 private:
     asio::ip::tcp::acceptor* m_acceptor;
     asio::io_service m_service;

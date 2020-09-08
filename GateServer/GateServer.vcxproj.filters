@@ -16,18 +16,12 @@
     <ClCompile Include="..\Common\include\proto\ServerLink.pb.cc">
       <Filter>System\ServerRegisterSystem</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\include\proto\ErrorNotify.pb.cc">
-      <Filter>System\ServerRegisterSystem</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="System\ServerRegisterSystem\ServerRegisterSystem.h">
       <Filter>System\ServerRegisterSystem</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\include\proto\ServerLink.pb.h">
-      <Filter>System\ServerRegisterSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\include\proto\ErrorNotify.pb.h">
       <Filter>System\ServerRegisterSystem</Filter>
     </ClInclude>
   </ItemGroup>
