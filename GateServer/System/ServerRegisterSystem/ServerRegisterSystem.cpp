@@ -41,7 +41,7 @@ bool ServerRegisterSystem::EnvDefine() {
         }
         _conn_find->second->m_node_type = (NodeType)msg_->node_type();
         _conn_find->second->m_state = ServerState::initializa;
-        DataBaseNotify_t _notify = make_shared<DataBaseNotify>();
+        DataBaseNotify_t _notify = std::make_shared<DataBaseNotify>();
 
         LogInfo << "[ServerRegisterSystem] ServerLink Touch" << conn_ << FlushLog;
 
@@ -81,7 +81,7 @@ bool ServerRegisterSystem::EnvDefine() {
             LogError << "[ServerRegisterSystem] OpenConnect ERR" << conn_ << FlushLog;
             return;
         }
-        ServerInfo_t _info = make_shared<ServerInfo>();
+        ServerInfo_t _info = std::make_shared<ServerInfo>();
         _info->m_state = ServerState::Touch;
         _info->m_conn_id = conn_;
         LogInfo << "[ServerRegisterSystem] OpenConnect" << (uint32_t)conn_ << FlushLog;

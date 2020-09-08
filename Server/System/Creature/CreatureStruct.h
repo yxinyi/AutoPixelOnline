@@ -25,7 +25,7 @@ public:
 
 
     AllAttributeDataNotify_t BuildUpdateProto() {
-        AllAttributeDataNotify_t _ntf = make_shared<AllAttributeDataNotify>();
+        AllAttributeDataNotify_t _ntf = std::make_shared<AllAttributeDataNotify>();
         _ntf->set_oid(m_oid);
         m_attr->BuildAllProto(_ntf);
         return _ntf;
@@ -54,4 +54,4 @@ private:
     uint32_t m_conn_id;
 };
 
-using Creature_t = shared_ptr<Creature>;
+using Creature_t = std::shared_ptr<Creature>;

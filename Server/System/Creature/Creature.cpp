@@ -63,7 +63,7 @@ bool CreatureManager::Destroy() {
 }
 
 
-shared_ptr<Creature> CreatureManager::CreateCreature(const uint32_t conn_, const PlayerLoginEvent_t& message_) {
+Creature_t CreatureManager::CreateCreature(const uint32_t conn_, const PlayerLoginEvent_t& message_) {
     auto _conn_find = m_conid_to_player.find(conn_);
     if (_conn_find != m_conid_to_player.end()) {
         return _conn_find->second;

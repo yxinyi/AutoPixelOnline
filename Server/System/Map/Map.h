@@ -7,7 +7,7 @@ class CMapConfigMgr :public Singleton<CMapConfigMgr> {
     friend class Singleton<CMapConfigMgr>;
 public:
     bool init() {
-        CMapConfig_t _tmp_cfg = make_shared<CMapConfig>();
+        CMapConfig_t _tmp_cfg = std::make_shared<CMapConfig>();
         m_configs[_tmp_cfg->m_tid] = _tmp_cfg;
         return true;
     };

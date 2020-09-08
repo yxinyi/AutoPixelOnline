@@ -38,8 +38,8 @@ bool MapManager::EnvDefine() {
     return true;
 }
 bool MapManager::PreInit() {
-    CAttrManager::getInstance()->Register("Player", make_shared<CAttrMap>());
-    CAttrManager::getInstance()->Register("Monster", make_shared<CAttrMap>());
+    CAttrManager::getInstance()->Register("Player", std::make_shared<CAttrMap>());
+    CAttrManager::getInstance()->Register("Monster", std::make_shared<CAttrMap>());
 
     CMapConfigMgr::getInstance()->init();
     return true;
@@ -48,14 +48,14 @@ bool MapManager::Init() {
     return true;
 }
 bool MapManager::Loop(const uint64_t interval_) {
-    shared_ptr<CreatureManager> _sys = SystemManager::getInstance()->GetSystem<CreatureManager>();
+    std::shared_ptr<CreatureManager> _sys = SystemManager::getInstance()->GetSystem<CreatureManager>();
     if (!_sys) {
         return false;
     }
 
     for (auto&& _map_it :m_map_pool) {
         const std::set<uint32_t>& _players = _map_it.second->GetPlayer();
-        MapTickUpdate_t _update_msg = make_shared<MapTickUpdate>();
+        MapTickUpdate_t _update_msg = std::make_shared<MapTickUpdate>();
         for (auto&& _ply_it : _players) {
 
             Creature_t _player = _sys->FindCreatureByOid(_ply_it);
@@ -179,7 +179,7 @@ bool CMap::PosMoveCheck(const CPosition& pos_) {
 }
 
 SceneMapInfo_t CMap::ToProto() {
-    SceneMapInfo_t _proto = make_shared<SceneMapInfo>();
+    SceneMapInfo_t _proto = std::make_shared<SceneMapInfo>();
     _proto->set_map_block_size(m_config->m_cell_size);
     for (auto&& _colmn_it : m_config->m_maze_shape) {
         auto _colmn = _proto->add_map_info();

@@ -29,7 +29,7 @@ public:
     int m_member_1 = 0;
     int m_member_2 = 0;
 };
-void PrintTestObj(const string& name_ ,shared_ptr<CTestObj> test_obj_) {
+void PrintTestObj(const std::string& name_ , std::shared_ptr<CTestObj> test_obj_) {
     std::cout << "################" << std::endl;
     std::cout << name_ << " : " << test_obj_->m_member_0 << std::endl;
     std::cout << name_  << " : " << test_obj_->m_member_1 << std::endl;
@@ -40,7 +40,7 @@ void PrintTestObj(const string& name_ ,shared_ptr<CTestObj> test_obj_) {
 void CObjectPoolTest() {
     //objcetPool test
     {
-        std::vector<shared_ptr<CTestObj>> _obj_vec;
+        std::vector<std::shared_ptr<CTestObj>> _obj_vec;
         _obj_vec.resize(50);
         for (size_t _idx = 0; _idx < _obj_vec.size(); _idx++) {
             _obj_vec[_idx] = (CObjectPool<CTestObj>::getInstance()->Get(1));
