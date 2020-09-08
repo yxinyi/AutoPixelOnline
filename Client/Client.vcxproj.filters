@@ -5,13 +5,7 @@
     <ClCompile Include="..\Common\include\proto\Shakehand.pb.cc">
       <Filter>proto</Filter>
     </ClCompile>
-    <ClCompile Include="System\Map\CliMapSystem.cpp">
-      <Filter>System\Map</Filter>
-    </ClCompile>
     <ClCompile Include="..\Common\include\proto\Map.pb.cc">
-      <Filter>System\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Common\include\proto\PlayerLogin.pb.cc">
       <Filter>System\Map</Filter>
     </ClCompile>
     <ClCompile Include="RenderManager.h">
@@ -40,6 +34,18 @@
     </ClCompile>
     <ClCompile Include="..\Common\SDL2\include\SDL2\imgui.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="System\Map\CliMapSystem.cpp">
+      <Filter>System\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\proto\PlayerLogin.pb.cc">
+      <Filter>System\Login</Filter>
+    </ClCompile>
+    <ClCompile Include="System\Login\CliLoginSystem.cpp">
+      <Filter>System\Login</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -72,13 +78,7 @@
     <ClInclude Include="..\Server\System\Creature\CreatureStruct.h">
       <Filter>System\Creature</Filter>
     </ClInclude>
-    <ClInclude Include="System\Map\CliMapSystem.h">
-      <Filter>System\Map</Filter>
-    </ClInclude>
     <ClInclude Include="..\Common\include\proto\Map.pb.h">
-      <Filter>System\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\include\proto\PlayerLogin.pb.h">
       <Filter>System\Map</Filter>
     </ClInclude>
     <ClInclude Include="UI\UIManager.h">
@@ -110,6 +110,15 @@
     </ClInclude>
     <ClInclude Include="..\Common\SDL2\include\SDL2\imstb_truetype.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Map\CliMapSystem.h">
+      <Filter>System\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\proto\PlayerLogin.pb.h">
+      <Filter>System\Login</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Login\CliLoginSystem.h">
+      <Filter>System\Login</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

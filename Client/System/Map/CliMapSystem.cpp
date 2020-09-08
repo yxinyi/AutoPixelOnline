@@ -36,12 +36,12 @@ bool CliMapSystem::PreInit() {
     return true;
 }
 bool CliMapSystem::Init() {
-    TimerTaskMgr->RegisterTask("CliMapSystem::Init", 6000, 3000, 1, [this]() {
-        LogError << "CliMapSystem::Init" << FlushLog;
-        CConnection_t _server_conn = CConnectionMgr::getInstance()->GetConnection("LogicServer");
-        shared_ptr<PlayerLoginEvent> _event = make_shared<PlayerLoginEvent>();
-        NetManager::getInstance()->SendMessageBuff(_server_conn->getConnId(), _event);
-    });
+    //TimerTaskMgr->RegisterTask("CliMapSystem::Init", 6000, 3000, 1, [this]() {
+    //    LogError << "CliMapSystem::Init" << FlushLog;
+    //    CConnection_t _server_conn = CConnectionMgr::getInstance()->GetConnection();
+    //    shared_ptr<PlayerLoginEvent> _event = make_shared<PlayerLoginEvent>();
+    //    NetManager::getInstance()->SendMessageBuff(_server_conn->getConnId(), _event);
+    //});
     return true;
 }
 void CliMapSystem::MapRender(SDL_Window* windows_, SDL_Renderer* render_) {

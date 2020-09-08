@@ -31,9 +31,6 @@ bool UIManager::Register(const UIScene scene_type_, UIRenderFunc func_) {
     return true;
 }
 bool UIManager::loop() {
-    for (auto&& _func_it : m_scene_pool[m_now_scene]) {
-        _func_it();
-    }
 
     ImGui::NewFrame();
 
@@ -41,6 +38,9 @@ bool UIManager::loop() {
     ImGui::ShowDemoWindow(&show_demo_window);
 
 
+    for (auto&& _func_it : m_scene_pool[m_now_scene]) {
+        _func_it();
+    }
     ImGui::Render();
     ImGuiSDL::Render(ImGui::GetDrawData());
 
