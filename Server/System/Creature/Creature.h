@@ -4,7 +4,7 @@
 #include "include/proto/PlayerLogin.pb.h"
 #include "Attribute/Attribute.h"
 
-using PlayerLoginEvent_t = std::shared_ptr<PlayerLoginEvent>;
+using PlayerLoginEvent_t = std::shared_ptr<PlayerLogin>;
 
 class CreatureManager :public BaseSystem{
 public:

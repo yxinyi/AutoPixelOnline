@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="System\Account\AccountSystem.cpp">
+      <Filter>System\Account</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\proto\PlayerLogin.pb.cc">
+      <Filter>System\Account</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="System">
+      <UniqueIdentifier>{1d1d1425-e2e9-4398-a775-688b6c62daab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Account">
+      <UniqueIdentifier>{240bdd74-f2ec-478e-b984-6501fb14b006}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="System\Account\AccountSystem.h">
+      <Filter>System\Account</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Account\AccountStruct.h">
+      <Filter>System\Account</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\proto\PlayerLogin.pb.h">
+      <Filter>System\Account</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

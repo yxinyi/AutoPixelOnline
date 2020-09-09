@@ -19,4 +19,7 @@ public:
     bool Loop(const uint64_t interval_);
     bool Quit();
     bool Destroy();
+private:
+    std::string m_account = "";
+    std::string m_password = "";
 };

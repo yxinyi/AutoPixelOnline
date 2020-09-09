@@ -8,7 +8,7 @@ RegSystem(CreatureManager)
 bool CreatureManager::EnvDefine() {
     //先忽略前置,假设已经通过验证并从数据库拿出玩家存档
 
-    ProtobufDispatch::getInstance()->registerMessageCallback<PlayerLoginEvent>([this](const uint32_t conn_,
+    ProtobufDispatch::getInstance()->registerMessageCallback<PlayerLogin>([this](const uint32_t conn_,
         const PlayerLoginEvent_t& message_,
         const int64_t& receive_time_) {
         Creature_t _creature = CreateCreature(conn_, message_);

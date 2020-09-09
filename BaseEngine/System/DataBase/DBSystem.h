@@ -46,3 +46,5 @@ private:
     
     std::vector<DataBaseReq_t> m_proto_send_cache;
 };
+
+using CDataBaseSystem_t = std::shared_ptr<CDataBaseSystem>;

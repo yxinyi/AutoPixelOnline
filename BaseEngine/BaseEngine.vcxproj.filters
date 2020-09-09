@@ -16,9 +16,6 @@
     <Filter Include="MessageBus">
       <UniqueIdentifier>{c78503ec-9793-4d2a-9be8-74cf1b9a50e9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="System\DB">
-      <UniqueIdentifier>{bd50177a-6d69-4f94-ba65-b8da9c12a50a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="System\ShakeHand">
       <UniqueIdentifier>{daedceff-29d6-4b85-a790-e5e8d5392dd3}</UniqueIdentifier>
     </Filter>
@@ -27,6 +24,9 @@
     </Filter>
     <Filter Include="System\ServerRegister">
       <UniqueIdentifier>{ae15959d-2975-4841-ab97-8ba949fcd285}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\DataBase">
+      <UniqueIdentifier>{bd50177a-6d69-4f94-ba65-b8da9c12a50a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -81,16 +81,16 @@
     </ClInclude>
     <ClInclude Include="EngineInclude.h" />
     <ClInclude Include="System\DataBase\DBSystem.h">
-      <Filter>System\DB</Filter>
+      <Filter>System\DataBase</Filter>
     </ClInclude>
     <ClInclude Include="System\ShakeHand\ShakeHandSystem.h">
       <Filter>System\ShakeHand</Filter>
     </ClInclude>
     <ClInclude Include="System\DataBase\DBSystemStruct.h">
-      <Filter>System\DB</Filter>
+      <Filter>System\DataBase</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\include\proto\DataBase.pb.h">
-      <Filter>System\DB</Filter>
+      <Filter>System\DataBase</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\include\proto\Shakehand.pb.h">
       <Filter>System\ShakeHand</Filter>
@@ -129,13 +129,13 @@
       <Filter>tool</Filter>
     </ClCompile>
     <ClCompile Include="System\DataBase\DBSystem.cpp">
-      <Filter>System\DB</Filter>
+      <Filter>System\DataBase</Filter>
     </ClCompile>
     <ClCompile Include="System\ShakeHand\ShakeHandSystem.cpp">
       <Filter>System\ShakeHand</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\include\proto\DataBase.pb.cc">
-      <Filter>System\DB</Filter>
+      <Filter>System\DataBase</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\include\proto\Shakehand.pb.cc">
       <Filter>System\ShakeHand</Filter>

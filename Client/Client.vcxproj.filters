@@ -44,6 +44,15 @@
     <ClCompile Include="..\Common\include\SDL2\imgui_demo.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="..\Common\include\SDL2\imgui_stdlib.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="System\ErrorNotify\CliErrorNotify.cpp">
+      <Filter>System\ErrorNotify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\proto\ErrorNotify.pb.cc">
+      <Filter>System\ErrorNotify</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="proto">
@@ -63,6 +72,9 @@
     </Filter>
     <Filter Include="System\Login">
       <UniqueIdentifier>{dbbd6f45-4ccd-4599-8c64-0bd3c5c2edbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\ErrorNotify">
+      <UniqueIdentifier>{b629ad56-285b-4f37-8bd0-2c3ea8bfa8fd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +128,21 @@
     </ClInclude>
     <ClInclude Include="..\Common\include\SDL2\imgui.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\SDL2\imgui_stdlib.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="System\ErrorNotify\CliErrorNotify.h">
+      <Filter>System\ErrorNotify</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\proto\ErrorNotify.pb.h">
+      <Filter>System\ErrorNotify</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BaseEngine\Error\ErrorStruct.h">
+      <Filter>System\ErrorNotify</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Login\CliLoginStruct.h">
+      <Filter>System\Login</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

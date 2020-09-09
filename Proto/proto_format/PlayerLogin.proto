@@ -1,6 +1,17 @@
 syntax = "proto3";
 
-message PlayerLoginEvent {
-    //uint32 state = 1;
-	//string src_name = 2;
+message PlayerLogin {
+	string account = 1;
+	string password = 2;
+}
+message PlayerLoginAck {
+	uint64 session_key = 1;
+	
+}
+message LoginLogic {
+	uint64 session_key = 1;
+}
+message PlayerRegsiter {
+	string account = 1;
+	string password = 2;
 }

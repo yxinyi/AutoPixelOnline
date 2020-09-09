@@ -203,6 +203,21 @@ public:
         }
         return _conn_find->second;
     }
+
+
+    CConnection_t GetOnlyOneConnection(const NodeType& node_type_) {
+        auto _conn_find = m_nodetype_to_conn.find(node_type_);
+        if (_conn_find == m_nodetype_to_conn.end()) {
+            return nullptr;
+        }
+
+        if (_conn_find->second.size() != 1) {
+            return nullptr;
+        }
+
+        return m_conn_pool[*_conn_find->second.begin()];
+    }
+
     bool CloseConnection(const uint32_t conn_id_) {
         auto _conn_find = m_conn_pool.find(conn_id_);
         if (_conn_find == m_conn_pool.end()) {

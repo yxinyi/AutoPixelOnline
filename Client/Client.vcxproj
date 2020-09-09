@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Common\include\proto\ErrorNotify.pb.cc" />
     <ClCompile Include="..\Common\include\proto\Map.pb.cc" />
     <ClCompile Include="..\Common\include\proto\PlayerLogin.pb.cc" />
     <ClCompile Include="..\Common\include\proto\Shakehand.pb.cc" />
@@ -157,15 +158,19 @@
     <ClCompile Include="..\Common\include\SDL2\imgui_draw.cpp" />
     <ClCompile Include="..\Common\include\SDL2\imgui_impl_dx11.cpp" />
     <ClCompile Include="..\Common\include\SDL2\imgui_impl_sdl.cpp" />
+    <ClCompile Include="..\Common\include\SDL2\imgui_stdlib.cpp" />
     <ClCompile Include="..\Common\include\SDL2\imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="RenderManager.h" />
+    <ClCompile Include="System\ErrorNotify\CliErrorNotify.cpp" />
     <ClCompile Include="System\Login\CliLoginSystem.cpp" />
     <ClCompile Include="System\Map\CliMapSystem.cpp" />
     <ClCompile Include="UI\UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\BaseEngine\Error\ErrorStruct.h" />
+    <ClInclude Include="..\Common\include\proto\ErrorNotify.pb.h" />
     <ClInclude Include="..\Common\include\proto\Map.pb.h" />
     <ClInclude Include="..\Common\include\proto\PlayerLogin.pb.h" />
     <ClInclude Include="..\Common\include\proto\Shakehand.pb.h" />
@@ -174,11 +179,14 @@
     <ClInclude Include="..\Common\include\SDL2\imgui_impl_dx11.h" />
     <ClInclude Include="..\Common\include\SDL2\imgui_impl_sdl.h" />
     <ClInclude Include="..\Common\include\SDL2\imgui_internal.h" />
+    <ClInclude Include="..\Common\include\SDL2\imgui_stdlib.h" />
     <ClInclude Include="..\Common\include\SDL2\imstb_rectpack.h" />
     <ClInclude Include="..\Common\include\SDL2\imstb_textedit.h" />
     <ClInclude Include="..\Common\include\SDL2\imstb_truetype.h" />
     <ClInclude Include="..\Server\System\Creature\CreatureStruct.h" />
     <ClInclude Include="..\Server\System\Map\MapStruct.h" />
+    <ClInclude Include="System\ErrorNotify\CliErrorNotify.h" />
+    <ClInclude Include="System\Login\CliLoginStruct.h" />
     <ClInclude Include="System\Login\CliLoginSystem.h" />
     <ClInclude Include="System\Map\CliMapSystem.h" />
     <ClInclude Include="UI\UIManager.h" />
