@@ -64,7 +64,7 @@ void CBaseEngine::run(const int64_t receive_time_) {
             if (!_msg) {
                 LogInfo << "[CBaseEngine] despatch err msg_str : " << _msg_name_str << FlushLog;
                 MessageBus::getInstance()->SendReq<uint32_t,std::string, std::string>(_conn_id, _msg_name_str, _msg_str,"DespatchDecodeFailed");
-                CONTINUE;
+                continue;
             }
             else {
                 LogInfo << "[CBaseEngine] despatch msg_str : " << _msg_name_str << FlushLog;

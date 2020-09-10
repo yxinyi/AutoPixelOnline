@@ -70,19 +70,19 @@ bool ServerRegisterSystem::EnvDefine() {
         }
     }, "DespatchDecodeFailed");
     
-    ProtobufDispatch::getInstance()->registerMessageCallback<PlayerLoginAck>([this](const uint64_t conn_,
-        const std::shared_ptr<PlayerLoginAck>& msg_,
-        const int64_t& tm_) {
-        auto _session_find = m_session_to_conn.find(msg_->session_key());
-        if (_session_find == m_session_to_conn.end()) {
-            RETURN_VOID;
-        }
-
-        if (msg_->result() == PlayerLoginAck_CheckResult_Pass) {
-            _session_find->second->m_state = GateSessionState::Pass;
-        }
-
-    });
+    //ProtobufDispatch::getInstance()->registerMessageCallback<PlayerLoginAck>([this](const uint64_t conn_,
+    //    const std::shared_ptr<PlayerLoginAck>& msg_,
+    //    const int64_t& tm_) {
+    //    auto _session_find = m_session_to_conn.find(msg_->session_key());
+    //    if (_session_find == m_session_to_conn.end()) {
+    //        RETURN_VOID;
+    //    }
+    //
+    //    if (msg_->result() == PlayerLoginAck_CheckResult_Pass) {
+    //        _session_find->second->m_state = GateSessionState::Pass;
+    //    }
+    //
+    //});
 
     //SessionPack 如果Gate收到该消息,则为转发消息,通过消息中的session 找到对应的链接
     ProtobufDispatch::getInstance()->registerMessageCallback<SessionPack>([this](const uint64_t conn_,
