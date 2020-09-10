@@ -28,6 +28,9 @@
     <Filter Include="System\DataBase">
       <UniqueIdentifier>{bd50177a-6d69-4f94-ba65-b8da9c12a50a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="System\Session">
+      <UniqueIdentifier>{9cf5a68f-1fa1-44e3-ab9b-0837b8f1a9a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\BaseEngine.h" />
@@ -111,6 +114,15 @@
       <Filter>System\ServerRegister</Filter>
     </ClInclude>
     <ClInclude Include="ServerTypeStruct.h" />
+    <ClInclude Include="System\Session\SessionSystem.h">
+      <Filter>System\Session</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Session\SessionStruct.h">
+      <Filter>System\Session</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\proto\Session.pb.h">
+      <Filter>System\Session</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\include\tool\Time.cpp">
@@ -152,5 +164,12 @@
     <ClCompile Include="System\ServerRegister\ServerNodeRegisterSystem.cpp">
       <Filter>System\ServerRegister</Filter>
     </ClCompile>
+    <ClCompile Include="System\Session\SessionSystem.cpp">
+      <Filter>System\Session</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\proto\Session.pb.cc">
+      <Filter>System\Session</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BaseEngine.cpp" />
   </ItemGroup>
 </Project>

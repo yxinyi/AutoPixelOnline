@@ -149,11 +149,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\include\proto\PlayerLogin.pb.cc" />
+    <ClCompile Include="..\Common\include\proto\Session.pb.cc" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="System\Account\AccountSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Common\include\proto\PlayerLogin.pb.h" />
+    <ClInclude Include="..\Common\include\proto\Session.pb.h" />
     <ClInclude Include="System\Account\AccountStruct.h" />
     <ClInclude Include="System\Account\AccountSystem.h" />
   </ItemGroup>

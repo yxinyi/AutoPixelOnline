@@ -8,17 +8,17 @@ RegSystem(CreatureManager)
 bool CreatureManager::EnvDefine() {
     //先忽略前置,假设已经通过验证并从数据库拿出玩家存档
 
-    ProtobufDispatch::getInstance()->registerMessageCallback<PlayerLogin>([this](const uint32_t conn_,
-        const PlayerLoginEvent_t& message_,
-        const int64_t& receive_time_) {
-        Creature_t _creature = CreateCreature(conn_, message_);
-        if (!_creature) {
-            LogError << "[PlayerLoginEvent] create err " << FlushLog;
-            NetManager::getInstance()->SendMessageBuff(conn_, ApiBuildErrorMsg(LOG_ERR));
-            return;
-        }
-        MessageBus::getInstance()->SendReq<Creature_t>(_creature, "PlayerLogin");
-    });
+    //ProtobufDispatch::getInstance()->registerMessageCallback<PlayerLogin>([this](const uint32_t conn_,
+    //    const PlayerLoginEvent_t& message_,
+    //    const int64_t& receive_time_) {
+    //    Creature_t _creature = CreateCreature(conn_, message_);
+    //    if (!_creature) {
+    //        LogError << "[PlayerLoginEvent] create err " << FlushLog;
+    //        NetManager::getInstance()->SendMessageBuff(conn_, ApiBuildErrorMsg(LOG_ERR));
+    //        return;
+    //    }
+    //    MessageBus::getInstance()->SendReq<Creature_t>(_creature, "PlayerLogin");
+    //});
 
     return true;
 }

@@ -3,7 +3,6 @@
 #include "../Common/include/proto/Shakehand.pb.h"
 #include "RenderManager.h"
 #include <Windows.h>
-#include "../Client/RenderManager.h"
 
 const uint32_t g_frame = 100;
 const NodeType g_node_type = NodeType::Client;
@@ -27,7 +26,6 @@ void MainLoop() {
             system("pause");
             return;
         }
-
         while (true) {
             const int64_t _this_frame_time = _frame_timer.elapsed();
             if (_this_frame_time >= _one_frame_time) {

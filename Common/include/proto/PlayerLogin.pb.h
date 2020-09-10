@@ -31,6 +31,7 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
@@ -47,7 +48,7 @@ struct TableStruct_PlayerLogin_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[3]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[4]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -60,15 +61,44 @@ extern LoginLogicDefaultTypeInternal _LoginLogic_default_instance_;
 class PlayerLogin;
 class PlayerLoginDefaultTypeInternal;
 extern PlayerLoginDefaultTypeInternal _PlayerLogin_default_instance_;
+class PlayerLoginAck;
+class PlayerLoginAckDefaultTypeInternal;
+extern PlayerLoginAckDefaultTypeInternal _PlayerLoginAck_default_instance_;
 class PlayerRegsiter;
 class PlayerRegsiterDefaultTypeInternal;
 extern PlayerRegsiterDefaultTypeInternal _PlayerRegsiter_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
 template<> ::LoginLogic* Arena::CreateMaybeMessage<::LoginLogic>(Arena*);
 template<> ::PlayerLogin* Arena::CreateMaybeMessage<::PlayerLogin>(Arena*);
+template<> ::PlayerLoginAck* Arena::CreateMaybeMessage<::PlayerLoginAck>(Arena*);
 template<> ::PlayerRegsiter* Arena::CreateMaybeMessage<::PlayerRegsiter>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 
+enum PlayerLoginAck_CheckResult : int {
+  PlayerLoginAck_CheckResult_Pass = 0,
+  PlayerLoginAck_CheckResult_Refuse = 1,
+  PlayerLoginAck_CheckResult_PlayerLoginAck_CheckResult_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  PlayerLoginAck_CheckResult_PlayerLoginAck_CheckResult_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool PlayerLoginAck_CheckResult_IsValid(int value);
+constexpr PlayerLoginAck_CheckResult PlayerLoginAck_CheckResult_CheckResult_MIN = PlayerLoginAck_CheckResult_Pass;
+constexpr PlayerLoginAck_CheckResult PlayerLoginAck_CheckResult_CheckResult_MAX = PlayerLoginAck_CheckResult_Refuse;
+constexpr int PlayerLoginAck_CheckResult_CheckResult_ARRAYSIZE = PlayerLoginAck_CheckResult_CheckResult_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* PlayerLoginAck_CheckResult_descriptor();
+template<typename T>
+inline const std::string& PlayerLoginAck_CheckResult_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, PlayerLoginAck_CheckResult>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function PlayerLoginAck_CheckResult_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    PlayerLoginAck_CheckResult_descriptor(), enum_t_value);
+}
+inline bool PlayerLoginAck_CheckResult_Parse(
+    const std::string& name, PlayerLoginAck_CheckResult* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<PlayerLoginAck_CheckResult>(
+    PlayerLoginAck_CheckResult_descriptor(), name, value);
+}
 // ===================================================================
 
 class PlayerLogin :
@@ -221,6 +251,174 @@ class PlayerLogin :
 };
 // -------------------------------------------------------------------
 
+class PlayerLoginAck :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:PlayerLoginAck) */ {
+ public:
+  PlayerLoginAck();
+  virtual ~PlayerLoginAck();
+
+  PlayerLoginAck(const PlayerLoginAck& from);
+  PlayerLoginAck(PlayerLoginAck&& from) noexcept
+    : PlayerLoginAck() {
+    *this = ::std::move(from);
+  }
+
+  inline PlayerLoginAck& operator=(const PlayerLoginAck& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline PlayerLoginAck& operator=(PlayerLoginAck&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const PlayerLoginAck& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const PlayerLoginAck* internal_default_instance() {
+    return reinterpret_cast<const PlayerLoginAck*>(
+               &_PlayerLoginAck_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    1;
+
+  friend void swap(PlayerLoginAck& a, PlayerLoginAck& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(PlayerLoginAck* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline PlayerLoginAck* New() const final {
+    return CreateMaybeMessage<PlayerLoginAck>(nullptr);
+  }
+
+  PlayerLoginAck* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<PlayerLoginAck>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const PlayerLoginAck& from);
+  void MergeFrom(const PlayerLoginAck& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(PlayerLoginAck* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "PlayerLoginAck";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_PlayerLogin_2eproto);
+    return ::descriptor_table_PlayerLogin_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  typedef PlayerLoginAck_CheckResult CheckResult;
+  static constexpr CheckResult Pass =
+    PlayerLoginAck_CheckResult_Pass;
+  static constexpr CheckResult Refuse =
+    PlayerLoginAck_CheckResult_Refuse;
+  static inline bool CheckResult_IsValid(int value) {
+    return PlayerLoginAck_CheckResult_IsValid(value);
+  }
+  static constexpr CheckResult CheckResult_MIN =
+    PlayerLoginAck_CheckResult_CheckResult_MIN;
+  static constexpr CheckResult CheckResult_MAX =
+    PlayerLoginAck_CheckResult_CheckResult_MAX;
+  static constexpr int CheckResult_ARRAYSIZE =
+    PlayerLoginAck_CheckResult_CheckResult_ARRAYSIZE;
+  static inline const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor*
+  CheckResult_descriptor() {
+    return PlayerLoginAck_CheckResult_descriptor();
+  }
+  template<typename T>
+  static inline const std::string& CheckResult_Name(T enum_t_value) {
+    static_assert(::std::is_same<T, CheckResult>::value ||
+      ::std::is_integral<T>::value,
+      "Incorrect type passed to function CheckResult_Name.");
+    return PlayerLoginAck_CheckResult_Name(enum_t_value);
+  }
+  static inline bool CheckResult_Parse(const std::string& name,
+      CheckResult* value) {
+    return PlayerLoginAck_CheckResult_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kSessionKeyFieldNumber = 1,
+    kResultFieldNumber = 2,
+  };
+  // uint64 session_key = 1;
+  void clear_session_key();
+  ::PROTOBUF_NAMESPACE_ID::uint64 session_key() const;
+  void set_session_key(::PROTOBUF_NAMESPACE_ID::uint64 value);
+
+  // .PlayerLoginAck.CheckResult result = 2;
+  void clear_result();
+  ::PlayerLoginAck_CheckResult result() const;
+  void set_result(::PlayerLoginAck_CheckResult value);
+
+  // @@protoc_insertion_point(class_scope:PlayerLoginAck)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 session_key_;
+  int result_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_PlayerLogin_2eproto;
+};
+// -------------------------------------------------------------------
+
 class LoginLogic :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:LoginLogic) */ {
  public:
@@ -263,7 +461,7 @@ class LoginLogic :
                &_LoginLogic_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    2;
 
   friend void swap(LoginLogic& a, LoginLogic& b) {
     a.Swap(&b);
@@ -394,7 +592,7 @@ class PlayerRegsiter :
                &_PlayerRegsiter_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    3;
 
   friend void swap(PlayerRegsiter& a, PlayerRegsiter& b) {
     a.Swap(&b);
@@ -615,6 +813,38 @@ inline void PlayerLogin::set_allocated_password(std::string* password) {
 
 // -------------------------------------------------------------------
 
+// PlayerLoginAck
+
+// uint64 session_key = 1;
+inline void PlayerLoginAck::clear_session_key() {
+  session_key_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 PlayerLoginAck::session_key() const {
+  // @@protoc_insertion_point(field_get:PlayerLoginAck.session_key)
+  return session_key_;
+}
+inline void PlayerLoginAck::set_session_key(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  session_key_ = value;
+  // @@protoc_insertion_point(field_set:PlayerLoginAck.session_key)
+}
+
+// .PlayerLoginAck.CheckResult result = 2;
+inline void PlayerLoginAck::clear_result() {
+  result_ = 0;
+}
+inline ::PlayerLoginAck_CheckResult PlayerLoginAck::result() const {
+  // @@protoc_insertion_point(field_get:PlayerLoginAck.result)
+  return static_cast< ::PlayerLoginAck_CheckResult >(result_);
+}
+inline void PlayerLoginAck::set_result(::PlayerLoginAck_CheckResult value) {
+  
+  result_ = value;
+  // @@protoc_insertion_point(field_set:PlayerLoginAck.result)
+}
+
+// -------------------------------------------------------------------
+
 // LoginLogic
 
 // uint64 session_key = 1;
@@ -744,9 +974,21 @@ inline void PlayerRegsiter::set_allocated_password(std::string* password) {
 
 // -------------------------------------------------------------------
 
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 
+
+PROTOBUF_NAMESPACE_OPEN
+
+template <> struct is_proto_enum< ::PlayerLoginAck_CheckResult> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::PlayerLoginAck_CheckResult>() {
+  return ::PlayerLoginAck_CheckResult_descriptor();
+}
+
+PROTOBUF_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)
 

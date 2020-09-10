@@ -5,8 +5,13 @@ message PlayerLogin {
 	string password = 2;
 }
 message PlayerLoginAck {
-	uint64 session_key = 1;
-	
+	uint64 session_key = 1;	
+	enum CheckResult
+    {
+        Pass = 0;
+        Refuse = 1;;
+    }
+	CheckResult result = 2;
 }
 message LoginLogic {
 	uint64 session_key = 1;

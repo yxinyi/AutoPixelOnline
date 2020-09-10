@@ -1,12 +1,6 @@
 #include "./ShakeHandSystem.h"
-#include "../../../Common/include/tool/ProtobufDispatcher.h"
-#include "../../../BaseEngine/MessageBus/MessageBus.h"
-#include "../../../BaseEngine/Tcp/Connection.h"
-#include "../../../BaseEngine/Tcp/NetManager.h"
-#include "../../../Common/include/proto/Shakehand.pb.h"
-#include "../../../Common/include/tool/TimerTask.h"
-#include "../../../Common/include/tool/Time.h"
-
+#include "EngineInclude.h"
+#include "proto/Shakehand.pb.h"
 
 
 

@@ -6,12 +6,18 @@ bool CDBServerSystem::EnvDefine() {
     ProtobufDispatch::getInstance()->registerMessageCallback<DataBaseReq>([this](const uint32_t conn_,
         const std::shared_ptr<DataBaseReq>& message_,
         const int64_t& receive_time_) {
-        LogInfo << "[DataBaseReq]" << FlushLog;
+    });
 
-        const uint64_t _msg_id = message_->msg_id();
-        DBOperatorType _op = (DBOperatorType)message_->cmd_op();
-        const string& _key = message_->key();
-        const string& _val = message_->val();
+    MessageBus::getInstance()->Attach([this](Session_t session_, MessagePtr base_msg_) {
+        std::shared_ptr<DataBaseReq> _message = std::static_pointer_cast<DataBaseReq>(base_msg_);
+        if (!_message) {
+            RETURN_VOID;
+        }
+        LogInfo << "[DataBaseReq]" << FlushLog;
+        const uint64_t _msg_id = _message->msg_id();
+        DBOperatorType _op = (DBOperatorType)_message->cmd_op();
+        const string& _key = _message->key();
+        const string& _val = _message->val();
 
         DataBaseAck_t _ack = std::make_shared<DataBaseAck>();
         _ack->set_msg_id(_msg_id);
@@ -56,10 +62,10 @@ bool CDBServerSystem::EnvDefine() {
         default:
             break;
         }
-
         _ack->set_query_state((uint32_t)_err);
-        NetManager::getInstance()->SendMessageBuff(conn_, _ack);
-    });
+        session_->SendMessageBuff(_ack);
+    }, "DataBaseReq");
+
     return true;
 }
 bool CDBServerSystem::PreInit() {

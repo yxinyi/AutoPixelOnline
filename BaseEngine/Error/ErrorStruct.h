@@ -12,6 +12,7 @@ enum ErrorID
     LOG_POS_NOT_EXISTS = 2,
     SERVER_IS_CLOSE = 3,
     GATE_SERVER_NOT_CONN = 4,
+    ACCOUNT_PASSWORD_ERR,
     ErrorMAX,
 }; 
 

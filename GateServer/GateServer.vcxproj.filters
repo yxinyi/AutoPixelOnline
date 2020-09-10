@@ -7,6 +7,9 @@
     <Filter Include="System\ServerRegisterSystem">
       <UniqueIdentifier>{caae0967-002e-4032-8b51-dde702f724d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="proto">
+      <UniqueIdentifier>{ff5b7d29-dabf-4a99-84c4-04da66f25e9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -16,6 +19,12 @@
     <ClCompile Include="..\Common\include\proto\ServerLink.pb.cc">
       <Filter>System\ServerRegisterSystem</Filter>
     </ClCompile>
+    <ClCompile Include="..\Common\include\proto\PlayerLogin.pb.cc">
+      <Filter>proto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\proto\Session.pb.cc">
+      <Filter>proto</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="System\ServerRegisterSystem\ServerRegisterSystem.h">
@@ -23,6 +32,12 @@
     </ClInclude>
     <ClInclude Include="..\Common\include\proto\ServerLink.pb.h">
       <Filter>System\ServerRegisterSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\proto\PlayerLogin.pb.h">
+      <Filter>proto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\proto\Session.pb.h">
+      <Filter>proto</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

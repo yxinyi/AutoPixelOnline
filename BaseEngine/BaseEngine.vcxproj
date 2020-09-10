@@ -22,6 +22,7 @@
     <ClInclude Include="..\Common\include\proto\DataBase.pb.h" />
     <ClInclude Include="..\Common\include\proto\ErrorNotify.pb.h" />
     <ClInclude Include="..\Common\include\proto\ServerLink.pb.h" />
+    <ClInclude Include="..\Common\include\proto\Session.pb.h" />
     <ClInclude Include="..\Common\include\proto\Shakehand.pb.h" />
     <ClInclude Include="..\Common\include\tool\AStar.h" />
     <ClInclude Include="..\Common\include\tool\LogInfo.h" />
@@ -45,6 +46,8 @@
     <ClInclude Include="System\DataBase\DBSystem.h" />
     <ClInclude Include="System\DataBase\DBSystemStruct.h" />
     <ClInclude Include="System\ServerRegister\ServerNodeRegisterSystem.h" />
+    <ClInclude Include="System\Session\SessionStruct.h" />
+    <ClInclude Include="System\Session\SessionSystem.h" />
     <ClInclude Include="System\ShakeHand\ShakeHandSystem.h" />
     <ClInclude Include="Tcp\Connection.h" />
     <ClInclude Include="Tcp\NetManager.h" />
@@ -53,14 +56,17 @@
     <ClCompile Include="..\Common\include\proto\DataBase.pb.cc" />
     <ClCompile Include="..\Common\include\proto\ErrorNotify.pb.cc" />
     <ClCompile Include="..\Common\include\proto\ServerLink.pb.cc" />
+    <ClCompile Include="..\Common\include\proto\Session.pb.cc" />
     <ClCompile Include="..\Common\include\proto\Shakehand.pb.cc" />
     <ClCompile Include="..\Common\include\tool\Time.cpp" />
     <ClCompile Include="..\Common\include\tool\TimerTask.cpp" />
     <ClCompile Include="..\Common\include\tool\UniqueNumberFactory.cpp" />
     <ClCompile Include="Error\Error.cpp" />
+    <ClCompile Include="include\BaseEngine.cpp" />
     <ClCompile Include="System\BaseSystem.cpp" />
     <ClCompile Include="System\DataBase\DBSystem.cpp" />
     <ClCompile Include="System\ServerRegister\ServerNodeRegisterSystem.cpp" />
+    <ClCompile Include="System\Session\SessionSystem.cpp" />
     <ClCompile Include="System\ShakeHand\ShakeHandSystem.cpp" />
     <ClCompile Include="Tcp\NetManager.cpp" />
   </ItemGroup>

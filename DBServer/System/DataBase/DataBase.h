@@ -2,6 +2,7 @@
 #include "EngineInclude.h"
 #include "System/BaseSystem.h"
 #include "System/DataBase/DBSystemStruct.h"
+#include "System/Session/SessionStruct.h"
 #include "proto/DataBase.pb.h"
 #include "leveldb/db.h"
 class CDBServerSystem :public BaseSystem{

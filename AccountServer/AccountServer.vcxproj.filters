@@ -8,6 +8,9 @@
     <ClCompile Include="..\Common\include\proto\PlayerLogin.pb.cc">
       <Filter>System\Account</Filter>
     </ClCompile>
+    <ClCompile Include="..\Common\include\proto\Session.pb.cc">
+      <Filter>System\Account</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -25,6 +28,9 @@
       <Filter>System\Account</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\include\proto\PlayerLogin.pb.h">
+      <Filter>System\Account</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\proto\Session.pb.h">
       <Filter>System\Account</Filter>
     </ClInclude>
   </ItemGroup>

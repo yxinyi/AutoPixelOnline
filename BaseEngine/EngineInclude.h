@@ -11,6 +11,7 @@
 #include "tool/Time.h"
 #include "tool/Timer.h"
 #include "System/DataBase/DBSystem.h"
+#include "System/Session/SessionSystem.h"
 #include "nlohmann/json.hpp"
 #include "ServerTypeStruct.h"
 using Json = nlohmann::json;

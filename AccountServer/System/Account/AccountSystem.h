@@ -3,6 +3,7 @@
 #include <vector>
 #include <list>
 #include "proto/Map.pb.h"
+#include "proto/PlayerLogin.pb.h"
 #include <set>
 
 class AccountSystem :public BaseSystem {
