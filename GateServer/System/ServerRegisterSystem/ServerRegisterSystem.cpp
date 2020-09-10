@@ -18,9 +18,9 @@ uint32_t ServerRegisterSystem::GetMinLoadServerInfo(NodeType node_type_) {
 }
 
 bool ServerRegisterSystem::EnvDefine() {
-    ProtobufDispatch::getInstance()->SetDefaultCallback([this](const SessionConn conn_,
-        const std::shared_ptr<Message>& msg_,
-        const int64_t& tm_) {
+
+
+    MessageBus::getInstance()->Attach([this](uint32_t conn_, std::string msg_name_, std::string msg_str_) {
         const uint32_t _conn_id = ApiGetConnID(conn_);
         auto _session_find = m_conn_to_session.find(_conn_id);
         if (_session_find == m_conn_to_session.end()) {
@@ -31,12 +31,12 @@ bool ServerRegisterSystem::EnvDefine() {
         if (_session_find->second->m_state != GateSessionState::Pass) {
             //如果没通过,且是客户端,则判断是否是登陆,如果是登陆验证则允许放行
             auto _serverinfo_find = m_id_to_server.find(_conn_id);
-            if (_serverinfo_find->second->m_node_type != NodeType::Client){// || msg_->GetTypeName() != "PlayerLogin") {
+            if (_serverinfo_find->second->m_node_type != NodeType::Client) {// || msg_->GetTypeName() != "PlayerLogin") {
                 RETURN_VOID;
             }
         }
         //根据消息找到注册了该消息的服务器,
-        const string& _msg_name = msg_->GetTypeName();
+        const string& _msg_name = msg_name_;
         auto _info_find = m_msg_str_to_server.find(_msg_name);
         if (_info_find == m_msg_str_to_server.end()) {
             NetManager::getInstance()->SendMessageBuff(_conn_id, ApiBuildErrorMsg(SERVER_IS_CLOSE));
@@ -53,13 +53,13 @@ bool ServerRegisterSystem::EnvDefine() {
                 _session_find->second->m_type_conn.insert(_info->m_conn_id);
                 m_id_to_server[_info->m_conn_id]->m_load_number++;
 
-                LogInfo << "[ServerRegisterSystem] forward msg " << msg_->GetTypeName() << " to target " << GetNodeTypeStr(_info->m_node_type) << FlushLog;
+                LogInfo << "[ServerRegisterSystem] forward msg " << msg_name_ << " to target " << GetNodeTypeStr(_info->m_node_type) << FlushLog;
 
                 //打包转发
                 SessionPack_t _pack = std::make_shared<SessionPack>();
                 _pack->set_seesion_id(_session_find->second->m_session_id);
-                _pack->set_pack_name(msg_->GetTypeName());
-                _pack->set_pack_str(msg_->SerializeAsString());
+                _pack->set_pack_name(msg_name_);
+                _pack->set_pack_str(msg_str_);
                 NetManager::getInstance()->SendMessageBuff(_info->m_conn_id, _pack);
 
                 _node_it++;
@@ -68,14 +68,7 @@ bool ServerRegisterSystem::EnvDefine() {
                 _node_it = _info_find->second.erase(_node_it);
             }
         }
-
-
-
-
-    });
-
-
-
+    }, "DespatchDecodeFailed");
     
     ProtobufDispatch::getInstance()->registerMessageCallback<PlayerLoginAck>([this](const uint64_t conn_,
         const std::shared_ptr<PlayerLoginAck>& msg_,

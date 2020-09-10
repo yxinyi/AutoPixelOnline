@@ -5,7 +5,7 @@ message PlayerLogin {
 	string password = 2;
 }
 message PlayerLoginAck {
-	uint64 session_key = 1;	
+	uint32 session_key = 1;	
 	enum CheckResult
     {
         Pass = 0;
@@ -14,7 +14,7 @@ message PlayerLoginAck {
 	CheckResult result = 2;
 }
 message LoginLogic {
-	uint64 session_key = 1;
+	uint32 session_key = 1;
 }
 message PlayerRegsiter {
 	string account = 1;
