@@ -6,19 +6,13 @@ bool CDBServerSystem::EnvDefine() {
     ProtobufDispatch::getInstance()->registerMessageCallback<DataBaseReq>([this](const uint32_t conn_,
         const std::shared_ptr<DataBaseReq>& message_,
         const int64_t& receive_time_) {
-    });
-
-    MessageBus::getInstance()->Attach([this](Session_t session_, MessagePtr base_msg_) {
-        std::shared_ptr<DataBaseReq> _message = std::static_pointer_cast<DataBaseReq>(base_msg_);
-        if (!_message) {
-            RETURN_VOID;
-        }
         LogInfo << "[DataBaseReq]" << FlushLog;
-        const uint64_t _msg_id = _message->msg_id();
-        DBOperatorType _op = (DBOperatorType)_message->cmd_op();
-        const string& _key = _message->key();
-        const string& _val = _message->val();
-
+    
+        const uint64_t _msg_id = message_->msg_id();
+        DBOperatorType _op = (DBOperatorType)message_->cmd_op();
+        const string& _key = message_->key();
+        const string& _val = message_->val();
+    
         DataBaseAck_t _ack = std::make_shared<DataBaseAck>();
         _ack->set_msg_id(_msg_id);
         DBOperatorErr _err = DBOperatorErr::ERR;
@@ -32,7 +26,7 @@ bool CDBServerSystem::EnvDefine() {
                 _ack->set_result_str(_rst);
             }
             else {
-                LogError << "[DBOperatorType::Delete]" << _status.ToString() << FlushLog;
+                LogError << "[DBOperatorType::Query]" << _status.ToString() << FlushLog;
             }
             break;
         }
@@ -58,13 +52,14 @@ bool CDBServerSystem::EnvDefine() {
             }
             break;
         }
-
+    
         default:
             break;
         }
+    
         _ack->set_query_state((uint32_t)_err);
-        session_->SendMessageBuff(_ack);
-    }, "DataBaseReq");
+        NetManager::getInstance()->SendMessageBuff(conn_, _ack);
+    });
 
     return true;
 }
