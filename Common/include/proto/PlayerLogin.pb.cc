@@ -31,6 +31,24 @@ class PlayerRegsiterDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PlayerRegsiter> _instance;
 } _PlayerRegsiter_default_instance_;
+class BenchTestDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<BenchTest> _instance;
+} _BenchTest_default_instance_;
+static void InitDefaultsscc_info_BenchTest_PlayerLogin_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::_BenchTest_default_instance_;
+    new (ptr) ::BenchTest();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::BenchTest::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_BenchTest_PlayerLogin_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_BenchTest_PlayerLogin_2eproto}, {}};
+
 static void InitDefaultsscc_info_LoginLogic_PlayerLogin_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -87,7 +105,7 @@ static void InitDefaultsscc_info_PlayerRegsiter_PlayerLogin_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PlayerRegsiter_PlayerLogin_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_PlayerRegsiter_PlayerLogin_2eproto}, {}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_PlayerLogin_2eproto[4];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_PlayerLogin_2eproto[5];
 static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_PlayerLogin_2eproto[1];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_PlayerLogin_2eproto = nullptr;
 
@@ -119,12 +137,19 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_PlayerLogin_2eproto::offsets[]
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::PlayerRegsiter, account_),
   PROTOBUF_FIELD_OFFSET(::PlayerRegsiter, password_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::BenchTest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::BenchTest, num_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::PlayerLogin)},
   { 7, -1, sizeof(::PlayerLoginAck)},
   { 14, -1, sizeof(::LoginLogic)},
   { 20, -1, sizeof(::PlayerRegsiter)},
+  { 27, -1, sizeof(::BenchTest)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -132,6 +157,7 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_PlayerLoginAck_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_LoginLogic_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_PlayerRegsiter_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_BenchTest_default_instance_),
 };
 
 const char descriptor_table_protodef_PlayerLogin_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
@@ -141,12 +167,13 @@ const char descriptor_table_protodef_PlayerLogin_2eproto[] PROTOBUF_SECTION_VARI
   " \001(\0162\033.PlayerLoginAck.CheckResult\"#\n\013Che"
   "ckResult\022\010\n\004Pass\020\000\022\n\n\006Refuse\020\001\"!\n\nLoginL"
   "ogic\022\023\n\013session_key\030\001 \001(\004\"3\n\016PlayerRegsi"
-  "ter\022\017\n\007account\030\001 \001(\t\022\020\n\010password\030\002 \001(\tb\006"
-  "proto3"
+  "ter\022\017\n\007account\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"\030"
+  "\n\tBenchTest\022\013\n\003num\030\001 \001(\rb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_PlayerLogin_2eproto_deps[1] = {
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_PlayerLogin_2eproto_sccs[4] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_PlayerLogin_2eproto_sccs[5] = {
+  &scc_info_BenchTest_PlayerLogin_2eproto.base,
   &scc_info_LoginLogic_PlayerLogin_2eproto.base,
   &scc_info_PlayerLogin_PlayerLogin_2eproto.base,
   &scc_info_PlayerLoginAck_PlayerLogin_2eproto.base,
@@ -155,10 +182,10 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_Pla
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_PlayerLogin_2eproto_once;
 static bool descriptor_table_PlayerLogin_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_PlayerLogin_2eproto = {
-  &descriptor_table_PlayerLogin_2eproto_initialized, descriptor_table_protodef_PlayerLogin_2eproto, "PlayerLogin.proto", 286,
-  &descriptor_table_PlayerLogin_2eproto_once, descriptor_table_PlayerLogin_2eproto_sccs, descriptor_table_PlayerLogin_2eproto_deps, 4, 0,
+  &descriptor_table_PlayerLogin_2eproto_initialized, descriptor_table_protodef_PlayerLogin_2eproto, "PlayerLogin.proto", 312,
+  &descriptor_table_PlayerLogin_2eproto_once, descriptor_table_PlayerLogin_2eproto_sccs, descriptor_table_PlayerLogin_2eproto_deps, 5, 0,
   schemas, file_default_instances, TableStruct_PlayerLogin_2eproto::offsets,
-  file_level_metadata_PlayerLogin_2eproto, 4, file_level_enum_descriptors_PlayerLogin_2eproto, file_level_service_descriptors_PlayerLogin_2eproto,
+  file_level_metadata_PlayerLogin_2eproto, 5, file_level_enum_descriptors_PlayerLogin_2eproto, file_level_service_descriptors_PlayerLogin_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -1397,6 +1424,255 @@ void PlayerRegsiter::InternalSwap(PlayerRegsiter* other) {
 }
 
 
+// ===================================================================
+
+void BenchTest::InitAsDefaultInstance() {
+}
+class BenchTest::_Internal {
+ public:
+};
+
+BenchTest::BenchTest()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:BenchTest)
+}
+BenchTest::BenchTest(const BenchTest& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  num_ = from.num_;
+  // @@protoc_insertion_point(copy_constructor:BenchTest)
+}
+
+void BenchTest::SharedCtor() {
+  num_ = 0u;
+}
+
+BenchTest::~BenchTest() {
+  // @@protoc_insertion_point(destructor:BenchTest)
+  SharedDtor();
+}
+
+void BenchTest::SharedDtor() {
+}
+
+void BenchTest::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const BenchTest& BenchTest::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_BenchTest_PlayerLogin_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void BenchTest::Clear() {
+// @@protoc_insertion_point(message_clear_start:BenchTest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  num_ = 0u;
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* BenchTest::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // uint32 num = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          num_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool BenchTest::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:BenchTest)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // uint32 num = 1;
+      case 1: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::uint32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &num_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:BenchTest)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:BenchTest)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void BenchTest::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:BenchTest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint32 num = 1;
+  if (this->num() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32(1, this->num(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:BenchTest)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* BenchTest::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:BenchTest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint32 num = 1;
+  if (this->num() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->num(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:BenchTest)
+  return target;
+}
+
+size_t BenchTest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:BenchTest)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // uint32 num = 1;
+  if (this->num() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
+        this->num());
+  }
+
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void BenchTest::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BenchTest)
+  GOOGLE_DCHECK_NE(&from, this);
+  const BenchTest* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<BenchTest>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BenchTest)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BenchTest)
+    MergeFrom(*source);
+  }
+}
+
+void BenchTest::MergeFrom(const BenchTest& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BenchTest)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.num() != 0) {
+    set_num(from.num());
+  }
+}
+
+void BenchTest::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BenchTest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void BenchTest::CopyFrom(const BenchTest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BenchTest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool BenchTest::IsInitialized() const {
+  return true;
+}
+
+void BenchTest::InternalSwap(BenchTest* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(num_, other->num_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata BenchTest::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
 // @@protoc_insertion_point(namespace_scope)
 PROTOBUF_NAMESPACE_OPEN
 template<> PROTOBUF_NOINLINE ::PlayerLogin* Arena::CreateMaybeMessage< ::PlayerLogin >(Arena* arena) {
@@ -1410,6 +1686,9 @@ template<> PROTOBUF_NOINLINE ::LoginLogic* Arena::CreateMaybeMessage< ::LoginLog
 }
 template<> PROTOBUF_NOINLINE ::PlayerRegsiter* Arena::CreateMaybeMessage< ::PlayerRegsiter >(Arena* arena) {
   return Arena::CreateInternal< ::PlayerRegsiter >(arena);
+}
+template<> PROTOBUF_NOINLINE ::BenchTest* Arena::CreateMaybeMessage< ::BenchTest >(Arena* arena) {
+  return Arena::CreateInternal< ::BenchTest >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

@@ -8,7 +8,7 @@
 RegSystem(CliMapSystem)
 
 bool CliMapSystem::EnvDefine() {
-    EventRegister(SceneMapInfo, [this](const uint32_t conn_,
+    EventRegister(SceneMapInfo, [this](const uint64_t conn_,
         const std::shared_ptr<SceneMapInfo>& message_,
         const int64_t& receive_time_) {
         this->InitMap(message_);

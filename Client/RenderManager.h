@@ -1,7 +1,6 @@
 #pragma once
 #include "tool/SingletonTemplate.h"
 #include "UI/UIManager.h"
-#include "System/BaseSystem.h"
 #include <functional>
 #include <vector>
 #include <string>

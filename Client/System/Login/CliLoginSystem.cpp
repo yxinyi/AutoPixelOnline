@@ -67,6 +67,20 @@ bool CliLoginSystem::Init() {
     });
     LogInfo << "[CliLoginSystem] ConnGateServer " << GetGateIP() << " " << GetGatePort() << FlushLog;
     NetManager::getInstance()->Connect(GetGateIP(), GetGatePort(), NodeType::GateServer);
+
+    TimerTaskManager::getInstance()->RegisterTask("BenchTest", 0, 1000, -1, [this]() {
+        if (m_password.size()) {
+            const uint32_t _loop_times = atoi(m_password.c_str());
+            std::shared_ptr<BenchTest> _tst = std::make_shared<BenchTest>();
+            CConnection_t _conn = CConnectionMgr::getInstance()->GetOnlyOneConnection(NodeType::GateServer);
+            for (int _idx = 0; _idx < _loop_times; _idx++) {
+                static uint32_t _num = 0;;
+                _tst->set_num(_num++);
+                NetManager::getInstance()->SendMessageBuff(_conn->getConnId(), _tst);
+            }
+        }
+    });
+
     return true;
 }
 bool CliLoginSystem::Loop(const uint64_t interval_) {

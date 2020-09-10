@@ -42,8 +42,8 @@ struct GateSession {
         那么需要指定当前客户端与哪一个在通信
     */
     uint32_t m_conn_id = 0;
-    uint64_t m_session_id = 0;
+    uint32_t m_session_id = 0;
     GateSessionState m_state = GateSessionState::Error;
-    std::map<NodeType, uint32_t> m_type_conn;
+    std::set<uint32_t> m_type_conn;
 };
 using GateSession_t = std::shared_ptr<GateSession>;

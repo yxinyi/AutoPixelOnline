@@ -1,1 +1,3 @@
-﻿  GateServer.vcxproj -> F:\AutoPixelOnline\AutoPixelOnline\x64\Debug\GateServer.exe
+﻿  ServerRegisterSystem.cpp
+F:\AutoPixelOnline\AutoPixelOnline\GateServer\System\ServerRegisterSystem\ServerRegisterSystem.cpp(83,70): warning C4244: “参数”: 从“google::protobuf::uint64”转换到“const unsigned int”，可能丢失数据
+  GateServer.vcxproj -> F:\AutoPixelOnline\AutoPixelOnline\x64\Debug\GateServer.exe

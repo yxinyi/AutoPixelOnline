@@ -12,22 +12,29 @@ const std::string g_login_db_query = "AccountSystemAccountQuery:";
 bool AccountSystem::EnvDefine() {
 
 
-    MessageBus::getInstance()->Attach([this](Session_t session_, MessagePtr base_msg_) {
-        std::shared_ptr<PlayerLogin> _message = std::static_pointer_cast<PlayerLogin>(base_msg_);
-        if (!_message) {
-            RETURN_VOID;
-        }
+    ProtobufDispatch::getInstance()->registerMessageCallback<BenchTest>([this](const uint64_t session_,
+        const std::shared_ptr<BenchTest>& message_,
+        const int64_t& receive_time_) {
+        LogInfo << message_->num() << FlushLog;
+
+    });
+    
+
+    ProtobufDispatch::getInstance()->registerMessageCallback<PlayerLogin>([this](const uint64_t session_,
+        const std::shared_ptr<PlayerLogin>& message_,
+        const int64_t& receive_time_) {
+
         CDataBaseSystem_t _sys = SystemManager::getInstance()->GetSystem<CDataBaseSystem>();
-        const std::string _query_account = _message->account();
+        const std::string _query_account = message_->account();
         std::string _key = g_login_db_query + _query_account;
 
-        _sys->Query(_key, [_message, session_](DBOperatorErr err_, std::string val_) {
+        _sys->Query(_key, [message_, session_](DBOperatorErr err_, std::string val_) {
             PlayerLoginAck_CheckResult _rst = PlayerLoginAck_CheckResult_Refuse;
             do {
                 if (err_ != DBOperatorErr::SUCCESS) {
                     break;
                 }
-                if (_message->password() != val_) {
+                if (message_->password() != val_) {
                     break;
                 }
                 _rst = PlayerLoginAck_CheckResult_Pass;
@@ -35,20 +42,16 @@ bool AccountSystem::EnvDefine() {
 
             std::shared_ptr<PlayerLoginAck> _ack = std::make_shared<PlayerLoginAck>();
             //发一个消息到 gate 表示结果,
-            _ack->set_session_key(session_->m_session_id);
+            _ack->set_session_key(ApiGetSession(session_));
             _ack->set_result(PlayerLoginAck_CheckResult_Pass);
-            NetManager::getInstance()->SendMessageBuff(session_->m_conn_id, _ack);
+            NetManager::getInstance()->SendMessageBuff(ApiGetConnID(session_), _ack);
             if (_rst == PlayerLoginAck_CheckResult_Refuse) {
                 //如果没通过发个提示到客户端
-                session_->SendMessageBuff(ApiBuildErrorMsg(ACCOUNT_PASSWORD_ERR));
+                //session_->SendMessageBuff(ApiBuildErrorMsg(ACCOUNT_PASSWORD_ERR));
+                NetManager::getInstance()->SendMessageBuff(session_, ApiBuildErrorMsg(ACCOUNT_PASSWORD_ERR));
             }
 
         });
-    },"PlayerLogin");
-
-    ProtobufDispatch::getInstance()->registerMessageCallback<PlayerLogin>([this](const uint32_t conn_,
-        const std::shared_ptr<PlayerLogin>& message_,
-        const int64_t& receive_time_) {
     });
     return true;
 }

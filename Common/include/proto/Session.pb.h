@@ -47,16 +47,13 @@ struct TableStruct_Session_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[3]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[2]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
   static const ::PROTOBUF_NAMESPACE_ID::uint32 offsets[];
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Session_2eproto;
-class SessionCreate;
-class SessionCreateDefaultTypeInternal;
-extern SessionCreateDefaultTypeInternal _SessionCreate_default_instance_;
 class SessionDestory;
 class SessionDestoryDefaultTypeInternal;
 extern SessionDestoryDefaultTypeInternal _SessionDestory_default_instance_;
@@ -64,7 +61,6 @@ class SessionPack;
 class SessionPackDefaultTypeInternal;
 extern SessionPackDefaultTypeInternal _SessionPack_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
-template<> ::SessionCreate* Arena::CreateMaybeMessage<::SessionCreate>(Arena*);
 template<> ::SessionDestory* Arena::CreateMaybeMessage<::SessionDestory>(Arena*);
 template<> ::SessionPack* Arena::CreateMaybeMessage<::SessionPack>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
@@ -199,21 +195,21 @@ class SessionPack :
   std::string* release_pack_name();
   void set_allocated_pack_name(std::string* pack_name);
 
-  // string pack_str = 3;
+  // bytes pack_str = 3;
   void clear_pack_str();
   const std::string& pack_str() const;
   void set_pack_str(const std::string& value);
   void set_pack_str(std::string&& value);
   void set_pack_str(const char* value);
-  void set_pack_str(const char* value, size_t size);
+  void set_pack_str(const void* value, size_t size);
   std::string* mutable_pack_str();
   std::string* release_pack_str();
   void set_allocated_pack_str(std::string* pack_str);
 
-  // uint64 seesion_id = 1;
+  // uint32 seesion_id = 1;
   void clear_seesion_id();
-  ::PROTOBUF_NAMESPACE_ID::uint64 seesion_id() const;
-  void set_seesion_id(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  ::PROTOBUF_NAMESPACE_ID::uint32 seesion_id() const;
+  void set_seesion_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
 
   // @@protoc_insertion_point(class_scope:SessionPack)
  private:
@@ -222,138 +218,7 @@ class SessionPack :
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr pack_name_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr pack_str_;
-  ::PROTOBUF_NAMESPACE_ID::uint64 seesion_id_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  friend struct ::TableStruct_Session_2eproto;
-};
-// -------------------------------------------------------------------
-
-class SessionCreate :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:SessionCreate) */ {
- public:
-  SessionCreate();
-  virtual ~SessionCreate();
-
-  SessionCreate(const SessionCreate& from);
-  SessionCreate(SessionCreate&& from) noexcept
-    : SessionCreate() {
-    *this = ::std::move(from);
-  }
-
-  inline SessionCreate& operator=(const SessionCreate& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline SessionCreate& operator=(SessionCreate&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return GetMetadataStatic().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return GetMetadataStatic().reflection;
-  }
-  static const SessionCreate& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const SessionCreate* internal_default_instance() {
-    return reinterpret_cast<const SessionCreate*>(
-               &_SessionCreate_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    1;
-
-  friend void swap(SessionCreate& a, SessionCreate& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(SessionCreate* other) {
-    if (other == this) return;
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline SessionCreate* New() const final {
-    return CreateMaybeMessage<SessionCreate>(nullptr);
-  }
-
-  SessionCreate* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<SessionCreate>(arena);
-  }
-  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const SessionCreate& from);
-  void MergeFrom(const SessionCreate& from);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  #else
-  bool MergePartialFromCodedStream(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
-  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  void SerializeWithCachedSizes(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
-      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  inline void SharedCtor();
-  inline void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(SessionCreate* other);
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "SessionCreate";
-  }
-  private:
-  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
-    return nullptr;
-  }
-  inline void* MaybeArenaPtr() const {
-    return nullptr;
-  }
-  public:
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-  private:
-  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_Session_2eproto);
-    return ::descriptor_table_Session_2eproto.file_level_metadata[kIndexInFileMessages];
-  }
-
-  public:
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kSeesionIdFieldNumber = 1,
-  };
-  // uint64 seesion_id = 1;
-  void clear_seesion_id();
-  ::PROTOBUF_NAMESPACE_ID::uint64 seesion_id() const;
-  void set_seesion_id(::PROTOBUF_NAMESPACE_ID::uint64 value);
-
-  // @@protoc_insertion_point(class_scope:SessionCreate)
- private:
-  class _Internal;
-
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::uint64 seesion_id_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 seesion_id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Session_2eproto;
 };
@@ -401,7 +266,7 @@ class SessionDestory :
                &_SessionDestory_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    1;
 
   friend void swap(SessionDestory& a, SessionDestory& b) {
     a.Swap(&b);
@@ -474,17 +339,17 @@ class SessionDestory :
   enum : int {
     kSeesionIdFieldNumber = 1,
   };
-  // uint64 seesion_id = 1;
+  // uint32 seesion_id = 1;
   void clear_seesion_id();
-  ::PROTOBUF_NAMESPACE_ID::uint64 seesion_id() const;
-  void set_seesion_id(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  ::PROTOBUF_NAMESPACE_ID::uint32 seesion_id() const;
+  void set_seesion_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
 
   // @@protoc_insertion_point(class_scope:SessionDestory)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::uint64 seesion_id_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 seesion_id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Session_2eproto;
 };
@@ -499,15 +364,15 @@ class SessionDestory :
 #endif  // __GNUC__
 // SessionPack
 
-// uint64 seesion_id = 1;
+// uint32 seesion_id = 1;
 inline void SessionPack::clear_seesion_id() {
-  seesion_id_ = PROTOBUF_ULONGLONG(0);
+  seesion_id_ = 0u;
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 SessionPack::seesion_id() const {
+inline ::PROTOBUF_NAMESPACE_ID::uint32 SessionPack::seesion_id() const {
   // @@protoc_insertion_point(field_get:SessionPack.seesion_id)
   return seesion_id_;
 }
-inline void SessionPack::set_seesion_id(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void SessionPack::set_seesion_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   
   seesion_id_ = value;
   // @@protoc_insertion_point(field_set:SessionPack.seesion_id)
@@ -564,7 +429,7 @@ inline void SessionPack::set_allocated_pack_name(std::string* pack_name) {
   // @@protoc_insertion_point(field_set_allocated:SessionPack.pack_name)
 }
 
-// string pack_str = 3;
+// bytes pack_str = 3;
 inline void SessionPack::clear_pack_str() {
   pack_str_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -589,7 +454,7 @@ inline void SessionPack::set_pack_str(const char* value) {
   pack_str_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:SessionPack.pack_str)
 }
-inline void SessionPack::set_pack_str(const char* value, size_t size) {
+inline void SessionPack::set_pack_str(const void* value, size_t size) {
   
   pack_str_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
@@ -617,35 +482,17 @@ inline void SessionPack::set_allocated_pack_str(std::string* pack_str) {
 
 // -------------------------------------------------------------------
 
-// SessionCreate
-
-// uint64 seesion_id = 1;
-inline void SessionCreate::clear_seesion_id() {
-  seesion_id_ = PROTOBUF_ULONGLONG(0);
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint64 SessionCreate::seesion_id() const {
-  // @@protoc_insertion_point(field_get:SessionCreate.seesion_id)
-  return seesion_id_;
-}
-inline void SessionCreate::set_seesion_id(::PROTOBUF_NAMESPACE_ID::uint64 value) {
-  
-  seesion_id_ = value;
-  // @@protoc_insertion_point(field_set:SessionCreate.seesion_id)
-}
-
-// -------------------------------------------------------------------
-
 // SessionDestory
 
-// uint64 seesion_id = 1;
+// uint32 seesion_id = 1;
 inline void SessionDestory::clear_seesion_id() {
-  seesion_id_ = PROTOBUF_ULONGLONG(0);
+  seesion_id_ = 0u;
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 SessionDestory::seesion_id() const {
+inline ::PROTOBUF_NAMESPACE_ID::uint32 SessionDestory::seesion_id() const {
   // @@protoc_insertion_point(field_get:SessionDestory.seesion_id)
   return seesion_id_;
 }
-inline void SessionDestory::set_seesion_id(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void SessionDestory::set_seesion_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   
   seesion_id_ = value;
   // @@protoc_insertion_point(field_set:SessionDestory.seesion_id)
@@ -654,8 +501,6 @@ inline void SessionDestory::set_seesion_id(::PROTOBUF_NAMESPACE_ID::uint64 value
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
 // -------------------------------------------------------------------
 
 

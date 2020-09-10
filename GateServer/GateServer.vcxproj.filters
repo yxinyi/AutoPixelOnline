@@ -39,5 +39,8 @@
     <ClInclude Include="..\Common\include\proto\Session.pb.h">
       <Filter>proto</Filter>
     </ClInclude>
+    <ClInclude Include="System\ServerRegisterSystem\ServerRegisterStruct.h">
+      <Filter>System\ServerRegisterSystem</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

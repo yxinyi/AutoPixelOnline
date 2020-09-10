@@ -48,13 +48,16 @@ struct TableStruct_PlayerLogin_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[4]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[5]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
   static const ::PROTOBUF_NAMESPACE_ID::uint32 offsets[];
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_PlayerLogin_2eproto;
+class BenchTest;
+class BenchTestDefaultTypeInternal;
+extern BenchTestDefaultTypeInternal _BenchTest_default_instance_;
 class LoginLogic;
 class LoginLogicDefaultTypeInternal;
 extern LoginLogicDefaultTypeInternal _LoginLogic_default_instance_;
@@ -68,6 +71,7 @@ class PlayerRegsiter;
 class PlayerRegsiterDefaultTypeInternal;
 extern PlayerRegsiterDefaultTypeInternal _PlayerRegsiter_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
+template<> ::BenchTest* Arena::CreateMaybeMessage<::BenchTest>(Arena*);
 template<> ::LoginLogic* Arena::CreateMaybeMessage<::LoginLogic>(Arena*);
 template<> ::PlayerLogin* Arena::CreateMaybeMessage<::PlayerLogin>(Arena*);
 template<> ::PlayerLoginAck* Arena::CreateMaybeMessage<::PlayerLoginAck>(Arena*);
@@ -698,6 +702,137 @@ class PlayerRegsiter :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_PlayerLogin_2eproto;
 };
+// -------------------------------------------------------------------
+
+class BenchTest :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:BenchTest) */ {
+ public:
+  BenchTest();
+  virtual ~BenchTest();
+
+  BenchTest(const BenchTest& from);
+  BenchTest(BenchTest&& from) noexcept
+    : BenchTest() {
+    *this = ::std::move(from);
+  }
+
+  inline BenchTest& operator=(const BenchTest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline BenchTest& operator=(BenchTest&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const BenchTest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const BenchTest* internal_default_instance() {
+    return reinterpret_cast<const BenchTest*>(
+               &_BenchTest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    4;
+
+  friend void swap(BenchTest& a, BenchTest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(BenchTest* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline BenchTest* New() const final {
+    return CreateMaybeMessage<BenchTest>(nullptr);
+  }
+
+  BenchTest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<BenchTest>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const BenchTest& from);
+  void MergeFrom(const BenchTest& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(BenchTest* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "BenchTest";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_PlayerLogin_2eproto);
+    return ::descriptor_table_PlayerLogin_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kNumFieldNumber = 1,
+  };
+  // uint32 num = 1;
+  void clear_num();
+  ::PROTOBUF_NAMESPACE_ID::uint32 num() const;
+  void set_num(::PROTOBUF_NAMESPACE_ID::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:BenchTest)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 num_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_PlayerLogin_2eproto;
+};
 // ===================================================================
 
 
@@ -967,9 +1102,29 @@ inline void PlayerRegsiter::set_allocated_password(std::string* password) {
   // @@protoc_insertion_point(field_set_allocated:PlayerRegsiter.password)
 }
 
+// -------------------------------------------------------------------
+
+// BenchTest
+
+// uint32 num = 1;
+inline void BenchTest::clear_num() {
+  num_ = 0u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 BenchTest::num() const {
+  // @@protoc_insertion_point(field_get:BenchTest.num)
+  return num_;
+}
+inline void BenchTest::set_num(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  
+  num_ = value;
+  // @@protoc_insertion_point(field_set:BenchTest.num)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

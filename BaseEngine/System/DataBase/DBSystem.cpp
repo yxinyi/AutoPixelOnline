@@ -25,7 +25,7 @@ bool CDataBaseSystem::EnvDefine() {
     }, "CloseConnect");
 
 
-    ProtobufDispatch::getInstance()->registerMessageCallback<DataBaseAck>( [this](const uint32_t conn_,
+    ProtobufDispatch::getInstance()->registerMessageCallback<DataBaseAck>( [this](const uint64_t conn_,
         const std::shared_ptr<DataBaseAck>& message_,
         const int64_t& receive_time_) {
         const uint64_t _msg_id = message_->msg_id();
@@ -40,7 +40,7 @@ bool CDataBaseSystem::EnvDefine() {
     
 
 
-    ProtobufDispatch::getInstance()->registerMessageCallback<DataBaseNotify>([this](const uint32_t conn_,
+    ProtobufDispatch::getInstance()->registerMessageCallback<DataBaseNotify>([this](const uint64_t conn_,
         const std::shared_ptr<DataBaseNotify>& message_,
         const int64_t& receive_time_) {
 

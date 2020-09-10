@@ -25,7 +25,7 @@ void CliErrorNotify::PushErrPack(ErrorID err_, const std::vector<std::string>& p
 }
 
 bool CliErrorNotify::EnvDefine() {
-    ProtobufDispatch::getInstance()->registerMessageCallback<ErrorMsg>([this](const uint32_t conn_,
+    ProtobufDispatch::getInstance()->registerMessageCallback<ErrorMsg>([this](const uint64_t conn_,
         const std::shared_ptr<ErrorMsg>& message_,
         const int64_t& receive_time_) {
         std::vector<std::string>  _param(message_->param().begin(), message_->param().end());

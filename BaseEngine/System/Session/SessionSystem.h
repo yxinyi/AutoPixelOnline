@@ -1,10 +1,10 @@
 #pragma once
-#include<map>
-#include<memory>
 #include "google/protobuf/message.h"
 #include "System/BaseSystem.h"
 #include "./SessionStruct.h"
 #include "BaseEngine.h"
+#include<set>
+#include<memory>
 
 
 class SessionSystem : public BaseSystem {
@@ -17,12 +17,13 @@ public:
     bool Quit();
     bool Destroy();
 
-    Session_t FindSession(const uint64_t session_id_);
-    bool CreateSession(const uint64_t session_id_, const uint32_t conn_id_);
-    bool DestorySession(const uint64_t session_id_);
+    SessionConn BuildSessionConn(const uint32_t session_id_, const uint32_t conn_id_);
+
+    bool CreateSession(const uint32_t session_id_, const uint32_t conn_id_);
+    bool DestorySession(const SessionConn session_id_);
 
 private:
-    std::map<uint64_t, Session_t> m_session_pool;
-
+    std::set<SessionConn> m_session_pool;
+    
 
 };

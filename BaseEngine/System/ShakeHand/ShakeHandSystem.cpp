@@ -1,7 +1,7 @@
 #include "./ShakeHandSystem.h"
 #include "EngineInclude.h"
 #include "proto/Shakehand.pb.h"
-
+#include "Session/SessionStruct.h"
 
 
 
@@ -9,10 +9,14 @@ const uint32_t g_interval = 6000;
 
 using ShakeHandEvent_t = std::shared_ptr<ShakeHandEvent>;
 bool ShakeHandSystem::EnvDefine() {
-    EventRegister(ShakeHandEvent, [this](const uint32_t conn_,
+    EventRegister(ShakeHandEvent, [this](const SessionConn conn_,
         const ShakeHandEvent_t& message_,
         const int64_t& receive_time_) {
-        this->ShakeHandPrint(conn_);
+        /*
+            ²»Éæ¼°Session
+        */
+        const uint32_t _conn_id = ApiGetConnID(conn_);
+        this->ShakeHandPrint(_conn_id);
     });
 
     MessageBus::getInstance()->Attach([]() {
@@ -63,7 +67,6 @@ bool ShakeHandSystem::ShakeHandForEveryOne() {
     for (auto&& _conn_it : m_conne_vec) {
         NetManager::getInstance()->SendMessageBuff(_conn_it, _event);
     }
-
     return true;
 }
 

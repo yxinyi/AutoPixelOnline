@@ -1,5 +1,4 @@
-#include "NetManager.h"
-
+#include "./NetManager.h"
 
 bool NetManager::Start(const std::string& ip_, const uint32_t port_) {
 
@@ -37,8 +36,6 @@ bool NetManager::WaitConnect() {
 }
 
 
-
-
 CConnection_t NetManager::Connect(const std::string& ip_, const uint16_t port_, const NodeType& node_type_) {
     CConnection_t _conn = CConnectionMgr::getInstance()->CreateConnection(m_service, node_type_);
 
@@ -47,10 +44,6 @@ CConnection_t NetManager::Connect(const std::string& ip_, const uint16_t port_, 
     asio::async_connect(_conn->GetSocket(), _endpoints,
         [=](std::error_code err_, asio::ip::tcp::resolver::iterator)
     {
-        //if (err_.value() == 10061) {
-        //    Connect(ip_, port_, node_type_);
-        //}
-        //else 
         if (!err_)
         {
             _conn->ConnectedOK();
@@ -89,3 +82,21 @@ bool NetManager::SendMessageBuff(const uint32_t conn_id_, std::shared_ptr<google
 
     return SendMessageBuff(conn_id_, _buffer);
 }
+
+
+bool NetManager::SendMessageBuff(const SessionConn session_conn_, std::shared_ptr<google::protobuf::Message> msg_) {
+    Session _session = ApiGetSession(session_conn_);
+    if (_session) {
+        SessionPack_t _pack = std::make_shared<SessionPack>();
+        _pack->set_seesion_id(ApiGetSession(session_conn_));
+        _pack->set_pack_name(msg_->GetTypeName());
+        _pack->set_pack_str(msg_->SerializeAsString());
+
+        return SendMessageBuff(ApiGetConnID(session_conn_), _pack);
+    }
+    else {
+        return SendMessageBuff(ApiGetConnID(session_conn_), msg_);
+    }
+    return false;
+}
+

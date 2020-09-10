@@ -119,6 +119,7 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Common\;$(SolutionDir)Common\include\;$(SolutionDir)BaseEngine\include\;$(SolutionDir)BaseEngine\;$(MsBuildProjectDirectory)\System\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>-D_WIN32_WINNT=0x0601 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,6 +138,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Common\;$(SolutionDir)Common\include\;$(SolutionDir)BaseEngine\include\;$(SolutionDir)BaseEngine\;$(MsBuildProjectDirectory)\System\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>-_WIN32_WINNT=0x0601 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,14 +150,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Common\include\proto\ErrorNotify.pb.cc" />
     <ClCompile Include="..\Common\include\proto\PlayerLogin.pb.cc" />
-    <ClCompile Include="..\Common\include\proto\Session.pb.cc" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="System\Account\AccountSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Common\include\proto\ErrorNotify.pb.h" />
     <ClInclude Include="..\Common\include\proto\PlayerLogin.pb.h" />
-    <ClInclude Include="..\Common\include\proto\Session.pb.h" />
     <ClInclude Include="System\Account\AccountStruct.h" />
     <ClInclude Include="System\Account\AccountSystem.h" />
   </ItemGroup>

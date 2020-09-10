@@ -8,7 +8,7 @@
     <ClCompile Include="..\Common\include\proto\PlayerLogin.pb.cc">
       <Filter>System\Account</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\include\proto\Session.pb.cc">
+    <ClCompile Include="..\Common\include\proto\ErrorNotify.pb.cc">
       <Filter>System\Account</Filter>
     </ClCompile>
   </ItemGroup>
@@ -30,7 +30,7 @@
     <ClInclude Include="..\Common\include\proto\PlayerLogin.pb.h">
       <Filter>System\Account</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\include\proto\Session.pb.h">
+    <ClInclude Include="..\Common\include\proto\ErrorNotify.pb.h">
       <Filter>System\Account</Filter>
     </ClInclude>
   </ItemGroup>

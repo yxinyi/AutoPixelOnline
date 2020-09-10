@@ -9,6 +9,6 @@ private:
     UniqueNumberFactory();
 public:
     uint64_t build();
+    uint32_t build32();
 };
 
-uint64_t APIGetUniqueNumber();

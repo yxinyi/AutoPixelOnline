@@ -3,7 +3,7 @@
 RegSystem(CDBServerSystem)
 
 bool CDBServerSystem::EnvDefine() {
-    ProtobufDispatch::getInstance()->registerMessageCallback<DataBaseReq>([this](const uint32_t conn_,
+    ProtobufDispatch::getInstance()->registerMessageCallback<DataBaseReq>([this](const uint64_t conn_,
         const std::shared_ptr<DataBaseReq>& message_,
         const int64_t& receive_time_) {
         LogInfo << "[DataBaseReq]" << FlushLog;
