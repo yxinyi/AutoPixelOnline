@@ -163,10 +163,10 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 const char descriptor_table_protodef_PlayerLogin_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\021PlayerLogin.proto\"0\n\013PlayerLogin\022\017\n\007ac"
   "count\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"w\n\016PlayerL"
-  "oginAck\022\023\n\013session_key\030\001 \001(\004\022+\n\006result\030\002"
+  "oginAck\022\023\n\013session_key\030\001 \001(\r\022+\n\006result\030\002"
   " \001(\0162\033.PlayerLoginAck.CheckResult\"#\n\013Che"
   "ckResult\022\010\n\004Pass\020\000\022\n\n\006Refuse\020\001\"!\n\nLoginL"
-  "ogic\022\023\n\013session_key\030\001 \001(\004\"3\n\016PlayerRegsi"
+  "ogic\022\023\n\013session_key\030\001 \001(\r\"3\n\016PlayerRegsi"
   "ter\022\017\n\007account\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"\030"
   "\n\tBenchTest\022\013\n\003num\030\001 \001(\rb\006proto3"
   ;
@@ -610,7 +610,7 @@ const char* PlayerLoginAck::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // uint64 session_key = 1;
+      // uint32 session_key = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
           session_key_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
@@ -655,12 +655,12 @@ bool PlayerLoginAck::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // uint64 session_key = 1;
+      // uint32 session_key = 1;
       case 1: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
 
           DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::uint64, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64>(
+                   ::PROTOBUF_NAMESPACE_ID::uint32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT32>(
                  input, &session_key_)));
         } else {
           goto handle_unusual;
@@ -709,9 +709,9 @@ void PlayerLoginAck::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint64 session_key = 1;
+  // uint32 session_key = 1;
   if (this->session_key() != 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64(1, this->session_key(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32(1, this->session_key(), output);
   }
 
   // .PlayerLoginAck.CheckResult result = 2;
@@ -733,9 +733,9 @@ void PlayerLoginAck::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint64 session_key = 1;
+  // uint32 session_key = 1;
   if (this->session_key() != 0) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->session_key(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->session_key(), target);
   }
 
   // .PlayerLoginAck.CheckResult result = 2;
@@ -765,10 +765,10 @@ size_t PlayerLoginAck::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // uint64 session_key = 1;
+  // uint32 session_key = 1;
   if (this->session_key() != 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
         this->session_key());
   }
 
@@ -865,7 +865,7 @@ LoginLogic::LoginLogic(const LoginLogic& from)
 }
 
 void LoginLogic::SharedCtor() {
-  session_key_ = PROTOBUF_ULONGLONG(0);
+  session_key_ = 0u;
 }
 
 LoginLogic::~LoginLogic() {
@@ -891,7 +891,7 @@ void LoginLogic::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  session_key_ = PROTOBUF_ULONGLONG(0);
+  session_key_ = 0u;
   _internal_metadata_.Clear();
 }
 
@@ -903,7 +903,7 @@ const char* LoginLogic::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID:
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // uint64 session_key = 1;
+      // uint32 session_key = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
           session_key_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
@@ -940,12 +940,12 @@ bool LoginLogic::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // uint64 session_key = 1;
+      // uint32 session_key = 1;
       case 1: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
 
           DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::uint64, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64>(
+                   ::PROTOBUF_NAMESPACE_ID::uint32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT32>(
                  input, &session_key_)));
         } else {
           goto handle_unusual;
@@ -980,9 +980,9 @@ void LoginLogic::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint64 session_key = 1;
+  // uint32 session_key = 1;
   if (this->session_key() != 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64(1, this->session_key(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32(1, this->session_key(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -998,9 +998,9 @@ void LoginLogic::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint64 session_key = 1;
+  // uint32 session_key = 1;
   if (this->session_key() != 0) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->session_key(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->session_key(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1024,10 +1024,10 @@ size_t LoginLogic::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // uint64 session_key = 1;
+  // uint32 session_key = 1;
   if (this->session_key() != 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
         this->session_key());
   }
 

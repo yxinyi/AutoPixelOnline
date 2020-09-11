@@ -19,16 +19,45 @@ bool ShakeHandSystem::EnvDefine() {
         this->ShakeHandPrint(_conn_id);
     });
 
-    MessageBus::getInstance()->Attach([]() {
-        std::cout << "MessageBus ShakeHand" << std::endl;
-    }, "ShakeHand");
+
+    EventRegister(AuthenticationEvent, [this](const SessionConn conn_,
+        const std::shared_ptr<AuthenticationEvent>& message_,
+        const int64_t& receive_time_) {
+        /*
+            不涉及Session
+        */
+        const NodeType _type = (NodeType)message_->node_type();
+        const uint32_t _conn_id = ApiGetConnID(conn_);
+        if (CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(_conn_id)) {
+            _conn->SetConnNodeType(_type);
+            LogInfo << "[ShakeHandSystem]: AuthenticationEvent [" << _conn->getIPStr() << "] conn_id : [" << _conn->getConnId() << "] NodeType : [" << GetNodeTypeStr(_conn->GetConnNodeType()) << "] " << FlushLog;
+        }
+    });
+
+    MessageBus::getInstance()->Attach([this](uint32_t conn_id_) {
+        if (CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(conn_id_)) {
+            _conn->setIPStr(_conn->GetSocket().remote_endpoint().address().to_string(), _conn->GetSocket().remote_endpoint().port());
+            LogInfo << "[ShakeHandSystem]: AcceptConnect [" << _conn->getIPStr() << "] conn_id : [" << _conn->getConnId() << "]" << FlushLog;
+        }
+    }, "AcceptConnect");
+
     MessageBus::getInstance()->Attach([this](uint32_t conn_id_) {
         m_conne_vec.insert(conn_id_);
+        if (CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(conn_id_)) {
+            LogInfo << "[ShakeHandSystem]: OpenConnect [" << _conn->getIPStr() << "] conn_id : [" << _conn->getConnId() << "] NodeType : [" << GetNodeTypeStr(_conn->GetConnNodeType()) << "] " << FlushLog;
+        }
+        std::shared_ptr<AuthenticationEvent> _authen = std::make_shared<AuthenticationEvent>();
+        _authen->set_node_type((uint32_t)getNodeType());
+        NetManager::getInstance()->SendMessageBuff(conn_id_, _authen);
+        //第一次连接确认下身份
     }, "OpenConnect");
 
     MessageBus::getInstance()->Attach([this](uint32_t conn_id_) {
         m_conne_vec.erase(conn_id_);
         m_remote.erase(conn_id_);
+        if (CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(conn_id_)) {
+            LogInfo << "[ShakeHandSystem]: CloseConnect [" << _conn->getIPStr() << "] conn_id : [" << _conn->getConnId() << "] NodeType : [" << GetNodeTypeStr(_conn->GetConnNodeType()) << "] " << FlushLog;
+        }
     }, "CloseConnect");
     
     TimerTaskMgr->RegisterTask("ShakeHandEvent", 0, g_interval, -1, [this]() {
@@ -97,11 +126,10 @@ bool ShakeHandSystem::ShakeHandCheck() {
 }
 
 void  ShakeHandSystem::ShakeHandPrint(const uint32_t conn_){
-    
     if (CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(conn_)) {
-        m_remote[conn_] = NowTime->NowMillisecond();
-        std::cout << "ShakeHandPrint: " << _conn->getIPStr() << std::endl;
-        std::cout << "ShakeHandSize: " << m_remote.size() << std::endl;
+        const uint64_t _now_time = NowTime->NowMillisecond();
+        m_remote[conn_] = _now_time;
+        LogInfo << "[ShakeHandSystem]: ShakeHand [" << _conn->getIPStr() << "] conn_id : [" << _conn->getConnId() << "] NodeType : [" << GetNodeTypeStr(_conn->GetConnNodeType()) << "] lastTime: [" << _now_time <<"]" << FlushLog;
     }
 
 }

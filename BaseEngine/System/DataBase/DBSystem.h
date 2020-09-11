@@ -33,13 +33,7 @@ private:
 
     string m_dbserver_ip = "";
     uint32_t m_dbserver_port = 0;
-    enum class DBConnecState {
-        WaitDBInfo,
-        Close,
-        Connecting,
-        Open,
-    };
-    DBConnecState m_dbserver_connected_ok = DBConnecState::WaitDBInfo;
+
     uint32_t m_dbserver_connected_id = 0;
     const uint32_t m_query_time_out = 6000; //∫¡√Î
     std::map<uint64_t, DBOpUnity_t> m_op_pool;

@@ -38,7 +38,7 @@ bool NetManager::WaitConnect() {
 
 CConnection_t NetManager::Connect(const std::string& ip_, const uint16_t port_, const NodeType& node_type_) {
     CConnection_t _conn = CConnectionMgr::getInstance()->CreateConnection(m_service, node_type_);
-
+    _conn->setIPStr(ip_,port_);
     asio::ip::tcp::resolver _resolver(m_service);
     asio::ip::tcp::resolver::iterator _endpoints = _resolver.resolve(asio::ip::tcp::resolver::query(ip_, std::to_string(port_)));
     asio::async_connect(_conn->GetSocket(), _endpoints,

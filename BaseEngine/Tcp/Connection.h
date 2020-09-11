@@ -111,7 +111,10 @@ public:
     }
     void close() {
         if (m_is_conn) {
-            m_socket.shutdown(asio::ip::tcp::socket::shutdown_both);
+            std::error_code ignored_ec;
+            m_socket.cancel();
+            m_socket.shutdown(asio::ip::tcp::socket::shutdown_both, ignored_ec);
+            m_socket.close(ignored_ec);
         }
         m_is_conn = false;
         std::shared_ptr<Package> _pack = CObjectPool<Package>::getInstance()->Get(PackageType::CloseConnect, m_conn_id);
@@ -158,7 +161,12 @@ public:
     }
     ~CConnection() {}
     std::string getIPStr() {
-        return (m_socket.remote_endpoint().address().to_string() + " : " + std::to_string(m_socket.remote_endpoint().port()));
+
+        return remote_ip + " : " + std::to_string(remote_port);
+    }
+    void setIPStr(const std::string& remote_ip_,const uint16_t remote_port_) {
+        remote_ip = remote_ip_;
+        remote_port = remote_port_;
     }
 private:
     NodeType m_node_type;
@@ -168,7 +176,8 @@ private:
     bool m_is_conn = false;
     bool m_in_sended = false;
     CBuffer  m_recv_buff;
-
+    std::string remote_ip = "";
+    uint16_t remote_port = 0;
     std::mutex m_snd_buff_mutex;
     std::vector<std::shared_ptr<CBuffer>> m_snd_buff_list;
 };

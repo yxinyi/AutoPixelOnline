@@ -9,7 +9,6 @@ bool ServerNodeRegisterSystem::EnvDefine() {
         }
 
         if (_conn->GetConnNodeType() == NodeType::GateServer) {
-            LogInfo << "[ServerNodeRegisterSystem] OpenConnect" << (uint32_t)conn_id_ << FlushLog;
             ServerLink_t _link = std::make_shared<ServerLink>();
             _link->set_node_type((uint32_t)getNodeType());
             NetManager::getInstance()->SendMessageBuff(conn_id_, _link);
@@ -24,7 +23,6 @@ bool ServerNodeRegisterSystem::EnvDefine() {
         }
 
         if (_conn->GetConnNodeType() == NodeType::GateServer) {
-            LogInfo << "[ServerNodeRegisterSystem] CloseConnect" << (uint32_t)conn_id_ << FlushLog;
             ConnGateServer();
         }
 
@@ -60,8 +58,8 @@ extern NodeType getNodeType();
 
 bool ServerNodeRegisterSystem::ConnGateServer() {
     LogInfo << "[ServerNodeRegisterSystem] ConnGateServer " << GetGateIP() << " " << GetGatePort() << FlushLog;
-
     NetManager::getInstance()->Connect(GetGateIP(), GetGatePort(), NodeType::GateServer);
+
     return true;
 }
 

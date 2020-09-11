@@ -4,3 +4,7 @@ message ShakeHandEvent {
     uint32 state = 1;
 	string src_name = 2;
 }
+
+message AuthenticationEvent {
+    uint32 node_type = 1;
+}

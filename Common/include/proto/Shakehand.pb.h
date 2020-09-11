@@ -47,17 +47,21 @@ struct TableStruct_Shakehand_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[1]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[2]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
   static const ::PROTOBUF_NAMESPACE_ID::uint32 offsets[];
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Shakehand_2eproto;
+class AuthenticationEvent;
+class AuthenticationEventDefaultTypeInternal;
+extern AuthenticationEventDefaultTypeInternal _AuthenticationEvent_default_instance_;
 class ShakeHandEvent;
 class ShakeHandEventDefaultTypeInternal;
 extern ShakeHandEventDefaultTypeInternal _ShakeHandEvent_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
+template<> ::AuthenticationEvent* Arena::CreateMaybeMessage<::AuthenticationEvent>(Arena*);
 template<> ::ShakeHandEvent* Arena::CreateMaybeMessage<::ShakeHandEvent>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 
@@ -205,6 +209,137 @@ class ShakeHandEvent :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Shakehand_2eproto;
 };
+// -------------------------------------------------------------------
+
+class AuthenticationEvent :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:AuthenticationEvent) */ {
+ public:
+  AuthenticationEvent();
+  virtual ~AuthenticationEvent();
+
+  AuthenticationEvent(const AuthenticationEvent& from);
+  AuthenticationEvent(AuthenticationEvent&& from) noexcept
+    : AuthenticationEvent() {
+    *this = ::std::move(from);
+  }
+
+  inline AuthenticationEvent& operator=(const AuthenticationEvent& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline AuthenticationEvent& operator=(AuthenticationEvent&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const AuthenticationEvent& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const AuthenticationEvent* internal_default_instance() {
+    return reinterpret_cast<const AuthenticationEvent*>(
+               &_AuthenticationEvent_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    1;
+
+  friend void swap(AuthenticationEvent& a, AuthenticationEvent& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(AuthenticationEvent* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline AuthenticationEvent* New() const final {
+    return CreateMaybeMessage<AuthenticationEvent>(nullptr);
+  }
+
+  AuthenticationEvent* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<AuthenticationEvent>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const AuthenticationEvent& from);
+  void MergeFrom(const AuthenticationEvent& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(AuthenticationEvent* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "AuthenticationEvent";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_Shakehand_2eproto);
+    return ::descriptor_table_Shakehand_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kNodeTypeFieldNumber = 1,
+  };
+  // uint32 node_type = 1;
+  void clear_node_type();
+  ::PROTOBUF_NAMESPACE_ID::uint32 node_type() const;
+  void set_node_type(::PROTOBUF_NAMESPACE_ID::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:AuthenticationEvent)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 node_type_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_Shakehand_2eproto;
+};
 // ===================================================================
 
 
@@ -281,9 +416,29 @@ inline void ShakeHandEvent::set_allocated_src_name(std::string* src_name) {
   // @@protoc_insertion_point(field_set_allocated:ShakeHandEvent.src_name)
 }
 
+// -------------------------------------------------------------------
+
+// AuthenticationEvent
+
+// uint32 node_type = 1;
+inline void AuthenticationEvent::clear_node_type() {
+  node_type_ = 0u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 AuthenticationEvent::node_type() const {
+  // @@protoc_insertion_point(field_get:AuthenticationEvent.node_type)
+  return node_type_;
+}
+inline void AuthenticationEvent::set_node_type(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  
+  node_type_ = value;
+  // @@protoc_insertion_point(field_set:AuthenticationEvent.node_type)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 

@@ -401,10 +401,10 @@ class PlayerLoginAck :
     kSessionKeyFieldNumber = 1,
     kResultFieldNumber = 2,
   };
-  // uint64 session_key = 1;
+  // uint32 session_key = 1;
   void clear_session_key();
-  ::PROTOBUF_NAMESPACE_ID::uint64 session_key() const;
-  void set_session_key(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  ::PROTOBUF_NAMESPACE_ID::uint32 session_key() const;
+  void set_session_key(::PROTOBUF_NAMESPACE_ID::uint32 value);
 
   // .PlayerLoginAck.CheckResult result = 2;
   void clear_result();
@@ -416,7 +416,7 @@ class PlayerLoginAck :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::uint64 session_key_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 session_key_;
   int result_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_PlayerLogin_2eproto;
@@ -538,17 +538,17 @@ class LoginLogic :
   enum : int {
     kSessionKeyFieldNumber = 1,
   };
-  // uint64 session_key = 1;
+  // uint32 session_key = 1;
   void clear_session_key();
-  ::PROTOBUF_NAMESPACE_ID::uint64 session_key() const;
-  void set_session_key(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  ::PROTOBUF_NAMESPACE_ID::uint32 session_key() const;
+  void set_session_key(::PROTOBUF_NAMESPACE_ID::uint32 value);
 
   // @@protoc_insertion_point(class_scope:LoginLogic)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::uint64 session_key_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 session_key_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_PlayerLogin_2eproto;
 };
@@ -950,15 +950,15 @@ inline void PlayerLogin::set_allocated_password(std::string* password) {
 
 // PlayerLoginAck
 
-// uint64 session_key = 1;
+// uint32 session_key = 1;
 inline void PlayerLoginAck::clear_session_key() {
-  session_key_ = PROTOBUF_ULONGLONG(0);
+  session_key_ = 0u;
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 PlayerLoginAck::session_key() const {
+inline ::PROTOBUF_NAMESPACE_ID::uint32 PlayerLoginAck::session_key() const {
   // @@protoc_insertion_point(field_get:PlayerLoginAck.session_key)
   return session_key_;
 }
-inline void PlayerLoginAck::set_session_key(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void PlayerLoginAck::set_session_key(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   
   session_key_ = value;
   // @@protoc_insertion_point(field_set:PlayerLoginAck.session_key)
@@ -982,15 +982,15 @@ inline void PlayerLoginAck::set_result(::PlayerLoginAck_CheckResult value) {
 
 // LoginLogic
 
-// uint64 session_key = 1;
+// uint32 session_key = 1;
 inline void LoginLogic::clear_session_key() {
-  session_key_ = PROTOBUF_ULONGLONG(0);
+  session_key_ = 0u;
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 LoginLogic::session_key() const {
+inline ::PROTOBUF_NAMESPACE_ID::uint32 LoginLogic::session_key() const {
   // @@protoc_insertion_point(field_get:LoginLogic.session_key)
   return session_key_;
 }
-inline void LoginLogic::set_session_key(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void LoginLogic::set_session_key(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   
   session_key_ = value;
   // @@protoc_insertion_point(field_set:LoginLogic.session_key)

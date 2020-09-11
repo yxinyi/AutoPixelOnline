@@ -28,13 +28,13 @@ bool ServerRegisterSystem::EnvDefine() {
         }
 
         //检查是否通过认证
-        if (_session_find->second->m_state != GateSessionState::Pass) {
-            //如果没通过,且是客户端,则判断是否是登陆,如果是登陆验证则允许放行
-            auto _serverinfo_find = m_id_to_server.find(_conn_id);
-            if (_serverinfo_find->second->m_node_type != NodeType::Client) {// || msg_->GetTypeName() != "PlayerLogin") {
-                RETURN_VOID;
-            }
-        }
+        //if (_session_find->second->m_state != GateSessionState::Pass) {
+        //    //如果没通过,且是客户端,则判断是否是登陆,如果是登陆验证则允许放行
+        //    auto _serverinfo_find = m_id_to_server.find(_conn_id);
+        //    if (_serverinfo_find->second->m_node_type != NodeType::Client) {// || msg_->GetTypeName() != "PlayerLogin") {
+        //        RETURN_VOID;
+        //    }
+        //}
         //根据消息找到注册了该消息的服务器,
         const string& _msg_name = msg_name_;
         auto _info_find = m_msg_str_to_server.find(_msg_name);
@@ -49,6 +49,12 @@ bool ServerRegisterSystem::EnvDefine() {
         }
         for (auto _node_it = _info_find->second.begin(); _node_it != _info_find->second.end(); ) {
             if (ServerInfo_t _info = _node_it->lock()) {
+                if (_session_find->second->m_state != GateSessionState::Pass) {
+                    //如果不通过只允许向账号系统通信
+                    if (_info->m_node_type != NodeType::AccountServer) {
+                        continue;
+                    }
+                }
                 //如果服务器存在,则进行转发
                 _session_find->second->m_type_conn.insert(_info->m_conn_id);
                 m_id_to_server[_info->m_conn_id]->m_load_number++;
@@ -182,8 +188,6 @@ bool ServerRegisterSystem::EnvDefine() {
         ServerInfo_t _info = std::make_shared<ServerInfo>();
         _info->m_state = ServerState::Touch;
         _info->m_conn_id = conn_;
-        LogInfo << "[ServerRegisterSystem] OpenConnect" << (uint32_t)conn_ << FlushLog;
-
         m_id_to_server[_info->m_conn_id] = _info;
         //当有连接连入生成Seesion 并绑定
         //当前只是连接并没有表明身份
@@ -224,7 +228,6 @@ bool ServerRegisterSystem::EnvDefine() {
         }
         
 
-        LogInfo << "[ServerRegisterSystem] CloseConnect" << (uint32_t)conn_ << FlushLog;
         m_id_to_server.erase(conn_);
     }, "CloseConnect");
 

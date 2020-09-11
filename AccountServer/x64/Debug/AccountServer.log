@@ -1,6 +1,6 @@
 ﻿  ErrorNotify.pb.cc
   PlayerLogin.pb.cc
-  AccountSystem.cpp
   main.cpp
+  AccountSystem.cpp
   正在生成代码...
   AccountServer.vcxproj -> F:\AutoPixelOnline\AutoPixelOnline\x64\Debug\AccountServer.exe

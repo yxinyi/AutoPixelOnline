@@ -7,10 +7,7 @@ bool CDataBaseSystem::EnvDefine() {
         if (!_conn || _conn->GetConnNodeType() != NodeType::DataBaseServer) {
             return;
         }
-        m_dbserver_connected_ok = DBConnecState::Open;
-        m_dbserver_connected_id = _conn->getConnId();
-
-        LogError << "[CDataBaseSystem] DBServer open" << FlushLog;
+        m_dbserver_connected_id = conn_id_;
         MessageBus::getInstance()->SendReq<uint32_t>(conn_id_, "DBServerOpen");
     }, "OpenConnect");
     MessageBus::getInstance()->Attach([this](uint32_t conn_id_) {
@@ -18,10 +15,9 @@ bool CDataBaseSystem::EnvDefine() {
         if (!_conn ||_conn->GetConnNodeType() != NodeType::DataBaseServer) {
             return;
         }
-        m_dbserver_connected_ok = DBConnecState::Close;
         m_dbserver_connected_id = 0;
-        LogError << "[CDataBaseSystem] DBServer close" << FlushLog;
         MessageBus::getInstance()->SendReq<uint32_t>(conn_id_, "DBServerClose");
+        ConnecDBServer();
     }, "CloseConnect");
 
 
@@ -29,7 +25,6 @@ bool CDataBaseSystem::EnvDefine() {
         const std::shared_ptr<DataBaseAck>& message_,
         const int64_t& receive_time_) {
         const uint64_t _msg_id = message_->msg_id();
-        LogInfo << "[DataBaseAck]" << FlushLog;
         auto _op_find = m_op_pool.find(_msg_id);
         if (_op_find == m_op_pool.end()) {
             return;
@@ -44,27 +39,22 @@ bool CDataBaseSystem::EnvDefine() {
         const std::shared_ptr<DataBaseNotify>& message_,
         const int64_t& receive_time_) {
 
-        std::set<uint32_t> _cnn_set = CConnectionMgr::getInstance()->GetConnection(NodeType::DataBaseServer);
-        if (_cnn_set.size()) {
-            for (auto&& _it : _cnn_set) {
-                CConnectionMgr::getInstance()->CloseConnection(_it);
-            }
-        }
+
         m_dbserver_ip = message_->db_ip();
         m_dbserver_port = message_->db_port();
-        m_dbserver_connected_ok = DBConnecState::Close;
-        
+        ConnecDBServer();
     });
 
     return true;
 }
 
 bool CDataBaseSystem::ConnecDBServer() {
-    if (m_dbserver_connected_ok != DBConnecState::Close) {
+    CConnection_t  _cnn = CConnectionMgr::getInstance()->GetOnlyOneConnection(NodeType::DataBaseServer);
+    if (_cnn && _cnn->isConnection()) {
         return false;
     }
+    LogInfo << "[CDataBaseSystem] DBSystemConnectDBServer [IP:PORT] [" << m_dbserver_ip << " : " << m_dbserver_port << "] " << FlushLog;
     NetManager::getInstance()->Connect(m_dbserver_ip, m_dbserver_port, NodeType::DataBaseServer);
-    m_dbserver_connected_ok = DBConnecState::Connecting;
     return true;
 }
 
@@ -82,6 +72,7 @@ bool CDataBaseSystem::Init() {
         m_proto_send_cache.clear();
     });
 
+
     //超时处理
     TimerTaskManager::getInstance()->RegisterTask("DBSystemOpTimeOut", m_query_time_out, m_query_time_out, -1, [this]() {
         const uint64_t _now_time = Time::getInstance()->NowMillisecond();
@@ -95,17 +86,9 @@ bool CDataBaseSystem::Init() {
             }
         }
     });
-
     return true;
 }
 bool CDataBaseSystem::Loop(const uint64_t interval_) {
-    //重连 DBServer 
-    if (ConnecDBServer()) {
-        LogError << "[CDataBaseSystem] DBServer connected" << FlushLog;
-
-    }
-
-
     return true;
 }
 bool CDataBaseSystem::Quit() {
@@ -124,7 +107,7 @@ bool CDataBaseSystem::op(DBOperatorType opt_, const string& key_, DBQueryCB cb_,
     _msg->set_key(key_);
     _msg->set_val(val_);
     _msg->set_msg_id(_oid);
-    if (m_dbserver_connected_ok == DBConnecState::Open) {
+    if (m_dbserver_connected_id) {
         NetManager::getInstance()->SendMessageBuff(m_dbserver_connected_id, _msg);
     }
     else {
