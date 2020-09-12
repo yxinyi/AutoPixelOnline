@@ -107,12 +107,12 @@ bool AccountSystem::EnvDefine() {
                     std::shared_ptr<PlayerLoginAck> _ack = std::make_shared<PlayerLoginAck>();
                     _ack->set_session_key(ApiGetSession(session_));
                     _ack->set_result(_rst);
-                    NetManager::getInstance()->SendMessageBuff(session_, _ack);
+                    NetManager::getInstance()->SendMessageBuff(ApiGetConnID(session_), _ack);
                     //发消息到逻辑服务器,让那边准备好基本信息,
                     std::shared_ptr<LogicEnterFromAccountServer> _logic_ack = std::make_shared<LogicEnterFromAccountServer>();
                     _logic_ack->set_session_key(ApiGetSession(session_));
                     _logic_ack->set_account_key(atoll(val_.c_str()));
-                    NetManager::getInstance()->SendMessageBuff(session_, _ack);
+                    NetManager::getInstance()->SendMessageBuff(ApiGetConnID(session_), _logic_ack);
 
                 });
 

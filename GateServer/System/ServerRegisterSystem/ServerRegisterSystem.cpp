@@ -58,6 +58,7 @@ bool ServerRegisterSystem::EnvDefine() {
                 if (_session_find->second->m_state != GateSessionState::Pass) {
                     //如果不通过只允许向账号系统通信
                     if (_info->m_node_type != NodeType::AccountServer) {
+                        _node_it++;
                         continue;
                     }
                 }

@@ -26,6 +26,7 @@ bool SessionSystem::EnvDefine() {
         const std::string _msg_data = message_->pack_str();
         const std::string _msg_name = message_->pack_name();
         MessagePtr _msg(ProtobufCodec::getInstance()->decode(_msg_name, _msg_data));
+        LogInfo << "[SessionSystem] SessionPack dispatch [" << message_->pack_name()<<"]" << FlushLog;
         ProtobufDispatch::getInstance()->onProtobufMessage(_session_conn_id,_msg, receive_time_);
     });
 
