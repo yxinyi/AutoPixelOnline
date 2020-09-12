@@ -25,9 +25,6 @@ message LogicEnterFromAccountServer {
 	uint64 account_key = 2;	
 }
 
-message LoginLogic {
-	uint32 session_key = 1;
-}
 
 message PlayerEnter {
 	

@@ -1,10 +1,11 @@
 #include "./Creature.h"
 #include "EngineInclude.h"
 #include "Error/Error.h"
+#include "LogicSessionControl/LogicSessionControl.h"
 #include <memory>
 
 RegSystem(CreatureManager)
-
+std::string g_role_query = "QueryRoleDataBase:";
 bool CreatureManager::EnvDefine() {
     //先忽略前置,假设已经通过验证并从数据库拿出玩家存档
 
@@ -20,13 +21,6 @@ bool CreatureManager::EnvDefine() {
     //    MessageBus::getInstance()->SendReq<Creature_t>(_creature, "PlayerLogin");
     //});
 
-    ProtobufDispatch::getInstance()->registerMessageCallback<LogicEnterFromAccountServer>([this](const SessionConn conn_,
-        const std::shared_ptr<LogicEnterFromAccountServer>& message_,
-        const int64_t& receive_time_) {
-        LogInfo << "[PlayerLoginEvent] LogicEnterFromAccountServer " << message_->account_key() << " " << message_->session_key() << FlushLog;
-    });
-
-
 
     ProtobufDispatch::getInstance()->registerMessageCallback<PlayerEnter>([this](const SessionConn conn_,
         const std::shared_ptr<PlayerEnter>& message_,
@@ -37,6 +31,36 @@ bool CreatureManager::EnvDefine() {
             NetManager::getInstance()->SendMessageBuff(conn_, ApiBuildErrorMsg(LOG_ERR));
             return;
         }
+
+        std::shared_ptr<LogicSessionControlSystem> _sys =  SystemManager::getInstance()->GetSystem<LogicSessionControlSystem>();
+        if (!_sys) {
+            LogError << "[PlayerLoginEvent] LogicSessionControlSystem not exsits " << FlushLog;
+            return;
+        }
+
+        CDataBaseSystem_t _db_sys = SystemManager::getInstance()->GetSystem<CDataBaseSystem>();
+        if (!_db_sys) {
+            LogError << "[PlayerLoginEvent] LogicSessionControlSystem not exsits " << FlushLog;
+            return;
+        }
+
+        uint32_t _account_key = _sys->GetAccountKey(ApiGetSession(conn_));
+        std::string _role_query = g_role_query+std::to_string(_account_key);
+        _db_sys->Query(_role_query, [](DBOperatorErr err_, std::string val_) {
+            uint64_t _oid = 0;
+            
+            if (err_ == DBOperatorErr::ERR) {
+                //是新玩家
+                _oid = UniqueNumberFactory::getInstance()->build();
+            }
+            123122321
+
+
+        
+        });
+
+        //去数据库查询账号信息
+
         MessageBus::getInstance()->SendReq<Creature_t>(_creature, "PlayerLogin");
     });
 

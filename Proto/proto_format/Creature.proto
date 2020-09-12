@@ -1,5 +1,10 @@
 syntax = "proto3";
 
+
+message RoleBaseData{
+	uint64 oid = 1;
+};
+
 message ModuleData {    
 	string msg_type_str = 1;
 	string binary = 2;

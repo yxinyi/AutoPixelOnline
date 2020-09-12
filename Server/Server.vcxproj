@@ -157,6 +157,7 @@
     <ClCompile Include="..\Common\include\proto\Shakehand.pb.cc" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="System\Creature\Creature.cpp" />
+    <ClCompile Include="System\LogicSessionControl\LogicSessionControl.cpp" />
     <ClCompile Include="System\Map\Map.cpp" />
     <ClCompile Include="testMain.cpp" />
   </ItemGroup>
@@ -167,6 +168,8 @@
     <ClInclude Include="..\Common\include\proto\Shakehand.pb.h" />
     <ClInclude Include="System\Creature\Creature.h" />
     <ClInclude Include="System\Creature\CreatureStruct.h" />
+    <ClInclude Include="System\LogicSessionControl\LogicSessionControl.h" />
+    <ClInclude Include="System\LogicSessionControl\LogicSessionControlStruct.h" />
     <ClInclude Include="System\Map\Map.h" />
     <ClInclude Include="System\Map\MapStruct.h" />
   </ItemGroup>

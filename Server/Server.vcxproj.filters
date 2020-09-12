@@ -21,6 +21,9 @@
     <ClCompile Include="..\Common\include\proto\Map.pb.cc">
       <Filter>System\Map</Filter>
     </ClCompile>
+    <ClCompile Include="System\LogicSessionControl\LogicSessionControl.cpp">
+      <Filter>System\LogicSessionControl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="proto">
@@ -34,6 +37,9 @@
     </Filter>
     <Filter Include="System\Creature">
       <UniqueIdentifier>{3ab8185b-80ed-44b4-8f0c-771af260a157}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\LogicSessionControl">
+      <UniqueIdentifier>{a428fc28-19cd-4ff0-bbc8-30763f95e4e7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +66,12 @@
     </ClInclude>
     <ClInclude Include="..\Common\include\proto\Map.pb.h">
       <Filter>System\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="System\LogicSessionControl\LogicSessionControl.h">
+      <Filter>System\LogicSessionControl</Filter>
+    </ClInclude>
+    <ClInclude Include="System\LogicSessionControl\LogicSessionControlStruct.h">
+      <Filter>System\LogicSessionControl</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

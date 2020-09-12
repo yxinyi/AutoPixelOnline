@@ -3,16 +3,17 @@
 #include "Attribute/Attribute.h"
 #include "tool/UniqueNumberFactory.h"
 #include "Tcp/NetManager.h"
+#include "System/Session/SessionStruct.h"
 
 class Creature {
 public:
-    Creature():m_attr(nullptr), m_type_name(""), m_oid(0), m_conn_id(0){}
+    Creature():m_attr(nullptr), m_type_name(""), m_oid(0), m_session_id(0){}
 public:
-    void init(const string& type_name_, const uint32_t conn_) {
+    void init(const string& type_name_, const SessionConn SessionConn_) {
         m_type_name = type_name_;
         m_attr = CAttrManager::getInstance()->CreateAttr(type_name_);
         m_oid = UniqueNumberFactory::getInstance()->build();
-        m_conn_id = conn_;
+        m_session_id = SessionConn_;
     }
 
 
@@ -20,7 +21,7 @@ public:
         m_type_name = "";
         m_attr = nullptr;
         m_oid = 0;
-        m_conn_id = 0;
+        m_session_id = 0;
     }
 
 
@@ -39,19 +40,19 @@ public:
         }
     }
     bool SendProtoMsg(Message_t msg_) {
-        return NetManager::getInstance()->SendMessageBuff(m_conn_id, msg_);
+        return NetManager::getInstance()->SendMessageBuff(m_session_id, msg_);
     }
 
 public:
     uint64_t GetOid() { return m_oid; }
     CAttrs_t GetAttrs() { return m_attr; }
-    uint32_t GetConnID() { return m_conn_id; }
+    uint64_t GetSessionConn() { return m_session_id; }
 
 private:
     CAttrs_t m_attr;
     string m_type_name;
     uint64_t m_oid;
-    uint32_t m_conn_id;
+    SessionConn m_session_id;
 };
 
 using Creature_t = std::shared_ptr<Creature>;
