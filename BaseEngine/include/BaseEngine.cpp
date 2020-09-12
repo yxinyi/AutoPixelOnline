@@ -63,7 +63,7 @@ void CBaseEngine::run(const int64_t receive_time_) {
             MessagePtr _msg(ProtobufCodec::getInstance()->decode(_msg_name_str, _msg_str));
             if (!_msg) {
                 LogInfo << "[CBaseEngine] despatch err msg_str : " << _msg_name_str << FlushLog;
-                MessageBus::getInstance()->SendReq<uint32_t,std::string, std::string>(_conn_id, _msg_name_str, _msg_str,"DespatchDecodeFailed");
+                MessageBus::getInstance()->SendReq<uint32_t, std::string, std::string>(_conn_id, _msg_name_str, _msg_str, "DespatchDecodeFailed");
                 continue;
             }
             else {

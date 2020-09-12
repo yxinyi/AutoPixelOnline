@@ -5,7 +5,6 @@
 #include <vector>
 #include <list>
 #include "proto/Map.pb.h"
-#include "../Client/RenderManager.h"
 #include "UI/UIManager.h"
 #include <set>
 
@@ -22,4 +21,6 @@ public:
 private:
     std::string m_account = "";
     std::string m_password = "";
+private:
+    bool m_login = false;
 };

@@ -22,6 +22,9 @@
     <ClCompile Include="..\Common\include\proto\Session.pb.cc">
       <Filter>proto</Filter>
     </ClCompile>
+    <ClCompile Include="..\Common\include\proto\PlayerLogin.pb.cc">
+      <Filter>proto</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="System\ServerRegisterSystem\ServerRegisterSystem.h">
@@ -35,6 +38,9 @@
     </ClInclude>
     <ClInclude Include="System\ServerRegisterSystem\ServerRegisterStruct.h">
       <Filter>System\ServerRegisterSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\proto\PlayerLogin.pb.h">
+      <Filter>proto</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

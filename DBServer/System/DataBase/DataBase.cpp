@@ -26,7 +26,7 @@ bool CDBServerSystem::EnvDefine() {
                 _ack->set_result_str(_rst);
             }
             else {
-                LogError << "[DBOperatorType::Query]" << _status.ToString() << FlushLog;
+                LogError << "[DBOperatorType::Query] " << _status.ToString() << FlushLog;
             }
             break;
         }
@@ -36,12 +36,28 @@ bool CDBServerSystem::EnvDefine() {
                 _err = DBOperatorErr::SUCCESS;
             }
             else {
-                LogError << "[DBOperatorType::Delete]" << _status.ToString() << FlushLog;
+                LogError << "[DBOperatorType::Delete] " << _status.ToString() << FlushLog;
+            }
+            break;
+        }
+        case DBOperatorType::Insert: {
+            std::string _rst;
+            if (!m_db->Get(leveldb::ReadOptions(), _key, &_rst).ok()) {
+                leveldb::Status _status = m_db->Put(leveldb::WriteOptions(), _key, _val);
+                if (_status.ok()) {
+                    _err = DBOperatorErr::SUCCESS;
+                }
+                else {
+                    LogError << "[DBOperatorType:Insert] put err" << "op: " << (uint32_t)_op << " " << _key << FlushLog;
+
+                }
+            }
+            else {
+                LogError << "[DBOperatorType:Insert]" << "op: " << (uint32_t)_op << " " << _key << " exists " << FlushLog;
             }
             break;
         }
         case DBOperatorType::Update:
-        case DBOperatorType::Insert:
         case DBOperatorType::Upsert: {
             leveldb::Status _status = m_db->Put(leveldb::WriteOptions(), _key, _val);
             if (_status.ok()) {

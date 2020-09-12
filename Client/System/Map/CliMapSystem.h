@@ -4,8 +4,8 @@
 #include "tool/AStar.h"
 #include <vector>
 #include <list>
+#include "RenderManager.h"
 #include "proto/Map.pb.h"
-#include "../Client/RenderManager.h"
 #include <set>
 
 class CliMapSystem:public BaseSystem {

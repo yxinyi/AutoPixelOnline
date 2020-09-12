@@ -20,6 +20,12 @@ uint32_t ServerRegisterSystem::GetMinLoadServerInfo(NodeType node_type_) {
 bool ServerRegisterSystem::EnvDefine() {
 
 
+    ProtobufDispatch::getInstance()->SetDefaultCallback([](const uint64_t conn_,
+        const std::shared_ptr<Message>& msg_,
+        const int64_t& tm_) {
+        MessageBus::getInstance()->SendReq<uint32_t, std::string, std::string>(ApiGetConnID(conn_), msg_->GetTypeName(), msg_->SerializeAsString(), "DespatchDecodeFailed");
+    });
+
     MessageBus::getInstance()->Attach([this](uint32_t conn_, std::string msg_name_, std::string msg_str_) {
         const uint32_t _conn_id = ApiGetConnID(conn_);
         auto _session_find = m_conn_to_session.find(_conn_id);
@@ -76,19 +82,19 @@ bool ServerRegisterSystem::EnvDefine() {
         }
     }, "DespatchDecodeFailed");
     
-    //ProtobufDispatch::getInstance()->registerMessageCallback<PlayerLoginAck>([this](const uint64_t conn_,
-    //    const std::shared_ptr<PlayerLoginAck>& msg_,
-    //    const int64_t& tm_) {
-    //    auto _session_find = m_session_to_conn.find(msg_->session_key());
-    //    if (_session_find == m_session_to_conn.end()) {
-    //        RETURN_VOID;
-    //    }
-    //
-    //    if (msg_->result() == PlayerLoginAck_CheckResult_Pass) {
-    //        _session_find->second->m_state = GateSessionState::Pass;
-    //    }
-    //
-    //});
+    ProtobufDispatch::getInstance()->registerMessageCallback<PlayerLoginAck>([this](const uint64_t conn_,
+        const std::shared_ptr<PlayerLoginAck>& msg_,
+        const int64_t& tm_) {
+        auto _session_find = m_session_to_conn.find(msg_->session_key());
+        if (_session_find == m_session_to_conn.end()) {
+            RETURN_VOID;
+        }
+    
+        if (msg_->result() == PlayerLoginAck_CheckResult_Pass) {
+            _session_find->second->m_state = GateSessionState::Pass;
+        }
+    
+    });
 
     //SessionPack 如果Gate收到该消息,则为转发消息,通过消息中的session 找到对应的链接
     ProtobufDispatch::getInstance()->registerMessageCallback<SessionPack>([this](const uint64_t conn_,
@@ -140,8 +146,9 @@ bool ServerRegisterSystem::EnvDefine() {
             RETURN_VOID;
         }
         
-        _session_find->second->m_state = GateSessionState::Pass;
+        m_nodetype_to_server[_node_type] = _conn_find->second;
 
+        _session_find->second->m_state = GateSessionState::Pass;
         _conn_find->second->m_node_type = (NodeType)msg_->node_type();
         _conn_find->second->m_state = ServerState::initializa;
         DataBaseNotify_t _notify = std::make_shared<DataBaseNotify>();

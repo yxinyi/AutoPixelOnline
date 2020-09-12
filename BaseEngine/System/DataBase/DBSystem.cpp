@@ -51,6 +51,7 @@ bool CDataBaseSystem::EnvDefine() {
 bool CDataBaseSystem::ConnecDBServer() {
     CConnection_t  _cnn = CConnectionMgr::getInstance()->GetOnlyOneConnection(NodeType::DataBaseServer);
     if (_cnn && _cnn->isConnection()) {
+        MessageBus::getInstance()->SendReq<uint32_t>(m_dbserver_connected_id, "DBServerOpen");
         return false;
     }
     LogInfo << "[CDataBaseSystem] DBSystemConnectDBServer [IP:PORT] [" << m_dbserver_ip << " : " << m_dbserver_port << "] " << FlushLog;

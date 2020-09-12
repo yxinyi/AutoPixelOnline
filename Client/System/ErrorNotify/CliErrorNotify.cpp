@@ -1,6 +1,7 @@
 #include "./CliErrorNotify.h"
 #include "EngineInclude.h"
 #include "Error/Error.h"
+#include "RenderManager.h"
 #include "proto/PlayerLogin.pb.h"
 #include <math.h>
 

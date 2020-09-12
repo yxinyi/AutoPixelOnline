@@ -150,12 +150,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Common\include\proto\PlayerLogin.pb.cc" />
     <ClCompile Include="..\Common\include\proto\ServerLink.pb.cc" />
     <ClCompile Include="..\Common\include\proto\Session.pb.cc" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="System\ServerRegisterSystem\ServerRegisterSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Common\include\proto\PlayerLogin.pb.h" />
     <ClInclude Include="..\Common\include\proto\ServerLink.pb.h" />
     <ClInclude Include="..\Common\include\proto\Session.pb.h" />
     <ClInclude Include="System\ServerRegisterSystem\ServerRegisterStruct.h" />

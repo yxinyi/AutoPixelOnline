@@ -4,6 +4,12 @@ message PlayerLogin {
 	string account = 1;
 	string password = 2;
 }
+
+message PlayerRegsiter {
+	string account = 1;
+	string password = 2;
+}
+
 message PlayerLoginAck {
 	uint32 session_key = 1;	
 	enum CheckResult
@@ -13,13 +19,20 @@ message PlayerLoginAck {
     }
 	CheckResult result = 2;
 }
+
+message LogicEnterFromAccountServer {
+	uint32 session_key = 1;	
+	uint64 account_key = 2;	
+}
+
 message LoginLogic {
 	uint32 session_key = 1;
 }
-message PlayerRegsiter {
-	string account = 1;
-	string password = 2;
+
+message PlayerEnter {
+	
 }
+
 
 message BenchTest{
 	uint32 num = 1;

@@ -20,6 +20,28 @@ bool CreatureManager::EnvDefine() {
     //    MessageBus::getInstance()->SendReq<Creature_t>(_creature, "PlayerLogin");
     //});
 
+    ProtobufDispatch::getInstance()->registerMessageCallback<LogicEnterFromAccountServer>([this](const SessionConn conn_,
+        const std::shared_ptr<LogicEnterFromAccountServer>& message_,
+        const int64_t& receive_time_) {
+        LogInfo << "[PlayerLoginEvent] LogicEnterFromAccountServer " << message_->account_key() << " " << message_->session_key() << FlushLog;
+    });
+
+
+
+    ProtobufDispatch::getInstance()->registerMessageCallback<PlayerEnter>([this](const SessionConn conn_,
+        const std::shared_ptr<PlayerEnter>& message_,
+        const int64_t& receive_time_) {
+        Creature_t _creature = CreateCreature(ApiGetSession(conn_));
+        if (!_creature) {
+            LogError << "[PlayerLoginEvent] create err " << FlushLog;
+            NetManager::getInstance()->SendMessageBuff(conn_, ApiBuildErrorMsg(LOG_ERR));
+            return;
+        }
+        MessageBus::getInstance()->SendReq<Creature_t>(_creature, "PlayerLogin");
+    });
+
+    //PlayerEnter
+
     return true;
 }
 
@@ -63,18 +85,18 @@ bool CreatureManager::Destroy() {
 }
 
 
-Creature_t CreatureManager::CreateCreature(const uint32_t conn_, const PlayerLoginEvent_t& message_) {
-    auto _conn_find = m_conid_to_player.find(conn_);
-    if (_conn_find != m_conid_to_player.end()) {
+Creature_t CreatureManager::CreateCreature(const uint32_t session_) {
+    auto _conn_find = m_session_to_player.find(session_);
+    if (_conn_find != m_session_to_player.end()) {
         return _conn_find->second;
     }
-    Creature_t _login_create = CObjectPool<Creature>::getInstance()->Get("Player", conn_);
+    Creature_t _login_create = CObjectPool<Creature>::getInstance()->Get("Player", session_);
     const uint64_t _oid = _login_create->GetOid();
     if (m_oid_to_player.find(_oid) != m_oid_to_player.end()) {
         return nullptr;
     }
     m_oid_to_player[_oid] = _login_create;
-    m_conid_to_player[conn_] = _login_create;
+    m_session_to_player[session_] = _login_create;
     return _login_create;
 }
 

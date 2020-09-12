@@ -23,6 +23,10 @@ class PlayerLoginAckDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PlayerLoginAck> _instance;
 } _PlayerLoginAck_default_instance_;
+class LogicEnterFromAccountServerDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<LogicEnterFromAccountServer> _instance;
+} _LogicEnterFromAccountServer_default_instance_;
 class LoginLogicDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<LoginLogic> _instance;
@@ -31,6 +35,10 @@ class PlayerRegsiterDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PlayerRegsiter> _instance;
 } _PlayerRegsiter_default_instance_;
+class PlayerEnterDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PlayerEnter> _instance;
+} _PlayerEnter_default_instance_;
 class BenchTestDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<BenchTest> _instance;
@@ -49,6 +57,20 @@ static void InitDefaultsscc_info_BenchTest_PlayerLogin_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_BenchTest_PlayerLogin_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_BenchTest_PlayerLogin_2eproto}, {}};
 
+static void InitDefaultsscc_info_LogicEnterFromAccountServer_PlayerLogin_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::_LogicEnterFromAccountServer_default_instance_;
+    new (ptr) ::LogicEnterFromAccountServer();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::LogicEnterFromAccountServer::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_LogicEnterFromAccountServer_PlayerLogin_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_LogicEnterFromAccountServer_PlayerLogin_2eproto}, {}};
+
 static void InitDefaultsscc_info_LoginLogic_PlayerLogin_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -62,6 +84,20 @@ static void InitDefaultsscc_info_LoginLogic_PlayerLogin_2eproto() {
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_LoginLogic_PlayerLogin_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_LoginLogic_PlayerLogin_2eproto}, {}};
+
+static void InitDefaultsscc_info_PlayerEnter_PlayerLogin_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::_PlayerEnter_default_instance_;
+    new (ptr) ::PlayerEnter();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::PlayerEnter::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PlayerEnter_PlayerLogin_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_PlayerEnter_PlayerLogin_2eproto}, {}};
 
 static void InitDefaultsscc_info_PlayerLogin_PlayerLogin_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -105,7 +141,7 @@ static void InitDefaultsscc_info_PlayerRegsiter_PlayerLogin_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PlayerRegsiter_PlayerLogin_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_PlayerRegsiter_PlayerLogin_2eproto}, {}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_PlayerLogin_2eproto[5];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_PlayerLogin_2eproto[7];
 static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_PlayerLogin_2eproto[1];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_PlayerLogin_2eproto = nullptr;
 
@@ -125,6 +161,13 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_PlayerLogin_2eproto::offsets[]
   PROTOBUF_FIELD_OFFSET(::PlayerLoginAck, session_key_),
   PROTOBUF_FIELD_OFFSET(::PlayerLoginAck, result_),
   ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::LogicEnterFromAccountServer, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::LogicEnterFromAccountServer, session_key_),
+  PROTOBUF_FIELD_OFFSET(::LogicEnterFromAccountServer, account_key_),
+  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::LoginLogic, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -138,6 +181,11 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_PlayerLogin_2eproto::offsets[]
   PROTOBUF_FIELD_OFFSET(::PlayerRegsiter, account_),
   PROTOBUF_FIELD_OFFSET(::PlayerRegsiter, password_),
   ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::PlayerEnter, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::BenchTest, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -147,16 +195,20 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_PlayerLogin_2eproto::offsets[]
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::PlayerLogin)},
   { 7, -1, sizeof(::PlayerLoginAck)},
-  { 14, -1, sizeof(::LoginLogic)},
-  { 20, -1, sizeof(::PlayerRegsiter)},
-  { 27, -1, sizeof(::BenchTest)},
+  { 14, -1, sizeof(::LogicEnterFromAccountServer)},
+  { 21, -1, sizeof(::LoginLogic)},
+  { 27, -1, sizeof(::PlayerRegsiter)},
+  { 34, -1, sizeof(::PlayerEnter)},
+  { 39, -1, sizeof(::BenchTest)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_PlayerLogin_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_PlayerLoginAck_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_LogicEnterFromAccountServer_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_LoginLogic_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_PlayerRegsiter_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_PlayerEnter_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_BenchTest_default_instance_),
 };
 
@@ -165,16 +217,20 @@ const char descriptor_table_protodef_PlayerLogin_2eproto[] PROTOBUF_SECTION_VARI
   "count\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"w\n\016PlayerL"
   "oginAck\022\023\n\013session_key\030\001 \001(\r\022+\n\006result\030\002"
   " \001(\0162\033.PlayerLoginAck.CheckResult\"#\n\013Che"
-  "ckResult\022\010\n\004Pass\020\000\022\n\n\006Refuse\020\001\"!\n\nLoginL"
-  "ogic\022\023\n\013session_key\030\001 \001(\r\"3\n\016PlayerRegsi"
-  "ter\022\017\n\007account\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"\030"
-  "\n\tBenchTest\022\013\n\003num\030\001 \001(\rb\006proto3"
+  "ckResult\022\010\n\004Pass\020\000\022\n\n\006Refuse\020\001\"G\n\033LogicE"
+  "nterFromAccountServer\022\023\n\013session_key\030\001 \001"
+  "(\r\022\023\n\013account_key\030\002 \001(\004\"!\n\nLoginLogic\022\023\n"
+  "\013session_key\030\001 \001(\r\"3\n\016PlayerRegsiter\022\017\n\007"
+  "account\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"\r\n\013Playe"
+  "rEnter\"\030\n\tBenchTest\022\013\n\003num\030\001 \001(\rb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_PlayerLogin_2eproto_deps[1] = {
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_PlayerLogin_2eproto_sccs[5] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_PlayerLogin_2eproto_sccs[7] = {
   &scc_info_BenchTest_PlayerLogin_2eproto.base,
+  &scc_info_LogicEnterFromAccountServer_PlayerLogin_2eproto.base,
   &scc_info_LoginLogic_PlayerLogin_2eproto.base,
+  &scc_info_PlayerEnter_PlayerLogin_2eproto.base,
   &scc_info_PlayerLogin_PlayerLogin_2eproto.base,
   &scc_info_PlayerLoginAck_PlayerLogin_2eproto.base,
   &scc_info_PlayerRegsiter_PlayerLogin_2eproto.base,
@@ -182,10 +238,10 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_Pla
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_PlayerLogin_2eproto_once;
 static bool descriptor_table_PlayerLogin_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_PlayerLogin_2eproto = {
-  &descriptor_table_PlayerLogin_2eproto_initialized, descriptor_table_protodef_PlayerLogin_2eproto, "PlayerLogin.proto", 312,
-  &descriptor_table_PlayerLogin_2eproto_once, descriptor_table_PlayerLogin_2eproto_sccs, descriptor_table_PlayerLogin_2eproto_deps, 5, 0,
+  &descriptor_table_PlayerLogin_2eproto_initialized, descriptor_table_protodef_PlayerLogin_2eproto, "PlayerLogin.proto", 400,
+  &descriptor_table_PlayerLogin_2eproto_once, descriptor_table_PlayerLogin_2eproto_sccs, descriptor_table_PlayerLogin_2eproto_deps, 7, 0,
   schemas, file_default_instances, TableStruct_PlayerLogin_2eproto::offsets,
-  file_level_metadata_PlayerLogin_2eproto, 5, file_level_enum_descriptors_PlayerLogin_2eproto, file_level_service_descriptors_PlayerLogin_2eproto,
+  file_level_metadata_PlayerLogin_2eproto, 7, file_level_enum_descriptors_PlayerLogin_2eproto, file_level_service_descriptors_PlayerLogin_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -845,6 +901,302 @@ void PlayerLoginAck::InternalSwap(PlayerLoginAck* other) {
 
 // ===================================================================
 
+void LogicEnterFromAccountServer::InitAsDefaultInstance() {
+}
+class LogicEnterFromAccountServer::_Internal {
+ public:
+};
+
+LogicEnterFromAccountServer::LogicEnterFromAccountServer()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:LogicEnterFromAccountServer)
+}
+LogicEnterFromAccountServer::LogicEnterFromAccountServer(const LogicEnterFromAccountServer& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::memcpy(&account_key_, &from.account_key_,
+    static_cast<size_t>(reinterpret_cast<char*>(&session_key_) -
+    reinterpret_cast<char*>(&account_key_)) + sizeof(session_key_));
+  // @@protoc_insertion_point(copy_constructor:LogicEnterFromAccountServer)
+}
+
+void LogicEnterFromAccountServer::SharedCtor() {
+  ::memset(&account_key_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&session_key_) -
+      reinterpret_cast<char*>(&account_key_)) + sizeof(session_key_));
+}
+
+LogicEnterFromAccountServer::~LogicEnterFromAccountServer() {
+  // @@protoc_insertion_point(destructor:LogicEnterFromAccountServer)
+  SharedDtor();
+}
+
+void LogicEnterFromAccountServer::SharedDtor() {
+}
+
+void LogicEnterFromAccountServer::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const LogicEnterFromAccountServer& LogicEnterFromAccountServer::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_LogicEnterFromAccountServer_PlayerLogin_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void LogicEnterFromAccountServer::Clear() {
+// @@protoc_insertion_point(message_clear_start:LogicEnterFromAccountServer)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&account_key_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&session_key_) -
+      reinterpret_cast<char*>(&account_key_)) + sizeof(session_key_));
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* LogicEnterFromAccountServer::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // uint32 session_key = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          session_key_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // uint64 account_key = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          account_key_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool LogicEnterFromAccountServer::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:LogicEnterFromAccountServer)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // uint32 session_key = 1;
+      case 1: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::uint32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &session_key_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // uint64 account_key = 2;
+      case 2: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (16 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::uint64, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &account_key_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:LogicEnterFromAccountServer)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:LogicEnterFromAccountServer)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void LogicEnterFromAccountServer::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:LogicEnterFromAccountServer)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint32 session_key = 1;
+  if (this->session_key() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32(1, this->session_key(), output);
+  }
+
+  // uint64 account_key = 2;
+  if (this->account_key() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64(2, this->account_key(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:LogicEnterFromAccountServer)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* LogicEnterFromAccountServer::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:LogicEnterFromAccountServer)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint32 session_key = 1;
+  if (this->session_key() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->session_key(), target);
+  }
+
+  // uint64 account_key = 2;
+  if (this->account_key() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(2, this->account_key(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:LogicEnterFromAccountServer)
+  return target;
+}
+
+size_t LogicEnterFromAccountServer::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:LogicEnterFromAccountServer)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // uint64 account_key = 2;
+  if (this->account_key() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
+        this->account_key());
+  }
+
+  // uint32 session_key = 1;
+  if (this->session_key() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
+        this->session_key());
+  }
+
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void LogicEnterFromAccountServer::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:LogicEnterFromAccountServer)
+  GOOGLE_DCHECK_NE(&from, this);
+  const LogicEnterFromAccountServer* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<LogicEnterFromAccountServer>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:LogicEnterFromAccountServer)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:LogicEnterFromAccountServer)
+    MergeFrom(*source);
+  }
+}
+
+void LogicEnterFromAccountServer::MergeFrom(const LogicEnterFromAccountServer& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:LogicEnterFromAccountServer)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.account_key() != 0) {
+    set_account_key(from.account_key());
+  }
+  if (from.session_key() != 0) {
+    set_session_key(from.session_key());
+  }
+}
+
+void LogicEnterFromAccountServer::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:LogicEnterFromAccountServer)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void LogicEnterFromAccountServer::CopyFrom(const LogicEnterFromAccountServer& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:LogicEnterFromAccountServer)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool LogicEnterFromAccountServer::IsInitialized() const {
+  return true;
+}
+
+void LogicEnterFromAccountServer::InternalSwap(LogicEnterFromAccountServer* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(account_key_, other->account_key_);
+  swap(session_key_, other->session_key_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata LogicEnterFromAccountServer::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
 void LoginLogic::InitAsDefaultInstance() {
 }
 class LoginLogic::_Internal {
@@ -1426,6 +1778,205 @@ void PlayerRegsiter::InternalSwap(PlayerRegsiter* other) {
 
 // ===================================================================
 
+void PlayerEnter::InitAsDefaultInstance() {
+}
+class PlayerEnter::_Internal {
+ public:
+};
+
+PlayerEnter::PlayerEnter()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:PlayerEnter)
+}
+PlayerEnter::PlayerEnter(const PlayerEnter& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:PlayerEnter)
+}
+
+void PlayerEnter::SharedCtor() {
+}
+
+PlayerEnter::~PlayerEnter() {
+  // @@protoc_insertion_point(destructor:PlayerEnter)
+  SharedDtor();
+}
+
+void PlayerEnter::SharedDtor() {
+}
+
+void PlayerEnter::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const PlayerEnter& PlayerEnter::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PlayerEnter_PlayerLogin_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void PlayerEnter::Clear() {
+// @@protoc_insertion_point(message_clear_start:PlayerEnter)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* PlayerEnter::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      default: {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool PlayerEnter::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:PlayerEnter)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+  handle_unusual:
+    if (tag == 0) {
+      goto success;
+    }
+    DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+          input, tag, _internal_metadata_.mutable_unknown_fields()));
+  }
+success:
+  // @@protoc_insertion_point(parse_success:PlayerEnter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:PlayerEnter)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void PlayerEnter::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:PlayerEnter)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:PlayerEnter)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* PlayerEnter::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:PlayerEnter)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:PlayerEnter)
+  return target;
+}
+
+size_t PlayerEnter::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:PlayerEnter)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void PlayerEnter::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:PlayerEnter)
+  GOOGLE_DCHECK_NE(&from, this);
+  const PlayerEnter* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<PlayerEnter>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:PlayerEnter)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:PlayerEnter)
+    MergeFrom(*source);
+  }
+}
+
+void PlayerEnter::MergeFrom(const PlayerEnter& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:PlayerEnter)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+}
+
+void PlayerEnter::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:PlayerEnter)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void PlayerEnter::CopyFrom(const PlayerEnter& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:PlayerEnter)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool PlayerEnter::IsInitialized() const {
+  return true;
+}
+
+void PlayerEnter::InternalSwap(PlayerEnter* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata PlayerEnter::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
 void BenchTest::InitAsDefaultInstance() {
 }
 class BenchTest::_Internal {
@@ -1681,11 +2232,17 @@ template<> PROTOBUF_NOINLINE ::PlayerLogin* Arena::CreateMaybeMessage< ::PlayerL
 template<> PROTOBUF_NOINLINE ::PlayerLoginAck* Arena::CreateMaybeMessage< ::PlayerLoginAck >(Arena* arena) {
   return Arena::CreateInternal< ::PlayerLoginAck >(arena);
 }
+template<> PROTOBUF_NOINLINE ::LogicEnterFromAccountServer* Arena::CreateMaybeMessage< ::LogicEnterFromAccountServer >(Arena* arena) {
+  return Arena::CreateInternal< ::LogicEnterFromAccountServer >(arena);
+}
 template<> PROTOBUF_NOINLINE ::LoginLogic* Arena::CreateMaybeMessage< ::LoginLogic >(Arena* arena) {
   return Arena::CreateInternal< ::LoginLogic >(arena);
 }
 template<> PROTOBUF_NOINLINE ::PlayerRegsiter* Arena::CreateMaybeMessage< ::PlayerRegsiter >(Arena* arena) {
   return Arena::CreateInternal< ::PlayerRegsiter >(arena);
+}
+template<> PROTOBUF_NOINLINE ::PlayerEnter* Arena::CreateMaybeMessage< ::PlayerEnter >(Arena* arena) {
+  return Arena::CreateInternal< ::PlayerEnter >(arena);
 }
 template<> PROTOBUF_NOINLINE ::BenchTest* Arena::CreateMaybeMessage< ::BenchTest >(Arena* arena) {
   return Arena::CreateInternal< ::BenchTest >(arena);

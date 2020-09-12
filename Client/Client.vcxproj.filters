@@ -8,9 +8,6 @@
     <ClCompile Include="..\Common\include\proto\Map.pb.cc">
       <Filter>System\Map</Filter>
     </ClCompile>
-    <ClCompile Include="RenderManager.h">
-      <Filter>System</Filter>
-    </ClCompile>
     <ClCompile Include="UI\UIManager.cpp">
       <Filter>UI</Filter>
     </ClCompile>
@@ -143,6 +140,9 @@
     </ClInclude>
     <ClInclude Include="System\Login\CliLoginStruct.h">
       <Filter>System\Login</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderManager.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -60,6 +60,7 @@ void MainLoop() {
     catch (const std::exception& e)
     {
         LogError << "Exception: " << e.what() << FlushLog;
+        system("pause");
     }
     catch (...)
     {

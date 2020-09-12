@@ -1,4 +1,5 @@
-﻿  ServerLink.pb.cc
+﻿  PlayerLogin.pb.cc
+  ServerLink.pb.cc
   Session.pb.cc
   main.cpp
   ServerRegisterSystem.cpp

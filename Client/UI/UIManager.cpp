@@ -1,5 +1,5 @@
-#include "./UIManager.h"
 #include "RenderManager.h"
+#include "./UIManager.h"
 
 UIManager::UIManager() {
 }

@@ -5,7 +5,6 @@
 #include <vector>
 #include <list>
 #include "proto/Map.pb.h"
-#include "../Client/RenderManager.h"
 #include "UI/UIManager.h"
 #include <set>
 

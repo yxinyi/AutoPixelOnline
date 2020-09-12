@@ -164,7 +164,6 @@
     <ClCompile Include="..\Common\include\SDL2\imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RenderManager.cpp" />
-    <ClCompile Include="RenderManager.h" />
     <ClCompile Include="System\ErrorNotify\CliErrorNotify.cpp" />
     <ClCompile Include="System\Login\CliLoginSystem.cpp" />
     <ClCompile Include="System\Map\CliMapSystem.cpp" />
@@ -187,6 +186,7 @@
     <ClInclude Include="..\Common\include\SDL2\imstb_truetype.h" />
     <ClInclude Include="..\Server\System\Creature\CreatureStruct.h" />
     <ClInclude Include="..\Server\System\Map\MapStruct.h" />
+    <ClInclude Include="RenderManager.h" />
     <ClInclude Include="System\ErrorNotify\CliErrorNotify.h" />
     <ClInclude Include="System\Login\CliLoginStruct.h" />
     <ClInclude Include="System\Login\CliLoginSystem.h" />
