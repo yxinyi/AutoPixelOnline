@@ -50,6 +50,9 @@
     <ClCompile Include="..\Common\include\proto\ErrorNotify.pb.cc">
       <Filter>System\ErrorNotify</Filter>
     </ClCompile>
+    <ClCompile Include="..\Common\include\SDL2\imgui_sdl.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="proto">
@@ -143,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="RenderManager.h">
       <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\SDL2\imgui_sdl.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

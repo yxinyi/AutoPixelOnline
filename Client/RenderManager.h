@@ -6,6 +6,7 @@
 #include <string>
 #include "tool/LogInfo.h"
 #include "imgui.h"
+#include "imgui_sdl.h"
 #include "imgui_stdlib.h"
 #include "imgui_impl_sdl.h"
 #include "imgui_impl_dx11.h"

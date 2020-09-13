@@ -9,71 +9,6 @@ SDL_Renderer* RenderManager::GetRenderer() {
     return m_render;
 }
 
-
-// Data
-static ID3D11Device* g_pd3dDevice = NULL;
-static ID3D11DeviceContext* g_pd3dDeviceContext = NULL;
-static IDXGISwapChain* g_pSwapChain = NULL;
-static ID3D11RenderTargetView* g_mainRenderTargetView = NULL;
-
-// Forward declarations of helper functions
-// Helper functions
-void CleanupDeviceD3D();
-void CreateRenderTarget();
-void CleanupRenderTarget();
-
-bool CreateDeviceD3D(HWND hWnd)
-{
-    // Setup swap chain
-    DXGI_SWAP_CHAIN_DESC sd;
-    ZeroMemory(&sd, sizeof(sd));
-    sd.BufferCount = 2;
-    sd.BufferDesc.Width = 0;
-    sd.BufferDesc.Height = 0;
-    sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-    sd.BufferDesc.RefreshRate.Numerator = 60;
-    sd.BufferDesc.RefreshRate.Denominator = 1;
-    sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
-    sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-    sd.OutputWindow = hWnd;
-    sd.SampleDesc.Count = 1;
-    sd.SampleDesc.Quality = 0;
-    sd.Windowed = TRUE;
-    sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
-
-    UINT createDeviceFlags = 0;
-    //createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
-    D3D_FEATURE_LEVEL featureLevel;
-    const D3D_FEATURE_LEVEL featureLevelArray[2] = { D3D_FEATURE_LEVEL_11_0, D3D_FEATURE_LEVEL_10_0, };
-    if (D3D11CreateDeviceAndSwapChain(NULL, D3D_DRIVER_TYPE_HARDWARE, NULL, createDeviceFlags, featureLevelArray, 2, D3D11_SDK_VERSION, &sd, &g_pSwapChain, &g_pd3dDevice, &featureLevel, &g_pd3dDeviceContext) != S_OK)
-        return false;
-
-    CreateRenderTarget();
-    return true;
-}
-
-void CleanupDeviceD3D()
-{
-    CleanupRenderTarget();
-    if (g_pSwapChain) { g_pSwapChain->Release(); g_pSwapChain = NULL; }
-    if (g_pd3dDeviceContext) { g_pd3dDeviceContext->Release(); g_pd3dDeviceContext = NULL; }
-    if (g_pd3dDevice) { g_pd3dDevice->Release(); g_pd3dDevice = NULL; }
-}
-
-void CreateRenderTarget()
-{
-    ID3D11Texture2D* pBackBuffer;
-    g_pSwapChain->GetBuffer(0, IID_PPV_ARGS(&pBackBuffer));
-    g_pd3dDevice->CreateRenderTargetView(pBackBuffer, NULL, &g_mainRenderTargetView);
-    pBackBuffer->Release();
-}
-
-void CleanupRenderTarget()
-{
-    if (g_mainRenderTargetView) { g_mainRenderTargetView->Release(); g_mainRenderTargetView = NULL; }
-}
-
-
 bool RenderManager::WindowInit() {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0)
     {
@@ -90,18 +25,8 @@ bool RenderManager::WindowInit() {
         LogError << _message << FlushLog;
         return false;
     }
-    SDL_SysWMinfo wmInfo;
-    SDL_VERSION(&wmInfo.version);
-    SDL_GetWindowWMInfo(m_window, &wmInfo);
-    HWND hwnd = (HWND)wmInfo.info.win.window;
-    // Initialize Direct3D
-    if (!CreateDeviceD3D(hwnd))
-    {
-        CleanupDeviceD3D();
-        return 1;
-    }
 
-    m_render = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_SOFTWARE);
+    m_render = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
 
     if (!m_render)
     {
@@ -117,26 +42,28 @@ bool RenderManager::WindowInit() {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
-    // Setup Dear ImGui style
-    ImGui::StyleColorsDark();
-    //ImGui::StyleColorsClassic();
-    // Setup Platform/Renderer bindings
+    ImGuiSDL::Initialize(m_render, 1280, 720);
+    SDL_Texture* texture = SDL_CreateTexture(m_render, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, 100, 100);
+    {
+        SDL_SetRenderTarget(m_render, texture);
+        SDL_SetRenderDrawColor(m_render, 255, 0, 255, 255);
+        SDL_RenderClear(m_render);
+        SDL_SetRenderTarget(m_render, nullptr);
+    }
     ImGui_ImplSDL2_InitForD3D(m_window);
-    ImGui_ImplDX11_Init(g_pd3dDevice, g_pd3dDeviceContext);
 
     LogInfo << "WindowInit" << FlushLog;
     return true;
 }
 
 RenderManager::~RenderManager() {
-    // Cleanup
-    ImGui_ImplDX11_Shutdown();
-    ImGui_ImplSDL2_Shutdown();
-    ImGui::DestroyContext();
 
-    CleanupDeviceD3D();
+    ImGuiSDL::Deinitialize();
+
+    SDL_DestroyRenderer(m_render);
     SDL_DestroyWindow(m_window);
-    SDL_Quit();
+
+    ImGui::DestroyContext();
 }
 
 bool RenderManager::WindowUpdate(const int64_t& dt_) {
@@ -146,24 +73,14 @@ bool RenderManager::WindowUpdate(const int64_t& dt_) {
 
 static ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 bool RenderManager::Loop(const uint64_t interval_) {
-    ImGuiIO& io = ImGui::GetIO();
     int wheel = 0;
-    SDL_Event event;
-    while (SDL_PollEvent(&event))
+    while (SDL_PollEvent(&m_event))
     {
-        ImGui_ImplSDL2_ProcessEvent(&event);
-        if (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_RESIZED && event.window.windowID == SDL_GetWindowID(m_window))
-        {
-            // Release all outstanding references to the swap chain's buffers before resizing.
-            CleanupRenderTarget();
-            g_pSwapChain->ResizeBuffers(0, 0, 0, DXGI_FORMAT_UNKNOWN, 0);
-            CreateRenderTarget();
-        }
-    }
+        ImGui_ImplSDL2_ProcessEvent(&m_event);
 
-    //SDL_SetRenderDrawColor(m_render, 0, 0, 0, 255);
-    //SDL_RenderClear(m_render);
-    ImGui_ImplDX11_NewFrame();
+    }
+    SDL_SetRenderDrawColor(m_render, 114, 144, 154, 255);
+    SDL_RenderClear(m_render);
     ImGui_ImplSDL2_NewFrame(m_window);
     ImGui::NewFrame();
 
@@ -172,13 +89,11 @@ bool RenderManager::Loop(const uint64_t interval_) {
     }
 
     UIManager::getInstance()->loop();
-    ImGui::Render();
-    //SDL_RenderPresent(m_render);
-    g_pd3dDeviceContext->OMSetRenderTargets(1, &g_mainRenderTargetView, NULL);
-    g_pd3dDeviceContext->ClearRenderTargetView(g_mainRenderTargetView, (float*)&clear_color);
-    ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
-    g_pSwapChain->Present(1, 0); // Present with vsync
+    ImGui::Render();
+    ImGuiSDL::Render(ImGui::GetDrawData());
+
+    SDL_RenderPresent(m_render);
     m_render_funcs.clear();
 
 
