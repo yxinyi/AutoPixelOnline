@@ -229,24 +229,24 @@ class PlayerLogin :
     kAccountFieldNumber = 1,
     kPasswordFieldNumber = 2,
   };
-  // string account = 1;
+  // bytes account = 1;
   void clear_account();
   const std::string& account() const;
   void set_account(const std::string& value);
   void set_account(std::string&& value);
   void set_account(const char* value);
-  void set_account(const char* value, size_t size);
+  void set_account(const void* value, size_t size);
   std::string* mutable_account();
   std::string* release_account();
   void set_allocated_account(std::string* account);
 
-  // string password = 2;
+  // bytes password = 2;
   void clear_password();
   const std::string& password() const;
   void set_password(const std::string& value);
   void set_password(std::string&& value);
   void set_password(const char* value);
-  void set_password(const char* value, size_t size);
+  void set_password(const void* value, size_t size);
   std::string* mutable_password();
   std::string* release_password();
   void set_allocated_password(std::string* password);
@@ -379,24 +379,24 @@ class PlayerRegsiter :
     kAccountFieldNumber = 1,
     kPasswordFieldNumber = 2,
   };
-  // string account = 1;
+  // bytes account = 1;
   void clear_account();
   const std::string& account() const;
   void set_account(const std::string& value);
   void set_account(std::string&& value);
   void set_account(const char* value);
-  void set_account(const char* value, size_t size);
+  void set_account(const void* value, size_t size);
   std::string* mutable_account();
   std::string* release_account();
   void set_allocated_account(std::string* account);
 
-  // string password = 2;
+  // bytes password = 2;
   void clear_password();
   const std::string& password() const;
   void set_password(const std::string& value);
   void set_password(std::string&& value);
   void set_password(const char* value);
-  void set_password(const char* value, size_t size);
+  void set_password(const void* value, size_t size);
   std::string* mutable_password();
   std::string* release_password();
   void set_allocated_password(std::string* password);
@@ -1103,7 +1103,7 @@ class BenchTest :
 #endif  // __GNUC__
 // PlayerLogin
 
-// string account = 1;
+// bytes account = 1;
 inline void PlayerLogin::clear_account() {
   account_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -1128,7 +1128,7 @@ inline void PlayerLogin::set_account(const char* value) {
   account_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:PlayerLogin.account)
 }
-inline void PlayerLogin::set_account(const char* value, size_t size) {
+inline void PlayerLogin::set_account(const void* value, size_t size) {
   
   account_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
@@ -1154,7 +1154,7 @@ inline void PlayerLogin::set_allocated_account(std::string* account) {
   // @@protoc_insertion_point(field_set_allocated:PlayerLogin.account)
 }
 
-// string password = 2;
+// bytes password = 2;
 inline void PlayerLogin::clear_password() {
   password_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -1179,7 +1179,7 @@ inline void PlayerLogin::set_password(const char* value) {
   password_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:PlayerLogin.password)
 }
-inline void PlayerLogin::set_password(const char* value, size_t size) {
+inline void PlayerLogin::set_password(const void* value, size_t size) {
   
   password_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
@@ -1209,7 +1209,7 @@ inline void PlayerLogin::set_allocated_password(std::string* password) {
 
 // PlayerRegsiter
 
-// string account = 1;
+// bytes account = 1;
 inline void PlayerRegsiter::clear_account() {
   account_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -1234,7 +1234,7 @@ inline void PlayerRegsiter::set_account(const char* value) {
   account_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:PlayerRegsiter.account)
 }
-inline void PlayerRegsiter::set_account(const char* value, size_t size) {
+inline void PlayerRegsiter::set_account(const void* value, size_t size) {
   
   account_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
@@ -1260,7 +1260,7 @@ inline void PlayerRegsiter::set_allocated_account(std::string* account) {
   // @@protoc_insertion_point(field_set_allocated:PlayerRegsiter.account)
 }
 
-// string password = 2;
+// bytes password = 2;
 inline void PlayerRegsiter::clear_password() {
   password_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -1285,7 +1285,7 @@ inline void PlayerRegsiter::set_password(const char* value) {
   password_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:PlayerRegsiter.password)
 }
-inline void PlayerRegsiter::set_password(const char* value, size_t size) {
+inline void PlayerRegsiter::set_password(const void* value, size_t size) {
   
   password_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));

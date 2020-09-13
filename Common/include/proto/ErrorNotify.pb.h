@@ -179,7 +179,7 @@ class ErrorMsg :
     kParamFieldNumber = 2,
     kErrorIdFieldNumber = 1,
   };
-  // repeated string param = 2;
+  // repeated bytes param = 2;
   int param_size() const;
   void clear_param();
   const std::string& param(int index) const;
@@ -187,12 +187,12 @@ class ErrorMsg :
   void set_param(int index, const std::string& value);
   void set_param(int index, std::string&& value);
   void set_param(int index, const char* value);
-  void set_param(int index, const char* value, size_t size);
+  void set_param(int index, const void* value, size_t size);
   std::string* add_param();
   void add_param(const std::string& value);
   void add_param(std::string&& value);
   void add_param(const char* value);
-  void add_param(const char* value, size_t size);
+  void add_param(const void* value, size_t size);
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& param() const;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_param();
 
@@ -236,7 +236,7 @@ inline void ErrorMsg::set_error_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:ErrorMsg.error_id)
 }
 
-// repeated string param = 2;
+// repeated bytes param = 2;
 inline int ErrorMsg::param_size() const {
   return param_.size();
 }
@@ -264,7 +264,7 @@ inline void ErrorMsg::set_param(int index, const char* value) {
   param_.Mutable(index)->assign(value);
   // @@protoc_insertion_point(field_set_char:ErrorMsg.param)
 }
-inline void ErrorMsg::set_param(int index, const char* value, size_t size) {
+inline void ErrorMsg::set_param(int index, const void* value, size_t size) {
   param_.Mutable(index)->assign(
     reinterpret_cast<const char*>(value), size);
   // @@protoc_insertion_point(field_set_pointer:ErrorMsg.param)
@@ -286,7 +286,7 @@ inline void ErrorMsg::add_param(const char* value) {
   param_.Add()->assign(value);
   // @@protoc_insertion_point(field_add_char:ErrorMsg.param)
 }
-inline void ErrorMsg::add_param(const char* value, size_t size) {
+inline void ErrorMsg::add_param(const void* value, size_t size) {
   param_.Add()->assign(reinterpret_cast<const char*>(value), size);
   // @@protoc_insertion_point(field_add_pointer:ErrorMsg.param)
 }

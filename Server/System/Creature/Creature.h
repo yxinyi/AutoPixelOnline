@@ -18,6 +18,7 @@ public:
 public:
     Creature_t CreateCreature(const SessionConn session_conn_);
     Creature_t FindCreatureByOid(const uint64_t& oid_);
+    Creature_t FindCreatureBySession(const uint32_t& session_);
 
 
 private:

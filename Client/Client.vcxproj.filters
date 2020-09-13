@@ -53,6 +53,9 @@
     <ClCompile Include="..\Common\include\SDL2\imgui_sdl.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="System\Creature\CreatureSystem.cpp">
+      <Filter>System\Creature</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="proto">
@@ -83,9 +86,6 @@
     </ClInclude>
     <ClInclude Include="..\Server\System\Map\MapStruct.h">
       <Filter>System\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Server\System\Creature\CreatureStruct.h">
-      <Filter>System\Creature</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\include\proto\Map.pb.h">
       <Filter>System\Map</Filter>
@@ -149,6 +149,9 @@
     </ClInclude>
     <ClInclude Include="..\Common\include\SDL2\imgui_sdl.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Creature\CreatureSystem.h">
+      <Filter>System\Creature</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

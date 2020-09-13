@@ -86,10 +86,10 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 
 const char descriptor_table_protodef_DataBase_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\016DataBase.proto\"G\n\013DataBaseReq\022\016\n\006msg_i"
-  "d\030\001 \001(\004\022\016\n\006cmd_op\030\002 \001(\r\022\013\n\003key\030\003 \001(\t\022\013\n\003"
-  "val\030\004 \001(\t\"F\n\013DataBaseAck\022\016\n\006msg_id\030\001 \001(\004"
+  "d\030\001 \001(\004\022\016\n\006cmd_op\030\002 \001(\r\022\013\n\003key\030\003 \001(\014\022\013\n\003"
+  "val\030\004 \001(\014\"F\n\013DataBaseAck\022\016\n\006msg_id\030\001 \001(\004"
   "\022\023\n\013query_state\030\002 \001(\r\022\022\n\nresult_str\030\003 \001("
-  "\tb\006proto3"
+  "\014b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_DataBase_2eproto_deps[1] = {
 };
@@ -204,17 +204,17 @@ const char* DataBaseReq::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string key = 3;
+      // bytes key = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_key(), ptr, ctx, "DataBaseReq.key");
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(mutable_key(), ptr, ctx);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string val = 4;
+      // bytes val = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_val(), ptr, ctx, "DataBaseReq.val");
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(mutable_val(), ptr, ctx);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -274,30 +274,22 @@ bool DataBaseReq::MergePartialFromCodedStream(
         break;
       }
 
-      // string key = 3;
+      // bytes key = 3;
       case 3: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_key()));
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-            this->key().data(), static_cast<int>(this->key().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
-            "DataBaseReq.key"));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // string val = 4;
+      // bytes val = 4;
       case 4: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (34 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_val()));
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-            this->val().data(), static_cast<int>(this->val().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
-            "DataBaseReq.val"));
         } else {
           goto handle_unusual;
         }
@@ -341,23 +333,15 @@ void DataBaseReq::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32(2, this->cmd_op(), output);
   }
 
-  // string key = 3;
+  // bytes key = 3;
   if (this->key().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->key().data(), static_cast<int>(this->key().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "DataBaseReq.key");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesMaybeAliased(
       3, this->key(), output);
   }
 
-  // string val = 4;
+  // bytes val = 4;
   if (this->val().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->val().data(), static_cast<int>(this->val().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "DataBaseReq.val");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesMaybeAliased(
       4, this->val(), output);
   }
 
@@ -384,25 +368,17 @@ void DataBaseReq::SerializeWithCachedSizes(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->cmd_op(), target);
   }
 
-  // string key = 3;
+  // bytes key = 3;
   if (this->key().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->key().data(), static_cast<int>(this->key().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "DataBaseReq.key");
     target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesToArray(
         3, this->key(), target);
   }
 
-  // string val = 4;
+  // bytes val = 4;
   if (this->val().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->val().data(), static_cast<int>(this->val().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "DataBaseReq.val");
     target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesToArray(
         4, this->val(), target);
   }
 
@@ -427,17 +403,17 @@ size_t DataBaseReq::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string key = 3;
+  // bytes key = 3;
   if (this->key().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->key());
   }
 
-  // string val = 4;
+  // bytes val = 4;
   if (this->val().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->val());
   }
 
@@ -620,10 +596,10 @@ const char* DataBaseAck::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string result_str = 3;
+      // bytes result_str = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_result_str(), ptr, ctx, "DataBaseAck.result_str");
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(mutable_result_str(), ptr, ctx);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -683,15 +659,11 @@ bool DataBaseAck::MergePartialFromCodedStream(
         break;
       }
 
-      // string result_str = 3;
+      // bytes result_str = 3;
       case 3: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_result_str()));
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-            this->result_str().data(), static_cast<int>(this->result_str().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
-            "DataBaseAck.result_str"));
         } else {
           goto handle_unusual;
         }
@@ -735,13 +707,9 @@ void DataBaseAck::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32(2, this->query_state(), output);
   }
 
-  // string result_str = 3;
+  // bytes result_str = 3;
   if (this->result_str().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->result_str().data(), static_cast<int>(this->result_str().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "DataBaseAck.result_str");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesMaybeAliased(
       3, this->result_str(), output);
   }
 
@@ -768,14 +736,10 @@ void DataBaseAck::SerializeWithCachedSizes(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->query_state(), target);
   }
 
-  // string result_str = 3;
+  // bytes result_str = 3;
   if (this->result_str().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->result_str().data(), static_cast<int>(this->result_str().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "DataBaseAck.result_str");
     target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesToArray(
         3, this->result_str(), target);
   }
 
@@ -800,10 +764,10 @@ size_t DataBaseAck::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string result_str = 3;
+  // bytes result_str = 3;
   if (this->result_str().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->result_str());
   }
 

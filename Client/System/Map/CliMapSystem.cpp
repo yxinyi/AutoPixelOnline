@@ -14,6 +14,19 @@ bool CliMapSystem::EnvDefine() {
         this->InitMap(message_);
         
     });
+
+
+    ProtobufDispatch::getInstance()->registerMessageCallback<MapTickUpdate>([this](const SessionConn session_conn_,
+        const std::shared_ptr<MapTickUpdate>& message_,
+        const int64_t& receive_time_) {
+        m_move_block_data.clear();
+        for (auto&& _it : message_->map_infos()) {
+            std::shared_ptr<MapData> _map_data = std::make_shared<MapData>();
+            _map_data->ParseFromString(_it);
+            m_move_block_data.push_back(_map_data);
+        }
+    });
+    
     return true;
 }
 
@@ -65,12 +78,37 @@ void CliMapSystem::MapRender(SDL_Window* windows_, SDL_Renderer* render_) {
             SDL_RenderFillRectF(render_, &rectToDraw);
         }
     }
+
+    for (auto&& _move_block_it : m_move_block_data) {
+
+        SDL_SetRenderDrawColor(render_, 0, 0, 255, 255);
+        SDL_FRect rectToDraw{ _move_block_it->map_postion().postion_x(), _move_block_it->map_postion().postion_y(), (float)5, (float)5 };
+        SDL_RenderFillRectF(render_, &rectToDraw);
+    }
+
 }
 bool CliMapSystem::Loop(const uint64_t interval_) {
 
     RenderManager::getInstance()->Register([this](SDL_Window* windows_, SDL_Renderer* render_) {
         this->MapRender(windows_, render_);
     });
+
+    if (UIManager::getInstance()->GetNowScene() == UIScene::Game) {
+        ImGuiIO& _io = ImGui::GetIO();
+        //如果是左键则发送当前坐标给服务器
+        if (_io.MouseClicked[0]) {
+            
+            std::shared_ptr<PlayerMoveTo> _msg = std::make_shared<PlayerMoveTo>();
+            auto _pos = _msg->mutable_postion();
+            _pos->set_postion_x(_io.MousePos.x);
+            _pos->set_postion_y(_io.MousePos.y);
+            if (CConnection_t _conn = CConnectionMgr::getInstance()->GetOnlyOneConnection(NodeType::GateServer)) {
+                NetManager::getInstance()->SendMessageBuff(_conn->getConnId(),_msg);
+            }
+            LogError << "[CliMapSystem] PlayerMoveTo x: " << _io.MousePos.x << "y: " << _io.MousePos.y << FlushLog;
+        }
+    }
+
     return true;
 }
 bool CliMapSystem::Quit() {

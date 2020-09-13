@@ -318,13 +318,13 @@ class DataBaseNotify :
     kDbIpFieldNumber = 1,
     kDbPortFieldNumber = 2,
   };
-  // string db_ip = 1;
+  // bytes db_ip = 1;
   void clear_db_ip();
   const std::string& db_ip() const;
   void set_db_ip(const std::string& value);
   void set_db_ip(std::string&& value);
   void set_db_ip(const char* value);
-  void set_db_ip(const char* value, size_t size);
+  void set_db_ip(const void* value, size_t size);
   std::string* mutable_db_ip();
   std::string* release_db_ip();
   void set_allocated_db_ip(std::string* db_ip);
@@ -461,7 +461,7 @@ class ServerMessageRegister :
   enum : int {
     kMessageStrFieldNumber = 1,
   };
-  // repeated string message_str = 1;
+  // repeated bytes message_str = 1;
   int message_str_size() const;
   void clear_message_str();
   const std::string& message_str(int index) const;
@@ -469,12 +469,12 @@ class ServerMessageRegister :
   void set_message_str(int index, const std::string& value);
   void set_message_str(int index, std::string&& value);
   void set_message_str(int index, const char* value);
-  void set_message_str(int index, const char* value, size_t size);
+  void set_message_str(int index, const void* value, size_t size);
   std::string* add_message_str();
   void add_message_str(const std::string& value);
   void add_message_str(std::string&& value);
   void add_message_str(const char* value);
-  void add_message_str(const char* value, size_t size);
+  void add_message_str(const void* value, size_t size);
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& message_str() const;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_message_str();
 
@@ -516,7 +516,7 @@ inline void ServerLink::set_node_type(::PROTOBUF_NAMESPACE_ID::uint32 value) {
 
 // DataBaseNotify
 
-// string db_ip = 1;
+// bytes db_ip = 1;
 inline void DataBaseNotify::clear_db_ip() {
   db_ip_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -541,7 +541,7 @@ inline void DataBaseNotify::set_db_ip(const char* value) {
   db_ip_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:DataBaseNotify.db_ip)
 }
-inline void DataBaseNotify::set_db_ip(const char* value, size_t size) {
+inline void DataBaseNotify::set_db_ip(const void* value, size_t size) {
   
   db_ip_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
@@ -585,7 +585,7 @@ inline void DataBaseNotify::set_db_port(::PROTOBUF_NAMESPACE_ID::uint32 value) {
 
 // ServerMessageRegister
 
-// repeated string message_str = 1;
+// repeated bytes message_str = 1;
 inline int ServerMessageRegister::message_str_size() const {
   return message_str_.size();
 }
@@ -613,7 +613,7 @@ inline void ServerMessageRegister::set_message_str(int index, const char* value)
   message_str_.Mutable(index)->assign(value);
   // @@protoc_insertion_point(field_set_char:ServerMessageRegister.message_str)
 }
-inline void ServerMessageRegister::set_message_str(int index, const char* value, size_t size) {
+inline void ServerMessageRegister::set_message_str(int index, const void* value, size_t size) {
   message_str_.Mutable(index)->assign(
     reinterpret_cast<const char*>(value), size);
   // @@protoc_insertion_point(field_set_pointer:ServerMessageRegister.message_str)
@@ -635,7 +635,7 @@ inline void ServerMessageRegister::add_message_str(const char* value) {
   message_str_.Add()->assign(value);
   // @@protoc_insertion_point(field_add_char:ServerMessageRegister.message_str)
 }
-inline void ServerMessageRegister::add_message_str(const char* value, size_t size) {
+inline void ServerMessageRegister::add_message_str(const void* value, size_t size) {
   message_str_.Add()->assign(reinterpret_cast<const char*>(value), size);
   // @@protoc_insertion_point(field_add_pointer:ServerMessageRegister.message_str)
 }

@@ -56,7 +56,7 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 
 const char descriptor_table_protodef_ErrorNotify_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\021ErrorNotify.proto\"+\n\010ErrorMsg\022\020\n\010error"
-  "_id\030\001 \001(\r\022\r\n\005param\030\002 \003(\tb\006proto3"
+  "_id\030\001 \001(\r\022\r\n\005param\030\002 \003(\014b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_ErrorNotify_2eproto_deps[1] = {
 };
@@ -145,13 +145,13 @@ const char* ErrorMsg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::i
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // repeated string param = 2;
+      // repeated bytes param = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
           ptr -= 1;
           do {
             ptr += 1;
-            ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(add_param(), ptr, ctx, "ErrorMsg.param");
+            ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(add_param(), ptr, ctx);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 18);
@@ -200,16 +200,11 @@ bool ErrorMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated string param = 2;
+      // repeated bytes param = 2;
       case 2: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadBytes(
                 input, this->add_param()));
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-            this->param(this->param_size() - 1).data(),
-            static_cast<int>(this->param(this->param_size() - 1).length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
-            "ErrorMsg.param"));
         } else {
           goto handle_unusual;
         }
@@ -248,13 +243,9 @@ void ErrorMsg::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32(1, this->error_id(), output);
   }
 
-  // repeated string param = 2;
+  // repeated bytes param = 2;
   for (int i = 0, n = this->param_size(); i < n; i++) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->param(i).data(), static_cast<int>(this->param(i).length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "ErrorMsg.param");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteString(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytes(
       2, this->param(i), output);
   }
 
@@ -276,14 +267,10 @@ void ErrorMsg::SerializeWithCachedSizes(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->error_id(), target);
   }
 
-  // repeated string param = 2;
+  // repeated bytes param = 2;
   for (int i = 0, n = this->param_size(); i < n; i++) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->param(i).data(), static_cast<int>(this->param(i).length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "ErrorMsg.param");
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      WriteStringToArray(2, this->param(i), target);
+      WriteBytesToArray(2, this->param(i), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -307,11 +294,11 @@ size_t ErrorMsg::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated string param = 2;
+  // repeated bytes param = 2;
   total_size += 1 *
       ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->param_size());
   for (int i = 0, n = this->param_size(); i < n; i++) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
       this->param(i));
   }
 

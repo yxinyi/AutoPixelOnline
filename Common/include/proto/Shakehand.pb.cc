@@ -82,7 +82,7 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 
 const char descriptor_table_protodef_Shakehand_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\017Shakehand.proto\"1\n\016ShakeHandEvent\022\r\n\005s"
-  "tate\030\001 \001(\r\022\020\n\010src_name\030\002 \001(\t\"(\n\023Authenti"
+  "tate\030\001 \001(\r\022\020\n\010src_name\030\002 \001(\014\"(\n\023Authenti"
   "cationEvent\022\021\n\tnode_type\030\001 \001(\rb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_Shakehand_2eproto_deps[1] = {
@@ -178,10 +178,10 @@ const char* ShakeHandEvent::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string src_name = 2;
+      // bytes src_name = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_src_name(), ptr, ctx, "ShakeHandEvent.src_name");
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(mutable_src_name(), ptr, ctx);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -228,15 +228,11 @@ bool ShakeHandEvent::MergePartialFromCodedStream(
         break;
       }
 
-      // string src_name = 2;
+      // bytes src_name = 2;
       case 2: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_src_name()));
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-            this->src_name().data(), static_cast<int>(this->src_name().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
-            "ShakeHandEvent.src_name"));
         } else {
           goto handle_unusual;
         }
@@ -275,13 +271,9 @@ void ShakeHandEvent::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32(1, this->state(), output);
   }
 
-  // string src_name = 2;
+  // bytes src_name = 2;
   if (this->src_name().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->src_name().data(), static_cast<int>(this->src_name().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "ShakeHandEvent.src_name");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesMaybeAliased(
       2, this->src_name(), output);
   }
 
@@ -303,14 +295,10 @@ void ShakeHandEvent::SerializeWithCachedSizes(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->state(), target);
   }
 
-  // string src_name = 2;
+  // bytes src_name = 2;
   if (this->src_name().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->src_name().data(), static_cast<int>(this->src_name().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "ShakeHandEvent.src_name");
     target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesToArray(
         2, this->src_name(), target);
   }
 
@@ -335,10 +323,10 @@ size_t ShakeHandEvent::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string src_name = 2;
+  // bytes src_name = 2;
   if (this->src_name().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->src_name());
   }
 

@@ -109,8 +109,8 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 const char descriptor_table_protodef_ServerLink_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\020ServerLink.proto\"\037\n\nServerLink\022\021\n\tnode"
   "_type\030\001 \001(\r\"0\n\016DataBaseNotify\022\r\n\005db_ip\030\001"
-  " \001(\t\022\017\n\007db_port\030\002 \001(\r\",\n\025ServerMessageRe"
-  "gister\022\023\n\013message_str\030\001 \003(\tb\006proto3"
+  " \001(\014\022\017\n\007db_port\030\002 \001(\r\",\n\025ServerMessageRe"
+  "gister\022\023\n\013message_str\030\001 \003(\014b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_ServerLink_2eproto_deps[1] = {
 };
@@ -448,10 +448,10 @@ const char* DataBaseNotify::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // string db_ip = 1;
+      // bytes db_ip = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_db_ip(), ptr, ctx, "DataBaseNotify.db_ip");
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(mutable_db_ip(), ptr, ctx);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -492,15 +492,11 @@ bool DataBaseNotify::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string db_ip = 1;
+      // bytes db_ip = 1;
       case 1: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_db_ip()));
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-            this->db_ip().data(), static_cast<int>(this->db_ip().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
-            "DataBaseNotify.db_ip"));
         } else {
           goto handle_unusual;
         }
@@ -547,13 +543,9 @@ void DataBaseNotify::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string db_ip = 1;
+  // bytes db_ip = 1;
   if (this->db_ip().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->db_ip().data(), static_cast<int>(this->db_ip().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "DataBaseNotify.db_ip");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesMaybeAliased(
       1, this->db_ip(), output);
   }
 
@@ -575,14 +567,10 @@ void DataBaseNotify::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string db_ip = 1;
+  // bytes db_ip = 1;
   if (this->db_ip().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->db_ip().data(), static_cast<int>(this->db_ip().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "DataBaseNotify.db_ip");
     target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesToArray(
         1, this->db_ip(), target);
   }
 
@@ -612,10 +600,10 @@ size_t DataBaseNotify::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string db_ip = 1;
+  // bytes db_ip = 1;
   if (this->db_ip().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->db_ip());
   }
 
@@ -753,13 +741,13 @@ const char* ServerMessageRegister::_InternalParse(const char* ptr, ::PROTOBUF_NA
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // repeated string message_str = 1;
+      // repeated bytes message_str = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
           ptr -= 1;
           do {
             ptr += 1;
-            ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(add_message_str(), ptr, ctx, "ServerMessageRegister.message_str");
+            ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(add_message_str(), ptr, ctx);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 10);
@@ -795,16 +783,11 @@ bool ServerMessageRegister::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated string message_str = 1;
+      // repeated bytes message_str = 1;
       case 1: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadBytes(
                 input, this->add_message_str()));
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-            this->message_str(this->message_str_size() - 1).data(),
-            static_cast<int>(this->message_str(this->message_str_size() - 1).length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
-            "ServerMessageRegister.message_str"));
         } else {
           goto handle_unusual;
         }
@@ -838,13 +821,9 @@ void ServerMessageRegister::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated string message_str = 1;
+  // repeated bytes message_str = 1;
   for (int i = 0, n = this->message_str_size(); i < n; i++) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->message_str(i).data(), static_cast<int>(this->message_str(i).length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "ServerMessageRegister.message_str");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteString(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytes(
       1, this->message_str(i), output);
   }
 
@@ -861,14 +840,10 @@ void ServerMessageRegister::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated string message_str = 1;
+  // repeated bytes message_str = 1;
   for (int i = 0, n = this->message_str_size(); i < n; i++) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->message_str(i).data(), static_cast<int>(this->message_str(i).length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "ServerMessageRegister.message_str");
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      WriteStringToArray(1, this->message_str(i), target);
+      WriteBytesToArray(1, this->message_str(i), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -892,11 +867,11 @@ size_t ServerMessageRegister::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated string message_str = 1;
+  // repeated bytes message_str = 1;
   total_size += 1 *
       ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->message_str_size());
   for (int i = 0, n = this->message_str_size(); i < n; i++) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
       this->message_str(i));
   }
 

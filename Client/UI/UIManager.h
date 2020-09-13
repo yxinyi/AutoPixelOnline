@@ -12,7 +12,7 @@ public:
     bool Init();
     bool Register(const UIScene scene_type_, UIRenderFunc func_);
     bool loop();
-
+    UIScene GetNowScene() { return m_now_scene; };
 private:
     UIScene m_now_scene = UIScene::Login;
     UIScene m_default_scene = UIScene::Login;

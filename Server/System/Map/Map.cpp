@@ -22,18 +22,25 @@ bool MapManager::EnvDefine() {
         creature_->SendProtoMsg(_proto);
     }, PlayerLoginEvent);
 
-    MessageBus::getInstance()->Attach([this](Creature_t creature_, CPosition pos_) {
-        CAttrMap_t _attr_map = creature_->GetAttrs()->ApiGetAttr<CAttrMap>("CAttrMap");
-        if (_attr_map->m_last_map_tid != 0) {
-            _attr_map->m_last_map_tid = m_default_map_tid;
-        }
-        Map_t _map = GetMapByMapOid(_attr_map->m_map_oid);
-        if (!_map) {
-            NetManager::getInstance()->SendMessageBuff(creature_->GetSessionConn(), ApiBuildErrorMsg(LOG_POS_NOT_EXISTS));
-            return;
+    ProtobufDispatch::getInstance()->registerMessageCallback<PlayerMoveTo>([this](const SessionConn conn_,
+        const std::shared_ptr<PlayerMoveTo>& message_,
+        const int64_t& receive_time_) {
+
+        const float _x = message_->postion().postion_x();
+        const float _y = message_->postion().postion_y();
+
+        std::shared_ptr<CreatureManager> _sys = SystemManager::getInstance()->GetSystem<CreatureManager>();
+        Creature_t _palyer = _sys->FindCreatureBySession(ApiGetSession(conn_));
+        CAttrMap_t _map_data = _palyer->GetAttrs()->ApiGetAttr<CAttrMap>("CAttrMap");
+        //_map_data->m_map_postion.m_postion_x = _x;
+        //_map_data->m_map_postion.m_postion_y = _y;
+        if (Map_t _map = GetMapByMapOid(_map_data->m_map_oid)) {
+            _map->MoveTo(_palyer, {_x,_y});
+            LogError << "[MapManager] PlayerMoveTo x: " << _x << "y: " << _y << FlushLog;
         }
 
-    }, "PlayerMoveTo");
+    });
+
 
     return true;
 }
@@ -44,65 +51,69 @@ bool MapManager::PreInit() {
     return true;
 }
 bool MapManager::Init() {
+    float _interval = 300;
+    TimerTaskManager::getInstance()->RegisterTask("MapLoop",0, (uint64_t)_interval,-1,[_interval,this]() {
+        std::shared_ptr<CreatureManager> _sys = SystemManager::getInstance()->GetSystem<CreatureManager>();
+        if (!_sys) {
+            return;
+        }
+
+        for (auto&& _map_it : m_map_pool) {
+            const std::set<uint64_t>& _players = _map_it.second->GetPlayer();
+            MapTickUpdate_t _update_msg = std::make_shared<MapTickUpdate>();
+            for (auto&& _ply_it : _players) {
+
+                Creature_t _player = _sys->FindCreatureByOid(_ply_it);
+                if (!_player) {
+                    LogError << "[MapManager::Loop]" << _ply_it << FlushLog;
+                    continue;
+                }
+
+                //move postion
+                CAttrMap_t _attr_map = _player->GetAttrs()->ApiGetAttr<CAttrMap>("CAttrMap");
+                if (!_attr_map) {
+                    return;
+                }
+                if (_attr_map->m_path_pos.size()) {
+                    CPosition _target_pos = _attr_map->m_path_pos.front();
+
+
+                    CPosition& _now_pos = _attr_map->m_map_postion;
+
+
+                    float _distance = sqrt(pow((_target_pos.m_postion_y - _now_pos.m_postion_y), 2) * pow((_target_pos.m_postion_x - _now_pos.m_postion_x), 2));
+
+                    float _move_rate = (_attr_map->m_speed * (_interval / 1000.f) / _distance);
+
+                    _now_pos.m_postion_y += (_target_pos.m_postion_y - _now_pos.m_postion_y) * _move_rate;
+                    _now_pos.m_postion_x += (_target_pos.m_postion_x - _now_pos.m_postion_x) * _move_rate;
+
+                    if (sqrt(pow((_target_pos.m_postion_y - _now_pos.m_postion_y), 2) * pow((_target_pos.m_postion_x - _now_pos.m_postion_x), 2)) < 0.1f) {
+                        _attr_map->m_path_pos.pop_front();
+                    }
+                }
+
+                _update_msg->add_map_infos(_attr_map->ToClientStr());
+            }
+
+
+            //向当前场景所有玩家进行同步
+            for (auto&& _ply_it : _players) {
+                Creature_t _player = _sys->FindCreatureByOid(_ply_it);
+                if (!_player) {
+                    LogError << "[MapManager::Loop]" << _ply_it << FlushLog;
+                    continue;
+                }
+                _player->SendProtoMsg(_update_msg);
+            }
+        }
+
+    });
+
     return true;
 }
 bool MapManager::Loop(const uint64_t interval_) {
-    std::shared_ptr<CreatureManager> _sys = SystemManager::getInstance()->GetSystem<CreatureManager>();
-    if (!_sys) {
-        return false;
-    }
-
-    for (auto&& _map_it :m_map_pool) {
-        const std::set<uint32_t>& _players = _map_it.second->GetPlayer();
-        MapTickUpdate_t _update_msg = std::make_shared<MapTickUpdate>();
-        for (auto&& _ply_it : _players) {
-
-            Creature_t _player = _sys->FindCreatureByOid(_ply_it);
-            if (!_player) {
-                LogError << "[MapManager::Loop]" << _ply_it << FlushLog;
-                continue;
-            }
-
-            //move postion
-            CAttrMap_t _attr_map = _player->GetAttrs()->ApiGetAttr<CAttrMap>("CAttrMap");
-            if (!_attr_map) {
-                return false;
-            }
-            if (_attr_map->m_path_pos.size()) {
-                CPosition _target_pos = _attr_map->m_path_pos.front();
-                
-                CPosition _speed_vec;
-
-                CPosition _now_pos = _attr_map->m_map_postion;
-
-
-                float _distance = sqrt(pow((_target_pos.m_postion_y - _now_pos.m_postion_y), 2) * pow((_target_pos.m_postion_x - _now_pos.m_postion_x), 2));
-                
-                float _move_rate = (_attr_map->m_speed * (interval_ / 1000) / _distance);
-                
-                _now_pos.m_postion_y += (_target_pos.m_postion_y - _now_pos.m_postion_y) * _move_rate;
-                _now_pos.m_postion_x += (_target_pos.m_postion_x - _now_pos.m_postion_x) * _move_rate;
-
-                if (sqrt(pow((_target_pos.m_postion_y - _now_pos.m_postion_y), 2) * pow((_target_pos.m_postion_x - _now_pos.m_postion_x), 2)) < 0.1f) {
-                    _attr_map->m_path_pos.pop_front();
-                }
-            }
-
-            _update_msg->add_map_infos(_attr_map->ToClientStr());
-        }
-
-
-        //向当前场景所有玩家进行同步
-        for (auto&& _ply_it : _players) {
-            Creature_t _player = _sys->FindCreatureByOid(_ply_it);
-            if (!_player) {
-                LogError << "[MapManager::Loop]" << _ply_it << FlushLog;
-                continue;
-            }
-            _player->SendProtoMsg(_update_msg);
-        }
-    }
-
+    
     return true;
 }
 bool MapManager::Quit() {
@@ -136,6 +147,7 @@ Map_t MapManager::EnterMap(Creature_t creature_, const uint32_t map_tbl_id_) {
     }
     if (_map) {
         _map->EnterScene(creature_);
+        
     }
     return _map;
 }
@@ -170,7 +182,7 @@ bool CMap::PosMoveCheck(const CPosition& pos_) {
     }
     uint32_t _x_block = uint32_t(pos_.m_postion_x / m_config->m_cell_size);
     uint32_t _y_block = uint32_t(pos_.m_postion_y / m_config->m_cell_size);
-    if (m_maze_shape[_y_block][_x_block] == 1) {
+    if (m_config->m_maze_shape[_y_block][_x_block] == 1) {
         return false;
     }
 

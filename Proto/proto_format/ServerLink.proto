@@ -5,10 +5,10 @@ message ServerLink {
 }
 
 message DataBaseNotify{
-    string db_ip = 1;
+    bytes db_ip = 1;
     uint32 db_port = 2;
 }
 
 message ServerMessageRegister{
-    repeated string message_str = 1;
+    repeated bytes message_str = 1;
 }

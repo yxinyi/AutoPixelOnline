@@ -185,24 +185,24 @@ class DataBaseReq :
     kMsgIdFieldNumber = 1,
     kCmdOpFieldNumber = 2,
   };
-  // string key = 3;
+  // bytes key = 3;
   void clear_key();
   const std::string& key() const;
   void set_key(const std::string& value);
   void set_key(std::string&& value);
   void set_key(const char* value);
-  void set_key(const char* value, size_t size);
+  void set_key(const void* value, size_t size);
   std::string* mutable_key();
   std::string* release_key();
   void set_allocated_key(std::string* key);
 
-  // string val = 4;
+  // bytes val = 4;
   void clear_val();
   const std::string& val() const;
   void set_val(const std::string& value);
   void set_val(std::string&& value);
   void set_val(const char* value);
-  void set_val(const char* value, size_t size);
+  void set_val(const void* value, size_t size);
   std::string* mutable_val();
   std::string* release_val();
   void set_allocated_val(std::string* val);
@@ -348,13 +348,13 @@ class DataBaseAck :
     kMsgIdFieldNumber = 1,
     kQueryStateFieldNumber = 2,
   };
-  // string result_str = 3;
+  // bytes result_str = 3;
   void clear_result_str();
   const std::string& result_str() const;
   void set_result_str(const std::string& value);
   void set_result_str(std::string&& value);
   void set_result_str(const char* value);
-  void set_result_str(const char* value, size_t size);
+  void set_result_str(const void* value, size_t size);
   std::string* mutable_result_str();
   std::string* release_result_str();
   void set_allocated_result_str(std::string* result_str);
@@ -419,7 +419,7 @@ inline void DataBaseReq::set_cmd_op(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:DataBaseReq.cmd_op)
 }
 
-// string key = 3;
+// bytes key = 3;
 inline void DataBaseReq::clear_key() {
   key_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -444,7 +444,7 @@ inline void DataBaseReq::set_key(const char* value) {
   key_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:DataBaseReq.key)
 }
-inline void DataBaseReq::set_key(const char* value, size_t size) {
+inline void DataBaseReq::set_key(const void* value, size_t size) {
   
   key_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
@@ -470,7 +470,7 @@ inline void DataBaseReq::set_allocated_key(std::string* key) {
   // @@protoc_insertion_point(field_set_allocated:DataBaseReq.key)
 }
 
-// string val = 4;
+// bytes val = 4;
 inline void DataBaseReq::clear_val() {
   val_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -495,7 +495,7 @@ inline void DataBaseReq::set_val(const char* value) {
   val_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:DataBaseReq.val)
 }
-inline void DataBaseReq::set_val(const char* value, size_t size) {
+inline void DataBaseReq::set_val(const void* value, size_t size) {
   
   val_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
@@ -553,7 +553,7 @@ inline void DataBaseAck::set_query_state(::PROTOBUF_NAMESPACE_ID::uint32 value) 
   // @@protoc_insertion_point(field_set:DataBaseAck.query_state)
 }
 
-// string result_str = 3;
+// bytes result_str = 3;
 inline void DataBaseAck::clear_result_str() {
   result_str_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -578,7 +578,7 @@ inline void DataBaseAck::set_result_str(const char* value) {
   result_str_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:DataBaseAck.result_str)
 }
-inline void DataBaseAck::set_result_str(const char* value, size_t size) {
+inline void DataBaseAck::set_result_str(const void* value, size_t size) {
   
   result_str_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));

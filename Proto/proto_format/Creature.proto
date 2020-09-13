@@ -6,8 +6,8 @@ message RoleBaseData{
 };
 
 message ModuleData {    
-	string msg_type_str = 1;
-	string binary = 2;
+	bytes msg_type_str = 1;
+	bytes binary = 2;
 }
 
 message AllAttributeDataNotify{

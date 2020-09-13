@@ -83,7 +83,7 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 
 const char descriptor_table_protodef_Session_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\rSession.proto\"F\n\013SessionPack\022\022\n\nseesio"
-  "n_id\030\001 \001(\r\022\021\n\tpack_name\030\002 \001(\t\022\020\n\010pack_st"
+  "n_id\030\001 \001(\r\022\021\n\tpack_name\030\002 \001(\014\022\020\n\010pack_st"
   "r\030\003 \001(\014\"$\n\016SessionDestory\022\022\n\nseesion_id\030"
   "\001 \001(\rb\006proto3"
   ;
@@ -187,10 +187,10 @@ const char* SessionPack::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string pack_name = 2;
+      // bytes pack_name = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_pack_name(), ptr, ctx, "SessionPack.pack_name");
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(mutable_pack_name(), ptr, ctx);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -244,15 +244,11 @@ bool SessionPack::MergePartialFromCodedStream(
         break;
       }
 
-      // string pack_name = 2;
+      // bytes pack_name = 2;
       case 2: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_pack_name()));
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-            this->pack_name().data(), static_cast<int>(this->pack_name().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
-            "SessionPack.pack_name"));
         } else {
           goto handle_unusual;
         }
@@ -302,13 +298,9 @@ void SessionPack::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32(1, this->seesion_id(), output);
   }
 
-  // string pack_name = 2;
+  // bytes pack_name = 2;
   if (this->pack_name().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->pack_name().data(), static_cast<int>(this->pack_name().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "SessionPack.pack_name");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesMaybeAliased(
       2, this->pack_name(), output);
   }
 
@@ -336,14 +328,10 @@ void SessionPack::SerializeWithCachedSizes(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->seesion_id(), target);
   }
 
-  // string pack_name = 2;
+  // bytes pack_name = 2;
   if (this->pack_name().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->pack_name().data(), static_cast<int>(this->pack_name().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "SessionPack.pack_name");
     target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesToArray(
         2, this->pack_name(), target);
   }
 
@@ -375,10 +363,10 @@ size_t SessionPack::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string pack_name = 2;
+  // bytes pack_name = 2;
   if (this->pack_name().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->pack_name());
   }
 

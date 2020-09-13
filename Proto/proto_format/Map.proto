@@ -5,6 +5,11 @@ message Position {
     float postion_y = 2;
 };
 
+
+message PlayerMoveTo {
+    Position postion = 1;
+};
+
 message MapData {
     float speed = 1;
     Position map_postion = 2;
@@ -15,7 +20,7 @@ message MapData {
 }
 
 message MapTickUpdate{
-	repeated string map_infos = 1;
+	repeated bytes map_infos = 1;
 }
 
 message MapBlock{

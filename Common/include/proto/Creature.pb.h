@@ -318,24 +318,24 @@ class ModuleData :
     kMsgTypeStrFieldNumber = 1,
     kBinaryFieldNumber = 2,
   };
-  // string msg_type_str = 1;
+  // bytes msg_type_str = 1;
   void clear_msg_type_str();
   const std::string& msg_type_str() const;
   void set_msg_type_str(const std::string& value);
   void set_msg_type_str(std::string&& value);
   void set_msg_type_str(const char* value);
-  void set_msg_type_str(const char* value, size_t size);
+  void set_msg_type_str(const void* value, size_t size);
   std::string* mutable_msg_type_str();
   std::string* release_msg_type_str();
   void set_allocated_msg_type_str(std::string* msg_type_str);
 
-  // string binary = 2;
+  // bytes binary = 2;
   void clear_binary();
   const std::string& binary() const;
   void set_binary(const std::string& value);
   void set_binary(std::string&& value);
   void set_binary(const char* value);
-  void set_binary(const char* value, size_t size);
+  void set_binary(const void* value, size_t size);
   std::string* mutable_binary();
   std::string* release_binary();
   void set_allocated_binary(std::string* binary);
@@ -523,7 +523,7 @@ inline void RoleBaseData::set_oid(::PROTOBUF_NAMESPACE_ID::uint64 value) {
 
 // ModuleData
 
-// string msg_type_str = 1;
+// bytes msg_type_str = 1;
 inline void ModuleData::clear_msg_type_str() {
   msg_type_str_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -548,7 +548,7 @@ inline void ModuleData::set_msg_type_str(const char* value) {
   msg_type_str_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:ModuleData.msg_type_str)
 }
-inline void ModuleData::set_msg_type_str(const char* value, size_t size) {
+inline void ModuleData::set_msg_type_str(const void* value, size_t size) {
   
   msg_type_str_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
@@ -574,7 +574,7 @@ inline void ModuleData::set_allocated_msg_type_str(std::string* msg_type_str) {
   // @@protoc_insertion_point(field_set_allocated:ModuleData.msg_type_str)
 }
 
-// string binary = 2;
+// bytes binary = 2;
 inline void ModuleData::clear_binary() {
   binary_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -599,7 +599,7 @@ inline void ModuleData::set_binary(const char* value) {
   binary_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:ModuleData.binary)
 }
-inline void ModuleData::set_binary(const char* value, size_t size) {
+inline void ModuleData::set_binary(const void* value, size_t size) {
   
   binary_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));

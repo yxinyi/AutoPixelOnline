@@ -183,13 +183,13 @@ class ShakeHandEvent :
     kSrcNameFieldNumber = 2,
     kStateFieldNumber = 1,
   };
-  // string src_name = 2;
+  // bytes src_name = 2;
   void clear_src_name();
   const std::string& src_name() const;
   void set_src_name(const std::string& value);
   void set_src_name(std::string&& value);
   void set_src_name(const char* value);
-  void set_src_name(const char* value, size_t size);
+  void set_src_name(const void* value, size_t size);
   std::string* mutable_src_name();
   std::string* release_src_name();
   void set_allocated_src_name(std::string* src_name);
@@ -365,7 +365,7 @@ inline void ShakeHandEvent::set_state(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:ShakeHandEvent.state)
 }
 
-// string src_name = 2;
+// bytes src_name = 2;
 inline void ShakeHandEvent::clear_src_name() {
   src_name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -390,7 +390,7 @@ inline void ShakeHandEvent::set_src_name(const char* value) {
   src_name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:ShakeHandEvent.src_name)
 }
-inline void ShakeHandEvent::set_src_name(const char* value, size_t size) {
+inline void ShakeHandEvent::set_src_name(const void* value, size_t size) {
   
   src_name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));

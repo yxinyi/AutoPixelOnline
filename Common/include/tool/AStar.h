@@ -126,7 +126,7 @@ private:
 
     SAstarPoint_t getMinOpenNode() {
         SAstarPoint_t _rst_node;
-        float _rst_min = -1;
+        float _rst_min = 9999999999.f;
         for (auto& _it : m_open_list) {
             const float _f = _it.second->m_g + _it.second->m_h;
             if (_f < _rst_min) {

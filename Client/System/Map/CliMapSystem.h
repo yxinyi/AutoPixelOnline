@@ -23,5 +23,7 @@ public:
     void MapRender(SDL_Window* windows_, SDL_Renderer* render_);
 private:
     std::vector<std::vector<uint32_t>> m_maze_shape;
+    std::vector<std::shared_ptr<MapData>> m_move_block_data;
+    
     uint32_t m_cell_size = 0;
 };

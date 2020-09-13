@@ -47,7 +47,7 @@ struct TableStruct_Map_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[6]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[7]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -66,6 +66,9 @@ extern MapRowsDefaultTypeInternal _MapRows_default_instance_;
 class MapTickUpdate;
 class MapTickUpdateDefaultTypeInternal;
 extern MapTickUpdateDefaultTypeInternal _MapTickUpdate_default_instance_;
+class PlayerMoveTo;
+class PlayerMoveToDefaultTypeInternal;
+extern PlayerMoveToDefaultTypeInternal _PlayerMoveTo_default_instance_;
 class Position;
 class PositionDefaultTypeInternal;
 extern PositionDefaultTypeInternal _Position_default_instance_;
@@ -77,6 +80,7 @@ template<> ::MapBlock* Arena::CreateMaybeMessage<::MapBlock>(Arena*);
 template<> ::MapData* Arena::CreateMaybeMessage<::MapData>(Arena*);
 template<> ::MapRows* Arena::CreateMaybeMessage<::MapRows>(Arena*);
 template<> ::MapTickUpdate* Arena::CreateMaybeMessage<::MapTickUpdate>(Arena*);
+template<> ::PlayerMoveTo* Arena::CreateMaybeMessage<::PlayerMoveTo>(Arena*);
 template<> ::Position* Arena::CreateMaybeMessage<::Position>(Arena*);
 template<> ::SceneMapInfo* Arena::CreateMaybeMessage<::SceneMapInfo>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
@@ -221,6 +225,140 @@ class Position :
 };
 // -------------------------------------------------------------------
 
+class PlayerMoveTo :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:PlayerMoveTo) */ {
+ public:
+  PlayerMoveTo();
+  virtual ~PlayerMoveTo();
+
+  PlayerMoveTo(const PlayerMoveTo& from);
+  PlayerMoveTo(PlayerMoveTo&& from) noexcept
+    : PlayerMoveTo() {
+    *this = ::std::move(from);
+  }
+
+  inline PlayerMoveTo& operator=(const PlayerMoveTo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline PlayerMoveTo& operator=(PlayerMoveTo&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const PlayerMoveTo& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const PlayerMoveTo* internal_default_instance() {
+    return reinterpret_cast<const PlayerMoveTo*>(
+               &_PlayerMoveTo_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    1;
+
+  friend void swap(PlayerMoveTo& a, PlayerMoveTo& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(PlayerMoveTo* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline PlayerMoveTo* New() const final {
+    return CreateMaybeMessage<PlayerMoveTo>(nullptr);
+  }
+
+  PlayerMoveTo* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<PlayerMoveTo>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const PlayerMoveTo& from);
+  void MergeFrom(const PlayerMoveTo& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(PlayerMoveTo* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "PlayerMoveTo";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_Map_2eproto);
+    return ::descriptor_table_Map_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPostionFieldNumber = 1,
+  };
+  // .Position postion = 1;
+  bool has_postion() const;
+  void clear_postion();
+  const ::Position& postion() const;
+  ::Position* release_postion();
+  ::Position* mutable_postion();
+  void set_allocated_postion(::Position* postion);
+
+  // @@protoc_insertion_point(class_scope:PlayerMoveTo)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::Position* postion_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_Map_2eproto;
+};
+// -------------------------------------------------------------------
+
 class MapData :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:MapData) */ {
  public:
@@ -263,7 +401,7 @@ class MapData :
                &_MapData_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    2;
 
   friend void swap(MapData& a, MapData& b) {
     a.Swap(&b);
@@ -435,7 +573,7 @@ class MapTickUpdate :
                &_MapTickUpdate_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    3;
 
   friend void swap(MapTickUpdate& a, MapTickUpdate& b) {
     a.Swap(&b);
@@ -508,7 +646,7 @@ class MapTickUpdate :
   enum : int {
     kMapInfosFieldNumber = 1,
   };
-  // repeated string map_infos = 1;
+  // repeated bytes map_infos = 1;
   int map_infos_size() const;
   void clear_map_infos();
   const std::string& map_infos(int index) const;
@@ -516,12 +654,12 @@ class MapTickUpdate :
   void set_map_infos(int index, const std::string& value);
   void set_map_infos(int index, std::string&& value);
   void set_map_infos(int index, const char* value);
-  void set_map_infos(int index, const char* value, size_t size);
+  void set_map_infos(int index, const void* value, size_t size);
   std::string* add_map_infos();
   void add_map_infos(const std::string& value);
   void add_map_infos(std::string&& value);
   void add_map_infos(const char* value);
-  void add_map_infos(const char* value, size_t size);
+  void add_map_infos(const void* value, size_t size);
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& map_infos() const;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_map_infos();
 
@@ -578,7 +716,7 @@ class MapBlock :
                &_MapBlock_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    4;
 
   friend void swap(MapBlock& a, MapBlock& b) {
     a.Swap(&b);
@@ -709,7 +847,7 @@ class MapRows :
                &_MapRows_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    5;
 
   friend void swap(MapRows& a, MapRows& b) {
     a.Swap(&b);
@@ -846,7 +984,7 @@ class SceneMapInfo :
                &_SceneMapInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   friend void swap(SceneMapInfo& a, SceneMapInfo& b) {
     a.Swap(&b);
@@ -983,6 +1121,61 @@ inline void Position::set_postion_y(float value) {
   
   postion_y_ = value;
   // @@protoc_insertion_point(field_set:Position.postion_y)
+}
+
+// -------------------------------------------------------------------
+
+// PlayerMoveTo
+
+// .Position postion = 1;
+inline bool PlayerMoveTo::has_postion() const {
+  return this != internal_default_instance() && postion_ != nullptr;
+}
+inline void PlayerMoveTo::clear_postion() {
+  if (GetArenaNoVirtual() == nullptr && postion_ != nullptr) {
+    delete postion_;
+  }
+  postion_ = nullptr;
+}
+inline const ::Position& PlayerMoveTo::postion() const {
+  const ::Position* p = postion_;
+  // @@protoc_insertion_point(field_get:PlayerMoveTo.postion)
+  return p != nullptr ? *p : *reinterpret_cast<const ::Position*>(
+      &::_Position_default_instance_);
+}
+inline ::Position* PlayerMoveTo::release_postion() {
+  // @@protoc_insertion_point(field_release:PlayerMoveTo.postion)
+  
+  ::Position* temp = postion_;
+  postion_ = nullptr;
+  return temp;
+}
+inline ::Position* PlayerMoveTo::mutable_postion() {
+  
+  if (postion_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Position>(GetArenaNoVirtual());
+    postion_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:PlayerMoveTo.postion)
+  return postion_;
+}
+inline void PlayerMoveTo::set_allocated_postion(::Position* postion) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == nullptr) {
+    delete postion_;
+  }
+  if (postion) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      postion = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, postion, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  postion_ = postion;
+  // @@protoc_insertion_point(field_set_allocated:PlayerMoveTo.postion)
 }
 
 // -------------------------------------------------------------------
@@ -1151,7 +1344,7 @@ inline void MapData::set_creature_oid(::PROTOBUF_NAMESPACE_ID::uint64 value) {
 
 // MapTickUpdate
 
-// repeated string map_infos = 1;
+// repeated bytes map_infos = 1;
 inline int MapTickUpdate::map_infos_size() const {
   return map_infos_.size();
 }
@@ -1179,7 +1372,7 @@ inline void MapTickUpdate::set_map_infos(int index, const char* value) {
   map_infos_.Mutable(index)->assign(value);
   // @@protoc_insertion_point(field_set_char:MapTickUpdate.map_infos)
 }
-inline void MapTickUpdate::set_map_infos(int index, const char* value, size_t size) {
+inline void MapTickUpdate::set_map_infos(int index, const void* value, size_t size) {
   map_infos_.Mutable(index)->assign(
     reinterpret_cast<const char*>(value), size);
   // @@protoc_insertion_point(field_set_pointer:MapTickUpdate.map_infos)
@@ -1201,7 +1394,7 @@ inline void MapTickUpdate::add_map_infos(const char* value) {
   map_infos_.Add()->assign(value);
   // @@protoc_insertion_point(field_add_char:MapTickUpdate.map_infos)
 }
-inline void MapTickUpdate::add_map_infos(const char* value, size_t size) {
+inline void MapTickUpdate::add_map_infos(const void* value, size_t size) {
   map_infos_.Add()->assign(reinterpret_cast<const char*>(value), size);
   // @@protoc_insertion_point(field_add_pointer:MapTickUpdate.map_infos)
 }
@@ -1319,6 +1512,8 @@ inline void SceneMapInfo::set_map_block_size(::PROTOBUF_NAMESPACE_ID::uint32 val
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

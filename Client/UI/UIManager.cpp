@@ -12,10 +12,6 @@ bool UIManager::Init(){
         m_now_scene = UIScene::Login;
     }, BackLoginEvent);
 
-
-
-    
-
     return true;
 }
 

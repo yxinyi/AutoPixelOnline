@@ -112,7 +112,7 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 const char descriptor_table_protodef_Creature_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\016Creature.proto\"\033\n\014RoleBaseData\022\013\n\003oid\030"
   "\001 \001(\004\"2\n\nModuleData\022\024\n\014msg_type_str\030\001 \001("
-  "\t\022\016\n\006binary\030\002 \001(\t\"@\n\026AllAttributeDataNot"
+  "\014\022\016\n\006binary\030\002 \001(\014\"@\n\026AllAttributeDataNot"
   "ify\022\013\n\003oid\030\001 \001(\004\022\031\n\004data\030\002 \003(\0132\013.ModuleD"
   "atab\006proto3"
   ;
@@ -456,17 +456,17 @@ const char* ModuleData::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID:
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // string msg_type_str = 1;
+      // bytes msg_type_str = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_msg_type_str(), ptr, ctx, "ModuleData.msg_type_str");
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(mutable_msg_type_str(), ptr, ctx);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string binary = 2;
+      // bytes binary = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_binary(), ptr, ctx, "ModuleData.binary");
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(mutable_binary(), ptr, ctx);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -500,30 +500,22 @@ bool ModuleData::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string msg_type_str = 1;
+      // bytes msg_type_str = 1;
       case 1: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_msg_type_str()));
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-            this->msg_type_str().data(), static_cast<int>(this->msg_type_str().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
-            "ModuleData.msg_type_str"));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // string binary = 2;
+      // bytes binary = 2;
       case 2: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_binary()));
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-            this->binary().data(), static_cast<int>(this->binary().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
-            "ModuleData.binary"));
         } else {
           goto handle_unusual;
         }
@@ -557,23 +549,15 @@ void ModuleData::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string msg_type_str = 1;
+  // bytes msg_type_str = 1;
   if (this->msg_type_str().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->msg_type_str().data(), static_cast<int>(this->msg_type_str().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "ModuleData.msg_type_str");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesMaybeAliased(
       1, this->msg_type_str(), output);
   }
 
-  // string binary = 2;
+  // bytes binary = 2;
   if (this->binary().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->binary().data(), static_cast<int>(this->binary().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "ModuleData.binary");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesMaybeAliased(
       2, this->binary(), output);
   }
 
@@ -590,25 +574,17 @@ void ModuleData::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string msg_type_str = 1;
+  // bytes msg_type_str = 1;
   if (this->msg_type_str().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->msg_type_str().data(), static_cast<int>(this->msg_type_str().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "ModuleData.msg_type_str");
     target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesToArray(
         1, this->msg_type_str(), target);
   }
 
-  // string binary = 2;
+  // bytes binary = 2;
   if (this->binary().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->binary().data(), static_cast<int>(this->binary().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "ModuleData.binary");
     target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesToArray(
         2, this->binary(), target);
   }
 
@@ -633,17 +609,17 @@ size_t ModuleData::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string msg_type_str = 1;
+  // bytes msg_type_str = 1;
   if (this->msg_type_str().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->msg_type_str());
   }
 
-  // string binary = 2;
+  // bytes binary = 2;
   if (this->binary().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->binary());
   }
 

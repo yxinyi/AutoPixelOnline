@@ -184,13 +184,13 @@ class SessionPack :
     kPackStrFieldNumber = 3,
     kSeesionIdFieldNumber = 1,
   };
-  // string pack_name = 2;
+  // bytes pack_name = 2;
   void clear_pack_name();
   const std::string& pack_name() const;
   void set_pack_name(const std::string& value);
   void set_pack_name(std::string&& value);
   void set_pack_name(const char* value);
-  void set_pack_name(const char* value, size_t size);
+  void set_pack_name(const void* value, size_t size);
   std::string* mutable_pack_name();
   std::string* release_pack_name();
   void set_allocated_pack_name(std::string* pack_name);
@@ -378,7 +378,7 @@ inline void SessionPack::set_seesion_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:SessionPack.seesion_id)
 }
 
-// string pack_name = 2;
+// bytes pack_name = 2;
 inline void SessionPack::clear_pack_name() {
   pack_name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -403,7 +403,7 @@ inline void SessionPack::set_pack_name(const char* value) {
   pack_name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:SessionPack.pack_name)
 }
-inline void SessionPack::set_pack_name(const char* value, size_t size) {
+inline void SessionPack::set_pack_name(const void* value, size_t size) {
   
   pack_name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));

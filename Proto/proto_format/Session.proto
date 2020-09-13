@@ -2,7 +2,7 @@ syntax = "proto3";
 
 message SessionPack {
     uint32 seesion_id= 1;
-	string pack_name = 2;
+	bytes pack_name = 2;
     bytes pack_str = 3;
 }
 message SessionDestory {

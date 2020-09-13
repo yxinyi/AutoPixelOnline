@@ -168,5 +168,11 @@ Creature_t CreatureManager::FindCreatureByOid(const uint64_t& oid_) {
     }
     return _ply_find->second;
 }
-
+Creature_t CreatureManager::FindCreatureBySession(const uint32_t& oid_) {
+    auto _ply_find = m_session_to_player.find(oid_);
+    if (_ply_find == m_session_to_player.end()) {
+        return nullptr;
+    }
+    return _ply_find->second;
+}
 
