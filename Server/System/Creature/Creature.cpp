@@ -22,7 +22,7 @@ bool CreatureManager::EnvDefine() {
     //});
 
 
-    ProtobufDispatch::getInstance()->registerMessageCallback<PlayerEnter>([this](const SessionConn conn_,
+    ProtobufDispatch::getInstance()->registerMessageCallback<PlayerEnter>([this](const SessionConn session_conn_,
         const std::shared_ptr<PlayerEnter>& message_,
         const int64_t& receive_time_) {
 
@@ -39,15 +39,15 @@ bool CreatureManager::EnvDefine() {
             return;
         }
 
-        uint32_t _account_key = _sys->GetAccountKey(ApiGetSession(conn_));
+        uint64_t _account_key = _sys->GetAccountKey(ApiGetSession(session_conn_));
         //去数据库查询账号信息
         std::string _role_query = g_role_query+std::to_string(_account_key);
-        _db_sys->Query(_role_query, [_role_query,this,conn_](DBOperatorErr err_, std::string val_) {
+        _db_sys->Query(_role_query, [_role_query,this, session_conn_](DBOperatorErr err_, std::string val_) {
             
-            Creature_t _creature = CreateCreature(conn_);
+            Creature_t _creature = CreateCreature(session_conn_);
             if (!_creature) {
                 LogError << "[PlayerLoginEvent] create err " << FlushLog;
-                NetManager::getInstance()->SendMessageBuff(conn_, ApiBuildErrorMsg(LOG_ERR));
+                NetManager::getInstance()->SendMessageBuff(session_conn_, ApiBuildErrorMsg(LOG_ERR));
                 return;
             }
             if (err_ == DBOperatorErr::ERR) {
@@ -58,11 +58,11 @@ bool CreatureManager::EnvDefine() {
                     LogError << "[PlayerLoginEvent] CreatureManager not exsits " << FlushLog;
                     return;
                 }
+                //生成玩家后马上存盘一次
                 _db_sys->Insert(_role_query, _creature->BuildUpdateProto()->SerializeAsString(), [](DBOperatorErr err_, std::string val_) {
 
                     if (err_ == DBOperatorErr::ERR) {
                         LogError << "[PlayerLoginEvent] CreatureManager new player first save err " << FlushLog;
-                        //是新玩家
                     }else{
                         LogError << "[PlayerLoginEvent] CreatureManager new player first save ok " << FlushLog;
 
@@ -70,14 +70,31 @@ bool CreatureManager::EnvDefine() {
                 });
             }
             else {
-
+                //从数据库里加载数据
                 _creature->RestoreForProtoData(val_);
             }
             
+            m_session_to_player[ApiGetSession(session_conn_)] = _creature;
+            m_oid_to_player[_creature->GetOid()] = _creature;
+            
+            std::shared_ptr<PlayerEnterAck> _conn_ack = std::make_shared<PlayerEnterAck>();
+            NetManager::getInstance()->SendMessageBuff(session_conn_, _conn_ack);
 
-            MessageBus::getInstance()->SendReq<Creature_t>(_creature, "PlayerLogin");
-
+            MessageBus::getInstance()->SendReq<Creature_t>(_creature, PlayerLoginEvent);
         });
+
+        MessageBus::getInstance()->Attach([this](uint32_t session_id_) {
+            auto _player_find = m_session_to_player.find(session_id_);
+            if (_player_find  == m_session_to_player.end()) {
+                LogInfo << "[CreatureManager] player not exsits"<< session_id_ << FlushLog;
+                return;
+            }
+            const uint64_t _player_oid = _player_find->second->GetOid();
+            m_session_to_player.erase(session_id_);
+            m_oid_to_player.erase(_player_oid);
+            
+            MessageBus::getInstance()->SendReq<uint64_t>(_player_oid, PlayerOutEvent);
+        }, ClientOutEvent);
 
     });
 
@@ -126,18 +143,21 @@ bool CreatureManager::Destroy() {
 }
 
 
-Creature_t CreatureManager::CreateCreature(const uint32_t session_) {
-    auto _conn_find = m_session_to_player.find(session_);
+Creature_t CreatureManager::CreateCreature(const SessionConn session_conn_) {
+
+    const uint32_t _session_id = ApiGetSession(session_conn_);
+
+    auto _conn_find = m_session_to_player.find(_session_id);
     if (_conn_find != m_session_to_player.end()) {
         return _conn_find->second;
     }
-    Creature_t _login_create = CObjectPool<Creature>::getInstance()->Get("Player", session_);
+    Creature_t _login_create = CObjectPool<Creature>::getInstance()->Get("Player", session_conn_);
     const uint64_t _oid = _login_create->GetOid();
     if (m_oid_to_player.find(_oid) != m_oid_to_player.end()) {
         return nullptr;
     }
     m_oid_to_player[_oid] = _login_create;
-    m_session_to_player[session_] = _login_create;
+    m_session_to_player[_session_id] = _login_create;
     return _login_create;
 }
 

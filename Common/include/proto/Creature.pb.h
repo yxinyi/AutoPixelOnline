@@ -47,7 +47,7 @@ struct TableStruct_Creature_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[2]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[3]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -60,12 +60,147 @@ extern AllAttributeDataNotifyDefaultTypeInternal _AllAttributeDataNotify_default
 class ModuleData;
 class ModuleDataDefaultTypeInternal;
 extern ModuleDataDefaultTypeInternal _ModuleData_default_instance_;
+class RoleBaseData;
+class RoleBaseDataDefaultTypeInternal;
+extern RoleBaseDataDefaultTypeInternal _RoleBaseData_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
 template<> ::AllAttributeDataNotify* Arena::CreateMaybeMessage<::AllAttributeDataNotify>(Arena*);
 template<> ::ModuleData* Arena::CreateMaybeMessage<::ModuleData>(Arena*);
+template<> ::RoleBaseData* Arena::CreateMaybeMessage<::RoleBaseData>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 
 // ===================================================================
+
+class RoleBaseData :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:RoleBaseData) */ {
+ public:
+  RoleBaseData();
+  virtual ~RoleBaseData();
+
+  RoleBaseData(const RoleBaseData& from);
+  RoleBaseData(RoleBaseData&& from) noexcept
+    : RoleBaseData() {
+    *this = ::std::move(from);
+  }
+
+  inline RoleBaseData& operator=(const RoleBaseData& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline RoleBaseData& operator=(RoleBaseData&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const RoleBaseData& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const RoleBaseData* internal_default_instance() {
+    return reinterpret_cast<const RoleBaseData*>(
+               &_RoleBaseData_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    0;
+
+  friend void swap(RoleBaseData& a, RoleBaseData& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(RoleBaseData* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline RoleBaseData* New() const final {
+    return CreateMaybeMessage<RoleBaseData>(nullptr);
+  }
+
+  RoleBaseData* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<RoleBaseData>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const RoleBaseData& from);
+  void MergeFrom(const RoleBaseData& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(RoleBaseData* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "RoleBaseData";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_Creature_2eproto);
+    return ::descriptor_table_Creature_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kOidFieldNumber = 1,
+  };
+  // uint64 oid = 1;
+  void clear_oid();
+  ::PROTOBUF_NAMESPACE_ID::uint64 oid() const;
+  void set_oid(::PROTOBUF_NAMESPACE_ID::uint64 value);
+
+  // @@protoc_insertion_point(class_scope:RoleBaseData)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 oid_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_Creature_2eproto;
+};
+// -------------------------------------------------------------------
 
 class ModuleData :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ModuleData) */ {
@@ -109,7 +244,7 @@ class ModuleData :
                &_ModuleData_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    0;
+    1;
 
   friend void swap(ModuleData& a, ModuleData& b) {
     a.Swap(&b);
@@ -259,7 +394,7 @@ class AllAttributeDataNotify :
                &_AllAttributeDataNotify_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    2;
 
   friend void swap(AllAttributeDataNotify& a, AllAttributeDataNotify& b) {
     a.Swap(&b);
@@ -368,6 +503,24 @@ class AllAttributeDataNotify :
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
+// RoleBaseData
+
+// uint64 oid = 1;
+inline void RoleBaseData::clear_oid() {
+  oid_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 RoleBaseData::oid() const {
+  // @@protoc_insertion_point(field_get:RoleBaseData.oid)
+  return oid_;
+}
+inline void RoleBaseData::set_oid(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  oid_ = value;
+  // @@protoc_insertion_point(field_set:RoleBaseData.oid)
+}
+
+// -------------------------------------------------------------------
+
 // ModuleData
 
 // string msg_type_str = 1;
@@ -523,6 +676,8 @@ AllAttributeDataNotify::data() const {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 

@@ -74,13 +74,18 @@ bool NetManager::SendMessageBuff(const uint32_t conn_id_, std::shared_ptr<CBuffe
     return true;
 }
 
-bool NetManager::SendMessageBuff(const uint32_t conn_id_, std::shared_ptr<google::protobuf::Message> buff_) {
+
+bool NetManager::SendMessageBuff(const uint32_t conn_id_, std::string msg_str_, std::string msg_data_) {
     std::shared_ptr<CBuffer> _buffer = CObjectPool<CBuffer>::getInstance()->Get();
-    _buffer->appendInt32((int32_t)buff_->GetTypeName().size());
-    _buffer->append(buff_->GetTypeName());
-    _buffer->append(buff_->SerializePartialAsString());
+    _buffer->appendInt32((int32_t)msg_str_.size());
+    _buffer->append(msg_str_);
+    _buffer->append(msg_data_);
 
     return SendMessageBuff(conn_id_, _buffer);
+}
+
+bool NetManager::SendMessageBuff(const uint32_t conn_id_, std::shared_ptr<google::protobuf::Message> buff_) {
+    return SendMessageBuff(conn_id_, buff_->GetTypeName(), buff_->SerializePartialAsString());
 }
 
 

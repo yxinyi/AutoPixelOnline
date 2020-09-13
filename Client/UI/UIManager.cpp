@@ -1,16 +1,20 @@
 #include "RenderManager.h"
 #include "./UIManager.h"
-
+#include  "Login/CliLoginStruct.h"
 UIManager::UIManager() {
 }
 
 bool UIManager::Init(){
     MessageBus::getInstance()->Attach([this]() {
         m_now_scene = UIScene::Game;
-    }, "EnterGame");
+    }, EnterGameEvent);
     MessageBus::getInstance()->Attach([this]() {
         m_now_scene = UIScene::Login;
-    }, "BackLogin");
+    }, BackLoginEvent);
+
+
+
+    
 
     return true;
 }

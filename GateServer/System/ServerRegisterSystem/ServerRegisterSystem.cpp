@@ -110,8 +110,7 @@ bool ServerRegisterSystem::EnvDefine() {
 
         //需要优化
         const uint32_t _conn_id = _session_find->second->m_conn_id;
-        MessagePtr _msg(ProtobufCodec::getInstance()->decode(msg_->pack_name(), msg_->pack_str()));
-        NetManager::getInstance()->SendMessageBuff(_conn_id, _msg);
+        NetManager::getInstance()->SendMessageBuff(_conn_id, msg_->pack_name(), msg_->pack_str());
     });
 
 

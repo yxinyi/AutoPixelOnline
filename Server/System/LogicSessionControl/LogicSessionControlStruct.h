@@ -8,3 +8,6 @@
 
 using LogicEnterFromAccountServer_t = std::shared_ptr<LogicEnterFromAccountServer>;
 using SessionDestory_t= std::shared_ptr<SessionDestory>;
+
+#define ClientEnterEvent "ClientEnter" 
+#define ClientOutEvent "ClientQuit" 

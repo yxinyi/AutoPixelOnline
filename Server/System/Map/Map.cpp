@@ -20,7 +20,7 @@ bool MapManager::EnvDefine() {
         }
         SceneMapInfo_t _proto = _map->ToProto();
         creature_->SendProtoMsg(_proto);
-    }, "PlayerLogin");
+    }, PlayerLoginEvent);
 
     MessageBus::getInstance()->Attach([this](Creature_t creature_, CPosition pos_) {
         CAttrMap_t _attr_map = creature_->GetAttrs()->ApiGetAttr<CAttrMap>("CAttrMap");
@@ -29,7 +29,7 @@ bool MapManager::EnvDefine() {
         }
         Map_t _map = GetMapByMapOid(_attr_map->m_map_oid);
         if (!_map) {
-            NetManager::getInstance()->SendMessageBuff(creature_->GetConnID(), ApiBuildErrorMsg(LOG_POS_NOT_EXISTS));
+            NetManager::getInstance()->SendMessageBuff(creature_->GetSessionConn(), ApiBuildErrorMsg(LOG_POS_NOT_EXISTS));
             return;
         }
 
@@ -40,7 +40,6 @@ bool MapManager::EnvDefine() {
 bool MapManager::PreInit() {
     CAttrManager::getInstance()->Register("Player", std::make_shared<CAttrMap>());
     CAttrManager::getInstance()->Register("Monster", std::make_shared<CAttrMap>());
-
     CMapConfigMgr::getInstance()->init();
     return true;
 }

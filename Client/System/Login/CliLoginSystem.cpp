@@ -9,6 +9,13 @@
 RegSystem(CliLoginSystem)
 
 bool CliLoginSystem::EnvDefine() {
+
+    ProtobufDispatch::getInstance()->registerMessageCallback<PlayerEnterAck>([this](const SessionConn conn_,
+        const std::shared_ptr<PlayerEnterAck>& message_,
+        const int64_t& receive_time_) {
+        MessageBus::getInstance()->SendReq(EnterGameEvent);
+    });
+
     MessageBus::getInstance()->Attach([this](uint32_t conn_id_) {
         CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(conn_id_);
         if (!_conn) {

@@ -16,6 +16,10 @@
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 extern PROTOBUF_INTERNAL_EXPORT_Creature_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ModuleData_Creature_2eproto;
+class RoleBaseDataDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<RoleBaseData> _instance;
+} _RoleBaseData_default_instance_;
 class ModuleDataDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ModuleData> _instance;
@@ -53,11 +57,31 @@ static void InitDefaultsscc_info_ModuleData_Creature_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ModuleData_Creature_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_ModuleData_Creature_2eproto}, {}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_Creature_2eproto[2];
+static void InitDefaultsscc_info_RoleBaseData_Creature_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::_RoleBaseData_default_instance_;
+    new (ptr) ::RoleBaseData();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::RoleBaseData::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_RoleBaseData_Creature_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_RoleBaseData_Creature_2eproto}, {}};
+
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_Creature_2eproto[3];
 static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_Creature_2eproto = nullptr;
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_Creature_2eproto = nullptr;
 
 const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_Creature_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::RoleBaseData, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::RoleBaseData, oid_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::ModuleData, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -74,38 +98,291 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_Creature_2eproto::offsets[] PR
   PROTOBUF_FIELD_OFFSET(::AllAttributeDataNotify, data_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, sizeof(::ModuleData)},
-  { 7, -1, sizeof(::AllAttributeDataNotify)},
+  { 0, -1, sizeof(::RoleBaseData)},
+  { 6, -1, sizeof(::ModuleData)},
+  { 13, -1, sizeof(::AllAttributeDataNotify)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_RoleBaseData_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_ModuleData_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_AllAttributeDataNotify_default_instance_),
 };
 
 const char descriptor_table_protodef_Creature_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\016Creature.proto\"2\n\nModuleData\022\024\n\014msg_ty"
-  "pe_str\030\001 \001(\t\022\016\n\006binary\030\002 \001(\t\"@\n\026AllAttri"
-  "buteDataNotify\022\013\n\003oid\030\001 \001(\004\022\031\n\004data\030\002 \003("
-  "\0132\013.ModuleDatab\006proto3"
+  "\n\016Creature.proto\"\033\n\014RoleBaseData\022\013\n\003oid\030"
+  "\001 \001(\004\"2\n\nModuleData\022\024\n\014msg_type_str\030\001 \001("
+  "\t\022\016\n\006binary\030\002 \001(\t\"@\n\026AllAttributeDataNot"
+  "ify\022\013\n\003oid\030\001 \001(\004\022\031\n\004data\030\002 \003(\0132\013.ModuleD"
+  "atab\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_Creature_2eproto_deps[1] = {
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_Creature_2eproto_sccs[2] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_Creature_2eproto_sccs[3] = {
   &scc_info_AllAttributeDataNotify_Creature_2eproto.base,
   &scc_info_ModuleData_Creature_2eproto.base,
+  &scc_info_RoleBaseData_Creature_2eproto.base,
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_Creature_2eproto_once;
 static bool descriptor_table_Creature_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Creature_2eproto = {
-  &descriptor_table_Creature_2eproto_initialized, descriptor_table_protodef_Creature_2eproto, "Creature.proto", 142,
-  &descriptor_table_Creature_2eproto_once, descriptor_table_Creature_2eproto_sccs, descriptor_table_Creature_2eproto_deps, 2, 0,
+  &descriptor_table_Creature_2eproto_initialized, descriptor_table_protodef_Creature_2eproto, "Creature.proto", 171,
+  &descriptor_table_Creature_2eproto_once, descriptor_table_Creature_2eproto_sccs, descriptor_table_Creature_2eproto_deps, 3, 0,
   schemas, file_default_instances, TableStruct_Creature_2eproto::offsets,
-  file_level_metadata_Creature_2eproto, 2, file_level_enum_descriptors_Creature_2eproto, file_level_service_descriptors_Creature_2eproto,
+  file_level_metadata_Creature_2eproto, 3, file_level_enum_descriptors_Creature_2eproto, file_level_service_descriptors_Creature_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
 static bool dynamic_init_dummy_Creature_2eproto = (  ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_Creature_2eproto), true);
+
+// ===================================================================
+
+void RoleBaseData::InitAsDefaultInstance() {
+}
+class RoleBaseData::_Internal {
+ public:
+};
+
+RoleBaseData::RoleBaseData()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:RoleBaseData)
+}
+RoleBaseData::RoleBaseData(const RoleBaseData& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  oid_ = from.oid_;
+  // @@protoc_insertion_point(copy_constructor:RoleBaseData)
+}
+
+void RoleBaseData::SharedCtor() {
+  oid_ = PROTOBUF_ULONGLONG(0);
+}
+
+RoleBaseData::~RoleBaseData() {
+  // @@protoc_insertion_point(destructor:RoleBaseData)
+  SharedDtor();
+}
+
+void RoleBaseData::SharedDtor() {
+}
+
+void RoleBaseData::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const RoleBaseData& RoleBaseData::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_RoleBaseData_Creature_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void RoleBaseData::Clear() {
+// @@protoc_insertion_point(message_clear_start:RoleBaseData)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  oid_ = PROTOBUF_ULONGLONG(0);
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* RoleBaseData::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // uint64 oid = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          oid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool RoleBaseData::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:RoleBaseData)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // uint64 oid = 1;
+      case 1: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::uint64, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &oid_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:RoleBaseData)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:RoleBaseData)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void RoleBaseData::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:RoleBaseData)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint64 oid = 1;
+  if (this->oid() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64(1, this->oid(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:RoleBaseData)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* RoleBaseData::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:RoleBaseData)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint64 oid = 1;
+  if (this->oid() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->oid(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:RoleBaseData)
+  return target;
+}
+
+size_t RoleBaseData::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:RoleBaseData)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // uint64 oid = 1;
+  if (this->oid() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
+        this->oid());
+  }
+
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void RoleBaseData::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:RoleBaseData)
+  GOOGLE_DCHECK_NE(&from, this);
+  const RoleBaseData* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<RoleBaseData>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:RoleBaseData)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:RoleBaseData)
+    MergeFrom(*source);
+  }
+}
+
+void RoleBaseData::MergeFrom(const RoleBaseData& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:RoleBaseData)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.oid() != 0) {
+    set_oid(from.oid());
+  }
+}
+
+void RoleBaseData::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:RoleBaseData)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void RoleBaseData::CopyFrom(const RoleBaseData& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:RoleBaseData)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool RoleBaseData::IsInitialized() const {
+  return true;
+}
+
+void RoleBaseData::InternalSwap(RoleBaseData* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(oid_, other->oid_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata RoleBaseData::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
 
 // ===================================================================
 
@@ -746,6 +1023,9 @@ void AllAttributeDataNotify::InternalSwap(AllAttributeDataNotify* other) {
 
 // @@protoc_insertion_point(namespace_scope)
 PROTOBUF_NAMESPACE_OPEN
+template<> PROTOBUF_NOINLINE ::RoleBaseData* Arena::CreateMaybeMessage< ::RoleBaseData >(Arena* arena) {
+  return Arena::CreateInternal< ::RoleBaseData >(arena);
+}
 template<> PROTOBUF_NOINLINE ::ModuleData* Arena::CreateMaybeMessage< ::ModuleData >(Arena* arena) {
   return Arena::CreateInternal< ::ModuleData >(arena);
 }

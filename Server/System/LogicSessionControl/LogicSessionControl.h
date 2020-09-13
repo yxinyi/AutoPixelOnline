@@ -15,7 +15,7 @@ public:
     bool Quit();
     bool Destroy();
 
-    uint32_t GetAccountKey(const Session session_) {
+    uint64_t GetAccountKey(const Session session_) {
         auto _account_find = m_session_to_account.find(session_);
         if (_account_find == m_session_to_account.end()) {
             return 0;
@@ -24,6 +24,6 @@ public:
     }
 
 private:
-    std::map<uint32_t, uint32_t> m_session_to_account;
+    std::map<uint32_t, uint64_t> m_session_to_account;
 
 };

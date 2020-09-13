@@ -4,6 +4,7 @@
 #include "tool/UniqueNumberFactory.h"
 #include "Tcp/NetManager.h"
 #include "System/Session/SessionStruct.h"
+#include "EngineInclude.h"
 
 class Creature {
 public:
@@ -61,3 +62,6 @@ private:
 };
 
 using Creature_t = std::shared_ptr<Creature>;
+
+#define PlayerLoginEvent "PlayerLogin" 
+#define PlayerOutEvent "PlayerOut" 

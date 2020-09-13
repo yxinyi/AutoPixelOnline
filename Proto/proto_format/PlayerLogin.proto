@@ -30,6 +30,11 @@ message PlayerEnter {
 	
 }
 
+message PlayerEnterAck {
+	
+}
+
+
 
 message BenchTest{
 	uint32 num = 1;

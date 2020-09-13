@@ -11,7 +11,7 @@ bool LogicSessionControlSystem::EnvDefine() {
         
         LogInfo << "[PlayerLoginEvent] LogicEnterFromAccountServer " << message_->account_key() << " " << message_->session_key() << FlushLog;
 
-        const uint32_t _account_key = message_->account_key();
+        const uint64_t _account_key = message_->account_key();
         const uint32_t _session_key = message_->session_key();
 
         if (m_session_to_account.find(_session_key) != m_session_to_account.end()) {
@@ -20,7 +20,7 @@ bool LogicSessionControlSystem::EnvDefine() {
         }
 
         m_session_to_account[_session_key] = _account_key;
-        MessageBus::getInstance()->SendReq<uint32_t>(_account_key,"ClientEnter");
+        MessageBus::getInstance()->SendReq<uint32_t>(_session_key, ClientEnterEvent);
     });
 
     //
@@ -34,7 +34,7 @@ bool LogicSessionControlSystem::EnvDefine() {
             LogInfo << "[LogicSessionControlSystem] session  not exists " << message_->seesion_id() << FlushLog;
             return;
         }
-        MessageBus::getInstance()->SendReq<uint32_t>(_session_find->second, "ClientQuit");
+        MessageBus::getInstance()->SendReq<uint32_t>(_session_id, ClientOutEvent);
         m_session_to_account.erase(_session_find);
     });
     

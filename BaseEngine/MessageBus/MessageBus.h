@@ -7,6 +7,8 @@
 #include "include/tool/SingletonTemplate.h"
 
 
+#define MsgEvent 
+
 template<typename T>
 struct function_traits;
 

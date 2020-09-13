@@ -16,7 +16,7 @@ public:
     bool Quit();
     bool Destroy();
 public:
-    Creature_t CreateCreature(const uint32_t conn_);
+    Creature_t CreateCreature(const SessionConn session_conn_);
     Creature_t FindCreatureByOid(const uint64_t& oid_);
 
 

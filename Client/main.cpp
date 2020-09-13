@@ -4,7 +4,7 @@
 #include "RenderManager.h"
 #include <Windows.h>
 
-const uint32_t g_frame = 100;
+const uint32_t g_frame = 1000;
 const NodeType g_node_type = NodeType::Client;
 NodeType getNodeType() {
     return g_node_type;

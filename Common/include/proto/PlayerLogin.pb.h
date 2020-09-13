@@ -61,12 +61,12 @@ extern BenchTestDefaultTypeInternal _BenchTest_default_instance_;
 class LogicEnterFromAccountServer;
 class LogicEnterFromAccountServerDefaultTypeInternal;
 extern LogicEnterFromAccountServerDefaultTypeInternal _LogicEnterFromAccountServer_default_instance_;
-class LoginLogic;
-class LoginLogicDefaultTypeInternal;
-extern LoginLogicDefaultTypeInternal _LoginLogic_default_instance_;
 class PlayerEnter;
 class PlayerEnterDefaultTypeInternal;
 extern PlayerEnterDefaultTypeInternal _PlayerEnter_default_instance_;
+class PlayerEnterAck;
+class PlayerEnterAckDefaultTypeInternal;
+extern PlayerEnterAckDefaultTypeInternal _PlayerEnterAck_default_instance_;
 class PlayerLogin;
 class PlayerLoginDefaultTypeInternal;
 extern PlayerLoginDefaultTypeInternal _PlayerLogin_default_instance_;
@@ -79,8 +79,8 @@ extern PlayerRegsiterDefaultTypeInternal _PlayerRegsiter_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
 template<> ::BenchTest* Arena::CreateMaybeMessage<::BenchTest>(Arena*);
 template<> ::LogicEnterFromAccountServer* Arena::CreateMaybeMessage<::LogicEnterFromAccountServer>(Arena*);
-template<> ::LoginLogic* Arena::CreateMaybeMessage<::LoginLogic>(Arena*);
 template<> ::PlayerEnter* Arena::CreateMaybeMessage<::PlayerEnter>(Arena*);
+template<> ::PlayerEnterAck* Arena::CreateMaybeMessage<::PlayerEnterAck>(Arena*);
 template<> ::PlayerLogin* Arena::CreateMaybeMessage<::PlayerLogin>(Arena*);
 template<> ::PlayerLoginAck* Arena::CreateMaybeMessage<::PlayerLoginAck>(Arena*);
 template<> ::PlayerRegsiter* Arena::CreateMaybeMessage<::PlayerRegsiter>(Arena*);
@@ -263,6 +263,156 @@ class PlayerLogin :
 };
 // -------------------------------------------------------------------
 
+class PlayerRegsiter :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:PlayerRegsiter) */ {
+ public:
+  PlayerRegsiter();
+  virtual ~PlayerRegsiter();
+
+  PlayerRegsiter(const PlayerRegsiter& from);
+  PlayerRegsiter(PlayerRegsiter&& from) noexcept
+    : PlayerRegsiter() {
+    *this = ::std::move(from);
+  }
+
+  inline PlayerRegsiter& operator=(const PlayerRegsiter& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline PlayerRegsiter& operator=(PlayerRegsiter&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const PlayerRegsiter& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const PlayerRegsiter* internal_default_instance() {
+    return reinterpret_cast<const PlayerRegsiter*>(
+               &_PlayerRegsiter_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    1;
+
+  friend void swap(PlayerRegsiter& a, PlayerRegsiter& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(PlayerRegsiter* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline PlayerRegsiter* New() const final {
+    return CreateMaybeMessage<PlayerRegsiter>(nullptr);
+  }
+
+  PlayerRegsiter* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<PlayerRegsiter>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const PlayerRegsiter& from);
+  void MergeFrom(const PlayerRegsiter& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(PlayerRegsiter* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "PlayerRegsiter";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_PlayerLogin_2eproto);
+    return ::descriptor_table_PlayerLogin_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kAccountFieldNumber = 1,
+    kPasswordFieldNumber = 2,
+  };
+  // string account = 1;
+  void clear_account();
+  const std::string& account() const;
+  void set_account(const std::string& value);
+  void set_account(std::string&& value);
+  void set_account(const char* value);
+  void set_account(const char* value, size_t size);
+  std::string* mutable_account();
+  std::string* release_account();
+  void set_allocated_account(std::string* account);
+
+  // string password = 2;
+  void clear_password();
+  const std::string& password() const;
+  void set_password(const std::string& value);
+  void set_password(std::string&& value);
+  void set_password(const char* value);
+  void set_password(const char* value, size_t size);
+  std::string* mutable_password();
+  std::string* release_password();
+  void set_allocated_password(std::string* password);
+
+  // @@protoc_insertion_point(class_scope:PlayerRegsiter)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr account_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr password_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_PlayerLogin_2eproto;
+};
+// -------------------------------------------------------------------
+
 class PlayerLoginAck :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:PlayerLoginAck) */ {
  public:
@@ -305,7 +455,7 @@ class PlayerLoginAck :
                &_PlayerLoginAck_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    2;
 
   friend void swap(PlayerLoginAck& a, PlayerLoginAck& b) {
     a.Swap(&b);
@@ -473,7 +623,7 @@ class LogicEnterFromAccountServer :
                &_LogicEnterFromAccountServer_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    3;
 
   friend void swap(LogicEnterFromAccountServer& a, LogicEnterFromAccountServer& b) {
     a.Swap(&b);
@@ -569,287 +719,6 @@ class LogicEnterFromAccountServer :
 };
 // -------------------------------------------------------------------
 
-class LoginLogic :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:LoginLogic) */ {
- public:
-  LoginLogic();
-  virtual ~LoginLogic();
-
-  LoginLogic(const LoginLogic& from);
-  LoginLogic(LoginLogic&& from) noexcept
-    : LoginLogic() {
-    *this = ::std::move(from);
-  }
-
-  inline LoginLogic& operator=(const LoginLogic& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline LoginLogic& operator=(LoginLogic&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return GetMetadataStatic().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return GetMetadataStatic().reflection;
-  }
-  static const LoginLogic& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const LoginLogic* internal_default_instance() {
-    return reinterpret_cast<const LoginLogic*>(
-               &_LoginLogic_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    3;
-
-  friend void swap(LoginLogic& a, LoginLogic& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(LoginLogic* other) {
-    if (other == this) return;
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline LoginLogic* New() const final {
-    return CreateMaybeMessage<LoginLogic>(nullptr);
-  }
-
-  LoginLogic* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<LoginLogic>(arena);
-  }
-  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const LoginLogic& from);
-  void MergeFrom(const LoginLogic& from);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  #else
-  bool MergePartialFromCodedStream(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
-  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  void SerializeWithCachedSizes(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
-      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  inline void SharedCtor();
-  inline void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(LoginLogic* other);
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "LoginLogic";
-  }
-  private:
-  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
-    return nullptr;
-  }
-  inline void* MaybeArenaPtr() const {
-    return nullptr;
-  }
-  public:
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-  private:
-  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_PlayerLogin_2eproto);
-    return ::descriptor_table_PlayerLogin_2eproto.file_level_metadata[kIndexInFileMessages];
-  }
-
-  public:
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kSessionKeyFieldNumber = 1,
-  };
-  // uint32 session_key = 1;
-  void clear_session_key();
-  ::PROTOBUF_NAMESPACE_ID::uint32 session_key() const;
-  void set_session_key(::PROTOBUF_NAMESPACE_ID::uint32 value);
-
-  // @@protoc_insertion_point(class_scope:LoginLogic)
- private:
-  class _Internal;
-
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::uint32 session_key_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  friend struct ::TableStruct_PlayerLogin_2eproto;
-};
-// -------------------------------------------------------------------
-
-class PlayerRegsiter :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:PlayerRegsiter) */ {
- public:
-  PlayerRegsiter();
-  virtual ~PlayerRegsiter();
-
-  PlayerRegsiter(const PlayerRegsiter& from);
-  PlayerRegsiter(PlayerRegsiter&& from) noexcept
-    : PlayerRegsiter() {
-    *this = ::std::move(from);
-  }
-
-  inline PlayerRegsiter& operator=(const PlayerRegsiter& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline PlayerRegsiter& operator=(PlayerRegsiter&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return GetMetadataStatic().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return GetMetadataStatic().reflection;
-  }
-  static const PlayerRegsiter& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const PlayerRegsiter* internal_default_instance() {
-    return reinterpret_cast<const PlayerRegsiter*>(
-               &_PlayerRegsiter_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    4;
-
-  friend void swap(PlayerRegsiter& a, PlayerRegsiter& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(PlayerRegsiter* other) {
-    if (other == this) return;
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline PlayerRegsiter* New() const final {
-    return CreateMaybeMessage<PlayerRegsiter>(nullptr);
-  }
-
-  PlayerRegsiter* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<PlayerRegsiter>(arena);
-  }
-  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const PlayerRegsiter& from);
-  void MergeFrom(const PlayerRegsiter& from);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  #else
-  bool MergePartialFromCodedStream(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
-  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  void SerializeWithCachedSizes(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
-      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  inline void SharedCtor();
-  inline void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(PlayerRegsiter* other);
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "PlayerRegsiter";
-  }
-  private:
-  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
-    return nullptr;
-  }
-  inline void* MaybeArenaPtr() const {
-    return nullptr;
-  }
-  public:
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-  private:
-  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_PlayerLogin_2eproto);
-    return ::descriptor_table_PlayerLogin_2eproto.file_level_metadata[kIndexInFileMessages];
-  }
-
-  public:
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kAccountFieldNumber = 1,
-    kPasswordFieldNumber = 2,
-  };
-  // string account = 1;
-  void clear_account();
-  const std::string& account() const;
-  void set_account(const std::string& value);
-  void set_account(std::string&& value);
-  void set_account(const char* value);
-  void set_account(const char* value, size_t size);
-  std::string* mutable_account();
-  std::string* release_account();
-  void set_allocated_account(std::string* account);
-
-  // string password = 2;
-  void clear_password();
-  const std::string& password() const;
-  void set_password(const std::string& value);
-  void set_password(std::string&& value);
-  void set_password(const char* value);
-  void set_password(const char* value, size_t size);
-  std::string* mutable_password();
-  std::string* release_password();
-  void set_allocated_password(std::string* password);
-
-  // @@protoc_insertion_point(class_scope:PlayerRegsiter)
- private:
-  class _Internal;
-
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr account_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr password_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  friend struct ::TableStruct_PlayerLogin_2eproto;
-};
-// -------------------------------------------------------------------
-
 class PlayerEnter :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:PlayerEnter) */ {
  public:
@@ -892,7 +761,7 @@ class PlayerEnter :
                &_PlayerEnter_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    4;
 
   friend void swap(PlayerEnter& a, PlayerEnter& b) {
     a.Swap(&b);
@@ -963,6 +832,128 @@ class PlayerEnter :
   // accessors -------------------------------------------------------
 
   // @@protoc_insertion_point(class_scope:PlayerEnter)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_PlayerLogin_2eproto;
+};
+// -------------------------------------------------------------------
+
+class PlayerEnterAck :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:PlayerEnterAck) */ {
+ public:
+  PlayerEnterAck();
+  virtual ~PlayerEnterAck();
+
+  PlayerEnterAck(const PlayerEnterAck& from);
+  PlayerEnterAck(PlayerEnterAck&& from) noexcept
+    : PlayerEnterAck() {
+    *this = ::std::move(from);
+  }
+
+  inline PlayerEnterAck& operator=(const PlayerEnterAck& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline PlayerEnterAck& operator=(PlayerEnterAck&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const PlayerEnterAck& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const PlayerEnterAck* internal_default_instance() {
+    return reinterpret_cast<const PlayerEnterAck*>(
+               &_PlayerEnterAck_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  friend void swap(PlayerEnterAck& a, PlayerEnterAck& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(PlayerEnterAck* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline PlayerEnterAck* New() const final {
+    return CreateMaybeMessage<PlayerEnterAck>(nullptr);
+  }
+
+  PlayerEnterAck* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<PlayerEnterAck>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const PlayerEnterAck& from);
+  void MergeFrom(const PlayerEnterAck& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(PlayerEnterAck* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "PlayerEnterAck";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_PlayerLogin_2eproto);
+    return ::descriptor_table_PlayerLogin_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:PlayerEnterAck)
  private:
   class _Internal;
 
@@ -1216,88 +1207,6 @@ inline void PlayerLogin::set_allocated_password(std::string* password) {
 
 // -------------------------------------------------------------------
 
-// PlayerLoginAck
-
-// uint32 session_key = 1;
-inline void PlayerLoginAck::clear_session_key() {
-  session_key_ = 0u;
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint32 PlayerLoginAck::session_key() const {
-  // @@protoc_insertion_point(field_get:PlayerLoginAck.session_key)
-  return session_key_;
-}
-inline void PlayerLoginAck::set_session_key(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  
-  session_key_ = value;
-  // @@protoc_insertion_point(field_set:PlayerLoginAck.session_key)
-}
-
-// .PlayerLoginAck.CheckResult result = 2;
-inline void PlayerLoginAck::clear_result() {
-  result_ = 0;
-}
-inline ::PlayerLoginAck_CheckResult PlayerLoginAck::result() const {
-  // @@protoc_insertion_point(field_get:PlayerLoginAck.result)
-  return static_cast< ::PlayerLoginAck_CheckResult >(result_);
-}
-inline void PlayerLoginAck::set_result(::PlayerLoginAck_CheckResult value) {
-  
-  result_ = value;
-  // @@protoc_insertion_point(field_set:PlayerLoginAck.result)
-}
-
-// -------------------------------------------------------------------
-
-// LogicEnterFromAccountServer
-
-// uint32 session_key = 1;
-inline void LogicEnterFromAccountServer::clear_session_key() {
-  session_key_ = 0u;
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint32 LogicEnterFromAccountServer::session_key() const {
-  // @@protoc_insertion_point(field_get:LogicEnterFromAccountServer.session_key)
-  return session_key_;
-}
-inline void LogicEnterFromAccountServer::set_session_key(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  
-  session_key_ = value;
-  // @@protoc_insertion_point(field_set:LogicEnterFromAccountServer.session_key)
-}
-
-// uint64 account_key = 2;
-inline void LogicEnterFromAccountServer::clear_account_key() {
-  account_key_ = PROTOBUF_ULONGLONG(0);
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint64 LogicEnterFromAccountServer::account_key() const {
-  // @@protoc_insertion_point(field_get:LogicEnterFromAccountServer.account_key)
-  return account_key_;
-}
-inline void LogicEnterFromAccountServer::set_account_key(::PROTOBUF_NAMESPACE_ID::uint64 value) {
-  
-  account_key_ = value;
-  // @@protoc_insertion_point(field_set:LogicEnterFromAccountServer.account_key)
-}
-
-// -------------------------------------------------------------------
-
-// LoginLogic
-
-// uint32 session_key = 1;
-inline void LoginLogic::clear_session_key() {
-  session_key_ = 0u;
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint32 LoginLogic::session_key() const {
-  // @@protoc_insertion_point(field_get:LoginLogic.session_key)
-  return session_key_;
-}
-inline void LoginLogic::set_session_key(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  
-  session_key_ = value;
-  // @@protoc_insertion_point(field_set:LoginLogic.session_key)
-}
-
-// -------------------------------------------------------------------
-
 // PlayerRegsiter
 
 // string account = 1;
@@ -1404,7 +1313,75 @@ inline void PlayerRegsiter::set_allocated_password(std::string* password) {
 
 // -------------------------------------------------------------------
 
+// PlayerLoginAck
+
+// uint32 session_key = 1;
+inline void PlayerLoginAck::clear_session_key() {
+  session_key_ = 0u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 PlayerLoginAck::session_key() const {
+  // @@protoc_insertion_point(field_get:PlayerLoginAck.session_key)
+  return session_key_;
+}
+inline void PlayerLoginAck::set_session_key(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  
+  session_key_ = value;
+  // @@protoc_insertion_point(field_set:PlayerLoginAck.session_key)
+}
+
+// .PlayerLoginAck.CheckResult result = 2;
+inline void PlayerLoginAck::clear_result() {
+  result_ = 0;
+}
+inline ::PlayerLoginAck_CheckResult PlayerLoginAck::result() const {
+  // @@protoc_insertion_point(field_get:PlayerLoginAck.result)
+  return static_cast< ::PlayerLoginAck_CheckResult >(result_);
+}
+inline void PlayerLoginAck::set_result(::PlayerLoginAck_CheckResult value) {
+  
+  result_ = value;
+  // @@protoc_insertion_point(field_set:PlayerLoginAck.result)
+}
+
+// -------------------------------------------------------------------
+
+// LogicEnterFromAccountServer
+
+// uint32 session_key = 1;
+inline void LogicEnterFromAccountServer::clear_session_key() {
+  session_key_ = 0u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 LogicEnterFromAccountServer::session_key() const {
+  // @@protoc_insertion_point(field_get:LogicEnterFromAccountServer.session_key)
+  return session_key_;
+}
+inline void LogicEnterFromAccountServer::set_session_key(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  
+  session_key_ = value;
+  // @@protoc_insertion_point(field_set:LogicEnterFromAccountServer.session_key)
+}
+
+// uint64 account_key = 2;
+inline void LogicEnterFromAccountServer::clear_account_key() {
+  account_key_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 LogicEnterFromAccountServer::account_key() const {
+  // @@protoc_insertion_point(field_get:LogicEnterFromAccountServer.account_key)
+  return account_key_;
+}
+inline void LogicEnterFromAccountServer::set_account_key(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  account_key_ = value;
+  // @@protoc_insertion_point(field_set:LogicEnterFromAccountServer.account_key)
+}
+
+// -------------------------------------------------------------------
+
 // PlayerEnter
+
+// -------------------------------------------------------------------
+
+// PlayerEnterAck
 
 // -------------------------------------------------------------------
 
