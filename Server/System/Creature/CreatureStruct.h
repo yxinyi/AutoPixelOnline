@@ -12,6 +12,7 @@ public:
     void init(const string& type_name_, const SessionConn SessionConn_) {
         m_type_name = type_name_;
         m_attr = CAttrManager::getInstance()->CreateAttr(type_name_);
+        //如果是老玩家会在载入的时候修改成正确数值
         m_oid = UniqueNumberFactory::getInstance()->build();
         m_session_id = SessionConn_;
     }
@@ -31,7 +32,11 @@ public:
         m_attr->BuildAllProto(_ntf);
         return _ntf;
     }
-
+    void RestoreForProtoData(std::string proto_str_) {
+        AllAttributeDataNotify_t _msg = std::make_shared<AllAttributeDataNotify>();
+        _msg->ParseFromString(proto_str_);
+        RestoreForProto(_msg);
+    }
     void RestoreForProto(AllAttributeDataNotify_t ntf_) {
         const int _size = ntf_->data_size();
         for (int _idx = 0; _idx < _size; _idx++) {

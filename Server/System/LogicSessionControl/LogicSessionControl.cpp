@@ -22,6 +22,8 @@ bool LogicSessionControlSystem::EnvDefine() {
         m_session_to_account[_session_key] = _account_key;
         MessageBus::getInstance()->SendReq<uint32_t>(_account_key,"ClientEnter");
     });
+
+    //
     ProtobufDispatch::getInstance()->registerMessageCallback<SessionDestory>([this](const SessionConn conn_,
         const SessionDestory_t& message_,
         const int64_t& receive_time_) {

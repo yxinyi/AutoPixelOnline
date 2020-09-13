@@ -25,12 +25,7 @@ bool CreatureManager::EnvDefine() {
     ProtobufDispatch::getInstance()->registerMessageCallback<PlayerEnter>([this](const SessionConn conn_,
         const std::shared_ptr<PlayerEnter>& message_,
         const int64_t& receive_time_) {
-        Creature_t _creature = CreateCreature(ApiGetSession(conn_));
-        if (!_creature) {
-            LogError << "[PlayerLoginEvent] create err " << FlushLog;
-            NetManager::getInstance()->SendMessageBuff(conn_, ApiBuildErrorMsg(LOG_ERR));
-            return;
-        }
+
 
         std::shared_ptr<LogicSessionControlSystem> _sys =  SystemManager::getInstance()->GetSystem<LogicSessionControlSystem>();
         if (!_sys) {
@@ -45,23 +40,45 @@ bool CreatureManager::EnvDefine() {
         }
 
         uint32_t _account_key = _sys->GetAccountKey(ApiGetSession(conn_));
+        //去数据库查询账号信息
         std::string _role_query = g_role_query+std::to_string(_account_key);
-        _db_sys->Query(_role_query, [](DBOperatorErr err_, std::string val_) {
-            uint64_t _oid = 0;
+        _db_sys->Query(_role_query, [_role_query,this,conn_](DBOperatorErr err_, std::string val_) {
             
+            Creature_t _creature = CreateCreature(conn_);
+            if (!_creature) {
+                LogError << "[PlayerLoginEvent] create err " << FlushLog;
+                NetManager::getInstance()->SendMessageBuff(conn_, ApiBuildErrorMsg(LOG_ERR));
+                return;
+            }
             if (err_ == DBOperatorErr::ERR) {
                 //是新玩家
-                _oid = UniqueNumberFactory::getInstance()->build();
+
+                CDataBaseSystem_t _db_sys = SystemManager::getInstance()->GetSystem<CDataBaseSystem>();
+                if (!_db_sys) {
+                    LogError << "[PlayerLoginEvent] CreatureManager not exsits " << FlushLog;
+                    return;
+                }
+                _db_sys->Insert(_role_query, _creature->BuildUpdateProto()->SerializeAsString(), [](DBOperatorErr err_, std::string val_) {
+
+                    if (err_ == DBOperatorErr::ERR) {
+                        LogError << "[PlayerLoginEvent] CreatureManager new player first save err " << FlushLog;
+                        //是新玩家
+                    }else{
+                        LogError << "[PlayerLoginEvent] CreatureManager new player first save ok " << FlushLog;
+
+                    }
+                });
             }
-            123122321
+            else {
 
+                _creature->RestoreForProtoData(val_);
+            }
+            
 
-        
+            MessageBus::getInstance()->SendReq<Creature_t>(_creature, "PlayerLogin");
+
         });
 
-        //去数据库查询账号信息
-
-        MessageBus::getInstance()->SendReq<Creature_t>(_creature, "PlayerLogin");
     });
 
     //PlayerEnter
