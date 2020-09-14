@@ -2,7 +2,7 @@
 #include "EngineInclude.h"
 #include "Creature/Creature.h"
 #include <math.h>
-
+#include "tool/Random.h"
 RegSystem(MapManager)
 
 bool MapManager::EnvDefine() {
@@ -22,6 +22,17 @@ bool MapManager::EnvDefine() {
         creature_->SendProtoMsg(_proto);
     }, PlayerLoginEvent);
 
+
+    MessageBus::getInstance()->Attach([this](uint64_t ply_oid_) {
+        std::shared_ptr<CreatureManager> _sys = SystemManager::getInstance()->GetSystem<CreatureManager>();
+        Creature_t _ply = _sys->FindCreatureByOid(ply_oid_);
+        CAttrMap_t _attr_map = _ply->GetAttrs()->ApiGetAttr<CAttrMap>("CAttrMap");
+        if (Map_t _map = FindMapByMapOid(_attr_map->m_map_oid)) {
+            
+        }
+
+    }, PlayerOutBeforeEvent);
+
     ProtobufDispatch::getInstance()->registerMessageCallback<PlayerMoveTo>([this](const SessionConn conn_,
         const std::shared_ptr<PlayerMoveTo>& message_,
         const int64_t& receive_time_) {
@@ -34,7 +45,7 @@ bool MapManager::EnvDefine() {
         CAttrMap_t _map_data = _palyer->GetAttrs()->ApiGetAttr<CAttrMap>("CAttrMap");
         //_map_data->m_map_postion.m_postion_x = _x;
         //_map_data->m_map_postion.m_postion_y = _y;
-        if (Map_t _map = GetMapByMapOid(_map_data->m_map_oid)) {
+        if (Map_t _map = FindMapByMapOid(_map_data->m_map_oid)) {
             _map->MoveTo(_palyer, {_x,_y});
             LogError << "[MapManager] PlayerMoveTo x: " << _x << "y: " << _y << FlushLog;
         }
@@ -139,7 +150,7 @@ Map_t MapManager::CreateMap(const uint32_t map_tbl_id_) {
         return nullptr;
     }
     const uint64_t _map_oid = UniqueNumberFactory::getInstance()->build();
-    Map_t _map = CObjectPool<CMap>::getInstance()->Get(_map_oid,_cfg);
+    Map_t _map = CObjectPool<CRandomMap>::getInstance()->Get(_map_oid,_cfg);
     m_map_pool[_map_oid] = _map;
     m_type_to_map[map_tbl_id_].push_back(_map);
     return _map;
@@ -175,7 +186,7 @@ Map_t MapManager::GetMinLoadMapByTableID(const uint32_t map_tbl_id_) {
     }
     return _min_map;
 }
-Map_t MapManager::GetMapByMapOid(const uint64_t map_oid_) {
+Map_t MapManager::FindMapByMapOid(const uint64_t map_oid_) {
     auto _map_find = m_map_pool.find(map_oid_);
     if (_map_find == m_map_pool.end()) {
         return nullptr;
@@ -185,12 +196,12 @@ Map_t MapManager::GetMapByMapOid(const uint64_t map_oid_) {
 
 
 bool CMap::PosMoveCheck(const CPosition& pos_) {
-    if (pos_.m_postion_x > m_config->m_max_x || pos_.m_postion_y > m_config->m_max_y) {
+    if (pos_.m_postion_x > m_maze_max_x || pos_.m_postion_y > m_maze_max_y) {
         return false;
     }
-    uint32_t _x_block = uint32_t(pos_.m_postion_x / m_config->m_cell_size);
-    uint32_t _y_block = uint32_t(pos_.m_postion_y / m_config->m_cell_size);
-    if (m_config->m_maze_shape[_y_block][_x_block] == 1) {
+    uint32_t _x_block = uint32_t(pos_.m_postion_x / m_maze_cell_size);
+    uint32_t _y_block = uint32_t(pos_.m_postion_y / m_maze_cell_size);
+    if (m_maze[_y_block][_x_block] == 1) {
         return false;
     }
 
@@ -199,8 +210,8 @@ bool CMap::PosMoveCheck(const CPosition& pos_) {
 
 SceneMapInfo_t CMap::ToProto() {
     SceneMapInfo_t _proto = std::make_shared<SceneMapInfo>();
-    _proto->set_map_block_size(m_config->m_cell_size);
-    for (auto&& _colmn_it : m_config->m_maze_shape) {
+    _proto->set_map_block_size(m_maze_cell_size);
+    for (auto&& _colmn_it : m_maze) {
         auto _colmn = _proto->add_map_info();
         for (auto&& _row_it: _colmn_it) {
             auto _block = _colmn->add_rows();
@@ -223,17 +234,17 @@ bool CMap::MoveTo(Creature_t creature_, CPosition tar_pos_) {
 
     _attr_map->m_path_pos.clear();
 
-    uint32_t _start_x_block = uint32_t(_attr_map->m_map_postion.m_postion_x / m_config->m_cell_size);
-    uint32_t _start_y_block = uint32_t(_attr_map->m_map_postion.m_postion_y / m_config->m_cell_size);
+    uint32_t _start_x_block = uint32_t(_attr_map->m_map_postion.m_postion_x / m_maze_cell_size);
+    uint32_t _start_y_block = uint32_t(_attr_map->m_map_postion.m_postion_y / m_maze_cell_size);
 
-    uint32_t _end_x_block = uint32_t(tar_pos_.m_postion_x / m_config->m_cell_size);
-    uint32_t _end_y_block = uint32_t(tar_pos_.m_postion_y / m_config->m_cell_size);
+    uint32_t _end_x_block = uint32_t(tar_pos_.m_postion_x / m_maze_cell_size);
+    uint32_t _end_y_block = uint32_t(tar_pos_.m_postion_y / m_maze_cell_size);
     SAstarPoint_t _path = m_astar->getPath(_start_x_block, _start_y_block, _end_x_block, _end_y_block);
     
     while (_path) {
         CPosition _tmp_pos;
-        _tmp_pos.m_postion_x = _path->m_x * m_config->m_cell_size + float((float)m_config->m_cell_size / 2.f);
-        _tmp_pos.m_postion_y = _path->m_y * m_config->m_cell_size + float((float)m_config->m_cell_size / 2.f);
+        _tmp_pos.m_postion_x = _path->m_x * m_maze_cell_size + float((float)m_maze_cell_size / 2.f);
+        _tmp_pos.m_postion_y = _path->m_y * m_maze_cell_size + float((float)m_maze_cell_size / 2.f);
         _attr_map->m_path_pos.push_front(_tmp_pos);
         _path = _path->m_parent;
     }

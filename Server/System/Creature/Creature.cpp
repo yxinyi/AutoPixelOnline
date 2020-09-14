@@ -90,10 +90,11 @@ bool CreatureManager::EnvDefine() {
                 return;
             }
             const uint64_t _player_oid = _player_find->second->GetOid();
+            MessageBus::getInstance()->SendReq<uint64_t>(_player_oid, PlayerOutBeforeEvent);
             m_session_to_player.erase(session_id_);
             m_oid_to_player.erase(_player_oid);
+            MessageBus::getInstance()->SendReq<uint64_t>(_player_oid, PlayerOutAfterEvent);
             
-            MessageBus::getInstance()->SendReq<uint64_t>(_player_oid, PlayerOutEvent);
         }, ClientOutEvent);
 
     });

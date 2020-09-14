@@ -7,6 +7,7 @@
 #include <list>
 #include "proto/Map.pb.h"
 #include <set>
+#include <random>
 
 struct CPosition {
     float m_postion_x = 0.f;
@@ -127,6 +128,10 @@ public:
         m_config = cfg_;
         m_map_oid = oid_;
         m_astar = std::make_shared<Astar>(cfg_->m_maze_shape);
+        m_maze = cfg_->m_maze_shape;
+        m_maze_cell_size = cfg_->m_cell_size;
+        m_maze_max_x = cfg_->m_max_x;
+        m_maze_max_y = cfg_->m_max_y;
         return true;
     }
     bool reset() { return true; }
@@ -143,6 +148,15 @@ public:
         m_players.insert(creature_->GetOid());
         return true;
     }
+
+    bool ExitScene(Creature_t creature_) {
+        CAttrMap_t _attr_map = creature_->GetAttrs()->ApiGetAttr<CAttrMap>("CAttrMap");
+        if (!_attr_map) {
+            return false;
+        }
+        m_players.erase(creature_->GetOid());
+    }
+
     uint32_t GetPlayerSize() { return (uint32_t)m_players.size(); }
     const std::set<uint64_t>& GetPlayer() { return m_players; }
 
@@ -150,14 +164,66 @@ public:
     SceneMapInfo_t ToProto();
     bool MoveTo(Creature_t creature_, CPosition pos_);
 
-private:
+protected:
     std::set<uint64_t>              m_players;
-
-private: //map confg
+    std::vector<std::vector<uint32_t>> m_maze;
+    uint32_t m_maze_cell_size = 0;
+    uint64_t m_maze_max_y = 0;
+    uint64_t m_maze_max_x = 0;
+protected: //map confg
     CMapConfig_t m_config;
     uint64_t m_map_oid;
     Astar_t m_astar = nullptr;
 };
 
+class CRandomMap :public CMap{
+public:
+    bool init(const uint64_t oid_, const CMapConfig_t cfg_) {
+        //1280*720
+        m_config = cfg_;
+        m_map_oid = oid_;
+        const uint32_t _cell_size = 10;
+        const uint32_t _block_rate = 15;//%
+        std::default_random_engine _random_engine((uint32_t)time(0));
+        std::uniform_int_distribution<uint32_t> _dis(0, 100);
+        uint32_t _row_cnt = 1280 / _cell_size;
+        uint32_t _colmn_cnt = 720 / _cell_size;
+        std::vector<std::vector<uint32_t>> _maze;
+        for (uint32_t _colmn_it = 0; _colmn_it < _colmn_cnt; _colmn_it++) {
+            std::vector<uint32_t> _row_vec;
+            for (uint32_t _row_it = 0; _row_it < _row_cnt; _row_it++) {
+                if (_dis (_random_engine)< _block_rate) {
+                    _row_vec.push_back(1);
+                }
+                else {
+                    _row_vec.push_back(0);
+                }
+            }
+            _maze.push_back(_row_vec);
+        }
+        m_maze = _maze;
+        m_astar = std::make_shared<Astar>(_maze);
+        m_maze_cell_size = _cell_size;
+        m_maze_max_y = 720;
+        m_maze_max_x = 1280;
+        return true;
+    }
+    bool reset() { return true; }
+
+public:
+    bool EnterScene(Creature_t creature_) {
+        CAttrMap_t _attr_map = creature_->GetAttrs()->ApiGetAttr<CAttrMap>("CAttrMap");
+        if (!_attr_map) {
+            return false;
+        }
+        _attr_map->m_map_oid = m_map_oid;
+        _attr_map->m_last_map_tid = m_config->m_tid;
+        _attr_map->m_map_postion = m_config->m_default_postion;
+        m_players.insert(creature_->GetOid());
+        return true;
+    }
+
+};
 using Map_t = std::shared_ptr<CMap>;
+using RandomMap_t = std::shared_ptr<CRandomMap>;
 

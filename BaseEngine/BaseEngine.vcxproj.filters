@@ -61,9 +61,6 @@
     <ClInclude Include="System\BaseSystem.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="Buff\Buffer.h">
-      <Filter>tool</Filter>
-    </ClInclude>
     <ClInclude Include="Tcp\Connection.h">
       <Filter>TcpNet</Filter>
     </ClInclude>
@@ -122,6 +119,9 @@
     </ClInclude>
     <ClInclude Include="..\Common\include\proto\Session.pb.h">
       <Filter>System\Session</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\tool\Buffer.h">
+      <Filter>tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

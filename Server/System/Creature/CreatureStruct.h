@@ -64,4 +64,5 @@ private:
 using Creature_t = std::shared_ptr<Creature>;
 
 #define PlayerLoginEvent "PlayerLogin" 
-#define PlayerOutEvent "PlayerOut" 
+#define PlayerOutBeforeEvent "PlayerOutBefore" 
+#define PlayerOutAfterEvent "PlayerOutAfter" 

@@ -25,6 +25,7 @@
     <ClInclude Include="..\Common\include\proto\Session.pb.h" />
     <ClInclude Include="..\Common\include\proto\Shakehand.pb.h" />
     <ClInclude Include="..\Common\include\tool\AStar.h" />
+    <ClInclude Include="..\Common\include\tool\Buffer.h" />
     <ClInclude Include="..\Common\include\tool\LogInfo.h" />
     <ClInclude Include="..\Common\include\tool\ProtobufCodec.h" />
     <ClInclude Include="..\Common\include\tool\ProtobufDispatcher.h" />
@@ -35,7 +36,6 @@
     <ClInclude Include="..\Common\include\tool\TimerTask.h" />
     <ClInclude Include="..\Common\include\tool\UniqueNumberFactory.h" />
     <ClInclude Include="Attribute\Attribute.h" />
-    <ClInclude Include="Buff\Buffer.h" />
     <ClInclude Include="EngineInclude.h" />
     <ClInclude Include="Error\Error.h" />
     <ClInclude Include="Error\ErrorStruct.h" />

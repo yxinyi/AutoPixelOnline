@@ -38,7 +38,7 @@ public:
     Map_t CreateMap(const uint32_t map_tbl_id_);
     Map_t EnterMap(Creature_t creature_, const uint32_t map_tbl_id_);
     Map_t GetMinLoadMapByTableID(const uint32_t map_tbl_id_);
-    Map_t GetMapByMapOid(const uint64_t map_oid_);
+    Map_t FindMapByMapOid(const uint64_t map_oid_);
 
 private:
     std::map<uint64_t, Map_t> m_map_pool;

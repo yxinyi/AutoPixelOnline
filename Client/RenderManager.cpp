@@ -26,7 +26,7 @@ bool RenderManager::WindowInit() {
         return false;
     }
 
-    m_render = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
+    m_render = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_SOFTWARE);
 
     if (!m_render)
     {
