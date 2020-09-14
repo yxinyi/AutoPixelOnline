@@ -51,7 +51,7 @@ bool MapManager::PreInit() {
     return true;
 }
 bool MapManager::Init() {
-    float _interval = 300;
+    float _interval = 150.f;
     TimerTaskManager::getInstance()->RegisterTask("MapLoop",0, (uint64_t)_interval,-1,[_interval,this]() {
         std::shared_ptr<CreatureManager> _sys = SystemManager::getInstance()->GetSystem<CreatureManager>();
         if (!_sys) {
@@ -81,14 +81,22 @@ bool MapManager::Init() {
                     CPosition& _now_pos = _attr_map->m_map_postion;
 
 
-                    float _distance = sqrt(pow((_target_pos.m_postion_y - _now_pos.m_postion_y), 2) * pow((_target_pos.m_postion_x - _now_pos.m_postion_x), 2));
+                    float _distance = sqrt(pow(abs(_target_pos.m_postion_y - _now_pos.m_postion_y), 2) * pow(abs(_target_pos.m_postion_x - _now_pos.m_postion_x), 2));
 
                     float _move_rate = (_attr_map->m_speed * (_interval / 1000.f) / _distance);
+                    if (_move_rate >= 1.f) {
+                        _move_rate = 1.f;
+                    }
+                    float _growup_x = (_target_pos.m_postion_x - _now_pos.m_postion_x) * _move_rate;;
+                    float _growup_y = (_target_pos.m_postion_y - _now_pos.m_postion_y) * _move_rate;
 
-                    _now_pos.m_postion_y += (_target_pos.m_postion_y - _now_pos.m_postion_y) * _move_rate;
-                    _now_pos.m_postion_x += (_target_pos.m_postion_x - _now_pos.m_postion_x) * _move_rate;
+                    _now_pos.m_postion_y += _growup_y;
+                    _now_pos.m_postion_x += _growup_x;
 
-                    if (sqrt(pow((_target_pos.m_postion_y - _now_pos.m_postion_y), 2) * pow((_target_pos.m_postion_x - _now_pos.m_postion_x), 2)) < 0.1f) {
+                    LogError << "[MapManager::Loop] growup xy : [" << _growup_x << " : " << _growup_y  << "] after pos : [" << _now_pos.m_postion_x << " : "<< _now_pos.m_postion_y  << "] targetpos : ["<< _target_pos.m_postion_x<< " : "<< _target_pos.m_postion_y <<"] move rate : ["<< _move_rate <<" ]distance: [" << _distance << "]" << FlushLog;
+
+
+                    if (sqrt(pow((_target_pos.m_postion_y - _now_pos.m_postion_y), 2) * pow((_target_pos.m_postion_x - _now_pos.m_postion_x), 2)) < 1.f) {
                         _attr_map->m_path_pos.pop_front();
                     }
                 }

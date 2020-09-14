@@ -59,7 +59,7 @@ private:
         if (x_ < 0 || y_ < 0 || x_ >= m_maze_row || y_ >= m_maze_clounmn) {
             return nullptr;
         }
-        if (m_maze[y_][x_] == 2) {
+        if (m_maze[y_][x_] == 1) {
             return nullptr;
         }
         const uint64_t _unique_id = getUniqueID(x_, y_);
@@ -85,34 +85,34 @@ private:
         uint32_t _point_x = point_->m_x;
         uint32_t _point_y = point_->m_y;
 
-        if (SAstarPoint_t _point = getNode(point_, _point_x - 1, _point_y - 1)) {
-            _point->m_rate = 1.4f;
-            _rst_ptr.push_back(_point);
-        }
+        //if (SAstarPoint_t _point = getNode(point_, _point_x - 1, _point_y - 1)) {
+        //    _point->m_rate = 1.7f;
+        //    _rst_ptr.push_back(_point);
+        //}
         if (SAstarPoint_t _point = getNode(point_, _point_x - 1, _point_y)) {
             _rst_ptr.push_back(_point);
         }
-        if (SAstarPoint_t _point = getNode(point_, _point_x - 1, _point_y + 1)) {
-            _point->m_rate = 1.4f;
-            _rst_ptr.push_back(_point);
-        }
+        //if (SAstarPoint_t _point = getNode(point_, _point_x - 1, _point_y + 1)) {
+        //    _point->m_rate = 1.7f;
+        //    _rst_ptr.push_back(_point);
+        //}
         if (SAstarPoint_t _point = getNode(point_, _point_x, _point_y - 1)) {
             _rst_ptr.push_back(_point);
         }
         if (SAstarPoint_t _point = getNode(point_, _point_x, _point_y + 1)) {
             _rst_ptr.push_back(_point);
         }
-        if (SAstarPoint_t _point = getNode(point_, _point_x + 1, _point_y - 1)) {
-            _point->m_rate = 1.4f;
-            _rst_ptr.push_back(_point);
-        }
+        //if (SAstarPoint_t _point = getNode(point_, _point_x + 1, _point_y - 1)) {
+        //    _point->m_rate = 1.7f;
+        //    _rst_ptr.push_back(_point);
+        //}
         if (SAstarPoint_t _point = getNode(point_, _point_x + 1, _point_y)) {
             _rst_ptr.push_back(_point);
         }
-        if (SAstarPoint_t _point = getNode(point_, _point_x + 1, _point_y + 1)) {
-            _point->m_rate = 1.4f;
-            _rst_ptr.push_back(_point);
-        }
+        //if (SAstarPoint_t _point = getNode(point_, _point_x + 1, _point_y + 1)) {
+        //    _point->m_rate = 1.7f;
+        //    _rst_ptr.push_back(_point);
+        //}
         return _rst_ptr;
     }
 
