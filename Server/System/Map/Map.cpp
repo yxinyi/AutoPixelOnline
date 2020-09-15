@@ -28,7 +28,7 @@ bool MapManager::EnvDefine() {
         Creature_t _ply = _sys->FindCreatureByOid(ply_oid_);
         CAttrMap_t _attr_map = _ply->GetAttrs()->ApiGetAttr<CAttrMap>("CAttrMap");
         if (Map_t _map = FindMapByMapOid(_attr_map->m_map_oid)) {
-            
+            _map->ExitScene(_ply);
         }
 
     }, PlayerOutBeforeEvent);
