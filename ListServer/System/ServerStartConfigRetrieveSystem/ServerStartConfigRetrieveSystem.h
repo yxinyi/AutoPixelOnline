@@ -19,7 +19,7 @@ public:
     bool Loop(const uint64_t interval_);
     bool Quit();
     bool Destroy();
-
+    RetrieveServerConfigAck_t BuildAckMsg(const ServerConfig& config_);
 private:
     std::map<std::string, std::map<NodeType, ServerConfig>> m_servers_config;
 

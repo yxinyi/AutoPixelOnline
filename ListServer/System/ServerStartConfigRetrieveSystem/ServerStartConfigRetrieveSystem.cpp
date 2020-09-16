@@ -2,6 +2,16 @@
 
 RegSystem(ServerStartConfigRetrieveSystem)
 
+RetrieveServerConfigAck_t ServerStartConfigRetrieveSystem::BuildAckMsg(const ServerConfig& config_) {
+    RetrieveServerConfigAck_t _ack = std::make_shared<RetrieveServerConfigAck>();
+    _ack->set_db_ip(config_.m_db_ip);
+    _ack->set_db_port(config_.m_db_port);
+    _ack->set_gate_ip(config_.m_gate_ip);
+    _ack->set_gate_port(config_.m_gate_port);
+    _ack->set_listen_ip(config_.m_listen_ip);
+    _ack->set_listen_port(config_.m_listen_port);
+    return _ack;
+}
 bool ServerStartConfigRetrieveSystem::EnvDefine() {
     ProtobufDispatch::getInstance()->registerMessageCallback<RetrieveServerConfigReq>([this](const SessionConn session_conn_,
         const RetrieveServerConfigReq_t& message_,
@@ -9,24 +19,26 @@ bool ServerStartConfigRetrieveSystem::EnvDefine() {
 
         const NodeType _src_type = (NodeType)message_->server_type();
         std::string _conn_ip = ApiGetConnectIPPortStr(ApiGetConnID(session_conn_));
-        RetrieveServerConfigAck_t _ack = std::make_shared<RetrieveServerConfigAck>();
-        if (_src_type == NodeType::Client) {
-            
-        }
-
-
+        RetrieveServerConfigAck_t _ack = nullptr;
+        //if (_src_type == NodeType::Client) {
+        //    //如果是客户端,则需要携带当前选择的服务器,不过当前只有一组服务器只返回第一个
+        //    const ServerConfig& _cfg = (m_servers_config.begin()->second)[NodeType::Client];
+        //    _ack = BuildAckMsg(_cfg);
+        //}
 
         auto _rst_state = RetrieveServerConfigAck_checkResult_notExists;
         do {
 
             //看IP是否注册
-            auto _config_find = m_servers_config.find(_conn_ip);
-            if (_config_find == m_servers_config.end()) {
-                _rst_state = RetrieveServerConfigAck_checkResult_notExists;
-                break;
-            }
+            //auto _config_find = m_servers_config.find(_conn_ip);
+            //if (_config_find == m_servers_config.end()) {
+            //    _rst_state = RetrieveServerConfigAck_checkResult_notExists;
+            //    break;
+            //}
             //看类型是否正确
 
+            const ServerConfig& _cfg = (m_servers_config.begin()->second)[_src_type];
+            _ack = BuildAckMsg(_cfg);
             
             _rst_state = RetrieveServerConfigAck_checkResult_success;
 

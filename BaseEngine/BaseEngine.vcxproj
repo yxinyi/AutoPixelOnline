@@ -68,6 +68,7 @@
     <ClCompile Include="System\ServerRegister\ServerNodeRegisterSystem.cpp" />
     <ClCompile Include="System\Session\SessionSystem.cpp" />
     <ClCompile Include="System\ShakeHand\ShakeHandSystem.cpp" />
+    <ClCompile Include="Tcp\Connection.cpp" />
     <ClCompile Include="Tcp\NetManager.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

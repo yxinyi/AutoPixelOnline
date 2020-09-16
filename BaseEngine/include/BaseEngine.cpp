@@ -18,7 +18,8 @@ void BaseSystemRegister() {
     RegSystem(ShakeHandSystem);
     if (getNodeType() != NodeType::GateServer &&
         getNodeType() != NodeType::DataBaseServer &&
-        getNodeType() != NodeType::Client
+        getNodeType() != NodeType::Client&&
+        getNodeType() != NodeType::ListServer
         ) {
         RegSystem(CDataBaseSystem);
         RegSystem(ServerNodeRegisterSystem);

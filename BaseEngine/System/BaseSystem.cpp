@@ -26,24 +26,30 @@ bool SystemManager::Register(const std::string& str_, System_t sys_) {
 bool SystemManager::EnvDefine() {
     for (auto&& _it : m_system_pool) {
         if (!_it.second->EnvDefine()) {
+            LogInfo << "[SystemManager] EnvDefine " << _it.first << " failed " << std::endl;
             return false;
         }
+        LogInfo << "[SystemManager] EnvDefine " << _it.first << " ok " << std::endl;
     }
     return true;
 }
 bool SystemManager::PreInit() {
     for (auto&& _it : m_system_pool) {
         if (!_it.second->PreInit()) {
+            LogInfo << "[SystemManager] PreInit " << _it.first << " failed " << std::endl;
             return false;
         }
+        LogInfo << "[SystemManager] PreInit " << _it.first << " ok " << std::endl;
     }
     return true;
 }
 bool SystemManager::Init() {
     for (auto&& _it : m_system_pool) {
         if (!_it.second->Init()) {
+            LogInfo << "[SystemManager] Init " << _it.first << " failed " << std::endl;
             return false;
         }
+        LogInfo << "[SystemManager] Init " << _it.first << " ok " << std::endl;
     }
     return true;
 }
@@ -58,16 +64,20 @@ bool SystemManager::Loop(const uint64_t interval_) {
 bool SystemManager::Quit() {
     for (auto&& _it : m_system_pool) {
         if (!_it.second->Quit()) {
+            LogInfo << "[SystemManager] Quit " << _it.first << " failed " << std::endl;
             return false;
         }
+        LogInfo << "[SystemManager] Quit " << _it.first << " ok " << std::endl;
     }
     return true;
 }
 bool SystemManager::Destroy() {
     for (auto&& _it : m_system_pool) {
         if (!_it.second->Destroy()) {
+            LogInfo << "[SystemManager] Destroy " << _it.first << " failed " << std::endl;
             return false;
         }
+        LogInfo << "[SystemManager] Destroy " << _it.first << " ok " << std::endl;
     }
     
     return true;

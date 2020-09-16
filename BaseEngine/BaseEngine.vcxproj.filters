@@ -171,5 +171,8 @@
       <Filter>System\Session</Filter>
     </ClCompile>
     <ClCompile Include="include\BaseEngine.cpp" />
+    <ClCompile Include="Tcp\Connection.cpp">
+      <Filter>TcpNet</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

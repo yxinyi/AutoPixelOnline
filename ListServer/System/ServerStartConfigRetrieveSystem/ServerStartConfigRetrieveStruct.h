@@ -14,6 +14,7 @@ struct ServerConfig {
         m_db_ip(db_ip_), m_db_port(db_port_),
         m_gate_ip(gate_ip_), m_gate_port(gate_port_)
     {}
+    ServerConfig() = default;
     std::string m_listen_ip;
     uint32_t m_listen_port = 0;
 

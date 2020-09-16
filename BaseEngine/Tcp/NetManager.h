@@ -15,7 +15,10 @@ struct ConnectTargetConfig {
 
 class NetManager : public Singleton<NetManager> {
 public:
-    bool Start(const std::string& ip_ = "0.0.0.0", const uint32_t port_ = 9000);
+    NetManager() :m_work(m_service) {}
+
+    bool Start();
+    bool Start(const std::string& ip_, const uint32_t port_);
     bool Stop();
     bool SendMessageBuff(const uint32_t conn_id_, std::shared_ptr<CBuffer> buff_);
     bool SendMessageBuff(const uint32_t conn_id_, std::string msg_str_, std::string msg_data_);
@@ -27,6 +30,7 @@ public:
 private:
     asio::ip::tcp::acceptor* m_acceptor;
     asio::io_service m_service;
+    asio::io_service::work m_work;
     std::thread m_run_thread;
 };
 

@@ -155,6 +155,7 @@ public:
             return false;
         }
         m_players.erase(creature_->GetOid());
+        return true;
     }
 
     uint32_t GetPlayerSize() { return (uint32_t)m_players.size(); }

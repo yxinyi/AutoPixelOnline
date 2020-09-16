@@ -1,16 +1,19 @@
 #include "./NetManager.h"
 
-bool NetManager::Start(const std::string& ip_, const uint32_t port_) {
 
-
-    asio::ip::tcp::endpoint _end_point(asio::ip::address_v4::from_string(ip_), port_);
-
-    m_acceptor = new asio::ip::tcp::acceptor(m_service, _end_point, true);
-    WaitConnect();
+bool NetManager::Start() {
 
     m_run_thread = std::thread([this]() {
         m_service.run();
     });
+    return true;
+}
+
+bool NetManager::Start(const std::string& ip_, const uint32_t port_) {
+    asio::ip::tcp::endpoint _end_point(asio::ip::address_v4::from_string(ip_), port_);
+    m_acceptor = new asio::ip::tcp::acceptor(m_service, _end_point, true);
+    WaitConnect();
+    Start();
     return true;
 }
 
