@@ -23,7 +23,7 @@ bool MapManager::EnvDefine() {
     }, PlayerLoginEvent);
 
 
-    MessageBus::getInstance()->Attach([this](uint64_t ply_oid_) {
+    MessageBus::getInstance()->Attach([this](uint64_t ply_oid_)   {
         std::shared_ptr<CreatureManager> _sys = SystemManager::getInstance()->GetSystem<CreatureManager>();
         Creature_t _ply = _sys->FindCreatureByOid(ply_oid_);
         CAttrMap_t _attr_map = _ply->GetAttrs()->ApiGetAttr<CAttrMap>("CAttrMap");

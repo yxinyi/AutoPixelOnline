@@ -30,21 +30,21 @@ bool ShakeHandSystem::EnvDefine() {
         const uint32_t _conn_id = ApiGetConnID(conn_);
         if (CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(_conn_id)) {
             _conn->SetConnNodeType(_type);
-            LogInfo << "[ShakeHandSystem]: AuthenticationEvent [" << _conn->getIPStr() << "] conn_id : [" << _conn->getConnId() << "] NodeType : [" << GetNodeTypeStr(_conn->GetConnNodeType()) << "] " << FlushLog;
+            LogInfo << "[ShakeHandSystem]: AuthenticationEvent [" << _conn->getIPPortStr() << "] conn_id : [" << _conn->getConnId() << "] NodeType : [" << GetNodeTypeStr(_conn->GetConnNodeType()) << "] " << FlushLog;
         }
     });
 
     MessageBus::getInstance()->Attach([this](uint32_t conn_id_) {
         if (CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(conn_id_)) {
             _conn->setIPStr(_conn->GetSocket().remote_endpoint().address().to_string(), _conn->GetSocket().remote_endpoint().port());
-            LogInfo << "[ShakeHandSystem]: AcceptConnect [" << _conn->getIPStr() << "] conn_id : [" << _conn->getConnId() << "]" << FlushLog;
+            LogInfo << "[ShakeHandSystem]: AcceptConnect [" << _conn->getIPPortStr() << "] conn_id : [" << _conn->getConnId() << "]" << FlushLog;
         }
     }, "AcceptConnect");
 
     MessageBus::getInstance()->Attach([this](uint32_t conn_id_) {
         m_conne_vec.insert(conn_id_);
         if (CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(conn_id_)) {
-            LogInfo << "[ShakeHandSystem]: OpenConnect [" << _conn->getIPStr() << "] conn_id : [" << _conn->getConnId() << "] NodeType : [" << GetNodeTypeStr(_conn->GetConnNodeType()) << "] " << FlushLog;
+            LogInfo << "[ShakeHandSystem]: OpenConnect [" << _conn->getIPPortStr() << "] conn_id : [" << _conn->getConnId() << "] NodeType : [" << GetNodeTypeStr(_conn->GetConnNodeType()) << "] " << FlushLog;
         }
         std::shared_ptr<AuthenticationEvent> _authen = std::make_shared<AuthenticationEvent>();
         _authen->set_node_type((uint32_t)getNodeType());
@@ -56,7 +56,7 @@ bool ShakeHandSystem::EnvDefine() {
         m_conne_vec.erase(conn_id_);
         m_remote.erase(conn_id_);
         if (CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(conn_id_)) {
-            LogInfo << "[ShakeHandSystem]: CloseConnect [" << _conn->getIPStr() << "] conn_id : [" << _conn->getConnId() << "] NodeType : [" << GetNodeTypeStr(_conn->GetConnNodeType()) << "] " << FlushLog;
+            LogInfo << "[ShakeHandSystem]: CloseConnect [" << _conn->getIPPortStr() << "] conn_id : [" << _conn->getConnId() << "] NodeType : [" << GetNodeTypeStr(_conn->GetConnNodeType()) << "] " << FlushLog;
         }
     }, "CloseConnect");
     
@@ -108,7 +108,7 @@ bool ShakeHandSystem::ShakeHandCheck() {
             if (CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(_cnn_it.first)) {
                 _out_time_conn.push_back(_cnn_it.first);
                 MessageBus::getInstance()->SendReq< uint32_t>(_cnn_it.first, "ShakeHandOutTimeBefore");
-                std::cout << _conn->getIPStr() << " close " << std::endl;
+                std::cout << _conn->getIPPortStr() << " close " << std::endl;
                 CConnectionMgr::getInstance()->CloseConnection(_cnn_it.first);
             }
             else {
@@ -129,7 +129,7 @@ void  ShakeHandSystem::ShakeHandPrint(const uint32_t conn_){
     if (CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(conn_)) {
         const uint64_t _now_time = NowTime->NowMillisecond();
         m_remote[conn_] = _now_time;
-        LogInfo << "[ShakeHandSystem]: ShakeHand [" << _conn->getIPStr() << "] conn_id : [" << _conn->getConnId() << "] NodeType : [" << GetNodeTypeStr(_conn->GetConnNodeType()) << "] lastTime: [" << _now_time <<"]" << FlushLog;
+        LogInfo << "[ShakeHandSystem]: ShakeHand [" << _conn->getIPPortStr() << "] conn_id : [" << _conn->getConnId() << "] NodeType : [" << GetNodeTypeStr(_conn->GetConnNodeType()) << "] lastTime: [" << _now_time <<"]" << FlushLog;
     }
 
 }

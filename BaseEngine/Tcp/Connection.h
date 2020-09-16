@@ -161,9 +161,15 @@ public:
     }
     ~CConnection() {}
     std::string getIPStr() {
-
+        return remote_ip ;
+    }
+    std::string getPortStr() {
+        return std::to_string(remote_port);
+    }
+    std::string getIPPortStr() {
         return remote_ip + " : " + std::to_string(remote_port);
     }
+
     void setIPStr(const std::string& remote_ip_,const uint16_t remote_port_) {
         remote_ip = remote_ip_;
         remote_port = remote_port_;
@@ -249,3 +255,10 @@ private:
     std::map<NodeType, std::set<uint32_t>> m_nodetype_to_conn;
     uint32_t m_conn_inc_id = 0;
 };
+
+
+//Api
+
+std::string ApiGetConnectIPPortStr(const uint32_t conn_);
+std::string ApiGetConnectIPStr(const uint32_t conn_);
+

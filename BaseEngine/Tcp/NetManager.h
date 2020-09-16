@@ -17,7 +17,6 @@ class NetManager : public Singleton<NetManager> {
 public:
     bool Start(const std::string& ip_ = "0.0.0.0", const uint32_t port_ = 9000);
     bool Stop();
-    //bool SendMessageData(const uint32_t conn_id_, const char* data_, const uint32_t length_);
     bool SendMessageBuff(const uint32_t conn_id_, std::shared_ptr<CBuffer> buff_);
     bool SendMessageBuff(const uint32_t conn_id_, std::string msg_str_, std::string msg_data_);
     bool SendMessageBuff(const uint32_t conn_id_, std::shared_ptr<google::protobuf::Message> buff_);
@@ -29,7 +28,7 @@ private:
     asio::ip::tcp::acceptor* m_acceptor;
     asio::io_service m_service;
     std::thread m_run_thread;
-
-
-
 };
+
+//API
+bool ApiSendMessageToSessionConnect(const SessionConn session_conn_, std::shared_ptr<google::protobuf::Message> msg_);

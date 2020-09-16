@@ -105,3 +105,7 @@ bool NetManager::SendMessageBuff(const SessionConn session_conn_, std::shared_pt
     return false;
 }
 
+bool ApiSendMessageToSessionConnect(const SessionConn session_conn_, std::shared_ptr<google::protobuf::Message> msg_) {
+    return NetManager::getInstance()->SendMessageBuff(session_conn_,msg_);
+}
+

@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+message RetrieveServerConfigReq {
+    uint32 server_type = 1;
+	uint32 server_group_id = 2;
+}
+
+
+message RetrieveServerConfigAck {
+	enum checkResult
+    {
+        success = 0;
+        notExists = 1;;
+    }
+	checkResult result_state = 1; 
+    string listen_ip = 2;
+    uint32 listen_port = 3;
+
+    string db_ip = 4;
+    uint32 db_port = 5;
+
+    string gate_ip = 6;
+    uint32 gate_port = 7;
+
+}

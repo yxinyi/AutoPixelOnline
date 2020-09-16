@@ -6,7 +6,8 @@ const char* GetNodeTypeStr(NodeType node_) {
     "GateServer",
     "LogicServer",
     "DataBaseServer",
-    "AccountServer"};
+    "AccountServer",
+    "ListServer"};
 
     return _vec[(uint32_t)node_].c_str();
 }

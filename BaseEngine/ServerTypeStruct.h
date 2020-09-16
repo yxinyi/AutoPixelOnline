@@ -5,6 +5,7 @@ enum class NodeType {
     LogicServer,
     DataBaseServer,
     AccountServer,
+    ListServer,
     NodeError
 };
 const char* GetNodeTypeStr(NodeType);
