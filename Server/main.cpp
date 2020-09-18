@@ -30,6 +30,8 @@ void MainLoop() {
         Timer _second_fps_timer;
         uint32_t _fps_cnt = 1;
         SetConsoleTitleA("server");
+        //需要更改,从框架上控制监听的ip 和port
+
         if (!NetManager::getInstance()->Start(g_listen, g_listen_port)) {
             std::cout << "server start error " << std::endl;
         }
