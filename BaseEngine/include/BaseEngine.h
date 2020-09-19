@@ -4,6 +4,7 @@
 #include "System/ShakeHand/ShakeHandSystem.h"
 #include "System/Session/SessionSystem.h"
 #include "System/Listen/ListenSystem.h"
+#include "System/Gate/GateSystem.h"
 #include "System/DataBase/DBSystem.h"
 #include "System/ServerRegister/ServerNodeRegisterSystem.h"
 #include "EngineInclude.h"

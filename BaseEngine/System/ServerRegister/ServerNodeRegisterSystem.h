@@ -5,7 +5,6 @@
 #include <set>
 #include "proto/ServerLink.pb.h"
 
-using ServerLink_t = std::shared_ptr<ServerLink>;
 using ServerMessageRegister_t = std::shared_ptr<ServerMessageRegister>;
 
 class ServerNodeRegisterSystem :public BaseSystem {
@@ -18,9 +17,10 @@ public:
     bool Quit();
     bool Destroy();
 
-public:
-    bool ConnGateServer();
-    std::string m_gateserver_ip = "";
-    uint32_t m_gateserver_port = 0;
+private:
+    enum ConnState
+    {
+
+    };
 
 };

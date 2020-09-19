@@ -117,49 +117,10 @@ bool ServerRegisterSystem::EnvDefine() {
 
     /*
         其他服务器节点连入
-        ServerLink 进行注册并根据 携带的信息获取数据库 IP
-        节点接收到数据库IP后进行连接
         连接成功后发送 ServerMessageRegister 进行消息自动注册,服务器启动完毕
-
     */
 
-    ProtobufDispatch::getInstance()->registerMessageCallback<ServerLink>([this](const uint64_t conn_,
-        const std::shared_ptr<ServerLink>& msg_,
-        const int64_t& tm_) {
-        const uint32_t _conn_id = ApiGetConnID(conn_);
-        //有服务器连入Gate时,进行注册
-        auto _conn_find = m_id_to_server.find(_conn_id);
-        if (_conn_find == m_id_to_server.end()) {
-            LogError << "[ServerRegisterSystem] ServerLink ERR" << msg_->node_type() << FlushLog;
-            return;
-        }
 
-        auto _session_find = m_conn_to_session.find(_conn_id);
-        if (_session_find == m_conn_to_session.end()) {
-            LogError << "[ServerRegisterSystem] ServerLink ERR" << msg_->node_type() << FlushLog;
-            return;
-        }
-        const NodeType _node_type = (NodeType)msg_->node_type();
-        if ((NodeType)msg_->node_type() != NodeType::Client && m_nodetype_to_server.find(_node_type) != m_nodetype_to_server.end()) {
-            LogError << "[ServerRegisterSystem] ServerLink Exist" << GetNodeTypeStr(_node_type) << FlushLog;
-            CConnectionMgr::getInstance()->CloseConnection(_conn_id);
-            RETURN_VOID;
-        }
-        
-        m_nodetype_to_server[_node_type] = _conn_find->second;
-
-        _session_find->second->m_state = GateSessionState::Pass;
-        _conn_find->second->m_node_type = (NodeType)msg_->node_type();
-        _conn_find->second->m_state = ServerState::initializa;
-        DataBaseNotify_t _notify = std::make_shared<DataBaseNotify>();
-
-        LogInfo << "[ServerRegisterSystem] ServerLink Touch" << _conn_id << FlushLog;
-
-        auto _obj = Json::parse("{ \"db_ip\": \"127.0.0.1\", \"db_port\": 9000 }");
-        _notify->set_db_ip(_obj["db_ip"]);
-        _notify->set_db_port(_obj["db_port"]);
-        NetManager::getInstance()->SendMessageBuff(_conn_id, _notify);
-    });
 
 
     ProtobufDispatch::getInstance()->registerMessageCallback<ServerMessageRegister>([this](const uint64_t conn_,
@@ -171,6 +132,24 @@ bool ServerRegisterSystem::EnvDefine() {
             LogError << "[ServerRegisterSystem] ServerMessageRegister ERR" << _conn_id << FlushLog;
             return;
         }
+        auto _session_find = m_conn_to_session.find(_conn_id);
+        if (_session_find == m_conn_to_session.end()) {
+            LogError << "[ServerRegisterSystem] ServerLink ERR" << msg_->node_type() << FlushLog;
+            return;
+        }
+        _session_find->second->m_state = GateSessionState::Pass;
+        const NodeType _node_type = (NodeType)msg_->node_type();
+        _conn_find->second->m_node_type = (NodeType)msg_->node_type();
+
+
+        if (_node_type != NodeType::Client && m_nodetype_to_server.find(_node_type) != m_nodetype_to_server.end()) {
+            LogError << "[ServerRegisterSystem] ServerLink Exist" << GetNodeTypeStr(_node_type) << FlushLog;
+            CConnectionMgr::getInstance()->CloseConnection(_conn_id);
+            RETURN_VOID;
+        }
+
+
+
         LogInfo << "[ServerRegisterSystem] ServerLink runing" << (uint32_t)_conn_id << FlushLog;
         for (auto&& _it : msg_->message_str()) {
             LogInfo << "[ServerRegisterSystem] msg str " << _it << FlushLog;

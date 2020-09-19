@@ -34,6 +34,9 @@
     <Filter Include="System\Listen">
       <UniqueIdentifier>{48727648-fa10-4300-8555-8816a766c042}</UniqueIdentifier>
     </Filter>
+    <Filter Include="System\Gate">
+      <UniqueIdentifier>{b922ee9a-a641-4adf-8d67-54dcd45db9d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\BaseEngine.h" />
@@ -135,6 +138,9 @@
     <ClInclude Include="System\Listen\ListenStruct.h">
       <Filter>System\Listen</Filter>
     </ClInclude>
+    <ClInclude Include="System\Gate\GateSystem.h">
+      <Filter>System\Gate</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\include\tool\Time.cpp">
@@ -191,6 +197,9 @@
     </ClCompile>
     <ClCompile Include="..\Common\include\proto\ListServer.pb.cc">
       <Filter>System\Listen</Filter>
+    </ClCompile>
+    <ClCompile Include="System\Gate\GateSystem.cpp">
+      <Filter>System\Gate</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

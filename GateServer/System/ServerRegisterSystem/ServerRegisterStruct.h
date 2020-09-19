@@ -3,9 +3,8 @@
 #include <vector>
 #include <string>
 #include <memory>
-#include "proto/ServerLink.pb.h"
 #include "ServerTypeStruct.h"
-
+#include "proto/ServerLink.pb.h"
 
 enum class ServerState {
     Error,
@@ -25,7 +24,6 @@ struct  ServerInfo{
 using ServerInfo_t = std::shared_ptr<ServerInfo>;
 using ServerInfo_wt = std::weak_ptr<ServerInfo>;
 
-using DataBaseNotify_t = std::shared_ptr<DataBaseNotify>;
 
 //gate 将进行消息的分发
 

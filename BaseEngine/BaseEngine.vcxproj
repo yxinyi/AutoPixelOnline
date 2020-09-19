@@ -46,6 +46,7 @@
     <ClInclude Include="System\BaseSystem.h" />
     <ClInclude Include="System\DataBase\DBSystem.h" />
     <ClInclude Include="System\DataBase\DBSystemStruct.h" />
+    <ClInclude Include="System\Gate\GateSystem.h" />
     <ClInclude Include="System\Listen\ListenStruct.h" />
     <ClInclude Include="System\Listen\ListenSystem.h" />
     <ClInclude Include="System\ServerRegister\ServerNodeRegisterSystem.h" />
@@ -69,6 +70,7 @@
     <ClCompile Include="include\BaseEngine.cpp" />
     <ClCompile Include="System\BaseSystem.cpp" />
     <ClCompile Include="System\DataBase\DBSystem.cpp" />
+    <ClCompile Include="System\Gate\GateSystem.cpp" />
     <ClCompile Include="System\Listen\ListenSystem.cpp" />
     <ClCompile Include="System\ServerRegister\ServerNodeRegisterSystem.cpp" />
     <ClCompile Include="System\Session\SessionSystem.cpp" />

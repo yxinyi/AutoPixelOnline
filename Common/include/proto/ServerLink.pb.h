@@ -47,304 +47,21 @@ struct TableStruct_ServerLink_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[3]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[1]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
   static const ::PROTOBUF_NAMESPACE_ID::uint32 offsets[];
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_ServerLink_2eproto;
-class DataBaseNotify;
-class DataBaseNotifyDefaultTypeInternal;
-extern DataBaseNotifyDefaultTypeInternal _DataBaseNotify_default_instance_;
-class ServerLink;
-class ServerLinkDefaultTypeInternal;
-extern ServerLinkDefaultTypeInternal _ServerLink_default_instance_;
 class ServerMessageRegister;
 class ServerMessageRegisterDefaultTypeInternal;
 extern ServerMessageRegisterDefaultTypeInternal _ServerMessageRegister_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
-template<> ::DataBaseNotify* Arena::CreateMaybeMessage<::DataBaseNotify>(Arena*);
-template<> ::ServerLink* Arena::CreateMaybeMessage<::ServerLink>(Arena*);
 template<> ::ServerMessageRegister* Arena::CreateMaybeMessage<::ServerMessageRegister>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 
 // ===================================================================
-
-class ServerLink :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ServerLink) */ {
- public:
-  ServerLink();
-  virtual ~ServerLink();
-
-  ServerLink(const ServerLink& from);
-  ServerLink(ServerLink&& from) noexcept
-    : ServerLink() {
-    *this = ::std::move(from);
-  }
-
-  inline ServerLink& operator=(const ServerLink& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline ServerLink& operator=(ServerLink&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return GetMetadataStatic().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return GetMetadataStatic().reflection;
-  }
-  static const ServerLink& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ServerLink* internal_default_instance() {
-    return reinterpret_cast<const ServerLink*>(
-               &_ServerLink_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    0;
-
-  friend void swap(ServerLink& a, ServerLink& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(ServerLink* other) {
-    if (other == this) return;
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline ServerLink* New() const final {
-    return CreateMaybeMessage<ServerLink>(nullptr);
-  }
-
-  ServerLink* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<ServerLink>(arena);
-  }
-  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const ServerLink& from);
-  void MergeFrom(const ServerLink& from);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  #else
-  bool MergePartialFromCodedStream(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
-  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  void SerializeWithCachedSizes(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
-      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  inline void SharedCtor();
-  inline void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(ServerLink* other);
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "ServerLink";
-  }
-  private:
-  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
-    return nullptr;
-  }
-  inline void* MaybeArenaPtr() const {
-    return nullptr;
-  }
-  public:
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-  private:
-  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_ServerLink_2eproto);
-    return ::descriptor_table_ServerLink_2eproto.file_level_metadata[kIndexInFileMessages];
-  }
-
-  public:
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kNodeTypeFieldNumber = 1,
-  };
-  // uint32 node_type = 1;
-  void clear_node_type();
-  ::PROTOBUF_NAMESPACE_ID::uint32 node_type() const;
-  void set_node_type(::PROTOBUF_NAMESPACE_ID::uint32 value);
-
-  // @@protoc_insertion_point(class_scope:ServerLink)
- private:
-  class _Internal;
-
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::uint32 node_type_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  friend struct ::TableStruct_ServerLink_2eproto;
-};
-// -------------------------------------------------------------------
-
-class DataBaseNotify :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:DataBaseNotify) */ {
- public:
-  DataBaseNotify();
-  virtual ~DataBaseNotify();
-
-  DataBaseNotify(const DataBaseNotify& from);
-  DataBaseNotify(DataBaseNotify&& from) noexcept
-    : DataBaseNotify() {
-    *this = ::std::move(from);
-  }
-
-  inline DataBaseNotify& operator=(const DataBaseNotify& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline DataBaseNotify& operator=(DataBaseNotify&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return GetMetadataStatic().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return GetMetadataStatic().reflection;
-  }
-  static const DataBaseNotify& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const DataBaseNotify* internal_default_instance() {
-    return reinterpret_cast<const DataBaseNotify*>(
-               &_DataBaseNotify_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    1;
-
-  friend void swap(DataBaseNotify& a, DataBaseNotify& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(DataBaseNotify* other) {
-    if (other == this) return;
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline DataBaseNotify* New() const final {
-    return CreateMaybeMessage<DataBaseNotify>(nullptr);
-  }
-
-  DataBaseNotify* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<DataBaseNotify>(arena);
-  }
-  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const DataBaseNotify& from);
-  void MergeFrom(const DataBaseNotify& from);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  #else
-  bool MergePartialFromCodedStream(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
-  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  void SerializeWithCachedSizes(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
-      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  inline void SharedCtor();
-  inline void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(DataBaseNotify* other);
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "DataBaseNotify";
-  }
-  private:
-  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
-    return nullptr;
-  }
-  inline void* MaybeArenaPtr() const {
-    return nullptr;
-  }
-  public:
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-  private:
-  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_ServerLink_2eproto);
-    return ::descriptor_table_ServerLink_2eproto.file_level_metadata[kIndexInFileMessages];
-  }
-
-  public:
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kDbIpFieldNumber = 1,
-    kDbPortFieldNumber = 2,
-  };
-  // bytes db_ip = 1;
-  void clear_db_ip();
-  const std::string& db_ip() const;
-  void set_db_ip(const std::string& value);
-  void set_db_ip(std::string&& value);
-  void set_db_ip(const char* value);
-  void set_db_ip(const void* value, size_t size);
-  std::string* mutable_db_ip();
-  std::string* release_db_ip();
-  void set_allocated_db_ip(std::string* db_ip);
-
-  // uint32 db_port = 2;
-  void clear_db_port();
-  ::PROTOBUF_NAMESPACE_ID::uint32 db_port() const;
-  void set_db_port(::PROTOBUF_NAMESPACE_ID::uint32 value);
-
-  // @@protoc_insertion_point(class_scope:DataBaseNotify)
- private:
-  class _Internal;
-
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr db_ip_;
-  ::PROTOBUF_NAMESPACE_ID::uint32 db_port_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  friend struct ::TableStruct_ServerLink_2eproto;
-};
-// -------------------------------------------------------------------
 
 class ServerMessageRegister :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ServerMessageRegister) */ {
@@ -388,7 +105,7 @@ class ServerMessageRegister :
                &_ServerMessageRegister_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    0;
 
   friend void swap(ServerMessageRegister& a, ServerMessageRegister& b) {
     a.Swap(&b);
@@ -459,9 +176,10 @@ class ServerMessageRegister :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kMessageStrFieldNumber = 1,
+    kMessageStrFieldNumber = 2,
+    kNodeTypeFieldNumber = 1,
   };
-  // repeated bytes message_str = 1;
+  // repeated bytes message_str = 2;
   int message_str_size() const;
   void clear_message_str();
   const std::string& message_str(int index) const;
@@ -478,12 +196,18 @@ class ServerMessageRegister :
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& message_str() const;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_message_str();
 
+  // uint32 node_type = 1;
+  void clear_node_type();
+  ::PROTOBUF_NAMESPACE_ID::uint32 node_type() const;
+  void set_node_type(::PROTOBUF_NAMESPACE_ID::uint32 value);
+
   // @@protoc_insertion_point(class_scope:ServerMessageRegister)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> message_str_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 node_type_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_ServerLink_2eproto;
 };
@@ -496,96 +220,23 @@ class ServerMessageRegister :
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// ServerLink
-
-// uint32 node_type = 1;
-inline void ServerLink::clear_node_type() {
-  node_type_ = 0u;
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint32 ServerLink::node_type() const {
-  // @@protoc_insertion_point(field_get:ServerLink.node_type)
-  return node_type_;
-}
-inline void ServerLink::set_node_type(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  
-  node_type_ = value;
-  // @@protoc_insertion_point(field_set:ServerLink.node_type)
-}
-
-// -------------------------------------------------------------------
-
-// DataBaseNotify
-
-// bytes db_ip = 1;
-inline void DataBaseNotify::clear_db_ip() {
-  db_ip_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline const std::string& DataBaseNotify::db_ip() const {
-  // @@protoc_insertion_point(field_get:DataBaseNotify.db_ip)
-  return db_ip_.GetNoArena();
-}
-inline void DataBaseNotify::set_db_ip(const std::string& value) {
-  
-  db_ip_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:DataBaseNotify.db_ip)
-}
-inline void DataBaseNotify::set_db_ip(std::string&& value) {
-  
-  db_ip_.SetNoArena(
-    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:DataBaseNotify.db_ip)
-}
-inline void DataBaseNotify::set_db_ip(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  db_ip_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:DataBaseNotify.db_ip)
-}
-inline void DataBaseNotify::set_db_ip(const void* value, size_t size) {
-  
-  db_ip_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:DataBaseNotify.db_ip)
-}
-inline std::string* DataBaseNotify::mutable_db_ip() {
-  
-  // @@protoc_insertion_point(field_mutable:DataBaseNotify.db_ip)
-  return db_ip_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline std::string* DataBaseNotify::release_db_ip() {
-  // @@protoc_insertion_point(field_release:DataBaseNotify.db_ip)
-  
-  return db_ip_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline void DataBaseNotify::set_allocated_db_ip(std::string* db_ip) {
-  if (db_ip != nullptr) {
-    
-  } else {
-    
-  }
-  db_ip_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), db_ip);
-  // @@protoc_insertion_point(field_set_allocated:DataBaseNotify.db_ip)
-}
-
-// uint32 db_port = 2;
-inline void DataBaseNotify::clear_db_port() {
-  db_port_ = 0u;
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint32 DataBaseNotify::db_port() const {
-  // @@protoc_insertion_point(field_get:DataBaseNotify.db_port)
-  return db_port_;
-}
-inline void DataBaseNotify::set_db_port(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  
-  db_port_ = value;
-  // @@protoc_insertion_point(field_set:DataBaseNotify.db_port)
-}
-
-// -------------------------------------------------------------------
-
 // ServerMessageRegister
 
-// repeated bytes message_str = 1;
+// uint32 node_type = 1;
+inline void ServerMessageRegister::clear_node_type() {
+  node_type_ = 0u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 ServerMessageRegister::node_type() const {
+  // @@protoc_insertion_point(field_get:ServerMessageRegister.node_type)
+  return node_type_;
+}
+inline void ServerMessageRegister::set_node_type(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  
+  node_type_ = value;
+  // @@protoc_insertion_point(field_set:ServerMessageRegister.node_type)
+}
+
+// repeated bytes message_str = 2;
 inline int ServerMessageRegister::message_str_size() const {
   return message_str_.size();
 }
@@ -653,10 +304,6 @@ ServerMessageRegister::mutable_message_str() {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
-// -------------------------------------------------------------------
-
 
 // @@protoc_insertion_point(namespace_scope)
 
