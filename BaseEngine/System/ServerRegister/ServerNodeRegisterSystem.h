@@ -20,5 +20,7 @@ public:
 
 public:
     bool ConnGateServer();
+    std::string m_gateserver_ip = "";
+    uint32_t m_gateserver_port = 0;
 
 };

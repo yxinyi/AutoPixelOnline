@@ -33,17 +33,24 @@ bool CDataBaseSystem::EnvDefine() {
         m_op_pool.erase(_op_find->first);
     });
     
-
-
-    ProtobufDispatch::getInstance()->registerMessageCallback<DataBaseNotify>([this](const uint64_t conn_,
-        const std::shared_ptr<DataBaseNotify>& message_,
-        const int64_t& receive_time_) {
-
-
-        m_dbserver_ip = message_->db_ip();
-        m_dbserver_port = message_->db_port();
+    MessageBus::getInstance()->Attach([this](std::string ip_, uint32_t port_) {
+        //½øÐÐ¼àÌý
+        m_dbserver_ip = ip_;
+        m_dbserver_port = port_;
         ConnecDBServer();
-    });
+    }, "RetrieveDBConfig");
+
+    
+
+    //ProtobufDispatch::getInstance()->registerMessageCallback<DataBaseNotify>([this](const uint64_t conn_,
+    //    const std::shared_ptr<DataBaseNotify>& message_,
+    //    const int64_t& receive_time_) {
+    //
+    //
+    //    m_dbserver_ip = message_->db_ip();
+    //    m_dbserver_port = message_->db_port();
+    //    ConnecDBServer();
+    //});
 
     return true;
 }

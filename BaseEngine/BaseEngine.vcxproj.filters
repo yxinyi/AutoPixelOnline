@@ -31,6 +31,9 @@
     <Filter Include="System\Session">
       <UniqueIdentifier>{9cf5a68f-1fa1-44e3-ab9b-0837b8f1a9a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="System\Listen">
+      <UniqueIdentifier>{48727648-fa10-4300-8555-8816a766c042}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\BaseEngine.h" />
@@ -123,6 +126,15 @@
     <ClInclude Include="..\Common\include\tool\Buffer.h">
       <Filter>tool</Filter>
     </ClInclude>
+    <ClInclude Include="System\Listen\ListenSystem.h">
+      <Filter>System\Listen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\proto\ListServer.pb.h">
+      <Filter>System\Listen</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Listen\ListenStruct.h">
+      <Filter>System\Listen</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\include\tool\Time.cpp">
@@ -173,6 +185,12 @@
     <ClCompile Include="include\BaseEngine.cpp" />
     <ClCompile Include="Tcp\Connection.cpp">
       <Filter>TcpNet</Filter>
+    </ClCompile>
+    <ClCompile Include="System\Listen\ListenSystem.cpp">
+      <Filter>System\Listen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\include\proto\ListServer.pb.cc">
+      <Filter>System\Listen</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -4,10 +4,7 @@ message ServerLink {
     uint32 node_type = 1;
 }
 
-message DataBaseNotify{
-    bytes db_ip = 1;
-    uint32 db_port = 2;
-}
+
 
 message ServerMessageRegister{
     repeated bytes message_str = 1;

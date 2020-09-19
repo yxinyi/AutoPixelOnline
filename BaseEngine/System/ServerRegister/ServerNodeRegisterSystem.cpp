@@ -28,6 +28,7 @@ bool ServerNodeRegisterSystem::EnvDefine() {
 
     }, "CloseConnect");
 
+    //将当前服务器的所有网络消息进行注册
     MessageBus::getInstance()->Attach([this](uint32_t conn_id_) {
         CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(conn_id_);
         if (!_conn || _conn->GetConnNodeType() != NodeType::DataBaseServer) {
@@ -49,6 +50,13 @@ bool ServerNodeRegisterSystem::EnvDefine() {
 
     }, "DBServerOpen");
 
+
+    MessageBus::getInstance()->Attach([this](std::string ip_, uint32_t port_) {
+        m_gateserver_ip = ip_;
+        m_gateserver_port = port_;
+        ConnGateServer();
+    }, "RetrieveGateConfig");
+
     return true;
 }
 bool ServerNodeRegisterSystem::PreInit() {
@@ -59,7 +67,6 @@ extern NodeType getNodeType();
 bool ServerNodeRegisterSystem::ConnGateServer() {
     LogInfo << "[ServerNodeRegisterSystem] ConnGateServer " << GetGateIP() << " " << GetGatePort() << FlushLog;
     NetManager::getInstance()->Connect(GetGateIP(), GetGatePort(), NodeType::GateServer);
-
     return true;
 }
 

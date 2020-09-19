@@ -18,7 +18,7 @@ public:
     NetManager() :m_work(m_service) {}
 
     bool Start();
-    bool Start(const std::string& ip_, const uint32_t port_);
+    bool Accept(const std::string& ip_, const uint32_t port_);
     bool Stop();
     bool SendMessageBuff(const uint32_t conn_id_, std::shared_ptr<CBuffer> buff_);
     bool SendMessageBuff(const uint32_t conn_id_, std::string msg_str_, std::string msg_data_);
