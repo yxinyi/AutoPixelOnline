@@ -1,12 +1,7 @@
 #include "./BaseSystem.h"
 
 
-const char* GetGateIP() {
-    return "127.0.0.1";
-}
-uint32_t GetGatePort() {
-    return 9001;
-}
+
 
 
 using System_t = std::shared_ptr<BaseSystem>;

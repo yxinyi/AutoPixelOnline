@@ -12,9 +12,6 @@ NodeType getNodeType() {
 }
 
 
-const std::string g_listen = "127.0.0.1";
-const uint32_t g_listen_port = 9000;
-
 void MainLoop() {
 
     try {
@@ -24,7 +21,7 @@ void MainLoop() {
         Timer _second_fps_timer;
         uint32_t _fps_cnt = 1;
         SetConsoleTitleA("DBserver");
-        if (!NetManager::getInstance()->Start(g_listen, g_listen_port)) {
+        if (!NetManager::getInstance()->Start()) {
             std::cout << "server start error " << std::endl;
         }
         while (true) {

@@ -16,19 +16,6 @@ bool CliLoginSystem::EnvDefine() {
         MessageBus::getInstance()->SendReq(EnterGameEvent);
     });
 
-    MessageBus::getInstance()->Attach([this](uint32_t conn_id_) {
-        CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(conn_id_);
-        if (!_conn) {
-            RETURN_VOID;
-        }
-
-        if (_conn->GetConnNodeType() == NodeType::GateServer) {
-            LogInfo << "[ServerNodeRegisterSystem] CloseConnect" << (uint32_t)conn_id_ << FlushLog;
-        }
-
-        LogInfo << "[CliLoginSystem] ReConnGateServer " << GetGateIP() << " " << GetGatePort() << FlushLog;
-        NetManager::getInstance()->Connect(GetGateIP(), GetGatePort(), NodeType::GateServer);
-    }, "CloseConnect");
 
     ProtobufDispatch::getInstance()->registerMessageCallback<ErrorMsg>([this](const uint64_t conn_,
         const std::shared_ptr<ErrorMsg>& message_,
@@ -95,8 +82,6 @@ bool CliLoginSystem::Init() {
 
         ImGui::End();
     });
-    LogInfo << "[CliLoginSystem] ConnGateServer " << GetGateIP() << " " << GetGatePort() << FlushLog;
-    NetManager::getInstance()->Connect(GetGateIP(), GetGatePort(), NodeType::GateServer);
 
     //TimerTaskManager::getInstance()->RegisterTask("BenchTest", 0, 1000, -1, [this]() {
     //    if (m_password.size()) {

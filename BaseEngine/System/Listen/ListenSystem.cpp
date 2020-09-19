@@ -52,6 +52,10 @@ bool ListenSystem::EnvDefine() {
         if (!_gate_ip.empty()) {
             MessageBus::getInstance()->SendReq<std::string, uint32_t>(_gate_ip, _gate_port, "RetrieveGateConfig");
         }
+        if (CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(ApiGetConnID(conn_))) {
+            _conn->close();
+        }
+        LogInfo << "[ListenSystem] listen [" << _listen_ip << " : " <<_listen_port << "] db [" << _db_ip << " : " << _db_port << "] gate [" << _gate_ip << " : " << _gate_port << "]" <<FlushLog;
     });
 
     return true;
@@ -60,7 +64,12 @@ bool ListenSystem::PreInit() {
     return true;
 }
 bool ListenSystem::Init() {
-    NetManager::getInstance()->Connect(g_listen,g_listen_port,NodeType::ListServer);
+    if (getNodeType() != NodeType::ListServer) {
+        NetManager::getInstance()->Connect(g_listen, g_listen_port, NodeType::ListServer);
+    }
+    else {
+        NetManager::getInstance()->Accept(g_listen, g_listen_port);
+    }
 
     return true;
 }

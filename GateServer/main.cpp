@@ -12,8 +12,6 @@ NodeType getNodeType() {
     return g_node_type;
 }
 
-const std::string g_listen = "127.0.0.1";
-const uint32_t g_listen_port = 9001;
 
 void MainLoop() {
 
@@ -24,7 +22,7 @@ void MainLoop() {
         Timer _second_fps_timer;
         uint32_t _fps_cnt = 1;
         SetConsoleTitleA("GateServer");
-        if (!NetManager::getInstance()->Start(g_listen, g_listen_port)) {
+        if (!NetManager::getInstance()->Start()) {
             std::cout << "server start error " << std::endl;
         }
 

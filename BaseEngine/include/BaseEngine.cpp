@@ -16,6 +16,8 @@ const char* GetNodeTypeStr(NodeType node_) {
 
 void BaseSystemRegister() {
     RegSystem(ShakeHandSystem);
+    RegSystem(ListenSystem);
+    
     if (getNodeType() != NodeType::GateServer &&
         getNodeType() != NodeType::DataBaseServer &&
         getNodeType() != NodeType::Client&&

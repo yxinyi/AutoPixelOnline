@@ -65,14 +65,13 @@ bool ServerNodeRegisterSystem::PreInit() {
 extern NodeType getNodeType();
 
 bool ServerNodeRegisterSystem::ConnGateServer() {
-    LogInfo << "[ServerNodeRegisterSystem] ConnGateServer " << GetGateIP() << " " << GetGatePort() << FlushLog;
-    NetManager::getInstance()->Connect(GetGateIP(), GetGatePort(), NodeType::GateServer);
+    LogInfo << "[ServerNodeRegisterSystem] ConnGateServer " << m_gateserver_ip << " " << m_gateserver_port << FlushLog;
+    NetManager::getInstance()->Connect(m_gateserver_ip, m_gateserver_port, NodeType::GateServer);
     return true;
 }
 
 bool ServerNodeRegisterSystem::Init() {
 
-    ConnGateServer();
     return true;
 }
 bool ServerNodeRegisterSystem::Loop(const uint64_t interval_) {

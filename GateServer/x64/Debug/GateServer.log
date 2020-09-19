@@ -1,4 +1,7 @@
-﻿  ServerRegisterSystem.cpp
+﻿  PlayerLogin.pb.cc
+  ServerLink.pb.cc
+  Session.pb.cc
   main.cpp
+  ServerRegisterSystem.cpp
   正在生成代码...
   GateServer.vcxproj -> F:\AutoPixelOnline\AutoPixelOnline\x64\Debug\GateServer.exe

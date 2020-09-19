@@ -16,8 +16,6 @@ const std::vector<std::string> m_connec_target = {};
 
 void testMain();
 
-const std::string g_listen = "127.0.0.1";
-const uint32_t g_listen_port = 10000;
 
 void MainLoop() {
 
@@ -29,7 +27,7 @@ void MainLoop() {
         Timer _second_fps_timer;
         uint32_t _fps_cnt = 1;
         SetConsoleTitleA("ListServer");
-        if (!NetManager::getInstance()->Start(g_listen, g_listen_port)) {
+        if (!NetManager::getInstance()->Start()) {
             std::cout << "server start error " << std::endl;
         }
 

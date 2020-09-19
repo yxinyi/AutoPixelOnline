@@ -16,10 +16,6 @@ const std::vector<std::string> m_connec_target = {};
 
 void testMain();
 
-const std::string g_listen = "127.0.0.1";
-const uint32_t g_listen_port = 8888;
-
-
 void MainLoop() {
 
     try {
@@ -32,7 +28,7 @@ void MainLoop() {
         SetConsoleTitleA("server");
         //需要更改,从框架上控制监听的ip 和port
 
-        if (!NetManager::getInstance()->Start(g_listen, g_listen_port)) {
+        if (!NetManager::getInstance()->Start()) {
             std::cout << "server start error " << std::endl;
         }
 
