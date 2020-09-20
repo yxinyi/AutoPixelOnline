@@ -1,7 +1,11 @@
 /.vs/*
 /x64/*
-/DBServer/x64
-/Client/x64
-/BaseEngine/x64
-/Server/x64
+/DBServer/x64/*
+/Client/x64/*
+/BaseEngine/x64/*
+/BaseEngine/x64/*
+/Server/x64/*
+/AccountServer/x64/*
+/ListServer/x64/*
+/GateServer/x64/*
 /Common/dll/GameData/*

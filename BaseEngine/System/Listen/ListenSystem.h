@@ -15,6 +15,13 @@ public:
     bool Loop(const uint64_t interval_); 
     bool Quit();
     bool Destroy();
+private:
+    bool connectListServer(const std::string& str_ = "", uint32_t port_ = 0);
+    enum class ListenInitState{
+        initial,
+        success,
+    };
+    ListenInitState m_init_state = ListenInitState::initial;
 };
 
 

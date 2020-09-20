@@ -117,6 +117,7 @@ public:
             m_socket.close(ignored_ec);
         }
         m_is_conn = false;
+        
         std::shared_ptr<Package> _pack = CObjectPool<Package>::getInstance()->Get(PackageType::CloseConnect, m_conn_id);
         //推入消息池
         CPackageMgr::getInstance()->push(_pack);

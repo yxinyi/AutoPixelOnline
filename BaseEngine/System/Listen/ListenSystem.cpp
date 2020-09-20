@@ -18,7 +18,20 @@ bool ListenSystem::EnvDefine() {
         ApiSendMessageToSessionConnect((SessionConn)conn_id_,_msg);
 
     }, "OpenConnect");
+    MessageBus::getInstance()->Attach([this](uint32_t conn_id_) {
+        CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(conn_id_);
+        if (!_conn) {
+            return;
+        }
+        if (_conn->GetConnNodeType() != NodeType::ListServer) {
+            return;
+        }
+        //如果没有初始化成功则继续请求
+        if (m_init_state == ListenInitState::initial) {
+            connectListServer();
+        }
 
+    }, "CloseConnect");
 
     MessageBus::getInstance()->Attach([this](std::string ip_, uint32_t port_) {
         //进行监听
@@ -52,20 +65,33 @@ bool ListenSystem::EnvDefine() {
         if (!_gate_ip.empty()) {
             MessageBus::getInstance()->SendReq<std::string, uint32_t>(_gate_ip, _gate_port, "RetrieveGateConfig");
         }
-        if (CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(ApiGetConnID(conn_))) {
-            _conn->close();
-        }
+        CConnectionMgr::getInstance()->CloseConnection(ApiGetConnID(conn_));
+
+        m_init_state = ListenInitState::success;
         LogInfo << "[ListenSystem] listen [" << _listen_ip << " : " <<_listen_port << "] db [" << _db_ip << " : " << _db_port << "] gate [" << _gate_ip << " : " << _gate_port << "]" <<FlushLog;
     });
 
     return true;
 }
+
+
+bool ListenSystem::connectListServer(const std::string& ip_, uint32_t port_) {
+    if (ip_.empty()) {
+        NetManager::getInstance()->Connect(g_listen, g_listen_port, NodeType::ListServer);
+    }
+    else {
+        NetManager::getInstance()->Connect(ip_, port_, NodeType::ListServer);
+    }
+    return true;
+}
+
+
 bool ListenSystem::PreInit() {
     return true;
 }
 bool ListenSystem::Init() {
     if (getNodeType() != NodeType::ListServer) {
-        NetManager::getInstance()->Connect(g_listen, g_listen_port, NodeType::ListServer);
+        connectListServer();
     }
     else {
         NetManager::getInstance()->Accept(g_listen, g_listen_port);

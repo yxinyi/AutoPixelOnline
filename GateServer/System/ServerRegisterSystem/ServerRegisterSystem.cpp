@@ -189,7 +189,7 @@ bool ServerRegisterSystem::EnvDefine() {
     MessageBus::getInstance()->Attach([this](uint32_t conn_) {
         auto _serverInfo_find = m_id_to_server.find(conn_);
         if (_serverInfo_find == m_id_to_server.end()) {
-            RETURN_VOID
+            return;
         }
         //如果是当前正在运行的功能服务器断开,则删除唯一限制
         if (_serverInfo_find->second->m_node_type != NodeType::Client && _serverInfo_find->second->m_node_type != NodeType::NodeError) {

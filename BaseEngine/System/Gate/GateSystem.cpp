@@ -6,7 +6,7 @@ bool GateSystem::EnvDefine() {
     MessageBus::getInstance()->Attach([this](uint32_t conn_id_) {
         CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(conn_id_);
         if (!_conn) {
-            RETURN_VOID;
+            return;
         }
 
         if (_conn->GetConnNodeType() == NodeType::GateServer) {
