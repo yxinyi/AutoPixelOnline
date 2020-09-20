@@ -9,7 +9,7 @@
 #include <vector>
 #include <queue>
 
-using TaskFunc = std::function<void()>;
+using TaskFunc = std::function<void(uint64_t interval_)>;
 struct TimerTask {
     std::string m_name;
     int64_t m_start_time = 0;

@@ -177,6 +177,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_Map_2eproto::offsets[] PROTOBU
   PROTOBUF_FIELD_OFFSET(::MapData, map_oid_),
   PROTOBUF_FIELD_OFFSET(::MapData, last_map_tid_),
   PROTOBUF_FIELD_OFFSET(::MapData, creature_oid_),
+  PROTOBUF_FIELD_OFFSET(::MapData, target_postion_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::MapTickUpdate, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -207,10 +208,10 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 0, -1, sizeof(::Position)},
   { 7, -1, sizeof(::PlayerMoveTo)},
   { 13, -1, sizeof(::MapData)},
-  { 24, -1, sizeof(::MapTickUpdate)},
-  { 30, -1, sizeof(::MapBlock)},
-  { 36, -1, sizeof(::MapRows)},
-  { 42, -1, sizeof(::SceneMapInfo)},
+  { 25, -1, sizeof(::MapTickUpdate)},
+  { 31, -1, sizeof(::MapBlock)},
+  { 37, -1, sizeof(::MapRows)},
+  { 43, -1, sizeof(::SceneMapInfo)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -226,15 +227,16 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 const char descriptor_table_protodef_Map_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\tMap.proto\"0\n\010Position\022\021\n\tpostion_x\030\001 \001"
   "(\002\022\021\n\tpostion_y\030\002 \001(\002\"*\n\014PlayerMoveTo\022\032\n"
-  "\007postion\030\001 \001(\0132\t.Position\"\220\001\n\007MapData\022\r\n"
+  "\007postion\030\001 \001(\0132\t.Position\"\263\001\n\007MapData\022\r\n"
   "\005speed\030\001 \001(\002\022\036\n\013map_postion\030\002 \001(\0132\t.Posi"
   "tion\022\031\n\006vector\030\003 \001(\0132\t.Position\022\017\n\007map_o"
   "id\030\004 \001(\004\022\024\n\014last_map_tid\030\005 \001(\004\022\024\n\014creatu"
-  "re_oid\030\006 \001(\004\"\"\n\rMapTickUpdate\022\021\n\tmap_inf"
-  "os\030\001 \003(\014\"\031\n\010MapBlock\022\r\n\005state\030\001 \001(\r\"\"\n\007M"
-  "apRows\022\027\n\004rows\030\001 \003(\0132\t.MapBlock\"B\n\014Scene"
-  "MapInfo\022\032\n\010map_info\030\001 \003(\0132\010.MapRows\022\026\n\016m"
-  "ap_block_size\030\002 \001(\rb\006proto3"
+  "re_oid\030\006 \001(\004\022!\n\016target_postion\030\007 \001(\0132\t.P"
+  "osition\"\"\n\rMapTickUpdate\022\021\n\tmap_infos\030\001 "
+  "\003(\014\"\031\n\010MapBlock\022\r\n\005state\030\001 \001(\r\"\"\n\007MapRow"
+  "s\022\027\n\004rows\030\001 \003(\0132\t.MapBlock\"B\n\014SceneMapIn"
+  "fo\022\032\n\010map_info\030\001 \003(\0132\010.MapRows\022\026\n\016map_bl"
+  "ock_size\030\002 \001(\rb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_Map_2eproto_deps[1] = {
 };
@@ -250,7 +252,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_Map
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_Map_2eproto_once;
 static bool descriptor_table_Map_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Map_2eproto = {
-  &descriptor_table_Map_2eproto_initialized, descriptor_table_protodef_Map_2eproto, "Map.proto", 427,
+  &descriptor_table_Map_2eproto_initialized, descriptor_table_protodef_Map_2eproto, "Map.proto", 462,
   &descriptor_table_Map_2eproto_once, descriptor_table_Map_2eproto_sccs, descriptor_table_Map_2eproto_deps, 7, 0,
   schemas, file_default_instances, TableStruct_Map_2eproto::offsets,
   file_level_metadata_Map_2eproto, 7, file_level_enum_descriptors_Map_2eproto, file_level_service_descriptors_Map_2eproto,
@@ -824,11 +826,14 @@ void MapData::InitAsDefaultInstance() {
       ::Position::internal_default_instance());
   ::_MapData_default_instance_._instance.get_mutable()->vector_ = const_cast< ::Position*>(
       ::Position::internal_default_instance());
+  ::_MapData_default_instance_._instance.get_mutable()->target_postion_ = const_cast< ::Position*>(
+      ::Position::internal_default_instance());
 }
 class MapData::_Internal {
  public:
   static const ::Position& map_postion(const MapData* msg);
   static const ::Position& vector(const MapData* msg);
+  static const ::Position& target_postion(const MapData* msg);
 };
 
 const ::Position&
@@ -838,6 +843,10 @@ MapData::_Internal::map_postion(const MapData* msg) {
 const ::Position&
 MapData::_Internal::vector(const MapData* msg) {
   return *msg->vector_;
+}
+const ::Position&
+MapData::_Internal::target_postion(const MapData* msg) {
+  return *msg->target_postion_;
 }
 MapData::MapData()
   : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
@@ -857,6 +866,11 @@ MapData::MapData(const MapData& from)
     vector_ = new ::Position(*from.vector_);
   } else {
     vector_ = nullptr;
+  }
+  if (from.has_target_postion()) {
+    target_postion_ = new ::Position(*from.target_postion_);
+  } else {
+    target_postion_ = nullptr;
   }
   ::memcpy(&map_oid_, &from.map_oid_,
     static_cast<size_t>(reinterpret_cast<char*>(&speed_) -
@@ -879,6 +893,7 @@ MapData::~MapData() {
 void MapData::SharedDtor() {
   if (this != internal_default_instance()) delete map_postion_;
   if (this != internal_default_instance()) delete vector_;
+  if (this != internal_default_instance()) delete target_postion_;
 }
 
 void MapData::SetCachedSize(int size) const {
@@ -904,6 +919,10 @@ void MapData::Clear() {
     delete vector_;
   }
   vector_ = nullptr;
+  if (GetArenaNoVirtual() == nullptr && target_postion_ != nullptr) {
+    delete target_postion_;
+  }
+  target_postion_ = nullptr;
   ::memset(&map_oid_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&speed_) -
       reinterpret_cast<char*>(&map_oid_)) + sizeof(speed_));
@@ -957,6 +976,13 @@ const char* MapData::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::in
       case 6:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 48)) {
           creature_oid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .Position target_postion = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
+          ptr = ctx->ParseMessage(mutable_target_postion(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1064,6 +1090,17 @@ bool MapData::MergePartialFromCodedStream(
         break;
       }
 
+      // .Position target_postion = 7;
+      case 7: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (58 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
+               input, mutable_target_postion()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -1123,6 +1160,12 @@ void MapData::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64(6, this->creature_oid(), output);
   }
 
+  // .Position target_postion = 7;
+  if (this->has_target_postion()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      7, _Internal::target_postion(this), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -1170,6 +1213,13 @@ void MapData::SerializeWithCachedSizes(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(6, this->creature_oid(), target);
   }
 
+  // .Position target_postion = 7;
+  if (this->has_target_postion()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        7, _Internal::target_postion(this), target);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
@@ -1203,6 +1253,13 @@ size_t MapData::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *vector_);
+  }
+
+  // .Position target_postion = 7;
+  if (this->has_target_postion()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *target_postion_);
   }
 
   // uint64 map_oid = 4;
@@ -1264,6 +1321,9 @@ void MapData::MergeFrom(const MapData& from) {
   if (from.has_vector()) {
     mutable_vector()->::Position::MergeFrom(from.vector());
   }
+  if (from.has_target_postion()) {
+    mutable_target_postion()->::Position::MergeFrom(from.target_postion());
+  }
   if (from.map_oid() != 0) {
     set_map_oid(from.map_oid());
   }
@@ -1301,6 +1361,7 @@ void MapData::InternalSwap(MapData* other) {
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(map_postion_, other->map_postion_);
   swap(vector_, other->vector_);
+  swap(target_postion_, other->target_postion_);
   swap(map_oid_, other->map_oid_);
   swap(last_map_tid_, other->last_map_tid_);
   swap(creature_oid_, other->creature_oid_);

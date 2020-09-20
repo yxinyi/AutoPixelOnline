@@ -22,9 +22,10 @@ void  TimerTaskManager::Run() {
         TimerTask_t _task = m_task_pool.top();
         if (_task->m_start_time <= _now_time) {
             m_task_pool.pop();
-            _task->m_func();
+            const uint64_t _interval_time = _now_time > _task->m_start_time  ? _now_time - _task->m_start_time + _task->m_intervals : _task->m_intervals;
+            //std::cout << "[TimerTaskManager] " << _now_time << " : " << _task->m_start_time << " : " << _interval_time << " : " << _task->m_intervals << std::endl;
+            _task->m_func(_interval_time);
             --_task->m_loop_times;
-            //std::cout << _task->m_loop_times << std::endl;
             if (_task->m_loop_times) {
                 _task->m_start_time += _task->m_intervals;
                 m_task_pool.push(_task);

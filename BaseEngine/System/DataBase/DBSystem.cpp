@@ -70,7 +70,7 @@ bool CDataBaseSystem::PreInit() {
     return true;
 }
 bool CDataBaseSystem::Init() {
-    TimerTaskManager::getInstance()->RegisterTask("DBSystemCacheClear", m_query_time_out, m_query_time_out, -1, [this]() {
+    TimerTaskManager::getInstance()->RegisterTask("DBSystemCacheClear", m_query_time_out, m_query_time_out, -1, [this](uint64_t interval_) {
         for (auto _cache_it = m_proto_send_cache.cbegin(); _cache_it != m_proto_send_cache.cend(); _cache_it++) {
             const uint64_t _msg_id = (*_cache_it)->msg_id();
             if (m_op_pool.find(_msg_id) != m_op_pool.end()) {
@@ -82,7 +82,7 @@ bool CDataBaseSystem::Init() {
 
 
     //³¬Ê±´¦Àí
-    TimerTaskManager::getInstance()->RegisterTask("DBSystemOpTimeOut", m_query_time_out, m_query_time_out, -1, [this]() {
+    TimerTaskManager::getInstance()->RegisterTask("DBSystemOpTimeOut", m_query_time_out, m_query_time_out, -1, [this](uint64_t interval_) {
         const uint64_t _now_time = Time::getInstance()->NowMillisecond();
         for (auto _it = m_op_pool.cbegin(); _it != m_op_pool.cend();) {
             if (_it->second->m_start_time + m_query_time_out < _now_time) {

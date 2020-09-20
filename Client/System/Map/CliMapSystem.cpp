@@ -80,7 +80,7 @@ void CliMapSystem::MapRender(SDL_Window* windows_, SDL_Renderer* render_) {
     }
 
     for (auto&& _move_block_it : m_move_block_data) {
-
+        LogInfo << "[CliMapSystem]: _move_block_it [" << _move_block_it->map_postion().postion_x() << " : " << _move_block_it->map_postion().postion_y() << "]" << FlushLog;
         SDL_SetRenderDrawColor(render_, 0, 0, 255, 255);
         SDL_FRect rectToDraw{ _move_block_it->map_postion().postion_x(), _move_block_it->map_postion().postion_y(), (float)5, (float)5 };
         SDL_RenderFillRectF(render_, &rectToDraw);
@@ -109,6 +109,30 @@ bool CliMapSystem::Loop(const uint64_t interval_) {
         }
     }
 
+    //更顺滑的表现应该是,移动时,发送所有的节点至客户端,客户端和服务器同时进行移动计算,在每关键帧进行校对,当差距超过 当前网络延迟*速度 时,进行坐标修正
+    static uint64_t _s_last_update_time = Time::getInstance()->NowMillisecond();
+    uint64_t _now_time = Time::getInstance()->NowMillisecond();
+    float _tick_proportion = (_now_time - _s_last_update_time) / 1000.f;
+    _s_last_update_time = _now_time;
+    for (auto&& _move_block_it : m_move_block_data) {
+
+        auto _vec = _move_block_it->vector();
+        auto _tar_pos = _move_block_it->target_postion();
+        auto _now_pos = _move_block_it->mutable_map_postion();
+
+        float _growup_x = _vec.postion_x() * _tick_proportion;;
+        float _growup_y = _vec.postion_y() * _tick_proportion;;
+
+        if (abs(_growup_x) > abs(_tar_pos.postion_x() - _now_pos->postion_x())) {
+            _growup_x = _tar_pos.postion_x() - _now_pos->postion_x();
+        }
+
+        if (abs(_growup_y) > abs(_tar_pos.postion_y() - _now_pos->postion_y())) {
+            _growup_y = _tar_pos.postion_y() - _now_pos->postion_y();
+        }
+        _now_pos->set_postion_x(_now_pos->postion_x() + _growup_x);
+        _now_pos->set_postion_y(_now_pos->postion_y() + _growup_y);
+    }
     return true;
 }
 bool CliMapSystem::Quit() {

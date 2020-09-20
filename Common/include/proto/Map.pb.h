@@ -474,6 +474,7 @@ class MapData :
   enum : int {
     kMapPostionFieldNumber = 2,
     kVectorFieldNumber = 3,
+    kTargetPostionFieldNumber = 7,
     kMapOidFieldNumber = 4,
     kLastMapTidFieldNumber = 5,
     kCreatureOidFieldNumber = 6,
@@ -494,6 +495,14 @@ class MapData :
   ::Position* release_vector();
   ::Position* mutable_vector();
   void set_allocated_vector(::Position* vector);
+
+  // .Position target_postion = 7;
+  bool has_target_postion() const;
+  void clear_target_postion();
+  const ::Position& target_postion() const;
+  ::Position* release_target_postion();
+  ::Position* mutable_target_postion();
+  void set_allocated_target_postion(::Position* target_postion);
 
   // uint64 map_oid = 4;
   void clear_map_oid();
@@ -522,6 +531,7 @@ class MapData :
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::Position* map_postion_;
   ::Position* vector_;
+  ::Position* target_postion_;
   ::PROTOBUF_NAMESPACE_ID::uint64 map_oid_;
   ::PROTOBUF_NAMESPACE_ID::uint64 last_map_tid_;
   ::PROTOBUF_NAMESPACE_ID::uint64 creature_oid_;
@@ -1338,6 +1348,57 @@ inline void MapData::set_creature_oid(::PROTOBUF_NAMESPACE_ID::uint64 value) {
   
   creature_oid_ = value;
   // @@protoc_insertion_point(field_set:MapData.creature_oid)
+}
+
+// .Position target_postion = 7;
+inline bool MapData::has_target_postion() const {
+  return this != internal_default_instance() && target_postion_ != nullptr;
+}
+inline void MapData::clear_target_postion() {
+  if (GetArenaNoVirtual() == nullptr && target_postion_ != nullptr) {
+    delete target_postion_;
+  }
+  target_postion_ = nullptr;
+}
+inline const ::Position& MapData::target_postion() const {
+  const ::Position* p = target_postion_;
+  // @@protoc_insertion_point(field_get:MapData.target_postion)
+  return p != nullptr ? *p : *reinterpret_cast<const ::Position*>(
+      &::_Position_default_instance_);
+}
+inline ::Position* MapData::release_target_postion() {
+  // @@protoc_insertion_point(field_release:MapData.target_postion)
+  
+  ::Position* temp = target_postion_;
+  target_postion_ = nullptr;
+  return temp;
+}
+inline ::Position* MapData::mutable_target_postion() {
+  
+  if (target_postion_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Position>(GetArenaNoVirtual());
+    target_postion_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:MapData.target_postion)
+  return target_postion_;
+}
+inline void MapData::set_allocated_target_postion(::Position* target_postion) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == nullptr) {
+    delete target_postion_;
+  }
+  if (target_postion) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      target_postion = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, target_postion, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  target_postion_ = target_postion;
+  // @@protoc_insertion_point(field_set_allocated:MapData.target_postion)
 }
 
 // -------------------------------------------------------------------

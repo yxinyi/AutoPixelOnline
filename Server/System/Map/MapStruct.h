@@ -10,8 +10,8 @@
 #include <random>
 
 struct CPosition {
-    float m_postion_x = 0.f;
-    float m_postion_y = 0.f;
+    float m_x = 0.f;
+    float m_y = 0.f;
 };
 using MapData_t = std::shared_ptr<MapData>;
 using MapTickUpdate_t = std::shared_ptr<MapTickUpdate>;
@@ -30,11 +30,11 @@ public:
             return false;
         }
         m_speed = _msg->speed();
-        m_map_postion.m_postion_x = _msg->map_postion().postion_x();
-        m_map_postion.m_postion_y = _msg->map_postion().postion_y();
+        m_map_postion.m_x = _msg->map_postion().postion_x();
+        m_map_postion.m_y = _msg->map_postion().postion_y();
 
-        m_vector_x = _msg->vector().postion_x();
-        m_vector_y = _msg->vector().postion_y();
+        m_vector.m_x = _msg->vector().postion_x();
+        m_vector.m_y = _msg->vector().postion_y();
 
         uint64_t m_map_oid = _msg->map_oid();
         return true;
@@ -54,8 +54,20 @@ public:
         MapData_t _msg = std::make_shared<MapData>();
 
         auto _pos = _msg->mutable_map_postion();
-        _pos->set_postion_x(m_map_postion.m_postion_x);
-        _pos->set_postion_y(m_map_postion.m_postion_y);
+        _pos->set_postion_x(m_map_postion.m_x);
+        _pos->set_postion_y(m_map_postion.m_y);
+
+        auto _vec = _msg->mutable_vector();
+        _vec->set_postion_x(m_vector.m_x);
+        _vec->set_postion_y(m_vector.m_y);
+
+
+        auto _tar_pos = _msg->mutable_target_postion();
+        if (m_path_pos.size()) {
+            const CPosition& _tar_node = m_path_pos.front();
+            _tar_pos->set_postion_x(_tar_node.m_x);
+            _tar_pos->set_postion_y(_tar_node.m_y);
+        }
 
         _msg->set_map_oid(m_map_oid);
         _msg->set_speed(m_speed);
@@ -71,8 +83,8 @@ public:
 
     float m_speed = 100.f;
     CPosition m_map_postion;
-    float m_vector_x = 0.f;
-    float m_vector_y = 0.f;
+    //单位时间的向量
+    CPosition m_vector;
     uint64_t m_map_oid = 0;
     uint32_t m_last_map_tid = 0; //最后一次地图
     std::list<CPosition> m_path_pos;

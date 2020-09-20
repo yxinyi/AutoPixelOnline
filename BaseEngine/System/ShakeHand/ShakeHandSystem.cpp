@@ -60,10 +60,10 @@ bool ShakeHandSystem::EnvDefine() {
         }
     }, "CloseConnect");
     
-    TimerTaskMgr->RegisterTask("ShakeHandEvent", 0, g_interval, -1, [this]() {
+    TimerTaskMgr->RegisterTask("ShakeHandEvent", 0, g_interval, -1, [this](uint64_t interval_) {
         this->ShakeHandForEveryOne();
     });
-    TimerTaskMgr->RegisterTask("ShakeHandCheck", 0, g_interval, -1, [this]() {
+    TimerTaskMgr->RegisterTask("ShakeHandCheck", 0, g_interval, -1, [this](uint64_t interval_) {
         this->ShakeHandCheck();
     });
     //TimerTaskMgr->RegisterTask("ShakeHandInfo", 0, g_interval, -1, [this]() {

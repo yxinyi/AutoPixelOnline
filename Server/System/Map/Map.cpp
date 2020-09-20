@@ -62,8 +62,8 @@ bool MapManager::PreInit() {
     return true;
 }
 bool MapManager::Init() {
-    float _interval = 150.f;
-    TimerTaskManager::getInstance()->RegisterTask("MapLoop",0, (uint64_t)_interval,-1,[_interval,this]() {
+    const float _interval = 150.f;
+    TimerTaskManager::getInstance()->RegisterTask("MapLoop",0, (uint64_t)_interval,-1,[this](uint64_t interval_) {
         std::shared_ptr<CreatureManager> _sys = SystemManager::getInstance()->GetSystem<CreatureManager>();
         if (!_sys) {
             return;
@@ -83,32 +83,60 @@ bool MapManager::Init() {
                 //move postion
                 CAttrMap_t _attr_map = _player->GetAttrs()->ApiGetAttr<CAttrMap>("CAttrMap");
                 if (!_attr_map) {
-                    return;
+                    continue;
                 }
                 if (_attr_map->m_path_pos.size()) {
-                    CPosition _target_pos = _attr_map->m_path_pos.front();
-
-
+                    //如果当前有点没有到位,则计算当前向量
                     CPosition& _now_pos = _attr_map->m_map_postion;
+                    CPosition& _now_vector = _attr_map->m_vector;
+                    CPosition _target_pos = _attr_map->m_path_pos.front();
+                    if (_now_vector.m_y == 0.f && _now_vector.m_x == 0.f) {
+                        //计算向量
+                        LogError << "[MapManager::Loop] _target_pos : [" << _target_pos.m_x << " : " << _target_pos.m_y << "] taget pos[" << _now_pos.m_x << " : " << _now_pos.m_y <<"] "<< FlushLog;
 
-
-                    float _distance = sqrt(pow(abs(_target_pos.m_postion_y - _now_pos.m_postion_y), 2) * pow(abs(_target_pos.m_postion_x - _now_pos.m_postion_x), 2));
-
-                    float _move_rate = (_attr_map->m_speed * (_interval / 1000.f) / _distance);
-                    if (_move_rate >= 1.f) {
-                        _move_rate = 1.f;
+                        float _distance = sqrt(pow(abs(_target_pos.m_y - _now_pos.m_y), 2) + pow(abs(_target_pos.m_x - _now_pos.m_x), 2));
+                        
+                        float _move_rate = (_attr_map->m_speed / _distance);
+                        if (_move_rate >= 1.f) {
+                            _move_rate = 1.f;
+                        }
+                        _now_vector.m_x = (_target_pos.m_x - _now_pos.m_x) * _move_rate;;
+                        _now_vector.m_y = (_target_pos.m_y - _now_pos.m_y) * _move_rate;
+                        LogError << "[MapManager::Loop] vector xy : [" << _now_vector.m_x << " : " << _now_vector.m_y << "] move rate : [" << _move_rate << "]" << FlushLog;
                     }
-                    float _growup_x = (_target_pos.m_postion_x - _now_pos.m_postion_x) * _move_rate;;
-                    float _growup_y = (_target_pos.m_postion_y - _now_pos.m_postion_y) * _move_rate;
-
-                    _now_pos.m_postion_y += _growup_y;
-                    _now_pos.m_postion_x += _growup_x;
-
-                    LogError << "[MapManager::Loop] growup xy : [" << _growup_x << " : " << _growup_y  << "] after pos : [" << _now_pos.m_postion_x << " : "<< _now_pos.m_postion_y  << "] targetpos : ["<< _target_pos.m_postion_x<< " : "<< _target_pos.m_postion_y <<"] move rate : ["<< _move_rate <<" ]distance: [" << _distance << "]" << FlushLog;
 
 
-                    if (sqrt(pow((_target_pos.m_postion_y - _now_pos.m_postion_y), 2) * pow((_target_pos.m_postion_x - _now_pos.m_postion_x), 2)) < 1.f) {
+
+
+                    //float _distance = sqrt(pow(abs(_target_pos.m_y - _now_pos.m_y), 2) * pow(abs(_target_pos.m_x - _now_pos.m_x), 2));
+                    //
+                    //float _move_rate = (_attr_map->m_speed * (_interval / 1000.f) / _distance);
+                    //if (_move_rate >= 1.f) {
+                    //    _move_rate = 1.f;
+                    //}
+
+                    float _tick_proportion = interval_ / 1000.f;
+
+                    float _growup_x = _now_vector.m_x * _tick_proportion;;
+                    float _growup_y = _now_vector.m_y * _tick_proportion;;
+                    if (abs(_growup_x) > abs(_target_pos.m_x - _now_pos.m_x)) {
+                        _growup_x = _target_pos.m_x - _now_pos.m_x;
+                    }
+                    if (abs(_growup_y) > abs(_target_pos.m_y - _now_pos.m_y)) {
+                        _growup_y = _target_pos.m_y - _now_pos.m_y;
+                    }
+                    //
+                    _now_pos.m_y += _growup_y;
+                    _now_pos.m_x += _growup_x;
+                    float _after_distance = sqrt(pow((_target_pos.m_y - _now_pos.m_y), 2) + pow((_target_pos.m_x - _now_pos.m_x), 2));
+                    LogError << "[MapManager::Loop] growup xy : [" << _growup_x << " : " << _growup_y << "] after pos : [" << _now_pos.m_x << " : " << _now_pos.m_y << "] targetpos : [" << _target_pos.m_x << " : " << _target_pos.m_y << "] tick_proportion rate : [" << _tick_proportion << " ] after_distance: [" << _after_distance << "]" << FlushLog;
+
+
+                    if (_after_distance < 0.1f) {
                         _attr_map->m_path_pos.pop_front();
+                        _now_vector.m_x = 0.f;
+                        _now_vector.m_y = 0.f;
+                        _now_pos = _target_pos;
                     }
                 }
 
@@ -196,11 +224,11 @@ Map_t MapManager::FindMapByMapOid(const uint64_t map_oid_) {
 
 
 bool CMap::PosMoveCheck(const CPosition& pos_) {
-    if (pos_.m_postion_x > m_maze_max_x || pos_.m_postion_y > m_maze_max_y) {
+    if (pos_.m_x > m_maze_max_x || pos_.m_y > m_maze_max_y) {
         return false;
     }
-    uint32_t _x_block = uint32_t(pos_.m_postion_x / m_maze_cell_size);
-    uint32_t _y_block = uint32_t(pos_.m_postion_y / m_maze_cell_size);
+    uint32_t _x_block = uint32_t(pos_.m_x / m_maze_cell_size);
+    uint32_t _y_block = uint32_t(pos_.m_y / m_maze_cell_size);
     if (m_maze[_y_block][_x_block] == 1) {
         return false;
     }
@@ -234,21 +262,24 @@ bool CMap::MoveTo(Creature_t creature_, CPosition tar_pos_) {
 
     _attr_map->m_path_pos.clear();
 
-    uint32_t _start_x_block = uint32_t(_attr_map->m_map_postion.m_postion_x / m_maze_cell_size);
-    uint32_t _start_y_block = uint32_t(_attr_map->m_map_postion.m_postion_y / m_maze_cell_size);
+    uint32_t _start_x_block = uint32_t(_attr_map->m_map_postion.m_x / m_maze_cell_size);
+    uint32_t _start_y_block = uint32_t(_attr_map->m_map_postion.m_y / m_maze_cell_size);
 
-    uint32_t _end_x_block = uint32_t(tar_pos_.m_postion_x / m_maze_cell_size);
-    uint32_t _end_y_block = uint32_t(tar_pos_.m_postion_y / m_maze_cell_size);
+    uint32_t _end_x_block = uint32_t(tar_pos_.m_x / m_maze_cell_size);
+    uint32_t _end_y_block = uint32_t(tar_pos_.m_y / m_maze_cell_size);
     SAstarPoint_t _path = m_astar->getPath(_start_x_block, _start_y_block, _end_x_block, _end_y_block);
     
     while (_path) {
         CPosition _tmp_pos;
-        _tmp_pos.m_postion_x = _path->m_x * m_maze_cell_size + float((float)m_maze_cell_size / 2.f);
-        _tmp_pos.m_postion_y = _path->m_y * m_maze_cell_size + float((float)m_maze_cell_size / 2.f);
+        _tmp_pos.m_x = _path->m_x * m_maze_cell_size + float((float)m_maze_cell_size / 2.f);
+        _tmp_pos.m_y = _path->m_y * m_maze_cell_size + float((float)m_maze_cell_size / 2.f);
         _attr_map->m_path_pos.push_front(_tmp_pos);
         _path = _path->m_parent;
     }
 
+    for (auto _path_node_it : _attr_map->m_path_pos) {
+        LogInfo << "[CMap::MoveTo]: _path_node_it [" << _path_node_it.m_x << " : " << _path_node_it.m_y << "]" << FlushLog;
+    }
 
     return true;
 }

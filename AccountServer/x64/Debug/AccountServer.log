@@ -1,4 +1,7 @@
-﻿  AccountSystem.cpp
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppClean.targets(76,5): warning : 对路径“f:\autopixelonline\autopixelonline\x64\debug\accountserver.exe”的访问被拒绝。
+  ErrorNotify.pb.cc
+  PlayerLogin.pb.cc
   main.cpp
+  AccountSystem.cpp
   正在生成代码...
   AccountServer.vcxproj -> F:\AutoPixelOnline\AutoPixelOnline\x64\Debug\AccountServer.exe
