@@ -4,7 +4,6 @@ message PlayerLogin {
 	bytes account = 1;
 	bytes password = 2;
 }
-
 message PlayerRegsiter {
 	bytes account = 1;
 	bytes password = 2;

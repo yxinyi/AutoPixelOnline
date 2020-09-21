@@ -12,6 +12,13 @@ bool UIManager::Init(){
         m_now_scene = UIScene::Login;
     }, BackLoginEvent);
 
+    MessageBus::getInstance()->Attach([this](uint32_t conn_id_) {
+        CConnection_t _conn = CConnectionMgr::getInstance()->GetConnection(conn_id_);
+        if (_conn->GetConnNodeType() == NodeType::GateServer) {
+            MessageBus::getInstance()->SendReq(BackLoginEvent);
+        }
+    }, "CloseConnect");
+
     return true;
 }
 
