@@ -2,6 +2,10 @@
 #include "proto/PlayerLogin.pb.h"
 RegSystem(ServerRegisterSystem)
 
+123123
+//需要重新设计下 gate 系统
+//当前系统需要写特殊代码来实现比如逻辑服务器下线而导致的断开所有 client ,目标设计一个能从底层就能解决该目的的框架
+
 const uint32_t g_server_notfind_conn_id = 0XFFFFFFFF;
 
 uint32_t ServerRegisterSystem::GetMinLoadServerInfo(NodeType node_type_) {
