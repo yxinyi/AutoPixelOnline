@@ -8,8 +8,7 @@
 
 enum class ServerState {
     Error,
-    Touch,
-    initializa,
+    close,
     runing,
 };
 
@@ -18,12 +17,22 @@ struct  ServerInfo{
     NodeType m_node_type;
     ServerState m_state = ServerState::Error;
     std::vector<std::string> m_message_register;
-
     uint32_t m_load_number = 0;
 };
 using ServerInfo_t = std::shared_ptr<ServerInfo>;
 using ServerInfo_wt = std::weak_ptr<ServerInfo>;
 
+123123213
+struct SServerInfo{
+    uint32_t m_conn_id;
+    NodeType m_node_type;
+    //该服务器注册的消息是否需要先在gate上通过验证后进行转发
+    bool m_need_authenticate = true;
+    //是否是集群
+    bool m_slave = false;
+    ServerState m_state = ServerState::Error;
+    std::vector<std::string> m_message_register;
+};
 
 //gate 将进行消息的分发
 

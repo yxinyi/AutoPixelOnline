@@ -2,7 +2,6 @@
 #include "proto/PlayerLogin.pb.h"
 RegSystem(ServerRegisterSystem)
 
-123123
 //需要重新设计下 gate 系统
 //当前系统需要写特殊代码来实现比如逻辑服务器下线而导致的断开所有 client ,目标设计一个能从底层就能解决该目的的框架
 
@@ -37,14 +36,6 @@ bool ServerRegisterSystem::EnvDefine() {
             RETURN_VOID;
         }
 
-        //检查是否通过认证
-        //if (_session_find->second->m_state != GateSessionState::Pass) {
-        //    //如果没通过,且是客户端,则判断是否是登陆,如果是登陆验证则允许放行
-        //    auto _serverinfo_find = m_id_to_server.find(_conn_id);
-        //    if (_serverinfo_find->second->m_node_type != NodeType::Client) {// || msg_->GetTypeName() != "PlayerLogin") {
-        //        RETURN_VOID;
-        //    }
-        //}
         //根据消息找到注册了该消息的服务器,
         const string& _msg_name = msg_name_;
         auto _info_find = m_msg_str_to_server.find(_msg_name);
@@ -112,7 +103,6 @@ bool ServerRegisterSystem::EnvDefine() {
             RETURN_VOID;
         }
 
-        //需要优化
         const uint32_t _conn_id = _session_find->second->m_conn_id;
         NetManager::getInstance()->SendMessageBuff(_conn_id, msg_->pack_name(), msg_->pack_str());
     });
@@ -123,9 +113,6 @@ bool ServerRegisterSystem::EnvDefine() {
         其他服务器节点连入
         连接成功后发送 ServerMessageRegister 进行消息自动注册,服务器启动完毕
     */
-
-
-
 
     ProtobufDispatch::getInstance()->registerMessageCallback<ServerMessageRegister>([this](const uint64_t conn_,
         const std::shared_ptr<ServerMessageRegister>& msg_,
