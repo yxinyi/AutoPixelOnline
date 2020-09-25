@@ -8,6 +8,7 @@
 
 enum class ServerState {
     Error,
+    Touch,
     close,
     runing,
 };
